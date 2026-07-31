@@ -10,6 +10,8 @@
 <helmet>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    @font-face { font-family: "Axiforma"; src: url("assets/fonts/axiforma-regular.otf") format("opentype"); font-weight: 400; }
+    @font-face { font-family: "Axiforma"; src: url("assets/fonts/axiforma-black.otf") format("opentype"); font-weight: 700 900; }
     * { box-sizing: border-box; }
     body { margin: 0; }
     input, select, button, textarea { font-family: inherit; }
@@ -124,7 +126,7 @@
       <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px;">
         <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:10px;">
           <sc-for list="{{ precos }}" as="g" hint-placeholder-count="3">
-            <div style="position:relative; width:100%; aspect-ratio:2.004 / 1; background-image:url('assets/precificador/fundo.png'); background-size:100% 111.12%; background-position:top left; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
+            <div style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:2.004 / 1; background-image:url('assets/precificador/fundo.png'); background-size:100% 111.12%; background-position:top left; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
               <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:5.6%; top:11.4%; width:30.7%;">
               <div style="position:absolute; left:5.6%; top:63%; width:31%; font-size:3.3cqw; font-weight:800; line-height:1.15; color:#171717; text-transform:uppercase; text-wrap:balance;">{{ g.name }}</div>
               <sc-if value="{{ g.hasDe }}" hint-placeholder-val="{{ true }}">
@@ -186,7 +188,7 @@
       <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px;">
         <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:10px;">
           <sc-for list="{{ placas }}" as="pl" hint-placeholder-count="3">
-            <div style="position:relative; width:100%; aspect-ratio:1 / 1; background:#FFECEE; overflow:hidden; border:1px solid #f0dade; border-radius:2px; container-type:inline-size; font-family:Lexend, Archivo, sans-serif;">
+            <div style="position:relative; width:100%; aspect-ratio:1 / 1; background:#FFECEE; overflow:hidden; border:1px solid #f0dade; border-radius:2px; container-type:inline-size; font-family:Axiforma, Archivo, sans-serif;">
               <div style="position:absolute; left:0; top:45.7%; width:100%; height:54.3%; background-image:url('assets/placa/image1.png'); background-size:127.9% 235.4%; background-position:91.4% 0%; background-repeat:no-repeat;"></div>
               <div style="position:absolute; left:9.87%; top:23.08%; width:33.57%; aspect-ratio:725 / 714; background-image:url('assets/placa/image3.png'); background-size:contain; background-repeat:no-repeat;"></div>
               <div style="position:absolute; left:34.1%; top:20.03%; width:56.88%; aspect-ratio:1 / 1; background-image:url('assets/placa/image5.png'); background-size:contain; background-repeat:no-repeat;"></div>
