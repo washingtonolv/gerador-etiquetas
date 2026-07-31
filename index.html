@@ -27,7 +27,6 @@
   <div class="no-print" style="background:#3f9dc4; color:#fff; padding:12px 22px; display:flex; align-items:center; flex-wrap:wrap; gap:10px 16px;">
     <div style="font-size:19px; font-weight:800; letter-spacing:.2px;">Gerador de Etiquetas</div>
     <div style="display:flex; gap:4px; background:rgba(0,0,0,.12); padding:3px; border-radius:8px;">
-      <button onClick="{{ showEtiqueta }}" style="{{ tabEtiquetaStyle }}">Etiqueta de preço</button>
       <button onClick="{{ showVitrine }}" style="{{ tabVitrineStyle }}">Vitrine D&amp;D</button>
       <button onClick="{{ showPrecificador }}" style="{{ tabPrecificadorStyle }}">Precificador D&amp;D</button>
       <button onClick="{{ showPlaca }}" style="{{ tabPlacaStyle }}">Placa Promoção</button>
@@ -36,99 +35,6 @@
     <button onClick="{{ addCurrent }}" style="background:rgba(255,255,255,.16); color:#fff; border:1px solid rgba(255,255,255,.35); border-radius:6px; padding:8px 14px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar</button>
     <button onClick="{{ doPrint }}" style="background:#fff; color:#2b7fa3; border:none; border-radius:6px; padding:8px 16px; font-size:13px; font-weight:800; cursor:pointer;">Imprimir / PDF</button>
   </div>
-
-  <!-- ==================== MODELO: ETIQUETA ==================== -->
-  <sc-if value="{{ isEtiqueta }}" hint-placeholder-val="{{ true }}">
-  <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
-    <div class="no-print" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
-      <div style="font-size:12px; font-weight:800; letter-spacing:.6px; color:#6b7885; text-transform:uppercase;">Produtos ({{ count }})</div>
-      <sc-for list="{{ items }}" as="p" hint-placeholder-count="4">
-        <div style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
-          <div style="display:flex; align-items:center; gap:8px;">
-            <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ p.n }}</span>
-            <div style="flex:1;"></div>
-            <label style="display:flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:#c0392b; cursor:pointer;">
-              <input type="checkbox" checked="{{ p.promo }}" onChange="{{ p.togglePromo }}" style="width:15px; height:15px; accent-color:#c0392b;">
-              Promoção
-            </label>
-            <button onClick="{{ p.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
-          </div>
-          <textarea value="{{ p.name }}" onChange="{{ p.setName }}" rows="2" placeholder="Descrição do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:600;"></textarea>
-          <div style="display:flex; gap:8px;">
-            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
-              <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">CÓDIGO</span>
-              <input value="{{ p.code }}" onChange="{{ p.setCode }}" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
-            </div>
-            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
-              <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">RÓTULO</span>
-              <input value="{{ p.tag }}" onChange="{{ p.setTag }}" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
-            </div>
-          </div>
-          <div style="display:flex; gap:8px;">
-            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
-              <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">PREÇO</span>
-              <input value="{{ p.price }}" onChange="{{ p.setPrice }}" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
-            </div>
-            <sc-if value="{{ p.promo }}" hint-placeholder-val="{{ true }}">
-              <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
-                <span style="font-size:10px; font-weight:700; color:#c0392b; letter-spacing:.4px;">DE (ANTES)</span>
-                <input value="{{ p.oldPrice }}" onChange="{{ p.setOldPrice }}" style="width:100%; border:1px solid #e3b3ab; border-radius:6px; padding:7px; font-size:13px;">
-              </div>
-            </sc-if>
-          </div>
-          <div style="display:flex; flex-direction:column; gap:4px;">
-            <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">UNIDADE</span>
-            <input value="{{ p.unit }}" onChange="{{ p.setUnit }}" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
-          </div>
-        </div>
-      </sc-for>
-      <button onClick="{{ addProduct }}" style="background:#eef4f7; color:#2b7fa3; border:1px dashed #a9c9d8; border-radius:8px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar produto</button>
-    </div>
-
-    <div style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; justify-content:center; min-width:0;">
-      <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(14px,2.5vw,26px); width:100%; max-width:940px;">
-        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:6px 4px;">
-          <sc-for list="{{ items }}" as="p" hint-placeholder-count="4">
-            <div style="position:relative; padding:22px 18px 22px 14px; min-height:118px;">
-              <div style="position:absolute; top:6px; left:6px; width:11px; height:11px; border-left:1px solid #b9c2ca; border-top:1px solid #b9c2ca;"></div>
-              <div style="position:absolute; top:6px; right:6px; width:11px; height:11px; border-right:1px solid #b9c2ca; border-top:1px solid #b9c2ca;"></div>
-              <div style="position:absolute; bottom:6px; left:6px; width:11px; height:11px; border-left:1px solid #b9c2ca; border-bottom:1px solid #b9c2ca;"></div>
-              <div style="position:absolute; bottom:6px; right:6px; width:11px; height:11px; border-right:1px solid #b9c2ca; border-bottom:1px solid #b9c2ca;"></div>
-              <div style="font-size:14px; font-weight:700; line-height:1.15; color:#111; margin-bottom:9px; min-height:33px;">{{ p.name }}</div>
-              <sc-if value="{{ p.promo }}" hint-placeholder-val="{{ true }}">
-                <div style="display:inline-flex; align-items:stretch; background:#e11212; color:#fff; border-radius:1px;">
-                  <div style="display:flex; flex-direction:column; justify-content:center; padding:5px 7px; border-right:1px solid rgba(255,255,255,.45);">
-                    <span style="font-size:8.5px; font-weight:700; line-height:1.15;">de R$</span>
-                    <span style="font-size:11px; font-weight:800; line-height:1.15; text-decoration:line-through;">{{ p.oldPrice }}</span>
-                  </div>
-                  <div style="display:flex; align-items:flex-end; gap:4px; padding:4px 9px 4px 7px;">
-                    <span style="font-size:8.5px; font-weight:700; line-height:1.9;">por<br>R$</span>
-                    <span style="font-size:30px; font-weight:900; line-height:.85; letter-spacing:-1px;">{{ p.reais }}</span>
-                    <span style="display:flex; flex-direction:column; align-items:flex-start; padding-bottom:2px;">
-                      <span style="font-size:14px; font-weight:900; line-height:.9;">,{{ p.centavos }}</span>
-                      <span style="font-size:8px; font-weight:600; line-height:1; opacity:.95;">{{ p.unit }}</span>
-                    </span>
-                  </div>
-                </div>
-              </sc-if>
-              <sc-if value="{{ p.notPromo }}" hint-placeholder-val="{{ true }}">
-                <div style="display:flex; align-items:flex-end; gap:6px; color:#111;">
-                  <span style="font-size:15px; font-weight:800; padding-bottom:6px;">R$</span>
-                  <span style="font-size:38px; font-weight:900; line-height:.8; letter-spacing:-1.5px;">{{ p.reais }}</span>
-                  <span style="display:flex; flex-direction:column; align-items:flex-start; padding-bottom:1px;">
-                    <span style="font-size:16px; font-weight:900; line-height:.9;">,{{ p.centavos }}</span>
-                    <span style="font-size:8.5px; font-weight:600; color:#333; line-height:1;">{{ p.unit }}</span>
-                  </span>
-                </div>
-              </sc-if>
-              <div style="font-size:10.5px; font-weight:500; color:#888; margin-top:10px;">{{ p.codeTag }}</div>
-            </div>
-          </sc-for>
-        </div>
-      </div>
-    </div>
-  </div>
-  </sc-if>
 
   <!-- ==================== MODELO: VITRINE D&D ==================== -->
   <sc-if value="{{ isVitrine }}" hint-placeholder-val="{{ true }}">
@@ -313,13 +219,7 @@
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   state = {
-    model: "etiqueta",
-    items: [
-      { name: "Colônia Luna Nuit Feminino 75ml", code: "204451", tag: "LUNA", price: "124,90", oldPrice: "185,90", unit: "unidade", promo: true },
-      { name: "Colônia Luna Nuit Feminino 75ml", code: "204451", tag: "LUNA", price: "185,90", oldPrice: "", unit: "unidade", promo: false },
-      { name: "Deo Parfum Natura Una Feminino - 75ml", code: "2446", tag: "UNA", price: "329,90", oldPrice: "", unit: "unidade", promo: false },
-      { name: "Deo Parfum Una Brilho Feminino 75ml", code: "156118", tag: "UNA", price: "329,90", oldPrice: "", unit: "unidade", promo: false },
-    ],
+    model: "vitrine",
     cards: [
       { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
       { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
@@ -362,9 +262,6 @@ class Component extends DCLogic {
     { key: "rubykisses", label: "Ruby Kisses" }, { key: "truss", label: "Truss" },
     { key: "vizzela", label: "Vizzela" }, { key: "semmarca", label: "Sem marca" },
   ];
-  updateItem(i, patch) {
-    this.setState(s => ({ items: s.items.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
-  }
   updateCard(i, patch) {
     this.setState(s => ({ cards: s.cards.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
   }
@@ -386,22 +283,6 @@ class Component extends DCLogic {
     const tabBase = "border:none; border-radius:6px; padding:7px 14px; font-size:13px; font-weight:700; cursor:pointer;";
     const on = tabBase + "background:#fff; color:#2b7fa3;";
     const off = tabBase + "background:transparent; color:#eaf5fb;";
-
-    const items = this.state.items.map((p, i) => {
-      const { reais, centavos } = this.splitPrice(p.price);
-      return {
-        ...p, n: i + 1, reais, centavos, notPromo: !p.promo,
-        codeTag: [p.code, p.tag].filter(Boolean).join(" - "),
-        setName: e => this.updateItem(i, { name: e.target.value }),
-        setCode: e => this.updateItem(i, { code: e.target.value }),
-        setTag: e => this.updateItem(i, { tag: e.target.value }),
-        setPrice: e => this.updateItem(i, { price: e.target.value }),
-        setOldPrice: e => this.updateItem(i, { oldPrice: e.target.value }),
-        setUnit: e => this.updateItem(i, { unit: e.target.value }),
-        togglePromo: e => this.updateItem(i, { promo: e.target.checked }),
-        remove: () => this.setState(s => ({ items: s.items.filter((_, idx) => idx !== i) })),
-      };
-    });
 
     const cards = this.state.cards.map((c, i) => {
       const { reais, centavos } = this.splitPrice(c.porPrice);
@@ -448,31 +329,24 @@ class Component extends DCLogic {
     });
 
     return {
-      isEtiqueta: model === "etiqueta",
       isVitrine: model === "vitrine",
       isPrecificador: model === "precificador",
       isPlaca: model === "placa",
-      tabEtiquetaStyle: model === "etiqueta" ? on : off,
       tabVitrineStyle: model === "vitrine" ? on : off,
       tabPrecificadorStyle: model === "precificador" ? on : off,
       tabPlacaStyle: model === "placa" ? on : off,
-      showEtiqueta: () => this.setState({ model: "etiqueta" }),
       showVitrine: () => this.setState({ model: "vitrine" }),
       showPrecificador: () => this.setState({ model: "precificador" }),
       showPlaca: () => this.setState({ model: "placa" }),
-      items, count: items.length,
       cards, cardCount: cards.length,
       precos, precoCount: precos.length,
       placas, placaCount: placas.length,
       placaBrandOptions: this.placaBrands,
       brandOptions: this.brands,
-      addProduct: () => this.setState(s => ({ items: [...s.items, { name: "Novo produto", code: "", tag: "", price: "0,00", oldPrice: "", unit: "unidade", promo: false }] })),
       addCard: () => this.setState(s => ({ cards: [...s.cards, { brand: "generico", name: "Novo produto", dePrice: "", porPrice: "0,00" }] })),
       addPreco: () => this.setState(s => ({ precos: [...s.precos, { name: "Novo produto", dePrice: "", porPrice: "0,00" }] })),
       addPlaca: () => this.setState(s => ({ placas: [...s.placas, { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }] })),
-      addCurrent: () => model === "etiqueta"
-        ? this.setState(s => ({ items: [...s.items, { name: "Novo produto", code: "", tag: "", price: "0,00", oldPrice: "", unit: "unidade", promo: false }] }))
-        : model === "vitrine"
+      addCurrent: () => model === "vitrine"
         ? this.setState(s => ({ cards: [...s.cards, { brand: "generico", name: "Novo produto", dePrice: "", porPrice: "0,00" }] }))
         : model === "precificador"
         ? this.setState(s => ({ precos: [...s.precos, { name: "Novo produto", dePrice: "", porPrice: "0,00" }] }))
