@@ -192,7 +192,7 @@
               <div style="position:absolute; left:34.1%; top:20.03%; width:56.88%; aspect-ratio:1 / 1; background-image:url('assets/placa/image5.png'); background-size:contain; background-repeat:no-repeat;"></div>
               <img src="assets/placa/image4.png" alt="D&amp;D" style="position:absolute; left:74.7%; top:5.12%; width:19.11%;">
               <sc-if value="{{ pl.hasBrand }}" hint-placeholder-val="{{ true }}">
-                <img src="{{ pl.brandSrc }}" alt="" style="position:absolute; left:15.1%; top:33.5%; width:22.5%; height:12%; object-fit:contain;">
+                <div style="position:absolute; left:15.1%; top:33.5%; width:22.5%; height:12%; background-image:{{ pl.brandBg }}; background-size:contain; background-position:center; background-repeat:no-repeat;"></div>
               </sc-if>
               <div style="position:absolute; left:8.3%; top:3.4%; width:64.2%; color:#1a1d21;">
                 <div style="font-size:3.56cqw; font-weight:700; line-height:1.25;">{{ pl.name }}</div>
@@ -222,21 +222,12 @@ class Component extends DCLogic {
     model: "vitrine",
     cards: [
       { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
-      { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
-      { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
-      { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
-      { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
-      { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
-      { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
-      { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
     ],
     precos: [
       { name: "Pó Bronzer", dePrice: "75,00", porPrice: "56,90" },
-      { name: "Pó Bronzer", dePrice: "", porPrice: "56,90" },
     ],
     placas: [
       { brand: "avon", name: "Creme Renew", desc: "Ultimate Dia Firmeza\n45+ Fps 25", dePrice: "174,90", porPrice: "99,90" },
-      { brand: "avon", name: "Creme Renew", desc: "Ultimate Dia Firmeza\n45+ Fps 25", dePrice: "", porPrice: "99,90" },
     ],
   };
 
@@ -318,7 +309,7 @@ class Component extends DCLogic {
         ...pl, n: i + 1, reais, centavos,
         hasDe: !!(pl.dePrice || "").trim(),
         hasBrand: pl.brand !== "semmarca",
-        brandSrc: "assets/placa/marcas/" + pl.brand + ".png",
+        brandBg: 'url("assets/placa/marcas/' + pl.brand + '.png")',
         setBrand: e => this.updatePlaca(i, { brand: e.target.value }),
         setName: e => this.updatePlaca(i, { name: e.target.value }),
         setDesc: e => this.updatePlaca(i, { desc: e.target.value }),
