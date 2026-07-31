@@ -24,7 +24,7 @@
 </helmet>
 <div style="min-height:100vh; background:#e9edf1; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
 
-  <div class="no-print" style="background:#3f9dc4; color:#fff; padding:12px 22px; display:flex; align-items:center; gap:16px;">
+  <div class="no-print" style="background:#3f9dc4; color:#fff; padding:12px 22px; display:flex; align-items:center; flex-wrap:wrap; gap:10px 16px;">
     <div style="font-size:19px; font-weight:800; letter-spacing:.2px;">Gerador de Etiquetas</div>
     <div style="display:flex; gap:4px; background:rgba(0,0,0,.12); padding:3px; border-radius:8px;">
       <button onClick="{{ showEtiqueta }}" style="{{ tabEtiquetaStyle }}">Etiqueta de preço</button>
@@ -37,8 +37,8 @@
 
   <!-- ==================== MODELO: ETIQUETA ==================== -->
   <sc-if value="{{ isEtiqueta }}" hint-placeholder-val="{{ true }}">
-  <div style="display:flex; flex:1; align-items:flex-start;">
-    <div class="no-print" style="width:390px; flex-shrink:0; padding:18px; display:flex; flex-direction:column; gap:14px; max-height:calc(100vh - 52px); overflow-y:auto; border-right:1px solid #d3dae0;">
+  <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
+    <div class="no-print" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
       <div style="font-size:12px; font-weight:800; letter-spacing:.6px; color:#6b7885; text-transform:uppercase;">Produtos ({{ count }})</div>
       <sc-for list="{{ items }}" as="p" hint-placeholder-count="4">
         <div style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
@@ -83,9 +83,9 @@
       <button onClick="{{ addProduct }}" style="background:#eef4f7; color:#2b7fa3; border:1px dashed #a9c9d8; border-radius:8px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar produto</button>
     </div>
 
-    <div style="flex:1; padding:26px; display:flex; justify-content:center;">
-      <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:26px 22px; width:100%; max-width:940px;">
-        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px 4px;">
+    <div style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; justify-content:center; min-width:0;">
+      <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(14px,2.5vw,26px); width:100%; max-width:940px;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:6px 4px;">
           <sc-for list="{{ items }}" as="p" hint-placeholder-count="4">
             <div style="position:relative; padding:22px 18px 22px 14px; min-height:118px;">
               <div style="position:absolute; top:6px; left:6px; width:11px; height:11px; border-left:1px solid #b9c2ca; border-top:1px solid #b9c2ca;"></div>
@@ -130,8 +130,8 @@
 
   <!-- ==================== MODELO: VITRINE D&D ==================== -->
   <sc-if value="{{ isVitrine }}" hint-placeholder-val="{{ true }}">
-  <div style="display:flex; flex:1; align-items:flex-start;">
-    <div class="no-print" style="width:390px; flex-shrink:0; padding:18px; display:flex; flex-direction:column; gap:14px; max-height:calc(100vh - 52px); overflow-y:auto; border-right:1px solid #d3dae0;">
+  <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
+    <div class="no-print" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
       <div style="font-size:12px; font-weight:800; letter-spacing:.6px; color:#6b7885; text-transform:uppercase;">Cards da vitrine ({{ cardCount }})</div>
       <sc-for list="{{ cards }}" as="c" hint-placeholder-count="4">
         <div style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
@@ -160,9 +160,9 @@
       <button onClick="{{ addCard }}" style="background:#eef4f7; color:#2b7fa3; border:1px dashed #a9c9d8; border-radius:8px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar card</button>
     </div>
 
-    <div style="flex:1; padding:26px; display:flex; justify-content:center;">
-      <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:22px; width:100%; max-width:980px;">
-        <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:10px;">
+    <div style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; justify-content:center; min-width:0;">
+      <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:10px;">
           <sc-for list="{{ cards }}" as="c" hint-placeholder-count="8">
             <div style="position:relative; width:100%; aspect-ratio:704 / 695; background-image:{{ c.bgUrl }}; background-size:cover; background-position:center; overflow:hidden; border-radius:2px; container-type:inline-size;">
               <!-- product name over white cloud -->
@@ -197,14 +197,14 @@ class Component extends DCLogic {
       { name: "Deo Parfum Una Brilho Feminino 75ml", code: "156118", tag: "UNA", price: "329,90", oldPrice: "", unit: "unidade", promo: false },
     ],
     cards: [
-      { brand: "generico", name: "Deo Colônia Cebolinha", dePrice: "34,90", porPrice: "19,90" },
-      { brand: "generico", name: "Body Splash Lattafa", dePrice: "129,99", porPrice: "89,99" },
-      { brand: "kiss", name: "Loção Hid. Corporal Kiss", dePrice: "49,99", porPrice: "19,99" },
-      { brand: "generico", name: "Colônia Feminina Aurien Gold", dePrice: "184,90", porPrice: "89,90" },
-      { brand: "generico", name: "Eau de Parfum Golden", dePrice: "244,99", porPrice: "146,94" },
-      { brand: "boticario", name: "Hidratante Cuide-se Bem", dePrice: "134,80", porPrice: "78,90" },
-      { brand: "mahogany", name: "Combo Shampoo + Cond. Própolis", dePrice: "159,98", porPrice: "99,90" },
-      { brand: "generico", name: "Body Splash Barbour's", dePrice: "99,90", porPrice: "59,90" },
+      { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
+      { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
+      { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
+      { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
+      { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
+      { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
+      { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
+      { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
     ],
   };
 
