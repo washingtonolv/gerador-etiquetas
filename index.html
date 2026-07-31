@@ -8,7 +8,7 @@
 <body>
 <x-dc>
 <helmet>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
     body { margin: 0; }
@@ -29,6 +29,8 @@
     <div style="display:flex; gap:4px; background:rgba(0,0,0,.12); padding:3px; border-radius:8px;">
       <button onClick="{{ showEtiqueta }}" style="{{ tabEtiquetaStyle }}">Etiqueta de preço</button>
       <button onClick="{{ showVitrine }}" style="{{ tabVitrineStyle }}">Vitrine D&amp;D</button>
+      <button onClick="{{ showPrecificador }}" style="{{ tabPrecificadorStyle }}">Precificador D&amp;D</button>
+      <button onClick="{{ showPlaca }}" style="{{ tabPlacaStyle }}">Placa Promoção</button>
     </div>
     <div style="flex:1;"></div>
     <button onClick="{{ addCurrent }}" style="background:rgba(255,255,255,.16); color:#fff; border:1px solid rgba(255,255,255,.35); border-radius:6px; padding:8px 14px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar</button>
@@ -184,6 +186,128 @@
   </div>
   </sc-if>
 
+  <!-- ==================== MODELO: PRECIFICADOR D&D ==================== -->
+  <sc-if value="{{ isPrecificador }}" hint-placeholder-val="{{ true }}">
+  <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
+    <div class="no-print" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
+      <div style="font-size:12px; font-weight:800; letter-spacing:.6px; color:#6b7885; text-transform:uppercase;">Precificadores ({{ precoCount }})</div>
+      <sc-for list="{{ precos }}" as="g" hint-placeholder-count="3">
+        <div style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
+            <div style="flex:1;"></div>
+            <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+          </div>
+          <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Descrição do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:600;"></textarea>
+          <div style="display:flex; gap:8px;">
+            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+              <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">DE (ANTES)</span>
+              <input value="{{ g.dePrice }}" onChange="{{ g.setDe }}" placeholder="opcional" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
+            </div>
+            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+              <span style="font-size:10px; font-weight:700; color:#c94f6d; letter-spacing:.4px;">POR R$</span>
+              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" style="width:100%; border:1px solid #e3b3c0; border-radius:6px; padding:7px; font-size:13px;">
+            </div>
+          </div>
+        </div>
+      </sc-for>
+      <button onClick="{{ addPreco }}" style="background:#eef4f7; color:#2b7fa3; border:1px dashed #a9c9d8; border-radius:8px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar precificador</button>
+    </div>
+
+    <div style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; justify-content:center; min-width:0;">
+      <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:10px;">
+          <sc-for list="{{ precos }}" as="g" hint-placeholder-count="3">
+            <div style="position:relative; width:100%; aspect-ratio:2.004 / 1; background-image:url('assets/precificador/fundo.png'); background-size:100% 111.12%; background-position:top left; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
+              <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:5.6%; top:11.4%; width:30.7%;">
+              <div style="position:absolute; left:5.6%; top:63%; width:31%; font-size:3.3cqw; font-weight:800; line-height:1.15; color:#171717; text-transform:uppercase; text-wrap:balance;">{{ g.name }}</div>
+              <sc-if value="{{ g.hasDe }}" hint-placeholder-val="{{ true }}">
+                <div style="position:absolute; left:64.9%; top:29%; font-size:3.05cqw; font-weight:700; color:#fff;">DE: R$ {{ g.dePrice }}</div>
+              </sc-if>
+              <div style="position:absolute; right:38.6%; top:42%; text-align:right; font-size:3.05cqw; font-weight:700; color:#fff; line-height:1.35;">POR:<br>R$</div>
+              <div style="position:absolute; left:63.1%; top:38%; display:flex; align-items:flex-start; color:#fff;">
+                <span style="font-size:11.8cqw; font-weight:900; line-height:1;">{{ g.reais }}</span>
+                <span style="font-size:5.5cqw; font-weight:700; line-height:1.1; margin-top:4.6cqw;">,{{ g.centavos }}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ==================== MODELO: PLACA PROMOÇÃO ==================== -->
+  <sc-if value="{{ isPlaca }}" hint-placeholder-val="{{ true }}">
+  <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
+    <div class="no-print" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
+      <div style="font-size:12px; font-weight:800; letter-spacing:.6px; color:#6b7885; text-transform:uppercase;">Placas ({{ placaCount }})</div>
+      <sc-for list="{{ placas }}" as="pl" hint-placeholder-count="3">
+        <div style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ pl.n }}</span>
+            <select value="{{ pl.brand }}" onChange="{{ pl.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
+              <sc-for list="{{ placaBrandOptions }}" as="b" hint-placeholder-count="17">
+                <option value="{{ b.key }}">{{ b.label }}</option>
+              </sc-for>
+            </select>
+            <button onClick="{{ pl.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">NOME (NEGRITO)</span>
+            <input value="{{ pl.name }}" onChange="{{ pl.setName }}" placeholder="Nome do produto" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px; font-weight:600;">
+          </div>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">DESCRIÇÃO</span>
+            <textarea value="{{ pl.desc }}" onChange="{{ pl.setDesc }}" rows="2" placeholder="Detalhes (opcional)" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px;"></textarea>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+              <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">DE (ANTES)</span>
+              <input value="{{ pl.dePrice }}" onChange="{{ pl.setDe }}" placeholder="opcional" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
+            </div>
+            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+              <span style="font-size:10px; font-weight:700; color:#127a6e; letter-spacing:.4px;">POR R$</span>
+              <input value="{{ pl.porPrice }}" onChange="{{ pl.setPor }}" style="width:100%; border:1px solid #9fd0c8; border-radius:6px; padding:7px; font-size:13px;">
+            </div>
+          </div>
+        </div>
+      </sc-for>
+      <button onClick="{{ addPlaca }}" style="background:#eef4f7; color:#2b7fa3; border:1px dashed #a9c9d8; border-radius:8px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar placa</button>
+    </div>
+
+    <div style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; justify-content:center; min-width:0;">
+      <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:10px;">
+          <sc-for list="{{ placas }}" as="pl" hint-placeholder-count="3">
+            <div style="position:relative; width:100%; aspect-ratio:1 / 1; background:#FFECEE; overflow:hidden; border:1px solid #f0dade; border-radius:2px; container-type:inline-size; font-family:Lexend, Archivo, sans-serif;">
+              <div style="position:absolute; left:0; top:45.7%; width:100%; height:54.3%; background-image:url('assets/placa/image1.png'); background-size:127.9% 235.4%; background-position:91.4% 0%; background-repeat:no-repeat;"></div>
+              <div style="position:absolute; left:9.87%; top:23.08%; width:33.57%; aspect-ratio:725 / 714; background-image:url('assets/placa/image3.png'); background-size:contain; background-repeat:no-repeat;"></div>
+              <div style="position:absolute; left:34.1%; top:20.03%; width:56.88%; aspect-ratio:1 / 1; background-image:url('assets/placa/image5.png'); background-size:contain; background-repeat:no-repeat;"></div>
+              <img src="assets/placa/image4.png" alt="D&amp;D" style="position:absolute; left:74.7%; top:5.12%; width:19.11%;">
+              <sc-if value="{{ pl.hasBrand }}" hint-placeholder-val="{{ true }}">
+                <img src="{{ pl.brandSrc }}" alt="" style="position:absolute; left:15.1%; top:33.5%; width:22.5%; height:12%; object-fit:contain;">
+              </sc-if>
+              <div style="position:absolute; left:8.3%; top:3.4%; width:64.2%; color:#1a1d21;">
+                <div style="font-size:3.56cqw; font-weight:700; line-height:1.25;">{{ pl.name }}</div>
+                <div style="font-size:3.56cqw; font-weight:400; line-height:1.25; white-space:pre-line;">{{ pl.desc }}</div>
+              </div>
+              <sc-if value="{{ pl.hasDe }}" hint-placeholder-val="{{ true }}">
+                <div style="position:absolute; left:46.9%; top:37.5%; font-size:3.2cqw; font-weight:400; color:#fff;">DE: R$ {{ pl.dePrice }}</div>
+              </sc-if>
+              <div style="position:absolute; right:49.1%; top:50.4%; text-align:right; font-size:2.35cqw; font-weight:700; color:#fff; line-height:1.3;">POR:<br>R$</div>
+              <div style="position:absolute; left:52.9%; top:42.9%; display:flex; align-items:flex-start; color:#fff;">
+                <span style="font-size:11.9cqw; font-weight:700; line-height:1;">{{ pl.reais }}</span>
+                <span style="font-size:5.8cqw; font-weight:700; line-height:1.1; margin-top:4.9cqw;">,{{ pl.centavos }}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
@@ -206,6 +330,14 @@ class Component extends DCLogic {
       { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
       { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
     ],
+    precos: [
+      { name: "Pó Bronzer", dePrice: "75,00", porPrice: "56,90" },
+      { name: "Pó Bronzer", dePrice: "", porPrice: "56,90" },
+    ],
+    placas: [
+      { brand: "avon", name: "Creme Renew", desc: "Ultimate Dia Firmeza\n45+ Fps 25", dePrice: "174,90", porPrice: "99,90" },
+      { brand: "avon", name: "Creme Renew", desc: "Ultimate Dia Firmeza\n45+ Fps 25", dePrice: "", porPrice: "99,90" },
+    ],
   };
 
   brands = [
@@ -219,11 +351,28 @@ class Component extends DCLogic {
     { key: "generico", label: "Sem marca" },
   ];
 
+  placaBrands = [
+    { key: "avon", label: "Avon" }, { key: "boticario", label: "O Boticário" },
+    { key: "ciclo", label: "Ciclo" }, { key: "eudora", label: "Eudora" },
+    { key: "fhader", label: "Fhader" }, { key: "hinode", label: "Hinode" },
+    { key: "jequiti", label: "Jequiti" }, { key: "kiss", label: "Kiss NY" },
+    { key: "larive", label: "La Rive" }, { key: "mahogany", label: "Mahogany" },
+    { key: "marimaria", label: "Mari Maria" }, { key: "marykay", label: "Mary Kay" },
+    { key: "mascavo", label: "Mascavo" }, { key: "pariselysees", label: "Paris Elysees" },
+    { key: "rubykisses", label: "Ruby Kisses" }, { key: "truss", label: "Truss" },
+    { key: "vizzela", label: "Vizzela" }, { key: "semmarca", label: "Sem marca" },
+  ];
   updateItem(i, patch) {
     this.setState(s => ({ items: s.items.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
   }
   updateCard(i, patch) {
     this.setState(s => ({ cards: s.cards.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
+  }
+  updatePreco(i, patch) {
+    this.setState(s => ({ precos: s.precos.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
+  }
+  updatePlaca(i, patch) {
+    this.setState(s => ({ placas: s.placas.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
   }
   splitPrice(v) {
     const s = (v == null ? "" : String(v)).trim();
@@ -270,21 +419,64 @@ class Component extends DCLogic {
       };
     });
 
+    const precos = this.state.precos.map((g, i) => {
+      const { reais, centavos } = this.splitPrice(g.porPrice);
+      return {
+        ...g, n: i + 1, reais, centavos,
+        hasDe: !!(g.dePrice || "").trim(),
+        setName: e => this.updatePreco(i, { name: e.target.value }),
+        setDe: e => this.updatePreco(i, { dePrice: e.target.value }),
+        setPor: e => this.updatePreco(i, { porPrice: e.target.value }),
+        remove: () => this.setState(s => ({ precos: s.precos.filter((_, idx) => idx !== i) })),
+      };
+    });
+
+    const placas = this.state.placas.map((pl, i) => {
+      const { reais, centavos } = this.splitPrice(pl.porPrice);
+      return {
+        ...pl, n: i + 1, reais, centavos,
+        hasDe: !!(pl.dePrice || "").trim(),
+        hasBrand: pl.brand !== "semmarca",
+        brandSrc: "assets/placa/marcas/" + pl.brand + ".png",
+        setBrand: e => this.updatePlaca(i, { brand: e.target.value }),
+        setName: e => this.updatePlaca(i, { name: e.target.value }),
+        setDesc: e => this.updatePlaca(i, { desc: e.target.value }),
+        setDe: e => this.updatePlaca(i, { dePrice: e.target.value }),
+        setPor: e => this.updatePlaca(i, { porPrice: e.target.value }),
+        remove: () => this.setState(s => ({ placas: s.placas.filter((_, idx) => idx !== i) })),
+      };
+    });
+
     return {
       isEtiqueta: model === "etiqueta",
       isVitrine: model === "vitrine",
+      isPrecificador: model === "precificador",
+      isPlaca: model === "placa",
       tabEtiquetaStyle: model === "etiqueta" ? on : off,
       tabVitrineStyle: model === "vitrine" ? on : off,
+      tabPrecificadorStyle: model === "precificador" ? on : off,
+      tabPlacaStyle: model === "placa" ? on : off,
       showEtiqueta: () => this.setState({ model: "etiqueta" }),
       showVitrine: () => this.setState({ model: "vitrine" }),
+      showPrecificador: () => this.setState({ model: "precificador" }),
+      showPlaca: () => this.setState({ model: "placa" }),
       items, count: items.length,
       cards, cardCount: cards.length,
+      precos, precoCount: precos.length,
+      placas, placaCount: placas.length,
+      placaBrandOptions: this.placaBrands,
       brandOptions: this.brands,
       addProduct: () => this.setState(s => ({ items: [...s.items, { name: "Novo produto", code: "", tag: "", price: "0,00", oldPrice: "", unit: "unidade", promo: false }] })),
       addCard: () => this.setState(s => ({ cards: [...s.cards, { brand: "generico", name: "Novo produto", dePrice: "", porPrice: "0,00" }] })),
+      addPreco: () => this.setState(s => ({ precos: [...s.precos, { name: "Novo produto", dePrice: "", porPrice: "0,00" }] })),
+      addPlaca: () => this.setState(s => ({ placas: [...s.placas, { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }] })),
       addCurrent: () => model === "etiqueta"
         ? this.setState(s => ({ items: [...s.items, { name: "Novo produto", code: "", tag: "", price: "0,00", oldPrice: "", unit: "unidade", promo: false }] }))
-        : this.setState(s => ({ cards: [...s.cards, { brand: "generico", name: "Novo produto", dePrice: "", porPrice: "0,00" }] })),
+        : model === "vitrine"
+        ? this.setState(s => ({ cards: [...s.cards, { brand: "generico", name: "Novo produto", dePrice: "", porPrice: "0,00" }] }))
+        : model === "precificador"
+        ? this.setState(s => ({ precos: [...s.precos, { name: "Novo produto", dePrice: "", porPrice: "0,00" }] }))
+        : this.setState(s => ({ placas: [...s.placas, { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }] })),
       doPrint: () => window.print(),
     };
   }
