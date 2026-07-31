@@ -2,7 +2,7 @@ repo: washingtonolv/gerador-etiquetas
 branch: main
 
 ## Last sync
-date: 2026-07-31T04:37:10Z
+date: 2026-07-31T04:04:34Z
 
 ### Updated in this project
 - Gerador de etiquetas de preço editável (modelo original do print)
@@ -14,4 +14,4 @@ date: 2026-07-31T04:37:10Z
 | Gerador de Etiquetas (Etiqueta + Vitrine) | Gerador de Etiquetas.dc.html, assets/vitrine/*.png, support.js |
 
 ## Notes
-O repositório em main (commit 881c3c2) está DESATUALIZADO: contém o modelo Vitrine, mas não a atualização responsiva (grades auto-fill, flex-wrap, scroll natural) feita depois. As ferramentas aqui só leem o repositório, não fazem push — o usuário precisa enviar os arquivos atuais manualmente para atualizar o main.eitos manualmente pelo usuário.
+Repositório populado pelo usuário em 2026-07-31 (Gerador de Etiquetas.dc.html, github.md e assets confirmados em main). As ferramentas aqui só leem o repositório, não fazem push — envios são feitos manualmente pelo usuário.
