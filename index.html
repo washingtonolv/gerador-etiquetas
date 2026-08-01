@@ -38,10 +38,13 @@
     .pp .g-pcr { grid-template-columns: repeat(3, 50mm) !important; gap: 6mm !important; }
     .pp .g-prec > div, .pp .g-make > div, .pp .g-placa > div, .pp .g-pcr > div { outline: 0.3mm dashed #9aa6b1; outline-offset: 1mm; }
     .pp .sheet { width: 210mm !important; max-width: none !important; padding: 10mm !important; }
-    @media (max-width: 640px) {
+    @media (max-width: 900px) {
       .hdr-btn { min-height: 44px !important; }
       .tab-btn { min-height: 40px !important; }
       .editor-col { border-right: none !important; border-bottom: 1px solid #d3dae0; }
+      .import-panel { padding: 18px !important; border-radius: 12px !important; }
+      .import-panel button, .import-panel input[type=file] { min-height: 46px !important; }
+      input, select, textarea, button { font-size: 15px !important; }
     }
   </style>
 </helmet>
@@ -73,7 +76,7 @@
 
   <sc-if value="{{ isImportOpen }}" hint-placeholder-val="{{ false }}">
     <div class="no-print" style="position:fixed; inset:0; z-index:100; background:rgba(30,20,25,.45); display:flex; align-items:center; justify-content:center; padding:16px;">
-      <div style="background:#fff; border-radius:14px; padding:24px; width:100%; max-width:440px; display:flex; flex-direction:column; gap:14px; box-shadow:0 10px 40px rgba(0,0,0,.3);">
+      <div class="import-panel" style="background:#fff; border-radius:14px; padding:24px; width:100%; max-width:440px; max-height:90vh; overflow:auto; display:flex; flex-direction:column; gap:14px; box-shadow:0 10px 40px rgba(0,0,0,.3);">
         <div style="display:flex; align-items:center; gap:8px;">
           <div style="font-size:17px; font-weight:800; color:#1a1d21;">Importar etiquetas (CSV)</div>
           <div style="flex:1;"></div>
@@ -83,7 +86,7 @@
         <button onClick="{{ downloadModel }}" style="background:#fdf1f4; color:#CD4664; border:1px dashed #e0a7b6; border-radius:8px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">⬇ Baixar modelo de importação (.csv)</button>
         <label style="display:flex; flex-direction:column; gap:6px; font-size:12px; font-weight:700; color:#6b7885;">
           ARQUIVO PREENCHIDO
-          <input type="file" accept=".csv,text/csv" onChange="{{ importFile }}" style="width:100%; border:1px solid #d8dee4; border-radius:8px; padding:10px; font-size:13px; font-weight:400;">
+          <input type="file" accept=".csv,text/csv,text/comma-separated-values,application/csv,application/vnd.ms-excel,text/plain" onChange="{{ importFile }}" style="width:100%; border:1px solid #d8dee4; border-radius:8px; padding:10px; font-size:13px; font-weight:400;">
         </label>
         <button onClick="{{ closeImport }}" style="background:#fff; color:#5a6873; border:1px solid #d8dee4; border-radius:8px; padding:10px; font-size:13px; font-weight:700; cursor:pointer;">Cancelar</button>
       </div>
