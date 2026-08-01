@@ -46,26 +46,71 @@
       .import-panel button, .import-panel input[type=file] { min-height: 46px !important; }
       input, select, textarea, button { font-size: 15px !important; }
     }
+      .dark { background-color:#221c20 !important; }
+    .dark .editor-col { border-color:#4a3e44 !important; }
+    .dark .card-box { background:#2b2429 !important; border-color:#4a3e44 !important; }
+    .dark .card-box span, .dark .card-box label { color:#cbbcc3 !important; }
+    .dark .editor-col > div:first-child { color:#cbbcc3 !important; }
+    .dark input, .dark select, .dark textarea { background:#1c171a; color:#f2e9ed; border-color:#4a3e44 !important; }
+    .dark input::placeholder, .dark textarea::placeholder { color:#8a7a81; }
+    .dark .hdr-pill { background:#2b2429 !important; }
+    .dark .hdr-pill span { color:#f2e9ed !important; }
+    .dark .hdr-pill .tab-btn { color:#cbbcc3 !important; }
+    .dark .hdr-pill .tab-btn[data-on="1"] { color:#fff !important; }
+    .dark .hdr-pill .hdr-btn { color:#cbbcc3 !important; }
+    .dark .hdr-pill .hdr-btn:hover { background:#3a3036 !important; color:#f5c9d4 !important; }
+    .dark .hdr-pill .print-btn { background:#CD4664 !important; color:#fff !important; }
+    .dark .card-box button[title="Menos"], .dark .card-box button[title="Mais"] { background:#1c171a !important; }
+    .card-box select { min-width: 0; }
+    .card-box > div { min-width: 0; flex-wrap: wrap; }
+    .tabbar { scrollbar-width: none; }
+    .tabbar::-webkit-scrollbar { display: none; }
+    .tabbar button { white-space: nowrap; flex: none; }
+    @media print { .sheet { zoom: 1 !important; } .bottombar { display: none !important; } }
+    .pp .sheet { zoom: 1 !important; }
+    .dark .bottombar { background: #2b2429 !important; border-color: #4a3e44 !important; }
+    .dark .zoombar { background: #2b2429 !important; border-color: #4a3e44 !important; }
+    @media (min-width: 1101px) {
+      .editor-col { flex: 0 0 380px !important; }
+    }
+    @media (min-width: 701px) and (max-width: 1100px) {
+      .editor-col { flex: 0 0 330px !important; }
+    }
+    @media (max-width: 700px) {
+      .hdr-band { padding: 10px 12px 12px !important; }
+      .hdr-pill { border-radius: 18px !important; padding: 10px 12px !important; }
+      .bottombar { display: flex !important; padding-bottom: calc(8px + env(safe-area-inset-bottom)) !important; }
+      .app-bg { padding-bottom: 82px !important; }
+      .mv-edit .preview-wrap { display: none !important; }
+      .mv-sheet .editor-col { display: none !important; }
+    }
   </style>
 </helmet>
-<div class="app-bg {{ ppClass }}" style="min-height:100vh; background:#f2f0f0; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg'); background-size:260px 260px, 120px 120px, 180px 180px; background-position:right -60px bottom -70px, right 200px bottom 160px, left -50px top 120px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
+<div class="app-bg {{ ppClass }} {{ darkClass }} {{ mvClass }}" style="min-height:100vh; background:#f2f0f0; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg'); background-size:260px 260px, 120px 120px, 180px 180px; background-position:right -60px bottom -70px, right 200px bottom 160px, left -50px top 120px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
 
-  <div class="no-print" style="background:#CD4664; color:#fff; padding:12px 22px; display:flex; align-items:center; flex-wrap:wrap; gap:10px 16px;">
-    <div style="font-size:19px; font-weight:800; letter-spacing:.2px;">Gerador de Etiquetas</div>
-    <div style="display:flex; gap:4px; background:rgba(0,0,0,.12); padding:3px; border-radius:8px;">
-      <button onClick="{{ showPlaca }}" style="{{ tabPlacaStyle }}">Placa Promoção</button>
-      <button onClick="{{ showPcr }}" style="{{ tabPcrStyle }}">Preçário</button>
-      <button onClick="{{ showPrec }}" style="{{ tabPrecStyle }}">Precificador</button>
-      <button onClick="{{ showMake }}" style="{{ tabMakeStyle }}">Etiqueta Make</button>
+  <div class="no-print hdr-band" style="background:#05918C; padding:14px 22px 18px;">
+    <div class="hdr-pill" style="background:#fff; border-radius:999px; padding:8px 8px 8px 20px; display:flex; align-items:center; gap:10px 18px; flex-wrap:wrap; box-shadow:0 6px 24px rgba(120,20,45,.18);">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="assets/placa/image4.png" alt="D&amp;D" style="height:26px; width:auto;">
+        <span style="font-size:15px; font-weight:800; color:#1a1d21; letter-spacing:.2px; white-space:nowrap;">Gerador de Etiquetas</span>
+      </div>
+      <div class="tabbar" style="display:flex; align-items:center; gap:2px; overflow-x:auto; max-width:100%;">
+        <button class="tab-btn" data-on="{{ tabPlacaOn }}" onClick="{{ showPlaca }}" style="{{ tabPlacaStyle }}">Placa Promoção</button>
+        <button class="tab-btn" data-on="{{ tabPcrOn }}" onClick="{{ showPcr }}" style="{{ tabPcrStyle }}">Preçário</button>
+        <button class="tab-btn" data-on="{{ tabPrecOn }}" onClick="{{ showPrec }}" style="{{ tabPrecStyle }}">Precificador</button>
+        <button class="tab-btn" data-on="{{ tabMakeOn }}" onClick="{{ showMake }}" style="{{ tabMakeStyle }}">Etiqueta Make</button>
+      </div>
+      <div style="flex:1;"></div>
+      <div style="display:flex; align-items:center; gap:2px; flex-wrap:wrap;">
+        <button onClick="{{ addCurrent }}" class="hdr-btn" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#fdf1f4; color:#CD4664;">+ Adicionar</button>
+        <button onClick="{{ doImport }}" class="hdr-btn" title="Importar CSV" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#fdf1f4; color:#CD4664;">Importar</button>
+        <button onClick="{{ togglePreview }}" class="hdr-btn" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#fdf1f4; color:#CD4664;">{{ previewLabel }}</button>
+        <button onClick="{{ clearCurrent }}" class="hdr-btn" title="Limpar a aba atual" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#fdf1f4; color:#CD4664;">Limpar</button>
+        <button onClick="{{ toggleDark }}" class="hdr-btn" title="Modo escuro" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px; padding:8px;" style-hover="background:#fdf1f4;">{{ darkIcon }}</button>
+        <button onClick="{{ openHelp }}" class="hdr-btn" title="Guia rápido" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px; padding:8px 12px;" style-hover="background:#fdf1f4; color:#CD4664;">?</button>
+        <button onClick="{{ doPrint }}" class="hdr-btn print-btn" style="background:#1a1d21; color:#fff; border:none; border-radius:999px; padding:12px 22px; font-size:14px; font-weight:800; cursor:pointer; white-space:nowrap;" style-hover="background:#CD4664;">Imprimir / PDF</button>
+      </div>
     </div>
-    <div style="flex:1;"></div>
-    <button onClick="{{ addCurrent }}" class="hdr-btn" style="background:rgba(255,255,255,.16); color:#fff; border:1px solid rgba(255,255,255,.35); border-radius:6px; padding:8px 14px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar</button>
-    <button onClick="{{ clearCurrent }}" class="hdr-btn" title="Limpar a aba atual" style="background:rgba(255,255,255,.16); color:#fff; border:1px solid rgba(255,255,255,.35); border-radius:6px; padding:8px 14px; font-size:13px; font-weight:700; cursor:pointer;">Limpar</button>
-    <button onClick="{{ doImport }}" class="hdr-btn" title="Carregar lista (.json)" style="background:rgba(255,255,255,.16); color:#fff; border:1px solid rgba(255,255,255,.35); border-radius:6px; padding:8px 14px; font-size:13px; font-weight:700; cursor:pointer;">Importar</button>
-    <span style="font-size:12px; font-weight:600; color:#fbe3e9;">{{ pageInfo }}</span>
-    <button onClick="{{ togglePreview }}" class="hdr-btn" style="background:rgba(255,255,255,.16); color:#fff; border:1px solid rgba(255,255,255,.35); border-radius:6px; padding:8px 14px; font-size:13px; font-weight:700; cursor:pointer;">{{ previewLabel }}</button>
-    <button onClick="{{ openHelp }}" class="hdr-btn" title="Guia rápido" style="background:rgba(255,255,255,.16); color:#fff; border:1px solid rgba(255,255,255,.35); border-radius:6px; padding:8px 12px; font-size:13px; font-weight:800; cursor:pointer;">?</button>
-    <button onClick="{{ doPrint }}" class="hdr-btn" style="background:#fff; color:#CD4664; border:none; border-radius:6px; padding:8px 16px; font-size:13px; font-weight:800; cursor:pointer;">Imprimir / PDF</button>
   </div>
 
   <sc-if value="{{ isPreview }}" hint-placeholder-val="{{ false }}">
@@ -74,6 +119,16 @@
       <button onClick="{{ doPrint }}" style="background:#fff; color:#CD4664; border:none; border-radius:8px; padding:12px 18px; font-size:14px; font-weight:800; cursor:pointer; box-shadow:0 2px 10px rgba(0,0,0,.25);">Imprimir / PDF</button>
     </div>
   </sc-if>
+
+  <div class="no-print bottombar" style="display:none; position:fixed; left:0; right:0; bottom:0; z-index:70; background:#fff; border-top:1px solid #e4d4d9; padding:8px 10px; gap:8px; align-items:center; box-shadow:0 -4px 16px rgba(0,0,0,.08);">
+    <div style="display:flex; gap:2px; background:#f7e9ec; padding:3px; border-radius:8px;">
+      <button onClick="{{ setMvEdit }}" style="{{ mvEditBtn }}">Editar</button>
+      <button onClick="{{ setMvSheet }}" style="{{ mvSheetBtn }}">Folha</button>
+    </div>
+    <div style="flex:1;"></div>
+    <button onClick="{{ addCurrent }}" style="background:#fdf1f4; color:#CD4664; border:1px solid #e0a7b6; border-radius:8px; padding:12px 14px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar</button>
+    <button onClick="{{ doPrint }}" style="background:#CD4664; color:#fff; border:none; border-radius:8px; padding:12px 16px; font-size:13px; font-weight:800; cursor:pointer;">Imprimir</button>
+  </div>
 
   <sc-if value="{{ isHelpOpen }}" hint-placeholder-val="{{ false }}">
     <div class="no-print" style="position:fixed; inset:0; z-index:100; background:rgba(30,20,25,.45); display:flex; align-items:center; justify-content:center; padding:16px;">
@@ -122,7 +177,7 @@
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
       <div style="font-size:12px; font-weight:800; letter-spacing:.6px; color:#6b7885; text-transform:uppercase;">Preçário ({{ pcrCount }})</div>
       <sc-for list="{{ pcrs }}" as="g" hint-placeholder-count="3">
-        <div style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
+        <div class="card-box" style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -130,7 +185,7 @@
                 <option value="{{ b.key }}">{{ b.label }}</option>
               </sc-for>
             </select>
-            <div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ g.brandBg }};"></div>
+            <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}"><div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ g.brandBg }};"></div></sc-if>
             <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
             <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
             <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
@@ -144,23 +199,39 @@
             </div>
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
               <span style="font-size:10px; font-weight:700; color:#CD4664; letter-spacing:.4px;">POR R$</span>
-              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" style="width:100%; border:1px solid #e8b4c2; border-radius:6px; padding:7px; font-size:13px;">
-            </div>
-            <div style="width:60px; display:flex; flex-direction:column; gap:4px;">
-              <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">QTD</span>
-              <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
+              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onKeyDown="{{ addOnEnter }}" style="width:100%; border:1px solid #e8b4c2; border-radius:6px; padding:7px; font-size:13px;">
             </div>
           </div>
-          <label style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#5a6873; cursor:pointer;">
-            <input type="checkbox" checked="{{ g.cada }}" onChange="{{ g.setCada }}"> Mostrar "cada"
-          </label>
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <label style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#5a6873; cursor:pointer;">
+              <input type="checkbox" checked="{{ g.cada }}" onChange="{{ g.setCada }}"> Mostrar "cada"
+            </label>
+            <div style="flex:1;"></div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
+                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#CD4664; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
+                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#CD4664; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+              </div>
+              <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
+            </div>
+          </div>
         </div>
       </sc-for>
       <button onClick="{{ addPcr }}" style="background:#fdf1f4; color:#CD4664; border:1px dashed #e0a7b6; border-radius:8px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar produto</button>
     </div>
 
-    <div style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; justify-content:center; min-width:0;">
-      <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px;">
+    <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
+      <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
+        <span style="font-size:12px; font-weight:700; color:#8b97a2;">{{ pageInfo }}</span>
+        <div style="flex:1;"></div>
+        <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">−</button>
+          <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">+</button>
+        </div>
+      </div>
+      <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-pcr" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:10px;">
           <sc-if value="{{ pcrEmpty }}" hint-placeholder-val="{{ false }}">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
@@ -211,7 +282,7 @@
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
       <div style="font-size:12px; font-weight:800; letter-spacing:.6px; color:#6b7885; text-transform:uppercase;">Precificadores ({{ prCount }})</div>
       <sc-for list="{{ prs }}" as="g" hint-placeholder-count="3">
-        <div style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
+        <div class="card-box" style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -219,7 +290,7 @@
                 <option value="{{ b.key }}">{{ b.label }}</option>
               </sc-for>
             </select>
-            <div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ g.brandBg }};"></div>
+            <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}"><div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ g.brandBg }};"></div></sc-if>
             <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
             <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
             <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
@@ -237,23 +308,39 @@
             </div>
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
               <span style="font-size:10px; font-weight:700; color:#CD4664; letter-spacing:.4px;">POR R$</span>
-              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" style="width:100%; border:1px solid #e8b4c2; border-radius:6px; padding:7px; font-size:13px;">
-            </div>
-            <div style="width:60px; display:flex; flex-direction:column; gap:4px;">
-              <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">QTD</span>
-              <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
+              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onKeyDown="{{ addOnEnter }}" style="width:100%; border:1px solid #e8b4c2; border-radius:6px; padding:7px; font-size:13px;">
             </div>
           </div>
-          <label style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#5a6873; cursor:pointer;">
-            <input type="checkbox" checked="{{ g.cada }}" onChange="{{ g.setCada }}"> Mostrar "cada"
-          </label>
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <label style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#5a6873; cursor:pointer;">
+              <input type="checkbox" checked="{{ g.cada }}" onChange="{{ g.setCada }}"> Mostrar "cada"
+            </label>
+            <div style="flex:1;"></div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
+                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#CD4664; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
+                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#CD4664; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+              </div>
+              <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
+            </div>
+          </div>
         </div>
       </sc-for>
       <button onClick="{{ addPr }}" style="background:#fdf1f4; color:#CD4664; border:1px dashed #e0a7b6; border-radius:8px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar precificador</button>
     </div>
 
-    <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; justify-content:center; min-width:0;">
-      <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px;">
+    <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
+      <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
+        <span style="font-size:12px; font-weight:700; color:#8b97a2;">{{ pageInfo }}</span>
+        <div style="flex:1;"></div>
+        <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">−</button>
+          <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">+</button>
+        </div>
+      </div>
+      <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-prec" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:10px;">
           <sc-if value="{{ prEmpty }}" hint-placeholder-val="{{ false }}">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
@@ -295,7 +382,7 @@
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
       <div style="font-size:12px; font-weight:800; letter-spacing:.6px; color:#6b7885; text-transform:uppercase;">Etiquetas ({{ mkCount }})</div>
       <sc-for list="{{ mks }}" as="g" hint-placeholder-count="3">
-        <div style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
+        <div class="card-box" style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -303,7 +390,7 @@
                 <option value="{{ b.key }}">{{ b.label }}</option>
               </sc-for>
             </select>
-            <div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ g.brandBg }};"></div>
+            <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}"><div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ g.brandBg }};"></div></sc-if>
             <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
             <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
             <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
@@ -317,23 +404,39 @@
             </div>
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
               <span style="font-size:10px; font-weight:700; color:#0a8f8a; letter-spacing:.4px;">POR R$</span>
-              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" style="width:100%; border:1px solid #9ed3cf; border-radius:6px; padding:7px; font-size:13px;">
-            </div>
-            <div style="width:60px; display:flex; flex-direction:column; gap:4px;">
-              <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">QTD</span>
-              <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
+              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onKeyDown="{{ addOnEnter }}" style="width:100%; border:1px solid #9ed3cf; border-radius:6px; padding:7px; font-size:13px;">
             </div>
           </div>
-          <label style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#5a6873; cursor:pointer;">
-            <input type="checkbox" checked="{{ g.cada }}" onChange="{{ g.setCada }}"> Mostrar "cada"
-          </label>
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <label style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#5a6873; cursor:pointer;">
+              <input type="checkbox" checked="{{ g.cada }}" onChange="{{ g.setCada }}"> Mostrar "cada"
+            </label>
+            <div style="flex:1;"></div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
+                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#CD4664; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
+                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#CD4664; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+              </div>
+              <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
+            </div>
+          </div>
         </div>
       </sc-for>
       <button onClick="{{ addMk }}" style="background:#fdf1f4; color:#CD4664; border:1px dashed #e0a7b6; border-radius:8px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar etiqueta</button>
     </div>
 
-    <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; justify-content:center; min-width:0;">
-      <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px;">
+    <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
+      <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
+        <span style="font-size:12px; font-weight:700; color:#8b97a2;">{{ pageInfo }}</span>
+        <div style="flex:1;"></div>
+        <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">−</button>
+          <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">+</button>
+        </div>
+      </div>
+      <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-make" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:10px;">
           <sc-if value="{{ mkEmpty }}" hint-placeholder-val="{{ false }}">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
@@ -375,7 +478,7 @@
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
       <div style="font-size:12px; font-weight:800; letter-spacing:.6px; color:#6b7885; text-transform:uppercase;">Placas ({{ placaCount }})</div>
       <sc-for list="{{ placas }}" as="pl" hint-placeholder-count="3">
-        <div style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
+        <div class="card-box" style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ pl.n }}</span>
             <select value="{{ pl.brand }}" onChange="{{ pl.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -383,7 +486,7 @@
                 <option value="{{ b.key }}">{{ b.label }}</option>
               </sc-for>
             </select>
-            <div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ pl.brandBg }};"></div>
+            <sc-if value="{{ pl.hasBrand }}" hint-placeholder-val="{{ true }}"><div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ pl.brandBg }};"></div></sc-if>
             <button onClick="{{ pl.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
             <button onClick="{{ pl.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
             <button onClick="{{ pl.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
@@ -404,23 +507,39 @@
             </div>
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
               <span style="font-size:10px; font-weight:700; color:#CD4664; letter-spacing:.4px;">POR R$</span>
-              <input value="{{ pl.porPrice }}" onChange="{{ pl.setPor }}" style="width:100%; border:1px solid #e8b4c2; border-radius:6px; padding:7px; font-size:13px;">
-            </div>
-            <div style="width:60px; display:flex; flex-direction:column; gap:4px;">
-              <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">QTD</span>
-              <input type="number" min="1" value="{{ pl.qty }}" onChange="{{ pl.setQty }}" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
+              <input value="{{ pl.porPrice }}" onChange="{{ pl.setPor }}" onKeyDown="{{ addOnEnter }}" style="width:100%; border:1px solid #e8b4c2; border-radius:6px; padding:7px; font-size:13px;">
             </div>
           </div>
-          <label style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#5a6873; cursor:pointer;">
-            <input type="checkbox" checked="{{ pl.cada }}" onChange="{{ pl.setCada }}"> Mostrar "cada"
-          </label>
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <label style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#5a6873; cursor:pointer;">
+              <input type="checkbox" checked="{{ pl.cada }}" onChange="{{ pl.setCada }}"> Mostrar "cada"
+            </label>
+            <div style="flex:1;"></div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
+                <button onClick="{{ pl.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#CD4664; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                <input type="number" min="1" value="{{ pl.qty }}" onChange="{{ pl.setQty }}" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
+                <button onClick="{{ pl.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#CD4664; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+              </div>
+              <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
+            </div>
+          </div>
         </div>
       </sc-for>
       <button onClick="{{ addPlaca }}" style="background:#fdf1f4; color:#CD4664; border:1px dashed #e0a7b6; border-radius:8px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar placa</button>
     </div>
 
-    <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; justify-content:center; min-width:0;">
-      <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px;">
+    <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
+      <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
+        <span style="font-size:12px; font-weight:700; color:#8b97a2;">{{ pageInfo }}</span>
+        <div style="flex:1;"></div>
+        <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">−</button>
+          <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">+</button>
+        </div>
+      </div>
+      <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-placa" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:10px;">
           <sc-if value="{{ placaEmpty }}" hint-placeholder-val="{{ false }}">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
@@ -578,15 +697,15 @@ class Component extends DCLogic {
   renderVals() {
     const model = this.state.model;
     const pp = !!this.state.preview;
-    const tabBase = "border:none; border-radius:6px; padding:7px 14px; font-size:13px; font-weight:700; cursor:pointer;";
-    const on = tabBase + "background:#fff; color:#CD4664;";
-    const off = tabBase + "background:transparent; color:#fbe3e9;";
+    const tabBase = "border:none; background:transparent; border-radius:999px; padding:9px 14px; font-size:14px; cursor:pointer; white-space:nowrap;";
+    const on = tabBase + "color:#1a1d21; font-weight:800;";
+    const off = tabBase + "color:#7c6b71; font-weight:500;";
 
 
     const pcrs = this.state.pcrs.map((g, i) => {
       const { reais, centavos } = this.splitPrice(g.porPrice);
       return {
-        ...g, n: i + 1, reais, centavos,
+        ...g, n: i + 1, reais, centavos, qty: parseInt(g.qty, 10) || 1,
         hasDe: !!(g.dePrice || "").trim(),
         hasBrand: g.brand !== "semmarca",
         brandBg: 'url("assets/placa/marcas/' + g.brand + '.png")',
@@ -595,6 +714,8 @@ class Component extends DCLogic {
         setDe: e => this.updatePcr(i, { dePrice: e.target.value }),
         setPor: e => this.updatePcr(i, { porPrice: e.target.value }),
         setQty: e => this.updatePcr(i, { qty: e.target.value }),
+        qtyMinus: () => this.updatePcr(i, { qty: Math.max(1, (parseInt(this.state.pcrs[i].qty, 10) || 1) - 1) }),
+        qtyPlus: () => this.updatePcr(i, { qty: Math.min(999, (parseInt(this.state.pcrs[i].qty, 10) || 1) + 1) }),
         deShow: this.fmtPrice(g.dePrice),
         dup: () => this.setState(s => ({ pcrs: [...s.pcrs.slice(0, i + 1), { ...s.pcrs[i] }, ...s.pcrs.slice(i + 1)] })),
         showCada: !!g.cada,
@@ -609,7 +730,7 @@ class Component extends DCLogic {
     const prs = this.state.prs.map((g, i) => {
       const { reais, centavos } = this.splitPrice(g.porPrice);
       return {
-        ...g, n: i + 1, reais, centavos,
+        ...g, n: i + 1, reais, centavos, qty: parseInt(g.qty, 10) || 1,
         hasDe: !!(g.dePrice || "").trim(),
         hasBrand: g.brand !== "semmarca",
         brandBg: 'url("assets/placa/marcas/' + g.brand + '.png")',
@@ -623,6 +744,8 @@ class Component extends DCLogic {
         setDe: e => this.updatePr(i, { dePrice: e.target.value }),
         setPor: e => this.updatePr(i, { porPrice: e.target.value }),
         setQty: e => this.updatePr(i, { qty: e.target.value }),
+        qtyMinus: () => this.updatePr(i, { qty: Math.max(1, (parseInt(this.state.prs[i].qty, 10) || 1) - 1) }),
+        qtyPlus: () => this.updatePr(i, { qty: Math.min(999, (parseInt(this.state.prs[i].qty, 10) || 1) + 1) }),
         deShow: this.fmtPrice(g.dePrice),
         dup: () => this.setState(s => ({ prs: [...s.prs.slice(0, i + 1), { ...s.prs[i] }, ...s.prs.slice(i + 1)] })),
         showCada: !!g.cada,
@@ -636,7 +759,7 @@ class Component extends DCLogic {
     const mks = this.state.mks.map((g, i) => {
       const { reais, centavos } = this.splitPrice(g.porPrice);
       return {
-        ...g, n: i + 1, reais, centavos,
+        ...g, n: i + 1, reais, centavos, qty: parseInt(g.qty, 10) || 1,
         hasDe: !!(g.dePrice || "").trim(),
         showCada: !!g.cada,
         hasBrand: g.brand !== "semmarca",
@@ -646,6 +769,8 @@ class Component extends DCLogic {
         setDe: e => this.updateMk(i, { dePrice: e.target.value }),
         setPor: e => this.updateMk(i, { porPrice: e.target.value }),
         setQty: e => this.updateMk(i, { qty: e.target.value }),
+        qtyMinus: () => this.updateMk(i, { qty: Math.max(1, (parseInt(this.state.mks[i].qty, 10) || 1) - 1) }),
+        qtyPlus: () => this.updateMk(i, { qty: Math.min(999, (parseInt(this.state.mks[i].qty, 10) || 1) + 1) }),
         deShow: this.fmtPrice(g.dePrice),
         dup: () => this.setState(s => ({ mks: [...s.mks.slice(0, i + 1), { ...s.mks[i] }, ...s.mks.slice(i + 1)] })),
         moveUp: () => this.moveItem("mks", i, -1),
@@ -658,7 +783,7 @@ class Component extends DCLogic {
     const placas = this.state.placas.map((pl, i) => {
       const { reais, centavos } = this.splitPrice(pl.porPrice);
       return {
-        ...pl, n: i + 1, reais, centavos,
+        ...pl, n: i + 1, reais, centavos, qty: parseInt(pl.qty, 10) || 1,
         hasDe: !!(pl.dePrice || "").trim(),
         hasBrand: pl.brand !== "semmarca",
         brandBg: 'url("assets/placa/marcas/' + pl.brand + '.png")',
@@ -668,6 +793,8 @@ class Component extends DCLogic {
         setDe: e => this.updatePlaca(i, { dePrice: e.target.value }),
         setPor: e => this.updatePlaca(i, { porPrice: e.target.value }),
         setQty: e => this.updatePlaca(i, { qty: e.target.value }),
+        qtyMinus: () => this.updatePlaca(i, { qty: Math.max(1, (parseInt(this.state.placas[i].qty, 10) || 1) - 1) }),
+        qtyPlus: () => this.updatePlaca(i, { qty: Math.min(999, (parseInt(this.state.placas[i].qty, 10) || 1) + 1) }),
         deShow: this.fmtPrice(pl.dePrice),
         dup: () => this.setState(s => ({ placas: [...s.placas.slice(0, i + 1), { ...s.placas[i] }, ...s.placas.slice(i + 1)] })),
         showCada: !!pl.cada,
@@ -689,6 +816,10 @@ class Component extends DCLogic {
       isMake: model === "make",
       isPrec: model === "prec",
       isPcr: model === "pcr",
+      tabPlacaOn: model === "placa" ? "1" : "0",
+      tabPcrOn: model === "pcr" ? "1" : "0",
+      tabPrecOn: model === "prec" ? "1" : "0",
+      tabMakeOn: model === "make" ? "1" : "0",
       tabPlacaStyle: model === "placa" ? on : off,
       tabMakeStyle: model === "make" ? on : off,
       tabPrecStyle: model === "prec" ? on : off,
@@ -717,6 +848,26 @@ class Component extends DCLogic {
         ? this.setState(s => ({ pcrs: [...s.pcrs, { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }] }))
         : this.setState(s => ({ placas: [...s.placas, { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }] })),
       doPrint: () => window.print(),
+      mvClass: this.state.mobileView === "sheet" ? "mv-sheet" : "mv-edit",
+      setMvEdit: () => this.setState({ mobileView: "edit" }),
+      setMvSheet: () => this.setState({ mobileView: "sheet" }),
+      mvEditBtn: "border:none; border-radius:6px; padding:9px 14px; font-size:13px; font-weight:700; cursor:pointer;" + (this.state.mobileView !== "sheet" ? "background:#CD4664; color:#fff;" : "background:transparent; color:#8a6b73;"),
+      mvSheetBtn: "border:none; border-radius:6px; padding:9px 14px; font-size:13px; font-weight:700; cursor:pointer;" + (this.state.mobileView === "sheet" ? "background:#CD4664; color:#fff;" : "background:transparent; color:#8a6b73;"),
+      zoomVal: this.state.zoom || 1,
+      zoomPct: Math.round((this.state.zoom || 1) * 100) + "%",
+      zoomIn: () => this.setState(s => ({ zoom: Math.min(2, +(((s.zoom || 1) + 0.15).toFixed(2))) })),
+      zoomOut: () => this.setState(s => ({ zoom: Math.max(0.5, +(((s.zoom || 1) - 0.15).toFixed(2))) })),
+      darkClass: this.state.dark ? "dark" : "",
+      darkIcon: this.state.dark ? "☀" : "🌙",
+      toggleDark: () => this.setState(s => {
+        try { localStorage.setItem("dd-dark", s.dark ? "0" : "1"); } catch (e) {}
+        return { dark: !s.dark };
+      }),
+      addOnEnter: e => {
+        if (e.key !== "Enter") return;
+        e.preventDefault();
+        this.renderVals().addCurrent();
+      },
       ppClass: pp ? "pp" : "",
       isPreview: pp,
       previewLabel: pp ? "Sair da prévia" : "Prévia",
