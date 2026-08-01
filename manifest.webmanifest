@@ -1,0 +1,16 @@
+{
+ "name": "Gerador de Etiquetas D&D",
+ "short_name": "Etiquetas D&D",
+ "start_url": ".",
+ "display": "standalone",
+ "background_color": "#f2f0f0",
+ "theme_color": "#05918C",
+ "icons": [
+  {
+   "src": "assets/placa/image4.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  }
+ ]
+}
