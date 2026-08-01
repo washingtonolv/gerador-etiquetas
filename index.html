@@ -76,6 +76,14 @@
     @media (min-width: 701px) and (max-width: 1100px) {
       .editor-col { flex: 0 0 330px !important; }
     }
+    @media (max-width: 1000px) {
+      .hdr-actions { display: none !important; }
+      .hdr-compact { display: block !important; }
+      .hdr-pill { flex-wrap: nowrap !important; padding: 8px 8px 8px 14px !important; gap: 10px !important; }
+      .hdr-pill .tabbar { flex: 1 1 auto; min-width: 0; }
+      .hdr-pill > div:first-child span { display: none; }
+      .dark .menu-pop { background:#2b2429 !important; }
+    }
     @media (max-width: 700px) {
       .hdr-band { padding: 10px 12px 12px !important; }
       .hdr-pill { border-radius: 18px !important; padding: 10px 12px !important; }
@@ -101,7 +109,21 @@
         <button class="tab-btn" data-on="{{ tabMakeOn }}" onClick="{{ showMake }}" style="{{ tabMakeStyle }}">Etiqueta Make</button>
       </div>
       <div style="flex:1;"></div>
-      <div style="display:flex; align-items:center; gap:2px; flex-wrap:wrap;">
+      <div class="hdr-compact" style="display:none; position:relative;">
+        <button onClick="{{ toggleMenu }}" title="Mais opções" style="background:none; border:none; color:#7c6b71; font-size:20px; font-weight:800; cursor:pointer; padding:6px 10px; border-radius:999px; line-height:1;">⋯</button>
+        <sc-if value="{{ isMenuOpen }}" hint-placeholder-val="{{ false }}">
+          <div class="menu-pop" style="position:absolute; right:0; top:calc(100% + 8px); z-index:90; background:#fff; border-radius:12px; box-shadow:0 10px 34px rgba(0,0,0,.25); padding:6px; display:flex; flex-direction:column; min-width:200px;">
+            <button onClick="{{ menuAdd }}" style="{{ menuItemStyle }}">+ Adicionar etiqueta</button>
+            <button onClick="{{ menuImport }}" style="{{ menuItemStyle }}">Importar CSV</button>
+            <button onClick="{{ menuPreview }}" style="{{ menuItemStyle }}">{{ previewLabel }}</button>
+            <button onClick="{{ menuClear }}" style="{{ menuItemStyle }}">Limpar aba atual</button>
+            <button onClick="{{ menuDark }}" style="{{ menuItemStyle }}">{{ darkLabel }}</button>
+            <button onClick="{{ menuHelp }}" style="{{ menuItemStyle }}">Guia rápido</button>
+            <button onClick="{{ menuPrint }}" style="{{ menuItemStyle }}">Imprimir / PDF</button>
+          </div>
+        </sc-if>
+      </div>
+      <div class="hdr-actions" style="display:flex; align-items:center; gap:2px; flex-wrap:wrap;">
         <button onClick="{{ addCurrent }}" class="hdr-btn" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#fdf1f4; color:#CD4664;">+ Adicionar</button>
         <button onClick="{{ doImport }}" class="hdr-btn" title="Importar CSV" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#fdf1f4; color:#CD4664;">Importar</button>
         <button onClick="{{ togglePreview }}" class="hdr-btn" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#fdf1f4; color:#CD4664;">{{ previewLabel }}</button>
@@ -848,6 +870,23 @@ class Component extends DCLogic {
         ? this.setState(s => ({ pcrs: [...s.pcrs, { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }] }))
         : this.setState(s => ({ placas: [...s.placas, { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }] })),
       doPrint: () => window.print(),
+      isMenuOpen: !!this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      menuItemStyle: "background:none; border:none; text-align:left; padding:12px; font-size:14px; font-weight:600; color:" + (this.state.dark ? "#f2e9ed" : "#1a1d21") + "; cursor:pointer; border-radius:8px;",
+      darkLabel: this.state.dark ? "Modo claro" : "Modo escuro",
+      menuAdd: () => { this.setState({ menuOpen: false }); this.renderVals().addCurrent(); },
+      menuImport: () => this.setState({ menuOpen: false, importOpen: true }),
+      menuPreview: () => this.setState(s => ({ menuOpen: false, preview: !s.preview })),
+      menuHelp: () => this.setState({ menuOpen: false, helpOpen: true }),
+      menuPrint: () => { this.setState({ menuOpen: false }); setTimeout(() => window.print(), 60); },
+      menuClear: () => {
+        this.setState({ menuOpen: false });
+        if (window.confirm("Limpar todas as etiquetas desta aba?")) this.setState({ [this.listKey(model)]: [] });
+      },
+      menuDark: () => this.setState(s => {
+        try { localStorage.setItem("dd-dark", s.dark ? "0" : "1"); } catch (e) {}
+        return { menuOpen: false, dark: !s.dark };
+      }),
       mvClass: this.state.mobileView === "sheet" ? "mv-sheet" : "mv-edit",
       setMvEdit: () => this.setState({ mobileView: "edit" }),
       setMvSheet: () => this.setState({ mobileView: "sheet" }),
