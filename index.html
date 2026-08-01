@@ -18,74 +18,128 @@
     a { color: #CD4664; }
     a:hover { color: #a83450; }
     @media print {
+      @page { size: A4 portrait; margin: 10mm; }
       .no-print { display: none !important; }
-      .sheet { box-shadow: none !important; border: none !important; margin: 0 !important; }
       body { background: #fff !important; }
+      .app-bg { background: #fff !important; min-height: 0 !important; }
+      .preview-wrap { padding: 0 !important; display: block !important; }
+      .sheet { box-shadow: none !important; border: none !important; margin: 0 !important; padding: 0 !important; max-width: none !important; border-radius: 0 !important; }
+      .g-prec { grid-template-columns: repeat(2, 65mm) !important; gap: 5mm !important; }
+      .g-make { grid-template-columns: repeat(2, 65mm) !important; gap: 5mm !important; }
+      .g-placa { grid-template-columns: repeat(2, 90mm) !important; gap: 5mm !important; }
+      .g-pcr { grid-template-columns: repeat(3, 50mm) !important; gap: 5mm !important; }
+      .g-prec > div, .g-make > div, .g-placa > div, .g-pcr > div { break-inside: avoid; outline: 0.3mm dashed #9aa6b1 !important; outline-offset: 1mm; border: none !important; border-radius: 0 !important; }
+      .g-prec, .g-make, .g-placa, .g-pcr { gap: 6mm !important; }
+    }
+    .pp .no-print { display: none !important; }
+    .pp .preview-wrap { padding: 16px !important; }
+    .pp .g-prec, .pp .g-make { grid-template-columns: repeat(2, 65mm) !important; gap: 6mm !important; }
+    .pp .g-placa { grid-template-columns: repeat(2, 90mm) !important; gap: 6mm !important; }
+    .pp .g-pcr { grid-template-columns: repeat(3, 50mm) !important; gap: 6mm !important; }
+    .pp .g-prec > div, .pp .g-make > div, .pp .g-placa > div, .pp .g-pcr > div { outline: 0.3mm dashed #9aa6b1; outline-offset: 1mm; }
+    .pp .sheet { width: 210mm !important; max-width: none !important; padding: 10mm !important; }
+    @media (max-width: 640px) {
+      .hdr-btn { min-height: 44px !important; }
+      .tab-btn { min-height: 40px !important; }
+      .editor-col { border-right: none !important; border-bottom: 1px solid #d3dae0; }
     }
   </style>
 </helmet>
-<div style="min-height:100vh; background:#f2f0f0; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg'); background-size:260px 260px, 120px 120px, 180px 180px; background-position:right -60px bottom -70px, right 200px bottom 160px, left -50px top 120px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
+<div class="app-bg {{ ppClass }}" style="min-height:100vh; background:#f2f0f0; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg'); background-size:260px 260px, 120px 120px, 180px 180px; background-position:right -60px bottom -70px, right 200px bottom 160px, left -50px top 120px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
 
   <div class="no-print" style="background:#CD4664; color:#fff; padding:12px 22px; display:flex; align-items:center; flex-wrap:wrap; gap:10px 16px;">
     <div style="font-size:19px; font-weight:800; letter-spacing:.2px;">Gerador de Etiquetas</div>
     <div style="display:flex; gap:4px; background:rgba(0,0,0,.12); padding:3px; border-radius:8px;">
-      <button onClick="{{ showVitrine }}" style="{{ tabVitrineStyle }}">Vitrine D&amp;D</button>
       <button onClick="{{ showPlaca }}" style="{{ tabPlacaStyle }}">Placa Promoção</button>
+      <button onClick="{{ showPcr }}" style="{{ tabPcrStyle }}">Preçário</button>
       <button onClick="{{ showPrec }}" style="{{ tabPrecStyle }}">Precificador</button>
       <button onClick="{{ showMake }}" style="{{ tabMakeStyle }}">Etiqueta Make</button>
     </div>
     <div style="flex:1;"></div>
-    <button onClick="{{ addCurrent }}" style="background:rgba(255,255,255,.16); color:#fff; border:1px solid rgba(255,255,255,.35); border-radius:6px; padding:8px 14px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar</button>
-    <button onClick="{{ doPrint }}" style="background:#fff; color:#CD4664; border:none; border-radius:6px; padding:8px 16px; font-size:13px; font-weight:800; cursor:pointer;">Imprimir / PDF</button>
+    <button onClick="{{ addCurrent }}" class="hdr-btn" style="background:rgba(255,255,255,.16); color:#fff; border:1px solid rgba(255,255,255,.35); border-radius:6px; padding:8px 14px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar</button>
+    <button onClick="{{ clearCurrent }}" class="hdr-btn" title="Limpar a aba atual" style="background:rgba(255,255,255,.16); color:#fff; border:1px solid rgba(255,255,255,.35); border-radius:6px; padding:8px 14px; font-size:13px; font-weight:700; cursor:pointer;">Limpar</button>
+    <button onClick="{{ doImport }}" class="hdr-btn" title="Carregar lista (.json)" style="background:rgba(255,255,255,.16); color:#fff; border:1px solid rgba(255,255,255,.35); border-radius:6px; padding:8px 14px; font-size:13px; font-weight:700; cursor:pointer;">Importar</button>
+    <span style="font-size:12px; font-weight:600; color:#fbe3e9;">{{ pageInfo }}</span>
+    <button onClick="{{ togglePreview }}" class="hdr-btn" style="background:rgba(255,255,255,.16); color:#fff; border:1px solid rgba(255,255,255,.35); border-radius:6px; padding:8px 14px; font-size:13px; font-weight:700; cursor:pointer;">{{ previewLabel }}</button>
+    <button onClick="{{ doPrint }}" class="hdr-btn" style="background:#fff; color:#CD4664; border:none; border-radius:6px; padding:8px 16px; font-size:13px; font-weight:800; cursor:pointer;">Imprimir / PDF</button>
   </div>
 
-  <!-- ==================== MODELO: VITRINE D&D ==================== -->
-  <sc-if value="{{ isVitrine }}" hint-placeholder-val="{{ true }}">
+  <sc-if value="{{ isPreview }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed; top:14px; right:14px; z-index:50; display:flex; gap:8px;">
+      <button onClick="{{ togglePreview }}" style="background:#CD4664; color:#fff; border:none; border-radius:8px; padding:12px 18px; font-size:14px; font-weight:800; cursor:pointer; box-shadow:0 2px 10px rgba(0,0,0,.25);">✕ Sair da prévia</button>
+      <button onClick="{{ doPrint }}" style="background:#fff; color:#CD4664; border:none; border-radius:8px; padding:12px 18px; font-size:14px; font-weight:800; cursor:pointer; box-shadow:0 2px 10px rgba(0,0,0,.25);">Imprimir / PDF</button>
+    </div>
+  </sc-if>
+
+  <!-- ==================== MODELO: PREÇÁRIO ==================== -->
+  <sc-if value="{{ isPcr }}" hint-placeholder-val="{{ true }}">
   <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
-    <div class="no-print" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
-      <div style="font-size:12px; font-weight:800; letter-spacing:.6px; color:#6b7885; text-transform:uppercase;">Cards da vitrine ({{ cardCount }})</div>
-      <sc-for list="{{ cards }}" as="c" hint-placeholder-count="4">
+    <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
+      <div style="font-size:12px; font-weight:800; letter-spacing:.6px; color:#6b7885; text-transform:uppercase;">Preçário ({{ pcrCount }})</div>
+      <sc-for list="{{ pcrs }}" as="g" hint-placeholder-count="3">
         <div style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
           <div style="display:flex; align-items:center; gap:8px;">
-            <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ c.n }}</span>
-            <select value="{{ c.brand }}" onChange="{{ c.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
-              <sc-for list="{{ brandOptions }}" as="b" hint-placeholder-count="15">
+            <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
+            <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
+              <sc-for list="{{ placaBrandOptions }}" as="b" hint-placeholder-count="17">
                 <option value="{{ b.key }}">{{ b.label }}</option>
               </sc-for>
             </select>
-            <button onClick="{{ c.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+            <div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ g.brandBg }};"></div>
+            <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
+            <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
+            <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
+            <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
           </div>
-          <textarea value="{{ c.name }}" onChange="{{ c.setName }}" rows="2" placeholder="Descrição do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:600;"></textarea>
+          <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Descrição do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:600;"></textarea>
           <div style="display:flex; gap:8px;">
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
               <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">DE (ANTES)</span>
-              <input value="{{ c.dePrice }}" onChange="{{ c.setDe }}" placeholder="opcional" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
+              <input value="{{ g.dePrice }}" onChange="{{ g.setDe }}" placeholder="opcional" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
             </div>
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
               <span style="font-size:10px; font-weight:700; color:#CD4664; letter-spacing:.4px;">POR R$</span>
-              <input value="{{ c.porPrice }}" onChange="{{ c.setPor }}" style="width:100%; border:1px solid #e8b4c2; border-radius:6px; padding:7px; font-size:13px;">
+              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" style="width:100%; border:1px solid #e8b4c2; border-radius:6px; padding:7px; font-size:13px;">
+            </div>
+            <div style="width:60px; display:flex; flex-direction:column; gap:4px;">
+              <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">QTD</span>
+              <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
             </div>
           </div>
+          <label style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#5a6873; cursor:pointer;">
+            <input type="checkbox" checked="{{ g.cada }}" onChange="{{ g.setCada }}"> Mostrar "cada"
+          </label>
         </div>
       </sc-for>
-      <button onClick="{{ addCard }}" style="background:#fdf1f4; color:#CD4664; border:1px dashed #e0a7b6; border-radius:8px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar card</button>
+      <button onClick="{{ addPcr }}" style="background:#fdf1f4; color:#CD4664; border:1px dashed #e0a7b6; border-radius:8px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar produto</button>
     </div>
 
     <div style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; justify-content:center; min-width:0;">
       <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px;">
-        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:10px;">
-          <sc-for list="{{ cards }}" as="c" hint-placeholder-count="8">
-            <div style="position:relative; width:100%; aspect-ratio:704 / 695; background-image:{{ c.bgUrl }}; background-size:cover; background-position:center; overflow:hidden; border-radius:2px; container-type:inline-size;">
-              <!-- product name over white cloud -->
-              <div style="position:absolute; left:6%; top:29%; width:44%; font-size:5.2cqw; font-weight:800; line-height:1.06; color:#171717; text-transform:uppercase; text-wrap:balance;">{{ c.name }}</div>
-              <!-- DE (old price) near baked "DE:" -->
-              <sc-if value="{{ c.hasDe }}" hint-placeholder-val="{{ true }}">
-                <div style="position:absolute; left:60%; top:39.5%; font-size:6cqw; font-weight:700; color:#fff; text-decoration:line-through; text-decoration-thickness:1px;">{{ c.deFmt }}</div>
-              </sc-if>
-              <!-- POR (new price) big, near baked "POR R$" -->
-              <div style="position:absolute; left:34%; top:57%; display:flex; align-items:flex-start; color:#fff;">
-                <span style="font-size:20cqw; font-weight:900; line-height:.78; letter-spacing:-0.04em;">{{ c.reais }}</span>
-                <span style="font-size:9cqw; font-weight:900; line-height:.9; margin-top:0.4cqw;">,{{ c.centavos }}</span>
+        <div class="g-pcr" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:10px;">
+          <sc-for list="{{ pcrsGrid }}" as="g" hint-placeholder-count="3">
+            <div style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:5 / 7; background:#FFE1E4; overflow:hidden; border:1px solid #f0dade; border-radius:2px; container-type:inline-size;">
+              <div style="position:absolute; left:0; top:58.7%; width:100%; height:41.3%; background-image:url('assets/placa/nuvem-rosa.png'); background-size:cover; background-position:center bottom; background-repeat:no-repeat;"></div>
+              <div style="position:absolute; left:40%; top:38.7%; width:56.7%; aspect-ratio:1 / 1; background-image:url('assets/placa/flor-verde.png'); background-size:contain; background-repeat:no-repeat;"></div>
+              <img src="assets/placa/image4.png" alt="D&amp;D" style="position:absolute; left:61%; top:6.5%; width:34%;">
+              <div style="position:absolute; left:5%; top:26%; width:52%; font-size:5.3cqw; font-weight:700; line-height:1.25; color:#1a1d21; text-transform:uppercase;">{{ g.name }}</div>
+              <div style="position:absolute; left:13.7%; top:44.1%; width:33.6%; height:25%; background-image:url('assets/placa/flor-branca.png'); background-size:contain; background-position:center; background-repeat:no-repeat;">
+                <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}">
+                  <div style="position:absolute; inset:30% 16%; background-image:{{ g.brandBg }}; background-size:contain; background-position:center; background-repeat:no-repeat;"></div>
+                </sc-if>
+              </div>
+              <div style="position:absolute; left:43%; top:42%; width:51%; height:34%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.8cqw; color:#fff; text-align:center;">
+                <sc-if value="{{ g.hasDe }}" hint-placeholder-val="{{ true }}">
+                  <div style="font-size:3.4cqw; font-weight:400; white-space:nowrap;">DE: R$ <s>{{ g.deShow }}</s></div>
+                </sc-if>
+                <div style="display:flex; align-items:flex-start; justify-content:center;">
+                  <span style="font-size:3cqw; font-weight:700; line-height:1.25; text-align:right; margin-top:2.2cqw;">POR:<br>R$&nbsp;</span>
+                  <span style="font-size:12.5cqw; font-weight:700; line-height:1;">{{ g.reais }}</span>
+                  <span style="font-size:6cqw; font-weight:700; line-height:1.1; margin-top:5.2cqw;">,{{ g.centavos }}</span>
+                </div>
+                <sc-if value="{{ g.showCada }}" hint-placeholder-val="{{ true }}">
+                  <div style="font-size:3.6cqw; font-weight:700;">cada</div>
+                </sc-if>
               </div>
             </div>
           </sc-for>
@@ -98,7 +152,7 @@
   <!-- ==================== MODELO: PRECIFICADOR ==================== -->
   <sc-if value="{{ isPrec }}" hint-placeholder-val="{{ true }}">
   <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
-    <div class="no-print" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
+    <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
       <div style="font-size:12px; font-weight:800; letter-spacing:.6px; color:#6b7885; text-transform:uppercase;">Precificadores ({{ prCount }})</div>
       <sc-for list="{{ prs }}" as="g" hint-placeholder-count="3">
         <div style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
@@ -109,6 +163,10 @@
                 <option value="{{ b.key }}">{{ b.label }}</option>
               </sc-for>
             </select>
+            <div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ g.brandBg }};"></div>
+            <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
+            <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
+            <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
             <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
           </div>
           <div style="display:flex; gap:6px;">
@@ -125,29 +183,36 @@
               <span style="font-size:10px; font-weight:700; color:#CD4664; letter-spacing:.4px;">POR R$</span>
               <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" style="width:100%; border:1px solid #e8b4c2; border-radius:6px; padding:7px; font-size:13px;">
             </div>
+            <div style="width:60px; display:flex; flex-direction:column; gap:4px;">
+              <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">QTD</span>
+              <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
+            </div>
           </div>
+          <label style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#5a6873; cursor:pointer;">
+            <input type="checkbox" checked="{{ g.cada }}" onChange="{{ g.setCada }}"> Mostrar "cada"
+          </label>
         </div>
       </sc-for>
       <button onClick="{{ addPr }}" style="background:#fdf1f4; color:#CD4664; border:1px dashed #e0a7b6; border-radius:8px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar precificador</button>
     </div>
 
-    <div style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; justify-content:center; min-width:0;">
+    <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; justify-content:center; min-width:0;">
       <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px;">
-        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:10px;">
-          <sc-for list="{{ prs }}" as="g" hint-placeholder-count="3">
-            <div style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:2.004 / 1; background-image:{{ g.fundoBg }}; background-size:100% 111.12%; background-position:top left; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
+        <div class="g-prec" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:10px;">
+          <sc-for list="{{ prsGrid }}" as="g" hint-placeholder-count="3">
+            <div style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:6.5 / 4.3; background-image:{{ g.fundoBg }}; background-size:100% 100%; background-position:top left; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
               <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:2.9%; top:5.7%; width:30.7%;">
               <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}">
                 <div style="position:absolute; left:5.4%; top:44%; width:19%; height:12%; background-image:{{ g.brandBg }}; background-size:contain; background-position:left center; background-repeat:no-repeat;"></div>
               </sc-if>
               <div style="position:absolute; left:5.6%; top:62%; width:32%; font-size:3.3cqw; font-weight:800; line-height:1.15; color:#171717; text-transform:uppercase; text-wrap:balance;">{{ g.name }}</div>
               <sc-if value="{{ g.hasDe }}" hint-placeholder-val="{{ true }}">
-                <div style="position:absolute; left:64.9%; top:29%; font-size:3.05cqw; font-weight:700; color:#fff;">DE: R$ {{ g.dePrice }}</div>
+                <div style="position:absolute; left:69%; top:22%; font-size:3.4cqw; font-weight:700; color:#fff;">DE: R$ {{ g.deShow }}</div>
               </sc-if>
-              <div style="position:absolute; right:38.6%; top:42%; text-align:right; font-size:3.05cqw; font-weight:700; color:#fff; line-height:1.35;">POR:<br>R$</div>
-              <div style="position:absolute; left:63.1%; top:38%; display:flex; align-items:flex-start; color:#fff;">
-                <span style="font-size:11.8cqw; font-weight:900; line-height:1;">{{ g.reais }}</span>
-                <span style="font-size:5.5cqw; font-weight:700; line-height:1.1; margin-top:4.6cqw;">,{{ g.centavos }}</span>
+              <div style="position:absolute; left:69%; top:33%; font-size:3.4cqw; font-weight:700; color:#fff;">POR: R$</div>
+              <div style="position:absolute; left:64%; top:47%; display:flex; align-items:flex-start; color:#fff;">
+                <span style="font-size:16cqw; font-weight:900; line-height:1;">{{ g.reais }}</span>
+                <span style="font-size:7.5cqw; font-weight:700; line-height:1.1; margin-top:6.5cqw;">,{{ g.centavos }}<sc-if value="{{ g.showCada }}" hint-placeholder-val="{{ true }}"><span style="display:block; font-size:4cqw; font-weight:700; line-height:1.1; text-align:center;">cada</span></sc-if></span>
               </div>
             </div>
           </sc-for>
@@ -160,7 +225,7 @@
   <!-- ==================== MODELO: ETIQUETA MAKE ==================== -->
   <sc-if value="{{ isMake }}" hint-placeholder-val="{{ true }}">
   <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
-    <div class="no-print" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
+    <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
       <div style="font-size:12px; font-weight:800; letter-spacing:.6px; color:#6b7885; text-transform:uppercase;">Etiquetas ({{ mkCount }})</div>
       <sc-for list="{{ mks }}" as="g" hint-placeholder-count="3">
         <div style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
@@ -171,6 +236,10 @@
                 <option value="{{ b.key }}">{{ b.label }}</option>
               </sc-for>
             </select>
+            <div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ g.brandBg }};"></div>
+            <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
+            <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
+            <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
             <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
           </div>
           <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Descrição do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:600;"></textarea>
@@ -183,6 +252,10 @@
               <span style="font-size:10px; font-weight:700; color:#0a8f8a; letter-spacing:.4px;">POR R$</span>
               <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" style="width:100%; border:1px solid #9ed3cf; border-radius:6px; padding:7px; font-size:13px;">
             </div>
+            <div style="width:60px; display:flex; flex-direction:column; gap:4px;">
+              <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">QTD</span>
+              <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
+            </div>
           </div>
           <label style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#5a6873; cursor:pointer;">
             <input type="checkbox" checked="{{ g.cada }}" onChange="{{ g.setCada }}"> Mostrar "cada"
@@ -192,27 +265,24 @@
       <button onClick="{{ addMk }}" style="background:#fdf1f4; color:#CD4664; border:1px dashed #e0a7b6; border-radius:8px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar etiqueta</button>
     </div>
 
-    <div style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; justify-content:center; min-width:0;">
+    <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; justify-content:center; min-width:0;">
       <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px;">
-        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:10px;">
-          <sc-for list="{{ mks }}" as="g" hint-placeholder-count="3">
-            <div style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:1.601 / 1; background-image:url('assets/precificador/fundo-verde.png'); background-size:100% 100%; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
+        <div class="g-make" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:10px;">
+          <sc-for list="{{ mksGrid }}" as="g" hint-placeholder-count="3">
+            <div style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:6.5 / 4.3; background-image:url('assets/precificador/fundo-verde.png'); background-size:100% 100%; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
               <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:1%; top:5%; width:48%;">
               <div style="position:absolute; left:2%; top:57%; width:38%; font-size:3.25cqw; font-weight:800; line-height:1.15; color:#171717; text-transform:uppercase; text-wrap:balance;">{{ g.name }}</div>
               <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}">
                 <div style="position:absolute; left:2%; top:79%; width:20%; height:16%; background-image:{{ g.brandBg }}; background-size:contain; background-position:left center; background-repeat:no-repeat;"></div>
               </sc-if>
               <sc-if value="{{ g.hasDe }}" hint-placeholder-val="{{ true }}">
-                <div style="position:absolute; left:58%; top:33%; font-size:5.1cqw; font-weight:700; color:#fff;">DE: R$ {{ g.dePrice }}</div>
+                <div style="position:absolute; left:58%; top:33%; font-size:5.1cqw; font-weight:700; color:#fff;">DE: R$ {{ g.deShow }}</div>
               </sc-if>
               <div style="position:absolute; right:44%; top:52%; text-align:right; font-size:4.2cqw; font-weight:700; color:#fff; line-height:1.35;">POR:<br>R$</div>
               <div style="position:absolute; left:57.5%; top:46%; display:flex; align-items:flex-start; color:#fff;">
                 <span style="font-size:14.8cqw; font-weight:900; line-height:1;">{{ g.reais }}</span>
-                <span style="font-size:8.3cqw; font-weight:700; line-height:1.1; margin-top:5.8cqw;">,{{ g.centavos }}</span>
+                <span style="font-size:8.3cqw; font-weight:700; line-height:1.1; margin-top:5.8cqw;">,{{ g.centavos }}<sc-if value="{{ g.showCada }}" hint-placeholder-val="{{ true }}"><span style="display:block; font-size:4.4cqw; font-weight:700; line-height:1.1; text-align:center;">cada</span></sc-if></span>
               </div>
-              <sc-if value="{{ g.showCada }}" hint-placeholder-val="{{ true }}">
-                <div style="position:absolute; left:63%; top:66%; font-size:5.1cqw; font-weight:700; color:#fff;">cada</div>
-              </sc-if>
             </div>
           </sc-for>
         </div>
@@ -224,7 +294,7 @@
   <!-- ==================== MODELO: PLACA PROMOÇÃO ==================== -->
   <sc-if value="{{ isPlaca }}" hint-placeholder-val="{{ true }}">
   <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
-    <div class="no-print" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
+    <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
       <div style="font-size:12px; font-weight:800; letter-spacing:.6px; color:#6b7885; text-transform:uppercase;">Placas ({{ placaCount }})</div>
       <sc-for list="{{ placas }}" as="pl" hint-placeholder-count="3">
         <div style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
@@ -235,6 +305,10 @@
                 <option value="{{ b.key }}">{{ b.label }}</option>
               </sc-for>
             </select>
+            <div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ pl.brandBg }};"></div>
+            <button onClick="{{ pl.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
+            <button onClick="{{ pl.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
+            <button onClick="{{ pl.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
             <button onClick="{{ pl.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
           </div>
           <div style="display:flex; flex-direction:column; gap:4px;">
@@ -254,16 +328,23 @@
               <span style="font-size:10px; font-weight:700; color:#CD4664; letter-spacing:.4px;">POR R$</span>
               <input value="{{ pl.porPrice }}" onChange="{{ pl.setPor }}" style="width:100%; border:1px solid #e8b4c2; border-radius:6px; padding:7px; font-size:13px;">
             </div>
+            <div style="width:60px; display:flex; flex-direction:column; gap:4px;">
+              <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">QTD</span>
+              <input type="number" min="1" value="{{ pl.qty }}" onChange="{{ pl.setQty }}" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
+            </div>
           </div>
+          <label style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#5a6873; cursor:pointer;">
+            <input type="checkbox" checked="{{ pl.cada }}" onChange="{{ pl.setCada }}"> Mostrar "cada"
+          </label>
         </div>
       </sc-for>
       <button onClick="{{ addPlaca }}" style="background:#fdf1f4; color:#CD4664; border:1px dashed #e0a7b6; border-radius:8px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar placa</button>
     </div>
 
-    <div style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; justify-content:center; min-width:0;">
+    <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; justify-content:center; min-width:0;">
       <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px;">
-        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:10px;">
-          <sc-for list="{{ placas }}" as="pl" hint-placeholder-count="3">
+        <div class="g-placa" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:10px;">
+          <sc-for list="{{ placasGrid }}" as="pl" hint-placeholder-count="3">
             <div style="position:relative; width:100%; aspect-ratio:1 / 1; background:#fff; overflow:hidden; border:1px solid #eadfe2; border-radius:2px; container-type:inline-size; font-family:Axiforma, Archivo, sans-serif;">
               <div style="position:absolute; left:0; top:45.7%; width:100%; height:54.3%; background-image:url('assets/placa/nuvem-rosa.png'); background-size:cover; background-position:center bottom; background-repeat:no-repeat;"></div>
               <div style="position:absolute; left:9.87%; top:23.08%; width:33.57%; aspect-ratio:725 / 714; background-image:url('assets/placa/flor-branca.png'); background-size:contain; background-repeat:no-repeat;"></div>
@@ -277,12 +358,12 @@
                 <div style="font-size:3.56cqw; font-weight:400; line-height:1.25; white-space:pre-line;">{{ pl.desc }}</div>
               </div>
               <sc-if value="{{ pl.hasDe }}" hint-placeholder-val="{{ true }}">
-                <div style="position:absolute; left:46.9%; top:37.5%; font-size:3.2cqw; font-weight:400; color:#fff;">DE: R$ {{ pl.dePrice }}</div>
+                <div style="position:absolute; left:46.9%; top:37.5%; font-size:3.2cqw; font-weight:400; color:#fff;">DE: R$ {{ pl.deShow }}</div>
               </sc-if>
               <div style="position:absolute; right:49.1%; top:50.4%; text-align:right; font-size:2.35cqw; font-weight:700; color:#fff; line-height:1.3;">POR:<br>R$</div>
               <div style="position:absolute; left:52.9%; top:42.9%; display:flex; align-items:flex-start; color:#fff;">
                 <span style="font-size:11.9cqw; font-weight:700; line-height:1;">{{ pl.reais }}</span>
-                <span style="font-size:5.8cqw; font-weight:700; line-height:1.1; margin-top:4.9cqw;">,{{ pl.centavos }}</span>
+                <span style="font-size:5.8cqw; font-weight:700; line-height:1.1; margin-top:4.9cqw;">,{{ pl.centavos }}<sc-if value="{{ pl.showCada }}" hint-placeholder-val="{{ true }}"><span style="display:block; font-size:3.2cqw; font-weight:700; line-height:1.1; text-align:center;">cada</span></sc-if></span>
               </div>
             </div>
           </sc-for>
@@ -297,9 +378,9 @@
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   state = {
-    model: "vitrine",
-    cards: [
-      { brand: "generico", name: "Produto", dePrice: "350,00", porPrice: "259,99" },
+    model: "placa",
+   pcrs: [
+      { brand: "boticario", name: "Hid. Obsessão por Baunilha 400ml", dePrice: "58,99", porPrice: "39,90" },
     ],
     prs: [
       { brand: "avon", fundo: "rosa", name: "Pó Bronzer", dePrice: "75,00", porPrice: "56,90" },
@@ -312,16 +393,6 @@ class Component extends DCLogic {
     ],
   };
 
-  brands = [
-    { key: "eudora", label: "Eudora" }, { key: "avon", label: "Avon" },
-    { key: "jequiti", label: "Jequiti" }, { key: "boticario", label: "O Boticário" },
-    { key: "fhader", label: "Fhader" }, { key: "hinode", label: "Hinode" },
-    { key: "kiss", label: "Kiss NY" }, { key: "larive", label: "La Rive" },
-    { key: "mahogany", label: "Mahogany" }, { key: "marykay", label: "Mary Kay" },
-    { key: "pariselysees", label: "Paris Elysees" }, { key: "rubyrose", label: "Ruby Rose" },
-    { key: "vizzela", label: "Vizzela" }, { key: "ciclo", label: "Ciclo" },
-    { key: "generico", label: "Sem marca" },
-  ];
 
   placaBrands = [
     { key: "avon", label: "Avon" }, { key: "boticario", label: "O Boticário" },
@@ -334,8 +405,8 @@ class Component extends DCLogic {
     { key: "rubykisses", label: "Ruby Kisses" }, { key: "truss", label: "Truss" },
     { key: "vizzela", label: "Vizzela" }, { key: "semmarca", label: "Sem marca" },
   ];
-  updateCard(i, patch) {
-    this.setState(s => ({ cards: s.cards.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
+  updatePcr(i, patch) {
+    this.setState(s => ({ pcrs: s.pcrs.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
   }
   updatePr(i, patch) {
     this.setState(s => ({ prs: s.prs.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
@@ -346,32 +417,64 @@ class Component extends DCLogic {
   updatePlaca(i, patch) {
     this.setState(s => ({ placas: s.placas.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
   }
+  moveItem(key, i, d) {
+    this.setState(s => {
+      const a = [...s[key]], j = i + d;
+      if (j < 0 || j >= a.length) return null;
+      [a[i], a[j]] = [a[j], a[i]];
+      return { [key]: a };
+    });
+  }
   splitPrice(v) {
     const s = (v == null ? "" : String(v)).trim();
     const m = s.match(/^(.*?)[,.](\d{1,2})$/);
     if (m) return { reais: m[1] || "0", centavos: m[2].padEnd(2, "0") };
+    if (/^\d{3,}$/.test(s)) return { reais: String(parseInt(s.slice(0, -2), 10)), centavos: s.slice(-2) };
     return { reais: s || "0", centavos: "00" };
   }
 
+  fmtPrice(v) {
+    const { reais, centavos } = this.splitPrice(v);
+    return reais + "," + centavos;
+  }
+  componentDidUpdate() {
+    const { pcrs, prs, mks, placas } = this.state;
+    const data = JSON.stringify({ pcrs, prs, mks, placas });
+    if (data !== this._last) {
+      this._last = data;
+      try { localStorage.setItem("dd-etiquetas-v1", data); } catch (e) {}
+    }
+  }
+  listKey(model) {
+    return model === "placa" ? "placas" : model === "pcr" ? "pcrs" : model === "prec" ? "prs" : "mks";
+  }
   renderVals() {
     const model = this.state.model;
+    const pp = !!this.state.preview;
     const tabBase = "border:none; border-radius:6px; padding:7px 14px; font-size:13px; font-weight:700; cursor:pointer;";
     const on = tabBase + "background:#fff; color:#CD4664;";
     const off = tabBase + "background:transparent; color:#fbe3e9;";
 
-    const cards = this.state.cards.map((c, i) => {
-      const { reais, centavos } = this.splitPrice(c.porPrice);
-      const de = (c.dePrice || "").trim();
+
+    const pcrs = this.state.pcrs.map((g, i) => {
+      const { reais, centavos } = this.splitPrice(g.porPrice);
       return {
-        ...c, n: i + 1, reais, centavos,
-        bgUrl: `url("assets/vitrine/${c.brand}.png")`,
-        hasDe: !!de,
-        deFmt: de ? ("R$ " + de) : "",
-        setBrand: e => this.updateCard(i, { brand: e.target.value }),
-        setName: e => this.updateCard(i, { name: e.target.value }),
-        setDe: e => this.updateCard(i, { dePrice: e.target.value }),
-        setPor: e => this.updateCard(i, { porPrice: e.target.value }),
-        remove: () => this.setState(s => ({ cards: s.cards.filter((_, idx) => idx !== i) })),
+        ...g, n: i + 1, reais, centavos,
+        hasDe: !!(g.dePrice || "").trim(),
+        hasBrand: g.brand !== "semmarca",
+        brandBg: 'url("assets/placa/marcas/' + g.brand + '.png")',
+        setBrand: e => this.updatePcr(i, { brand: e.target.value }),
+        setName: e => this.updatePcr(i, { name: e.target.value }),
+        setDe: e => this.updatePcr(i, { dePrice: e.target.value }),
+        setPor: e => this.updatePcr(i, { porPrice: e.target.value }),
+        setQty: e => this.updatePcr(i, { qty: e.target.value }),
+        deShow: this.fmtPrice(g.dePrice),
+        dup: () => this.setState(s => ({ pcrs: [...s.pcrs.slice(0, i + 1), { ...s.pcrs[i] }, ...s.pcrs.slice(i + 1)] })),
+        showCada: !!g.cada,
+        setCada: e => this.updatePcr(i, { cada: e.target.checked }),
+        moveUp: () => this.moveItem("pcrs", i, -1),
+        moveDown: () => this.moveItem("pcrs", i, 1),
+        remove: () => this.setState(s => ({ pcrs: s.pcrs.filter((_, idx) => idx !== i) })),
       };
     });
 
@@ -392,6 +495,13 @@ class Component extends DCLogic {
         setName: e => this.updatePr(i, { name: e.target.value }),
         setDe: e => this.updatePr(i, { dePrice: e.target.value }),
         setPor: e => this.updatePr(i, { porPrice: e.target.value }),
+        setQty: e => this.updatePr(i, { qty: e.target.value }),
+        deShow: this.fmtPrice(g.dePrice),
+        dup: () => this.setState(s => ({ prs: [...s.prs.slice(0, i + 1), { ...s.prs[i] }, ...s.prs.slice(i + 1)] })),
+        showCada: !!g.cada,
+        setCada: e => this.updatePr(i, { cada: e.target.checked }),
+        moveUp: () => this.moveItem("prs", i, -1),
+        moveDown: () => this.moveItem("prs", i, 1),
         remove: () => this.setState(s => ({ prs: s.prs.filter((_, idx) => idx !== i) })),
       };
     });
@@ -408,6 +518,11 @@ class Component extends DCLogic {
         setName: e => this.updateMk(i, { name: e.target.value }),
         setDe: e => this.updateMk(i, { dePrice: e.target.value }),
         setPor: e => this.updateMk(i, { porPrice: e.target.value }),
+        setQty: e => this.updateMk(i, { qty: e.target.value }),
+        deShow: this.fmtPrice(g.dePrice),
+        dup: () => this.setState(s => ({ mks: [...s.mks.slice(0, i + 1), { ...s.mks[i] }, ...s.mks.slice(i + 1)] })),
+        moveUp: () => this.moveItem("mks", i, -1),
+        moveDown: () => this.moveItem("mks", i, 1),
         setCada: e => this.updateMk(i, { cada: e.target.checked }),
         remove: () => this.setState(s => ({ mks: s.mks.filter((_, idx) => idx !== i) })),
       };
@@ -425,41 +540,126 @@ class Component extends DCLogic {
         setDesc: e => this.updatePlaca(i, { desc: e.target.value }),
         setDe: e => this.updatePlaca(i, { dePrice: e.target.value }),
         setPor: e => this.updatePlaca(i, { porPrice: e.target.value }),
+        setQty: e => this.updatePlaca(i, { qty: e.target.value }),
+        deShow: this.fmtPrice(pl.dePrice),
+        dup: () => this.setState(s => ({ placas: [...s.placas.slice(0, i + 1), { ...s.placas[i] }, ...s.placas.slice(i + 1)] })),
+        showCada: !!pl.cada,
+        setCada: e => this.updatePlaca(i, { cada: e.target.checked }),
+        moveUp: () => this.moveItem("placas", i, -1),
+        moveDown: () => this.moveItem("placas", i, 1),
         remove: () => this.setState(s => ({ placas: s.placas.filter((_, idx) => idx !== i) })),
       };
     });
 
+    const expand = a => a.flatMap(g => Array(Math.max(1, parseInt(g.qty, 10) || 1)).fill(g));
+    const perPage = { placa: 4, pcr: 9, prec: 10, make: 10 };
+    const activeCount = expand(model === "placa" ? placas : model === "pcr" ? pcrs : model === "prec" ? prs : mks).length;
+    const pages = Math.max(1, Math.ceil(activeCount / perPage[model]));
+    const pageInfo = activeCount + " etiqueta" + (activeCount === 1 ? "" : "s") + " · " + pages + " folha" + (pages === 1 ? "" : "s") + " A4";
+
     return {
-      isVitrine: model === "vitrine",
       isPlaca: model === "placa",
       isMake: model === "make",
       isPrec: model === "prec",
-      tabVitrineStyle: model === "vitrine" ? on : off,
+      isPcr: model === "pcr",
       tabPlacaStyle: model === "placa" ? on : off,
       tabMakeStyle: model === "make" ? on : off,
       tabPrecStyle: model === "prec" ? on : off,
-      showVitrine: () => this.setState({ model: "vitrine" }),
+      tabPcrStyle: model === "pcr" ? on : off,
       showPlaca: () => this.setState({ model: "placa" }),
       showMake: () => this.setState({ model: "make" }),
       showPrec: () => this.setState({ model: "prec" }),
-      cards, cardCount: cards.length,
+      showPcr: () => this.setState({ model: "pcr" }),
       placas, placaCount: placas.length,
+      placasGrid: expand(placas), mksGrid: expand(mks), prsGrid: expand(prs), pcrsGrid: expand(pcrs),
+      pageInfo,
       mks, mkCount: mks.length,
       prs, prCount: prs.length,
+      pcrs, pcrCount: pcrs.length,
       placaBrandOptions: this.placaBrands,
-      brandOptions: this.brands,
-      addCard: () => this.setState(s => ({ cards: [...s.cards, { brand: "generico", name: "Novo produto", dePrice: "", porPrice: "0,00" }] })),
+      addPcr: () => this.setState(s => ({ pcrs: [...s.pcrs, { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }] })),
       addPr: () => this.setState(s => ({ prs: [...s.prs, { brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" }] })),
       addMk: () => this.setState(s => ({ mks: [...s.mks, { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }] })),
       addPlaca: () => this.setState(s => ({ placas: [...s.placas, { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }] })),
-      addCurrent: () => model === "vitrine"
-        ? this.setState(s => ({ cards: [...s.cards, { brand: "generico", name: "Novo produto", dePrice: "", porPrice: "0,00" }] }))
-        : model === "make"
+      addCurrent: () => model === "make"
         ? this.setState(s => ({ mks: [...s.mks, { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }] }))
         : model === "prec"
         ? this.setState(s => ({ prs: [...s.prs, { brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" }] }))
+        : model === "pcr"
+        ? this.setState(s => ({ pcrs: [...s.pcrs, { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }] }))
         : this.setState(s => ({ placas: [...s.placas, { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }] })),
       doPrint: () => window.print(),
+      ppClass: pp ? "pp" : "",
+      isPreview: pp,
+      previewLabel: pp ? "Sair da prévia" : "Prévia",
+      togglePreview: () => this.setState(s => ({ preview: !s.preview })),
+      clearCurrent: () => {
+        if (window.confirm("Limpar todas as etiquetas desta aba?")) this.setState({ [this.listKey(model)]: [] });
+      },
+      doImport: () => {
+        const inp = document.createElement("input");
+        inp.type = "file";
+        inp.accept = ".json,.csv,.txt,.tsv,application/json,text/csv,text/plain";
+        inp.onchange = () => {
+          const f = inp.files[0];
+          if (!f) return;
+          const r = new FileReader();
+          r.onload = () => {
+            const txt = String(r.result || "");
+            // 1) JSON completo (backup do Exportar)
+            try {
+              const d = JSON.parse(txt);
+              const patch = {};
+              for (const k of ["pcrs", "prs", "mks", "placas"]) if (Array.isArray(d[k])) patch[k] = d[k];
+              if (Object.keys(patch).length) { this.setState(patch); return; }
+            } catch (e) {}
+            // 2) Texto/planilha: uma etiqueta por linha — Nome ; Preço ; De(opcional) ; Marca(opcional)
+            const norm = t => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]/g, "");
+            const brandByName = {};
+            for (const b of this.placaBrands) brandByName[norm(b.label)] = b.key;
+            const isPrice = t => /^r?\$?\s*\d{1,6}([,.]\d{1,2})?$/.test(String(t).trim());
+            const clean = t => String(t).trim().replace(/^r\$\s*/i, "").replace(/^"|"$/g, "");
+            const rows = txt.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+            const items = [];
+            for (const line of rows) {
+              const sep = line.includes("\t") ? "\t" : line.includes(";") ? ";" : ",";
+              let cells = line.split(sep).map(clean).filter(c => c !== "");
+              if (sep === "," && cells.length > 1) {
+                // vírgula pode ser decimal: re-junta "56","90" vizinhos
+                const merged = [];
+                for (let k = 0; k < cells.length; k++) {
+                  if (/^\d{1,6}$/.test(cells[k]) && /^\d{1,2}$/.test(cells[k + 1] || "")) { merged.push(cells[k] + "," + cells[k + 1]); k++; }
+                  else merged.push(cells[k]);
+                }
+                cells = merged;
+              }
+              if (!cells.length) continue;
+              const prices = cells.filter(isPrice);
+              const words = cells.filter(c => !isPrice(c));
+              if (!prices.length && items.length === 0) continue; // provável cabeçalho
+              if (!prices.length) continue;
+              let brand = "semmarca";
+              const rest = [];
+              for (const w of words) { if (brandByName[norm(w)]) brand = brandByName[norm(w)]; else rest.push(w); }
+              const name = rest.join(" ").trim() || "Produto";
+              const por = this.fmtPrice(prices[0]);
+              const de = prices[1] ? this.fmtPrice(prices[1]) : "";
+              items.push({ name, porPrice: por, dePrice: de, brand });
+            }
+            if (!items.length) { window.alert("Não encontrei linhas com preço. Use: Nome ; Preço ; De(opcional) ; Marca(opcional) — uma etiqueta por linha (CSV ou TXT; planilha: salvar como CSV)."); return; }
+            const key = this.listKey(this.state.model);
+            const shaped = items.map(it =>
+              key === "placas" ? { brand: it.brand, name: it.name, desc: "", dePrice: it.dePrice, porPrice: it.porPrice } :
+              key === "prs" ? { brand: it.brand, fundo: "rosa", name: it.name, dePrice: it.dePrice, porPrice: it.porPrice } :
+              key === "mks" ? { brand: it.brand, name: it.name, dePrice: it.dePrice, porPrice: it.porPrice, cada: false } :
+              { brand: it.brand, name: it.name, dePrice: it.dePrice, porPrice: it.porPrice });
+            this.setState(s => ({ [key]: [...s[key], ...shaped] }));
+            window.alert(shaped.length + " etiqueta(s) importada(s) para a aba atual.");
+          };
+          r.readAsText(f);
+        };
+        inp.click();
+      },
     };
   }
 }
