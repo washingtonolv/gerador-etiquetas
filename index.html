@@ -726,6 +726,7 @@
           <div class="menu-pop" style="position:absolute; right:0; top:calc(100% + 8px); z-index:90; background:#fff; border-radius:12px; box-shadow:0 10px 34px rgba(0,0,0,.25); padding:6px; display:flex; flex-direction:column; min-width:200px;">
             <button onClick="{{ menuAdd }}" style="{{ menuItemStyle }}">+ Adicionar etiqueta</button>
             <button onClick="{{ menuImport }}" style="{{ menuItemStyle }}">Importar CSV</button>
+            <button onClick="{{ menuExport }}" style="{{ menuItemStyle }}">Exportar etiquetas</button>
             <button onClick="{{ menuPreview }}" style="{{ menuItemStyle }}">{{ previewLabel }}</button>
             <button onClick="{{ menuClear }}" style="{{ menuItemStyle }}">Limpar aba atual</button>
             <button onClick="{{ menuDark }}" style="{{ menuItemStyle }}">{{ darkLabel }}</button>
@@ -737,6 +738,7 @@
       <div class="hdr-actions" style="display:flex; align-items:center; gap:2px; flex-wrap:wrap;">
         <button onClick="{{ addCurrent }}" class="hdr-btn" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#ECF8F7; color:#05918C;">+ Adicionar</button>
         <button onClick="{{ doImport }}" class="hdr-btn" title="Importar CSV" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#ECF8F7; color:#05918C;">Importar</button>
+        <button onClick="{{ exportLabels }}" class="hdr-btn" title="Baixar backup das etiquetas" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#ECF8F7; color:#05918C;">Exportar etiquetas</button>
         <button onClick="{{ togglePreview }}" class="hdr-btn" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#ECF8F7; color:#05918C;">{{ previewLabel }}</button>
         <button onClick="{{ clearCurrent }}" class="hdr-btn" title="Limpar a aba atual" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#ECF8F7; color:#05918C;">Limpar</button>
         <button onClick="{{ toggleDark }}" class="hdr-btn" title="Modo escuro" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px; padding:8px;" style-hover="background:#ECF8F7;">{{ darkIcon }}</button>
@@ -781,9 +783,27 @@
           <div><b style="color:#05918C;">5. Botões da etiqueta</b> — ▲▼ mudam a ordem, ⧉ duplica, ✕ remove.</div>
           <div><b style="color:#05918C;">6. Prévia e impressão</b> — "Prévia" mostra a folha A4 com linhas de corte; "Imprimir / PDF" imprime no tamanho real.</div>
           <div><b style="color:#05918C;">7. No celular</b> — em "Imprimir / PDF", escolha "Salvar como PDF" (Android) ou toque em Compartilhar › Imprimir e depois no ícone de compartilhar (iPhone) para gerar o arquivo.</div>
-          <div><b style="color:#05918C;">8. Tudo salva sozinho</b> — as etiquetas ficam guardadas no navegador e voltam quando você abrir de novo.</div>
+          <div><b style="color:#05918C;">8. Salvar e exportar</b> — tudo fica salvo no navegador; use “Exportar etiquetas” para criar um backup que pode ser restaurado em Importar.</div>
         </div>
         <button onClick="{{ closeHelp }}" style="background:#05918C; color:#fff; border:none; border-radius:8px; padding:11px; font-size:13px; font-weight:800; cursor:pointer;">Entendi</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isOnboardingOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="no-print" style="position:fixed; inset:0; z-index:105; background:rgba(21,38,37,.58); display:flex; align-items:center; justify-content:center; padding:16px;">
+      <div class="import-panel" style="background:#fff; border-radius:18px; padding:26px; width:100%; max-width:620px; max-height:90vh; overflow:auto; display:flex; flex-direction:column; gap:18px; box-shadow:0 18px 60px rgba(0,0,0,.3);">
+        <div style="display:flex; align-items:flex-start; gap:12px;">
+          <div><div style="font-size:21px; font-weight:800; color:#263737;">Crie suas etiquetas em 3 passos</div><div style="margin-top:4px; font-size:13px; color:#657575;">O sistema salva tudo automaticamente neste navegador.</div></div>
+          <div style="flex:1;"></div>
+          <button onClick="{{ closeOnboarding }}" title="Fechar" style="background:none; border:none; color:#8b97a2; font-size:20px; cursor:pointer; line-height:1;">✕</button>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px;">
+          <div style="padding:16px; border:1px solid #DCE9E8; border-radius:14px; background:#F7FAFA;"><div style="width:32px; height:32px; display:grid; place-items:center; border-radius:50%; background:#05918C; color:#fff; font-weight:800;">1</div><div style="margin-top:12px; font-size:14px; font-weight:800; color:#263737;">Preencha</div><div style="margin-top:5px; font-size:12px; line-height:1.5; color:#657575;">Digite nome, marca e preços no painel lateral.</div></div>
+          <div style="padding:16px; border:1px solid #DCE9E8; border-radius:14px; background:#F7FAFA;"><div style="width:32px; height:32px; display:grid; place-items:center; border-radius:50%; background:#05918C; color:#fff; font-weight:800;">2</div><div style="margin-top:12px; font-size:14px; font-weight:800; color:#263737;">Confira</div><div style="margin-top:5px; font-size:12px; line-height:1.5; color:#657575;">Clique na etiqueta da prévia para editar o item correto.</div></div>
+          <div style="padding:16px; border:1px solid #F0CAD3; border-radius:14px; background:#FFF5F7;"><div style="width:32px; height:32px; display:grid; place-items:center; border-radius:50%; background:#CD4664; color:#fff; font-weight:800;">3</div><div style="margin-top:12px; font-size:14px; font-weight:800; color:#263737;">Imprima</div><div style="margin-top:5px; font-size:12px; line-height:1.5; color:#657575;">Revise as configurações e imprima em tamanho real.</div></div>
+        </div>
+        <button onClick="{{ closeOnboarding }}" style="background:#05918C; color:#fff; border:none; border-radius:10px; padding:13px; font-size:14px; font-weight:800; cursor:pointer;">Começar</button>
       </div>
     </div>
   </sc-if>
@@ -792,17 +812,28 @@
     <div class="no-print" style="position:fixed; inset:0; z-index:100; background:rgba(30,20,25,.45); display:flex; align-items:center; justify-content:center; padding:16px;">
       <div class="import-panel" style="background:#fff; border-radius:14px; padding:24px; width:100%; max-width:440px; max-height:90vh; overflow:auto; display:flex; flex-direction:column; gap:14px; box-shadow:0 10px 40px rgba(0,0,0,.3);">
         <div style="display:flex; align-items:center; gap:8px;">
-          <div style="font-size:17px; font-weight:800; color:#1a1d21;">Importar etiquetas (CSV)</div>
+          <div style="font-size:17px; font-weight:800; color:#1a1d21;">Importar ou restaurar etiquetas</div>
           <div style="flex:1;"></div>
           <button onClick="{{ closeImport }}" style="background:none; border:none; color:#8b97a2; font-size:18px; cursor:pointer; line-height:1;">✕</button>
         </div>
-        <div style="font-size:13px; color:#5a6873; line-height:1.5;">Uma etiqueta por linha, colunas separadas por <b>;</b><br><b>Nome ; Preço POR ; Preço DE (opcional) ; Marca (opcional)</b><br>No Excel/Planilhas, salve como CSV. As etiquetas entram na aba atual.</div>
+        <div style="font-size:13px; color:#5a6873; line-height:1.5;">Para planilhas CSV: uma etiqueta por linha, separada por <b>;</b>.<br><b>Nome ; Preço POR ; Preço DE ; Marca</b><br><br>Para recuperar todas as etiquetas, selecione um backup <b>.json</b> criado em “Exportar etiquetas”.</div>
         <button onClick="{{ downloadModel }}" style="background:#fff; color:#05918C; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#ECF8F7; border-color:#05918C;">⬇ Baixar modelo de importação (.csv)</button>
         <label style="display:flex; flex-direction:column; gap:6px; font-size:12px; font-weight:700; color:#6b7885;">
-          ARQUIVO PREENCHIDO
-          <input type="file" accept=".csv,text/csv,text/comma-separated-values,application/csv,application/vnd.ms-excel,text/plain" onChange="{{ importFile }}" style="width:100%; border:1px solid #d8dee4; border-radius:8px; padding:10px; font-size:13px; font-weight:400;">
+          ARQUIVO CSV OU BACKUP JSON
+          <input type="file" accept=".csv,.json,text/csv,text/comma-separated-values,application/csv,application/json,application/vnd.ms-excel,text/plain" onChange="{{ importFile }}" style="width:100%; border:1px solid #d8dee4; border-radius:8px; padding:10px; font-size:13px; font-weight:400;">
         </label>
         <button onClick="{{ closeImport }}" style="background:#fff; color:#5a6873; border:1px solid #d8dee4; border-radius:8px; padding:10px; font-size:13px; font-weight:700; cursor:pointer;">Cancelar</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isPrintOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="no-print" style="position:fixed; inset:0; z-index:110; background:rgba(21,38,37,.58); display:flex; align-items:center; justify-content:center; padding:16px;">
+      <div class="import-panel" style="background:#fff; border-radius:18px; padding:26px; width:100%; max-width:500px; max-height:90vh; overflow:auto; display:flex; flex-direction:column; gap:18px; box-shadow:0 18px 60px rgba(0,0,0,.3);">
+        <div style="display:flex; align-items:center; gap:10px;"><div style="width:42px; height:42px; display:grid; place-items:center; border-radius:12px; background:#FCECEF; color:#CD4664; font-size:21px;">🖨</div><div><div style="font-size:19px; font-weight:800; color:#263737;">Tudo pronto para imprimir?</div><div style="font-size:12px; color:#657575; margin-top:3px;">{{ printModel }}</div></div><div style="flex:1;"></div><button onClick="{{ closePrint }}" style="background:none; border:none; color:#8b97a2; font-size:20px; cursor:pointer;">✕</button></div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;"><div style="padding:14px; border-radius:12px; background:#F7FAFA; border:1px solid #DCE9E8;"><div style="font-size:24px; font-weight:800; color:#05918C;">{{ printCount }}</div><div style="font-size:12px; color:#657575;">etiquetas</div></div><div style="padding:14px; border-radius:12px; background:#F7FAFA; border:1px solid #DCE9E8;"><div style="font-size:24px; font-weight:800; color:#05918C;">{{ printPages }}</div><div style="font-size:12px; color:#657575;">folhas A4</div></div></div>
+        <div style="display:flex; flex-direction:column; gap:9px; padding:14px; border-radius:12px; background:#FFF8F9; border:1px solid #F0CAD3; font-size:13px; color:#4E5555;"><div>✓ Papel: <b>A4</b></div><div>✓ Escala: <b>100% ou tamanho real</b></div><div>✓ Desative <b>cabeçalhos e rodapés</b></div><div>✓ Não use “Ajustar à página”</div></div>
+        <div style="display:flex; gap:10px;"><button onClick="{{ closePrint }}" style="flex:1; background:#fff; color:#657575; border:1px solid #DCE9E8; border-radius:10px; padding:12px; font-size:13px; font-weight:700; cursor:pointer;">Voltar</button><button onClick="{{ confirmPrint }}" style="flex:1.4; background:#CD4664; color:#fff; border:none; border-radius:10px; padding:12px; font-size:13px; font-weight:800; cursor:pointer;">Imprimir agora</button></div>
       </div>
     </div>
   </sc-if>
@@ -834,11 +865,11 @@
           <div style="display:flex; gap:8px;">
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
               <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">DE (ANTES)</span>
-              <input value="{{ g.dePrice }}" onChange="{{ g.setDe }}" inputMode="decimal" placeholder="opcional" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
+              <input value="{{ g.dePrice }}" onChange="{{ g.setDe }}" onFocus="{{ g.selectPrice }}" onBlur="{{ g.formatDe }}" inputMode="decimal" placeholder="opcional" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
             </div>
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
               <span style="font-size:10px; font-weight:700; color:#CD4664; letter-spacing:.4px;">POR R$</span>
-              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" style="width:100%; border:1px solid #B9DEDC; border-radius:6px; padding:7px; font-size:13px;">
+              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onFocus="{{ g.selectPrice }}" onBlur="{{ g.formatPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" style="width:100%; border:1px solid #B9DEDC; border-radius:6px; padding:7px; font-size:13px;">
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
@@ -947,11 +978,11 @@
           <div style="display:flex; gap:8px;">
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
               <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">DE (ANTES)</span>
-              <input value="{{ g.dePrice }}" onChange="{{ g.setDe }}" inputMode="decimal" placeholder="opcional" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
+              <input value="{{ g.dePrice }}" onChange="{{ g.setDe }}" onFocus="{{ g.selectPrice }}" onBlur="{{ g.formatDe }}" inputMode="decimal" placeholder="opcional" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
             </div>
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
               <span style="font-size:10px; font-weight:700; color:#CD4664; letter-spacing:.4px;">POR R$</span>
-              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" style="width:100%; border:1px solid #B9DEDC; border-radius:6px; padding:7px; font-size:13px;">
+              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onFocus="{{ g.selectPrice }}" onBlur="{{ g.formatPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" style="width:100%; border:1px solid #B9DEDC; border-radius:6px; padding:7px; font-size:13px;">
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
@@ -1047,11 +1078,11 @@
           <div style="display:flex; gap:8px;">
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
               <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">DE (ANTES)</span>
-              <input value="{{ g.dePrice }}" onChange="{{ g.setDe }}" inputMode="decimal" placeholder="opcional" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
+              <input value="{{ g.dePrice }}" onChange="{{ g.setDe }}" onFocus="{{ g.selectPrice }}" onBlur="{{ g.formatDe }}" inputMode="decimal" placeholder="opcional" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
             </div>
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
               <span style="font-size:10px; font-weight:700; color:#CD4664; letter-spacing:.4px;">POR R$</span>
-              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" style="width:100%; border:1px solid #B9DEDC; border-radius:6px; padding:7px; font-size:13px;">
+              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onFocus="{{ g.selectPrice }}" onBlur="{{ g.formatPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" style="width:100%; border:1px solid #B9DEDC; border-radius:6px; padding:7px; font-size:13px;">
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
@@ -1154,11 +1185,11 @@
           <div style="display:flex; gap:8px;">
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
               <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">DE (ANTES)</span>
-              <input value="{{ pl.dePrice }}" onChange="{{ pl.setDe }}" inputMode="decimal" placeholder="opcional" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
+              <input value="{{ pl.dePrice }}" onChange="{{ pl.setDe }}" onFocus="{{ pl.selectPrice }}" onBlur="{{ pl.formatDe }}" inputMode="decimal" placeholder="opcional" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
             </div>
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
               <span style="font-size:10px; font-weight:700; color:#CD4664; letter-spacing:.4px;">POR R$</span>
-              <input value="{{ pl.porPrice }}" onChange="{{ pl.setPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" style="width:100%; border:1px solid #B9DEDC; border-radius:6px; padding:7px; font-size:13px;">
+              <input value="{{ pl.porPrice }}" onChange="{{ pl.setPor }}" onFocus="{{ pl.selectPrice }}" onBlur="{{ pl.formatPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" style="width:100%; border:1px solid #B9DEDC; border-radius:6px; padding:7px; font-size:13px;">
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
@@ -1372,6 +1403,53 @@ class Component extends DCLogic {
     const { reais, centavos } = this.splitPrice(v);
     return reais + "," + centavos;
   }
+  normalizePriceField(v, optional = false) {
+    const raw = String(v == null ? "" : v).replace(/[^\d,.]/g, "").trim();
+    if (!raw) return optional ? "" : "0,00";
+    return this.fmtPrice(raw);
+  }
+  exportLabels() {
+    const payload = {
+      format: "dd-etiquetas",
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      etiquetas: {
+        pcrs: this.state.pcrs,
+        prs: this.state.prs,
+        mks: this.state.mks,
+        placas: this.state.placas,
+      },
+    };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "etiquetas-dd-" + new Date().toISOString().slice(0, 10) + ".json";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  }
+  restoreBackup(txt) {
+    try {
+      const parsed = JSON.parse(txt);
+      const data = parsed && parsed.etiquetas ? parsed.etiquetas : parsed;
+      const keys = ["pcrs", "prs", "mks", "placas"];
+      if (!data || !keys.every(key => Array.isArray(data[key]))) throw new Error("Formato inválido");
+      if (!window.confirm("Restaurar este backup e substituir as etiquetas atuais?")) return;
+      this.setState({
+        pcrs: data.pcrs,
+        prs: data.prs,
+        mks: data.mks,
+        placas: data.placas,
+        activePcr: 0,
+        activePr: 0,
+        activeMk: 0,
+        activePlaca: 0,
+        importOpen: false,
+      });
+      window.alert("Etiquetas restauradas com sucesso.");
+    } catch (e) {
+      window.alert("Este arquivo não é um backup válido de etiquetas D&D.");
+    }
+  }
   componentDidMount() {
     try {
       const raw = localStorage.getItem("dd-etiquetas-v1");
@@ -1382,6 +1460,7 @@ class Component extends DCLogic {
       if (saved && Array.isArray(saved.mks)) restored.mks = saved.mks;
       if (saved && Array.isArray(saved.placas)) restored.placas = saved.placas;
       restored.dark = localStorage.getItem("dd-dark") === "1";
+      restored.onboardingOpen = localStorage.getItem("dd-onboarding-seen") !== "1";
       if (Object.keys(restored).length) this.setState(restored);
     } catch (e) {
       /* Dados antigos inválidos não impedem o aplicativo de abrir. */
@@ -1460,6 +1539,9 @@ class Component extends DCLogic {
         setName: e => this.updatePcr(i, { name: e.target.value }),
         setDe: e => this.updatePcr(i, { dePrice: e.target.value }),
         setPor: e => this.updatePcr(i, { porPrice: e.target.value }),
+        selectPrice: e => e.target.select(),
+        formatDe: () => this.updatePcr(i, { dePrice: this.normalizePriceField(this.state.pcrs[i].dePrice, true) }),
+        formatPor: () => this.updatePcr(i, { porPrice: this.normalizePriceField(this.state.pcrs[i].porPrice) }),
         setQty: e => this.updatePcr(i, { qty: e.target.value }),
         qtyMinus: () => this.updatePcr(i, { qty: Math.max(1, (parseInt(this.state.pcrs[i].qty, 10) || 1) - 1) }),
         qtyPlus: () => this.updatePcr(i, { qty: Math.min(999, (parseInt(this.state.pcrs[i].qty, 10) || 1) + 1) }),
@@ -1495,6 +1577,9 @@ class Component extends DCLogic {
         setName: e => this.updatePr(i, { name: e.target.value }),
         setDe: e => this.updatePr(i, { dePrice: e.target.value }),
         setPor: e => this.updatePr(i, { porPrice: e.target.value }),
+        selectPrice: e => e.target.select(),
+        formatDe: () => this.updatePr(i, { dePrice: this.normalizePriceField(this.state.prs[i].dePrice, true) }),
+        formatPor: () => this.updatePr(i, { porPrice: this.normalizePriceField(this.state.prs[i].porPrice) }),
         setQty: e => this.updatePr(i, { qty: e.target.value }),
         qtyMinus: () => this.updatePr(i, { qty: Math.max(1, (parseInt(this.state.prs[i].qty, 10) || 1) - 1) }),
         qtyPlus: () => this.updatePr(i, { qty: Math.min(999, (parseInt(this.state.prs[i].qty, 10) || 1) + 1) }),
@@ -1525,6 +1610,9 @@ class Component extends DCLogic {
         setName: e => this.updateMk(i, { name: e.target.value }),
         setDe: e => this.updateMk(i, { dePrice: e.target.value }),
         setPor: e => this.updateMk(i, { porPrice: e.target.value }),
+        selectPrice: e => e.target.select(),
+        formatDe: () => this.updateMk(i, { dePrice: this.normalizePriceField(this.state.mks[i].dePrice, true) }),
+        formatPor: () => this.updateMk(i, { porPrice: this.normalizePriceField(this.state.mks[i].porPrice) }),
         setQty: e => this.updateMk(i, { qty: e.target.value }),
         qtyMinus: () => this.updateMk(i, { qty: Math.max(1, (parseInt(this.state.mks[i].qty, 10) || 1) - 1) }),
         qtyPlus: () => this.updateMk(i, { qty: Math.min(999, (parseInt(this.state.mks[i].qty, 10) || 1) + 1) }),
@@ -1554,6 +1642,9 @@ class Component extends DCLogic {
         setDesc: e => this.updatePlaca(i, { desc: e.target.value }),
         setDe: e => this.updatePlaca(i, { dePrice: e.target.value }),
         setPor: e => this.updatePlaca(i, { porPrice: e.target.value }),
+        selectPrice: e => e.target.select(),
+        formatDe: () => this.updatePlaca(i, { dePrice: this.normalizePriceField(this.state.placas[i].dePrice, true) }),
+        formatPor: () => this.updatePlaca(i, { porPrice: this.normalizePriceField(this.state.placas[i].porPrice) }),
         setQty: e => this.updatePlaca(i, { qty: e.target.value }),
         qtyMinus: () => this.updatePlaca(i, { qty: Math.max(1, (parseInt(this.state.placas[i].qty, 10) || 1) - 1) }),
         qtyPlus: () => this.updatePlaca(i, { qty: Math.min(999, (parseInt(this.state.placas[i].qty, 10) || 1) + 1) }),
@@ -1610,7 +1701,7 @@ class Component extends DCLogic {
         : model === "pcr"
         ? this.addItem("pcrs", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" })
         : this.addItem("placas", { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }),
-      doPrint: () => window.print(),
+      doPrint: () => activeCount ? this.setState({ printOpen: true }) : window.alert("Adicione pelo menos uma etiqueta antes de imprimir."),
       scrollTop: () => window.scrollTo({ top: 0, behavior: "smooth" }),
       isMenuOpen: !!this.state.menuOpen,
       toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
@@ -1618,9 +1709,10 @@ class Component extends DCLogic {
       darkLabel: this.state.dark ? "Modo claro" : "Modo escuro",
       menuAdd: () => { this.setState({ menuOpen: false }); this.renderVals().addCurrent(); },
       menuImport: () => this.setState({ menuOpen: false, importOpen: true }),
+      menuExport: () => { this.setState({ menuOpen: false }); this.exportLabels(); },
       menuPreview: () => this.setState(s => ({ menuOpen: false, preview: !s.preview })),
       menuHelp: () => this.setState({ menuOpen: false, helpOpen: true }),
-      menuPrint: () => { this.setState({ menuOpen: false }); setTimeout(() => window.print(), 60); },
+      menuPrint: () => activeCount ? this.setState({ menuOpen: false, printOpen: true }) : window.alert("Adicione pelo menos uma etiqueta antes de imprimir."),
       menuClear: () => {
         this.setState({ menuOpen: false });
         if (window.confirm("Limpar todas as etiquetas desta aba?")) {
@@ -1688,6 +1780,18 @@ class Component extends DCLogic {
       openHelp: () => this.setState({ helpOpen: true }),
       closeHelp: () => this.setState({ helpOpen: false }),
       isHelpOpen: !!this.state.helpOpen,
+      isOnboardingOpen: !!this.state.onboardingOpen,
+      closeOnboarding: () => {
+        try { localStorage.setItem("dd-onboarding-seen", "1"); } catch (e) {}
+        this.setState({ onboardingOpen: false });
+      },
+      exportLabels: () => this.exportLabels(),
+      isPrintOpen: !!this.state.printOpen,
+      closePrint: () => this.setState({ printOpen: false }),
+      confirmPrint: () => { this.setState({ printOpen: false }); setTimeout(() => window.print(), 80); },
+      printCount: activeCount,
+      printPages: pages,
+      printModel: model === "placa" ? "Placas promocionais" : model === "pcr" ? "Preçário" : model === "prec" ? "Etiquetas de preço" : "Etiquetas Make",
       isImportOpen: !!this.state.importOpen,
       closeImport: () => this.setState({ importOpen: false }),
       downloadModel: () => {
@@ -1703,7 +1807,12 @@ class Component extends DCLogic {
         const f = e.target.files && e.target.files[0];
         if (!f) return;
         const r = new FileReader();
-        r.onload = () => { this.importText(String(r.result || "")); e.target.value = ""; };
+        r.onload = () => {
+          const txt = String(r.result || "");
+          if (/\.json$/i.test(f.name) || f.type === "application/json") this.restoreBackup(txt);
+          else this.importText(txt);
+          e.target.value = "";
+        };
         r.readAsText(f);
       },
     };
