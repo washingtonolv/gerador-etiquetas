@@ -234,6 +234,27 @@
       font-weight: 700 !important;
       letter-spacing: .08em !important;
     }
+    .continuous-hint {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      padding: 10px 12px;
+      color: var(--dd-primary-700);
+      background: var(--dd-primary-100);
+      border: 1px solid color-mix(in srgb, var(--dd-primary-500) 32%, transparent);
+      border-radius: var(--dd-radius-button);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .continuous-hint strong { font-weight: 700; }
+    .continuous-hint .enter-key {
+      flex: none;
+      padding: 1px 6px;
+      color: #fff;
+      background: var(--dd-primary-700);
+      border-radius: 5px;
+      font-weight: 700;
+    }
     .card-box {
       padding: 16px !important;
       gap: 13px !important;
@@ -366,6 +387,7 @@
     .dark .hdr-pill .print-btn { color: #fff !important; background: var(--dd-primary-700) !important; }
     .dark .card-box span,
     .dark .card-box label { color: var(--dd-text-muted) !important; }
+    .dark .continuous-hint { color: #F6DDE6; background: rgba(196,92,126,.15); }
     .dark .sheet { border-color: #4B565C; }
     @media (max-width: 1000px) {
       .workspace-layout { grid-template-columns: minmax(0, 1fr) minmax(310px, 350px); }
@@ -517,6 +539,7 @@
   <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
       <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Preçário ({{ pcrCount }})</div>
+      <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ pcrs }}" as="g" hint-placeholder-count="3">
         <div class="card-box" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
           <div style="display:flex; align-items:center; gap:8px;">
@@ -622,6 +645,7 @@
   <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
       <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Precificadores ({{ prCount }})</div>
+      <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ prs }}" as="g" hint-placeholder-count="3">
         <div class="card-box" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
           <div style="display:flex; align-items:center; gap:8px;">
@@ -722,6 +746,7 @@
   <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
       <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Etiquetas ({{ mkCount }})</div>
+      <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ mks }}" as="g" hint-placeholder-count="3">
         <div class="card-box" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
           <div style="display:flex; align-items:center; gap:8px;">
@@ -818,6 +843,7 @@
   <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
       <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Placas ({{ placaCount }})</div>
+      <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ placas }}" as="pl" hint-placeholder-count="3">
         <div class="card-box" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
           <div style="display:flex; align-items:center; gap:8px;">
@@ -1240,9 +1266,27 @@ class Component extends DCLogic {
         return { dark: !s.dark };
       }),
       addOnEnter: e => {
-        if (e.key !== "Enter") return;
+        if (e.key !== "Enter" || e.repeat) return;
         e.preventDefault();
         this.renderVals().addCurrent();
+        setTimeout(() => {
+          const editor = document.querySelector(".workspace-layout .editor-col");
+          if (!editor) return;
+          const cards = editor.querySelectorAll(".card-box");
+          const nextCard = cards[cards.length - 1];
+          if (!nextCard) return;
+          const field = nextCard.querySelector('input[placeholder="Nome do produto"], textarea[placeholder="Descrição do produto"]');
+          if (field) {
+            field.scrollIntoView({ behavior: "smooth", block: "center" });
+            field.focus();
+            field.select();
+          }
+          const status = document.querySelector(".app-status");
+          if (status) {
+            status.textContent = "✓ Próxima etiqueta pronta para edição";
+            setTimeout(() => { status.textContent = "✓ Alterações salvas automaticamente"; }, 1600);
+          }
+        }, 80);
       },
       ppClass: pp ? "pp" : "",
       isPreview: pp,
