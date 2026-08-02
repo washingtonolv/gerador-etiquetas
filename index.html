@@ -400,9 +400,9 @@
     }
     .card-box {
       position: relative;
-      display: grid !important;
-      grid-template-rows: auto 1fr;
-      row-gap: 13px !important;
+      display: flex !important;
+      flex-direction: column;
+      gap: 13px !important;
       padding: 16px !important;
       border: 1px solid var(--dd-border) !important;
       border-radius: var(--dd-radius-panel) !important;
@@ -410,8 +410,7 @@
       box-shadow: 0 2px 8px rgba(24,29,34,.055) !important;
       overflow: hidden;
       transition:
-        grid-template-rows .42s cubic-bezier(.22,1,.36,1),
-        row-gap .34s ease,
+        gap .34s ease,
         padding .42s cubic-bezier(.22,1,.36,1),
         border-color .22s ease,
         box-shadow .22s ease,
@@ -481,30 +480,37 @@
     }
     .card-content {
       min-width: 0;
+      display: grid;
+      grid-template-rows: 1fr;
+      opacity: 1;
+      transform: translateY(0);
+      transition:
+        grid-template-rows .42s cubic-bezier(.22,1,.36,1),
+        opacity .24s ease .08s,
+        transform .42s cubic-bezier(.22,1,.36,1);
+    }
+    .card-content-inner {
+      min-width: 0;
       min-height: 0;
       display: flex;
       flex-direction: column;
       flex-wrap: nowrap !important;
       gap: 13px;
       overflow: hidden;
-      opacity: 1;
-      transform: translateY(0);
-      transition:
-        opacity .24s ease .08s,
-        transform .42s cubic-bezier(.22,1,.36,1);
     }
     .card-box[data-active="0"] {
-      grid-template-rows: auto 0fr;
       min-height: 52px;
       padding: 0 !important;
-      row-gap: 0 !important;
+      gap: 0 !important;
       cursor: pointer;
     }
     .card-box[data-active="0"] > .card-content {
+      grid-template-rows: 0fr;
       opacity: 0;
       transform: translateY(-10px);
       pointer-events: none;
       transition:
+        grid-template-rows .42s cubic-bezier(.22,1,.36,1),
         opacity .14s ease,
         transform .28s ease;
     }
@@ -516,6 +522,7 @@
       .panel-toggle-icon,
       .card-box,
       .card-content,
+      .card-content-inner,
       .card-summary-arrow {
         transition: none !important;
       }
@@ -941,6 +948,7 @@
         <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
           <button type="button" class="card-summary" onClick="{{ g.activate }}" aria-expanded="{{ g.activeExpanded }}"><span class="card-summary-index">#{{ g.n }}</span><span class="card-summary-name">{{ g.summaryName }}</span><span class="card-summary-price">R$ {{ g.porShow }}</span><span class="card-summary-arrow">›</span></button>
           <div class="card-content">
+            <div class="card-content-inner">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -979,7 +987,8 @@
               <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
             </div>
           </div>
-                  </div>
+                              </div>
+</div>
 </div>
       </sc-for>
       <button onClick="{{ addPcr }}" style="background:#fff; color:#05918C; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#ECF8F7; border-color:#05918C;">+ Adicionar produto</button>
@@ -1052,6 +1061,7 @@
         <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
           <button type="button" class="card-summary" onClick="{{ g.activate }}" aria-expanded="{{ g.activeExpanded }}"><span class="card-summary-index">#{{ g.n }}</span><span class="card-summary-name">{{ g.summaryName }}</span><span class="card-summary-price">R$ {{ g.porShow }}</span><span class="card-summary-arrow">›</span></button>
           <div class="card-content">
+            <div class="card-content-inner">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -1094,7 +1104,8 @@
               <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
             </div>
           </div>
-                  </div>
+                              </div>
+</div>
 </div>
       </sc-for>
       <button onClick="{{ addPr }}" style="background:#fff; color:#05918C; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#ECF8F7; border-color:#05918C;">+ Adicionar precificador</button>
@@ -1158,6 +1169,7 @@
         <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
           <button type="button" class="card-summary" onClick="{{ g.activate }}" aria-expanded="{{ g.activeExpanded }}"><span class="card-summary-index">#{{ g.n }}</span><span class="card-summary-name">{{ g.summaryName }}</span><span class="card-summary-price">R$ {{ g.porShow }}</span><span class="card-summary-arrow">›</span></button>
           <div class="card-content">
+            <div class="card-content-inner">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -1196,7 +1208,8 @@
               <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
             </div>
           </div>
-                  </div>
+                              </div>
+</div>
 </div>
       </sc-for>
       <button onClick="{{ addMk }}" style="background:#fff; color:#05918C; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#ECF8F7; border-color:#05918C;">+ Adicionar etiqueta</button>
@@ -1260,6 +1273,7 @@
         <div class="card-box" data-active="{{ pl.activeOn }}" data-card-index="{{ pl.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
           <button type="button" class="card-summary" onClick="{{ pl.activate }}" aria-expanded="{{ pl.activeExpanded }}"><span class="card-summary-index">#{{ pl.n }}</span><span class="card-summary-name">{{ pl.summaryName }}</span><span class="card-summary-price">R$ {{ pl.porShow }}</span><span class="card-summary-arrow">›</span></button>
           <div class="card-content">
+            <div class="card-content-inner">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ pl.n }}</span>
             <select value="{{ pl.brand }}" onChange="{{ pl.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -1305,7 +1319,8 @@
               <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
             </div>
           </div>
-                  </div>
+                              </div>
+</div>
 </div>
       </sc-for>
       <button onClick="{{ addPlaca }}" style="background:#fff; color:#05918C; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#ECF8F7; border-color:#05918C;">+ Adicionar placa</button>
