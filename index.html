@@ -77,6 +77,10 @@
       .editor-col { flex: 0 0 330px !important; }
     }
     @media (max-width: 1000px) {
+      .rail { display: none !important; }
+      .preview-wrap { padding-left: 14px !important; padding-right: 14px !important; }
+      .sel-on .preview-wrap { padding-right: 14px !important; }
+      .editor-col { left: 50% !important; right: auto !important; transform: translateX(-50%); top: auto !important; bottom: 58px !important; width: min(560px, 94vw) !important; max-height: min(58vh, 520px); border-radius: 18px; border: 1px solid #edf0f2 !important; box-shadow: 0 16px 44px rgba(30,40,50,.22); }
       .hdr-actions { display: none !important; }
       .hdr-compact { display: block !important; }
       .hdr-pill { flex-wrap: nowrap !important; padding: 8px 8px 8px 14px !important; gap: 10px !important; }
@@ -89,21 +93,27 @@
       .totop { display: flex !important; }
       .hdr-band { padding: 10px 12px 12px !important; }
       .hdr-pill { border-radius: 18px !important; padding: 10px 12px !important; }
-      .bottombar { bottom: calc(12px + env(safe-area-inset-bottom)) !important; }
-      .editor-col { bottom: 88px; border-radius: 18px; }
+      .bottombar { padding-bottom: env(safe-area-inset-bottom) !important; }
     }
-    .totop { display: none; position: fixed; right: 14px; bottom: 92px; z-index: 60; width: 46px; height: 46px; border-radius: 50%; border: none; background: #05918C; color: #fff; font-size: 20px; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,.25); cursor: pointer; }
-    .editor-col { position: fixed !important; left: 50%; transform: translateX(-50%); bottom: 84px; z-index: 65; width: min(560px, 94vw); max-height: min(60vh, 520px); overflow: auto; background: #fff; border: 1px solid #edf0f2 !important; border-radius: 20px; box-shadow: 0 16px 44px rgba(30,40,50,.22); padding: 14px !important; }
+    .totop { display: none; position: fixed; right: 14px; bottom: 62px; z-index: 60; width: 46px; height: 46px; border-radius: 50%; border: none; background: #05918C; color: #fff; font-size: 20px; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,.25); cursor: pointer; }
+    .editor-col { position: fixed !important; right: 0; top: 92px; bottom: 46px; width: 330px; z-index: 65; overflow: auto; background: #fff; border: none !important; border-left: 1px solid #edf0f2 !important; border-radius: 0; box-shadow: -6px 0 24px rgba(30,40,50,.06); padding: 16px 14px !important; }
+    @media (min-width: 1001px) {
+      .preview-wrap { padding-left: 228px !important; padding-right: 20px !important; }
+      .sel-on .preview-wrap { padding-right: 348px !important; }
+    }
+    .rail button[data-on="1"] { background: #eefaf9 !important; color: #05918C !important; }
+    .dark .rail { background: #2b2429 !important; border-color: #4a3e44 !important; }
+    .dark .bottombar { background: #2b2429 !important; border-color: #4a3e44 !important; }
     .dark .editor-col { background: #2b2429 !important; }
     .editor-col > button { display: none !important; }
     .editor-col .card-box[data-sel="0"] { display: none !important; }
     .editor-col .card-box { border: none !important; box-shadow: none !important; padding: 4px 4px 2px !important; }
     .sel-off .editor-col { display: none !important; }
     .preview-wrap { flex: 1 1 100% !important; }
-    .app-bg { padding-bottom: 96px !important; }
+    @media screen { .app-bg { padding-bottom: 62px !important; } }
     .sheet-card { outline-offset: 3px; }
     .sheet-card:hover { outline: 2px solid rgba(5,145,140,.35); }
-    @media print { .totop { display: none !important; } .editor-col { display: none !important; }  .splash { display: none !important; } }
+    @media print { .totop { display: none !important; } .editor-col { display: none !important; } .rail { display: none !important; } .preview-wrap { padding: 0 !important; }  .splash { display: none !important; } }
     .splash { animation: ddFade .45s ease .85s forwards; }
     @keyframes ddFade { to { opacity: 0; visibility: hidden; pointer-events: none; } }
     /* inputs modernos */
@@ -172,18 +182,63 @@
     </div>
   </sc-if>
 
+  <div class="no-print rail" style="position:fixed; left:0; top:92px; bottom:46px; width:212px; z-index:55; background:#fff; border-right:1px solid #edf0f2; padding:14px 10px; display:flex; flex-direction:column; gap:8px; overflow:auto;">
+    <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 6px 2px;">Etiquetas</div>
+    <sc-for list="{{ railItems }}" as="r" hint-placeholder-count="3">
+      <button onClick="{{ r.select }}" style="{{ r.railStyle }}">
+        <span style="font-size:11px; font-weight:800; color:#b3bcc4; min-width:18px;">{{ r.num }}</span>
+        <span style="flex:1; text-align:left; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ r.label }}</span>
+        <span style="font-size:11px; font-weight:700; color:#9aa6b1;">{{ r.qtyLabel }}</span>
+      </button>
+    </sc-for>
+    <button onClick="{{ addCurrent }}" style="background:#fff; color:#05918C; border:1.5px dashed #a9d8d5; border-radius:12px; padding:11px; font-size:13px; font-weight:800; cursor:pointer; margin-top:4px;" style-hover="background:#eefaf9; border-color:#05918C;">+ Nova</button>
+  </div>
+
+  <sc-if value="{{ showHint }}" hint-placeholder-val="{{ false }}">
+    <div class="no-print" style="position:fixed; left:50%; transform:translateX(-50%); bottom:62px; z-index:84; background:#fff; border:1px solid #e7ebee; border-radius:16px; padding:14px 16px; display:flex; align-items:center; gap:14px; box-shadow:0 12px 34px rgba(30,40,50,.18); max-width:94vw;">
+      <span style="font-size:13px; font-weight:600; color:#5a6873; line-height:1.5;">Toque em uma etiqueta para editar · use <b>+ Etiqueta</b> para criar · <b>Importar</b> traz uma planilha</span>
+      <button onClick="{{ dismissHint }}" style="background:#05918C; color:#fff; border:none; border-radius:999px; padding:9px 16px; font-size:13px; font-weight:800; cursor:pointer; white-space:nowrap;">Entendi</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+    <div class="no-print" style="position:fixed; left:50%; transform:translateX(-50%); bottom:62px; z-index:85; background:#1a1d21; color:#fff; border-radius:999px; padding:10px 12px 10px 18px; display:flex; align-items:center; gap:12px; box-shadow:0 10px 30px rgba(0,0,0,.28); max-width:94vw;">
+      <span style="font-size:13px; font-weight:700; white-space:nowrap;">{{ toastMsg }}</span>
+      <button onClick="{{ doUndo }}" style="background:#05918C; color:#fff; border:none; border-radius:999px; padding:8px 16px; font-size:13px; font-weight:800; cursor:pointer; white-space:nowrap;">Desfazer</button>
+    </div>
+  </sc-if>
+
   <button class="no-print totop" onClick="{{ scrollTop }}" title="Voltar ao topo">↑</button>
 
-  <div class="no-print bottombar" style="position:fixed; left:50%; transform:translateX(-50%); bottom:18px; z-index:70; background:#fff; border:1px solid #edf0f2; border-radius:999px; padding:7px; display:flex; align-items:center; gap:4px; box-shadow:0 10px 34px rgba(30,40,50,.18); max-width:94vw; overflow-x:auto;">
-    <button onClick="{{ addCurrent }}" title="Adicionar etiqueta" style="background:#05918C; color:#fff; border:none; border-radius:999px; padding:11px 18px; font-size:14px; font-weight:800; cursor:pointer; white-space:nowrap;">+ Etiqueta</button>
-    <button onClick="{{ doImport }}" title="Importar CSV" style="{{ barBtn }}">Importar</button>
-    <button onClick="{{ togglePreview }}" title="Prévia da folha" style="{{ barBtn }}">Prévia</button>
-    <button onClick="{{ zoomOut }}" title="Diminuir" style="{{ barIcon }}">−</button>
-    <span style="font-size:12px; font-weight:700; color:#8b97a2; min-width:40px; text-align:center;">{{ zoomPct }}</span>
-    <button onClick="{{ zoomIn }}" title="Aumentar" style="{{ barIcon }}">+</button>
-    <div style="width:1px; height:24px; background:#e7ebee; margin:0 4px;"></div>
-    <button onClick="{{ doPrint }}" title="Imprimir / PDF" style="background:#1a1d21; color:#fff; border:none; border-radius:999px; padding:11px 18px; font-size:14px; font-weight:800; cursor:pointer; white-space:nowrap;">Imprimir</button>
-  </div>  <sc-if value="{{ isHelpOpen }}" hint-placeholder-val="{{ false }}">
+  <div class="no-print bottombar" style="position:fixed; left:0; right:0; bottom:0; z-index:70; background:#fff; border-top:1px solid #edf0f2; padding:0 16px; height:46px; display:flex; align-items:center; gap:14px;">
+    <span style="font-size:12px; font-weight:700; color:#5a6873; white-space:nowrap;">{{ pageInfo }}</span>
+    <div style="flex:1;"></div>
+    <div style="display:flex; align-items:center; gap:2px;">
+      <button onClick="{{ zoomOut }}" title="Diminuir" style="{{ barIcon }}">−</button>
+      <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:52px; text-align:center;">Zoom {{ zoomPct }}</span>
+      <button onClick="{{ zoomIn }}" title="Aumentar" style="{{ barIcon }}">+</button>
+    </div>
+    <div style="width:1px; height:20px; background:#e7ebee;"></div>
+    <span style="font-size:12px; font-weight:700; color:#05918C; white-space:nowrap;">Salvo ✓</span>
+  </div>  <sc-if value="{{ isPrintOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="no-print" style="position:fixed; inset:0; z-index:100; background:rgba(30,20,25,.45); display:flex; align-items:center; justify-content:center; padding:16px;">
+      <div class="import-panel" style="background:#fff; border-radius:18px; padding:24px; width:100%; max-width:380px; display:flex; flex-direction:column; gap:16px; box-shadow:0 16px 44px rgba(0,0,0,.3);">
+        <div style="font-size:17px; font-weight:800; color:#1a1d21;">Conferir antes de imprimir</div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="display:flex; justify-content:space-between; font-size:14px;"><span style="color:#8b97a2; font-weight:600;">Etiquetas</span><b style="color:#1a1d21;">{{ printCount }}</b></div>
+          <div style="display:flex; justify-content:space-between; font-size:14px;"><span style="color:#8b97a2; font-weight:600;">Papel</span><b style="color:#1a1d21;">{{ printPages }}</b></div>
+          <div style="display:flex; justify-content:space-between; font-size:14px;"><span style="color:#8b97a2; font-weight:600;">Tamanho</span><b style="color:#1a1d21;">{{ printSize }}</b></div>
+        </div>
+        <div style="font-size:12px; color:#8b97a2; line-height:1.5;">As linhas tracejadas são guias de corte e saem na impressão.</div>
+        <div style="display:flex; gap:8px;">
+          <button onClick="{{ closePrint }}" style="flex:1; background:#fff; color:#5a6873; border:1px solid #e7ebee; border-radius:12px; padding:12px; font-size:13px; font-weight:700; cursor:pointer;">Cancelar</button>
+          <button onClick="{{ confirmPrint }}" style="flex:1; background:#1a1d21; color:#fff; border:none; border-radius:12px; padding:12px; font-size:13px; font-weight:800; cursor:pointer;">Imprimir</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isHelpOpen }}" hint-placeholder-val="{{ false }}">
     <div class="no-print" style="position:fixed; inset:0; z-index:100; background:rgba(30,20,25,.45); display:flex; align-items:center; justify-content:center; padding:16px;">
       <div class="import-panel" style="background:#fff; border-radius:14px; padding:24px; width:100%; max-width:480px; max-height:90vh; overflow:auto; display:flex; flex-direction:column; gap:12px; box-shadow:0 10px 40px rgba(0,0,0,.3);">
         <div style="display:flex; align-items:center; gap:8px;">
@@ -216,10 +271,11 @@
           <button onClick="{{ closeImport }}" style="background:none; border:none; color:#8b97a2; font-size:18px; cursor:pointer; line-height:1;">✕</button>
         </div>
         <div style="font-size:13px; color:#5a6873; line-height:1.5;">Uma etiqueta por linha, colunas separadas por <b>;</b><br><b>Nome ; Preço POR ; Preço DE (opcional) ; Marca (opcional)</b><br>No Excel/Planilhas, salve como CSV. As etiquetas entram na aba atual.</div>
+        <button onClick="{{ saveList }}" style="background:#eefaf9; color:#05918C; border:1px solid #a9d8d5; border-radius:10px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">⬇ Salvar minha lista (backup .json)</button>
         <button onClick="{{ downloadModel }}" style="background:#fff; color:#05918C; border:1.5px dashed #a9d8d5; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#eefaf9; border-color:#05918C;">⬇ Baixar modelo de importação (.csv)</button>
         <label style="display:flex; flex-direction:column; gap:6px; font-size:12px; font-weight:700; color:#6b7885;">
           ARQUIVO PREENCHIDO
-          <input type="file" accept=".csv,text/csv,text/comma-separated-values,application/csv,application/vnd.ms-excel,text/plain" onChange="{{ importFile }}" style="width:100%; border:1px solid #d8dee4; border-radius:8px; padding:10px; font-size:13px; font-weight:400;">
+          <input type="file" accept=".csv,.json,text/csv,text/comma-separated-values,application/csv,application/vnd.ms-excel,text/plain,application/json" onChange="{{ importFile }}" style="width:100%; border:1px solid #d8dee4; border-radius:8px; padding:10px; font-size:13px; font-weight:400;">
         </label>
         <button onClick="{{ closeImport }}" style="background:#fff; color:#5a6873; border:1px solid #d8dee4; border-radius:8px; padding:10px; font-size:13px; font-weight:700; cursor:pointer;">Cancelar</button>
       </div>
@@ -699,6 +755,7 @@ class Component extends DCLogic {
   }
   componentDidMount() {
     try { if (localStorage.getItem("dd-dark") === "1") this.setState({ dark: true }); } catch (e) {}
+    try { if (localStorage.getItem("dd-hint") === "1") this.setState({ hintDone: true }); } catch (e) {}
     try {
       const raw = localStorage.getItem("dd-etiquetas-v1");
       if (raw) {
@@ -728,10 +785,30 @@ class Component extends DCLogic {
       try { localStorage.setItem("dd-etiquetas-v1", data); } catch (e) {}
     }
   }
+  snapshot(msg) {
+    const { pcrs, prs, mks, placas } = this.state;
+    this._undo = { pcrs, prs, mks, placas, selIdx: this.state.selIdx };
+    this.setState({ toast: msg });
+    clearTimeout(this._toastT);
+    this._toastT = setTimeout(() => this.setState({ toast: null }), 7000);
+  }
+  undo() {
+    if (!this._undo) return;
+    const u = this._undo;
+    this._undo = null;
+    clearTimeout(this._toastT);
+    this.setState({ pcrs: u.pcrs, prs: u.prs, mks: u.mks, placas: u.placas, selIdx: u.selIdx, toast: null });
+  }
   listKey(model) {
     return model === "placa" ? "placas" : model === "pcr" ? "pcrs" : model === "prec" ? "prs" : "mks";
   }
   importText(txt) {
+    try {
+      const d = JSON.parse(txt);
+      const patch = {};
+      for (const k of ["pcrs", "prs", "mks", "placas"]) if (Array.isArray(d[k])) patch[k] = d[k];
+      if (Object.keys(patch).length) { this.snapshot("Lista carregada"); patch.importOpen = false; patch.selIdx = null; this.setState(patch); return; }
+    } catch (e) {}
     const norm = t => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]/g, "");
     const brandByName = {};
     for (const b of this.placaBrands) brandByName[norm(b.label)] = b.key;
@@ -766,8 +843,8 @@ class Component extends DCLogic {
       key === "prs" ? { brand: it.brand, fundo: "rosa", name: it.name, dePrice: it.dePrice, porPrice: it.porPrice } :
       key === "mks" ? { brand: it.brand, name: it.name, dePrice: it.dePrice, porPrice: it.porPrice, cada: false } :
       { brand: it.brand, name: it.name, dePrice: it.dePrice, porPrice: it.porPrice });
+    this.snapshot(shaped.length + " etiqueta(s) importada(s)");
     this.setState(s => ({ [key]: [...s[key], ...shaped], importOpen: false }));
-    window.alert(shaped.length + " etiqueta(s) importada(s) para a aba atual.");
   }
   renderVals() {
     const model = this.state.model;
@@ -799,7 +876,7 @@ class Component extends DCLogic {
         select: () => this.setState({ selIdx: i }),
         moveUp: () => this.moveItem("pcrs", i, -1),
         moveDown: () => this.moveItem("pcrs", i, 1),
-        remove: () => this.setState(s => ({ pcrs: s.pcrs.filter((_, idx) => idx !== i), selIdx: s.selIdx === i ? null : (s.selIdx > i ? s.selIdx - 1 : s.selIdx) })),
+        remove: () => { this.snapshot("Etiqueta removida"); this.setState(s => ({ pcrs: s.pcrs.filter((_, idx) => idx !== i), selIdx: s.selIdx === i ? null : (s.selIdx > i ? s.selIdx - 1 : s.selIdx) })); },
       };
     });
 
@@ -831,7 +908,7 @@ class Component extends DCLogic {
         select: () => this.setState({ selIdx: i }),
         moveUp: () => this.moveItem("prs", i, -1),
         moveDown: () => this.moveItem("prs", i, 1),
-        remove: () => this.setState(s => ({ prs: s.prs.filter((_, idx) => idx !== i), selIdx: s.selIdx === i ? null : (s.selIdx > i ? s.selIdx - 1 : s.selIdx) })),
+        remove: () => { this.snapshot("Etiqueta removida"); this.setState(s => ({ prs: s.prs.filter((_, idx) => idx !== i), selIdx: s.selIdx === i ? null : (s.selIdx > i ? s.selIdx - 1 : s.selIdx) })); },
       };
     });
 
@@ -857,7 +934,7 @@ class Component extends DCLogic {
         moveUp: () => this.moveItem("mks", i, -1),
         moveDown: () => this.moveItem("mks", i, 1),
         setCada: e => this.updateMk(i, { cada: e.target.checked }),
-        remove: () => this.setState(s => ({ mks: s.mks.filter((_, idx) => idx !== i), selIdx: s.selIdx === i ? null : (s.selIdx > i ? s.selIdx - 1 : s.selIdx) })),
+        remove: () => { this.snapshot("Etiqueta removida"); this.setState(s => ({ mks: s.mks.filter((_, idx) => idx !== i), selIdx: s.selIdx === i ? null : (s.selIdx > i ? s.selIdx - 1 : s.selIdx) })); },
       };
     });
 
@@ -884,7 +961,7 @@ class Component extends DCLogic {
         select: () => this.setState({ selIdx: i }),
         moveUp: () => this.moveItem("placas", i, -1),
         moveDown: () => this.moveItem("placas", i, 1),
-        remove: () => this.setState(s => ({ placas: s.placas.filter((_, idx) => idx !== i), selIdx: s.selIdx === i ? null : (s.selIdx > i ? s.selIdx - 1 : s.selIdx) })),
+        remove: () => { this.snapshot("Etiqueta removida"); this.setState(s => ({ placas: s.placas.filter((_, idx) => idx !== i), selIdx: s.selIdx === i ? null : (s.selIdx > i ? s.selIdx - 1 : s.selIdx) })); },
       };
     });
 
@@ -892,6 +969,7 @@ class Component extends DCLogic {
     const perPage = { placa: 4, pcr: 9, prec: 10, make: 10 };
     const activeCount = expand(model === "placa" ? placas : model === "pcr" ? pcrs : model === "prec" ? prs : mks).length;
     const pages = Math.max(1, Math.ceil(activeCount / perPage[model]));
+    const sizeLabel = { placa: "9 × 9 cm", pcr: "5 × 7 cm", prec: "6,5 × 4,3 cm", make: "6,5 × 4,3 cm" };
     const pageInfo = activeCount + " etiqueta" + (activeCount === 1 ? "" : "s") + " · " + pages + " folha" + (pages === 1 ? "" : "s") + " A4";
 
     return {
@@ -930,7 +1008,25 @@ class Component extends DCLogic {
         : model === "pcr"
         ? this.setState(s => ({ pcrs: [...s.pcrs, { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }] }))
         : this.setState(s => ({ placas: [...s.placas, { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }] }))); },
-      doPrint: () => window.print(),
+      doPrint: () => this.setState({ printOpen: true }),
+      isPrintOpen: !!this.state.printOpen,
+      closePrint: () => this.setState({ printOpen: false }),
+      confirmPrint: () => { this.setState({ printOpen: false }); setTimeout(() => window.print(), 120); },
+      printCount: activeCount + (activeCount === 1 ? " etiqueta" : " etiquetas"),
+      printPages: pages + (pages === 1 ? " folha A4" : " folhas A4"),
+      printSize: sizeLabel[model],
+      hasToast: !!this.state.toast,
+      toastMsg: this.state.toast || "",
+      doUndo: () => this.undo(),
+      showHint: !this.state.hintDone && !this.state.toast,
+      dismissHint: () => { try { localStorage.setItem("dd-hint", "1"); } catch (e) {} this.setState({ hintDone: true }); },
+      railItems: (model === "placa" ? placas : model === "pcr" ? pcrs : model === "prec" ? prs : mks).map(it => ({
+        num: String(it.n).padStart(2, "0"),
+        label: (it.name || "Sem nome").split("\n")[0],
+        qtyLabel: it.qty > 1 ? "×" + it.qty : "",
+        select: it.select,
+        railStyle: "display:flex; align-items:center; gap:8px; width:100%; text-align:left; background:" + (it.isSel === "1" ? "#eefaf9" : "transparent") + "; color:" + (it.isSel === "1" ? "#05918C" : "#5a6873") + "; border:none; border-radius:10px; padding:10px 8px; font-size:13px; font-weight:700; cursor:pointer;",
+      })),
       selClass: (this.state.selIdx != null && this.state.selIdx < this.state[this.listKey(model)].length) ? "sel-on" : "sel-off",
       clearSel: () => this.setState({ selIdx: null }),
       barBtn: "background:none; border:none; color:#5a6873; font-size:14px; font-weight:700; cursor:pointer; padding:10px 14px; border-radius:999px; white-space:nowrap;",
@@ -944,10 +1040,10 @@ class Component extends DCLogic {
       menuImport: () => this.setState({ menuOpen: false, importOpen: true }),
       menuPreview: () => this.setState(s => ({ menuOpen: false, preview: !s.preview })),
       menuHelp: () => this.setState({ menuOpen: false, helpOpen: true }),
-      menuPrint: () => { this.setState({ menuOpen: false }); setTimeout(() => window.print(), 60); },
+      menuPrint: () => this.setState({ menuOpen: false, printOpen: true }),
       menuClear: () => {
         this.setState({ menuOpen: false });
-        if (window.confirm("Limpar todas as etiquetas desta aba?")) this.setState({ [this.listKey(model)]: [] });
+        if (window.confirm("Limpar todas as etiquetas desta aba?")) { this.snapshot("Etiquetas apagadas"); this.setState({ [this.listKey(model)]: [], selIdx: null }); }
       },
       menuDark: () => this.setState(s => {
         try { localStorage.setItem("dd-dark", s.dark ? "0" : "1"); } catch (e) {}
@@ -978,7 +1074,7 @@ class Component extends DCLogic {
       previewLabel: pp ? "Sair da prévia" : "Prévia",
       togglePreview: () => this.setState(s => ({ preview: !s.preview })),
       clearCurrent: () => {
-        if (window.confirm("Limpar todas as etiquetas desta aba?")) this.setState({ [this.listKey(model)]: [] });
+        if (window.confirm("Limpar todas as etiquetas desta aba?")) { this.snapshot("Etiquetas apagadas"); this.setState({ [this.listKey(model)]: [], selIdx: null }); }
       },
       doImport: () => this.setState({ importOpen: true }),
       openHelp: () => this.setState({ helpOpen: true }),
@@ -992,6 +1088,15 @@ class Component extends DCLogic {
         const a = document.createElement("a");
         a.href = URL.createObjectURL(blob);
         a.download = "modelo-importacao.csv";
+        a.click();
+        URL.revokeObjectURL(a.href);
+      },
+      saveList: () => {
+        const { pcrs, prs, mks, placas } = this.state;
+        const blob = new Blob([JSON.stringify({ pcrs, prs, mks, placas }, null, 1)], { type: "application/json" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "etiquetas-dd-backup.json";
         a.click();
         URL.revokeObjectURL(a.href);
       },
