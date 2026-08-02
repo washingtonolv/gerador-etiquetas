@@ -79,7 +79,7 @@
     .dark .editor-col { border-color:#3C5554 !important; }
     .dark .card-box { background:#1E3231 !important; border-color:#3C5554 !important; }
     .dark .card-box span, .dark .card-box label { color:#C5DAD8 !important; }
-    .dark .editor-col > div:first-child { color:#C5DAD8 !important; }
+    .dark .editor-panel-content > div:first-child { color:#C5DAD8 !important; }
     .dark input, .dark select, .dark textarea { background:#10201F; color:#EEF8F7; border-color:#3C5554 !important; }
     .dark input::placeholder, .dark textarea::placeholder { color:#8EAAA8; }
     .dark .hdr-pill { background:#1E3231 !important; }
@@ -288,21 +288,23 @@
       scrollbar-width: thin;
       scrollbar-color: var(--dd-border) transparent;
       transition:
-        width .42s cubic-bezier(.22,1,.36,1),
-        min-width .42s cubic-bezier(.22,1,.36,1),
-        max-width .42s cubic-bezier(.22,1,.36,1),
-        padding .42s cubic-bezier(.22,1,.36,1),
-        background-color .24s ease,
-        border-color .24s ease;
+        width .36s cubic-bezier(.22,1,.36,1),
+        min-width .36s cubic-bezier(.22,1,.36,1),
+        max-width .36s cubic-bezier(.22,1,.36,1),
+        padding .36s cubic-bezier(.22,1,.36,1);
       will-change: width;
     }
-    .workspace-layout .editor-col > :not(.panel-toggle):not(.card-box) {
+    .editor-panel-content {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
       opacity: 1;
       transform: translateX(0);
       visibility: visible;
       transition:
-        opacity .2s ease .1s,
-        transform .36s cubic-bezier(.22,1,.36,1),
+        opacity .18s ease .16s,
+        transform .32s cubic-bezier(.22,1,.36,1) .08s,
         visibility 0s linear 0s;
     }
     .panel-toggle {
@@ -335,15 +337,22 @@
       display: block;
       transform: rotate(0deg);
       transform-origin: center;
-      transition: transform .42s cubic-bezier(.22,1,.36,1);
+      transition: transform .34s cubic-bezier(.22,1,.36,1);
     }
-    .panel-collapsed .panel-toggle-icon { transform: rotate(180deg); }
-    .editor-col > div:first-of-type { padding-right: 44px !important; }
+    .panel-collapsed .panel-toggle-icon {
+      transform: rotate(180deg);
+      transition-duration: .3s;
+    }
+    .editor-panel-content > div:first-of-type { padding-right: 44px !important; }
     @media (min-width: 821px) {
       .workspace-layout {
-        transition: grid-template-columns .42s cubic-bezier(.22,1,.36,1);
+        transition: grid-template-columns .36s cubic-bezier(.22,1,.36,1);
       }
-      .panel-collapsed .workspace-layout { grid-template-columns: 54px minmax(0, 1fr) !important; }
+      .panel-collapsed .workspace-layout {
+        grid-template-columns: 54px minmax(0, 1fr) !important;
+        transition-duration: .3s;
+        transition-delay: .09s;
+      }
       .panel-collapsed .workspace-layout .editor-col {
         width: 54px !important;
         min-width: 54px !important;
@@ -351,16 +360,18 @@
         min-height: calc(100vh - 76px);
         padding: 12px 8px !important;
         overflow: hidden;
+        transition-duration: .3s;
+        transition-delay: .09s;
       }
-      .panel-collapsed .workspace-layout .editor-col > :not(.panel-toggle):not(.card-box) {
+      .panel-collapsed .editor-panel-content {
         opacity: 0;
-        transform: translateX(-12px);
+        transform: translateX(-8px);
         visibility: hidden;
         pointer-events: none;
         transition:
-          opacity .14s ease,
-          transform .24s ease,
-          visibility 0s linear .24s;
+          opacity .1s ease,
+          transform .16s ease,
+          visibility 0s linear .1s;
       }
       .panel-collapsed .workspace-layout .editor-col .panel-toggle {
         position: absolute;
@@ -370,7 +381,7 @@
       }
       .panel-collapsed .workspace-layout .preview-wrap { grid-column: 2; }
     }
-    .editor-col > div:first-child {
+    .editor-panel-content > div:first-child {
       padding: 0 2px 2px !important;
       color: var(--dd-text-muted) !important;
       font-size: 12px !important;
@@ -518,7 +529,7 @@
     @media (prefers-reduced-motion: reduce) {
       .workspace-layout,
       .workspace-layout .editor-col,
-      .workspace-layout .editor-col > :not(.panel-toggle):not(.card-box),
+      .editor-panel-content,
       .panel-toggle-icon,
       .card-box,
       .card-content,
@@ -744,7 +755,7 @@
     .dark .card-box select,
     .dark .card-box textarea { color: var(--dd-text) !important; background: #132423 !important; border-color: var(--dd-border) !important; }
     .dark .hdr-pill > div:first-child span,
-    .dark .editor-col > div:first-child { color: var(--dd-text) !important; }
+    .dark .editor-panel-content > div:first-child { color: var(--dd-text) !important; }
     .dark .hdr-pill .print-btn { color: #fff !important; background: var(--dd-promo-500) !important; }
     .dark .panel-toggle { color: var(--dd-text); background: var(--dd-surface); border-color: var(--dd-border); }
     .dark .card-box span,
@@ -942,6 +953,7 @@
   <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
       <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
+      <div class="editor-panel-content">
       <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Preçário ({{ pcrCount }})</div>
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ pcrs }}" as="g" hint-placeholder-count="3">
@@ -992,7 +1004,8 @@
 </div>
       </sc-for>
       <button onClick="{{ addPcr }}" style="background:#fff; color:#05918C; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#ECF8F7; border-color:#05918C;">+ Adicionar produto</button>
-    </div>
+          </div>
+</div>
 
     <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
       <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
@@ -1055,6 +1068,7 @@
   <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
       <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
+      <div class="editor-panel-content">
       <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Precificadores ({{ prCount }})</div>
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ prs }}" as="g" hint-placeholder-count="3">
@@ -1109,7 +1123,8 @@
 </div>
       </sc-for>
       <button onClick="{{ addPr }}" style="background:#fff; color:#05918C; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#ECF8F7; border-color:#05918C;">+ Adicionar precificador</button>
-    </div>
+          </div>
+</div>
 
     <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
       <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
@@ -1163,6 +1178,7 @@
   <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
       <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
+      <div class="editor-panel-content">
       <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Etiquetas ({{ mkCount }})</div>
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ mks }}" as="g" hint-placeholder-count="3">
@@ -1213,7 +1229,8 @@
 </div>
       </sc-for>
       <button onClick="{{ addMk }}" style="background:#fff; color:#05918C; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#ECF8F7; border-color:#05918C;">+ Adicionar etiqueta</button>
-    </div>
+          </div>
+</div>
 
     <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
       <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
@@ -1267,6 +1284,7 @@
   <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
       <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
+      <div class="editor-panel-content">
       <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Placas ({{ placaCount }})</div>
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ placas }}" as="pl" hint-placeholder-count="3">
@@ -1324,7 +1342,8 @@
 </div>
       </sc-for>
       <button onClick="{{ addPlaca }}" style="background:#fff; color:#05918C; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#ECF8F7; border-color:#05918C;">+ Adicionar placa</button>
-    </div>
+          </div>
+</div>
 
     <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
       <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
