@@ -697,6 +697,26 @@ class Component extends DCLogic {
     const { reais, centavos } = this.splitPrice(v);
     return reais + "," + centavos;
   }
+  componentDidMount() {
+    try { if (localStorage.getItem("dd-dark") === "1") this.setState({ dark: true }); } catch (e) {}
+    try {
+      const raw = localStorage.getItem("dd-etiquetas-v1");
+      if (raw) {
+        const d = JSON.parse(raw);
+        const patch = {};
+        for (const k of ["pcrs", "prs", "mks", "placas"]) if (Array.isArray(d[k])) patch[k] = d[k];
+        if (Object.keys(patch).length) { this._last = raw; this.setState(patch); }
+      }
+    } catch (e) {}
+    this._onWheel = e => {
+      if (!(e.ctrlKey || e.metaKey)) return;
+      if (e.target.closest && e.target.closest(".editor-col, .bottombar, .hdr-band")) return;
+      e.preventDefault();
+      const step = e.deltaY > 0 ? -0.08 : 0.08;
+      this.setState(s => ({ zoom: Math.max(0.4, Math.min(2.5, +(((s.zoom || 1) + step).toFixed(2)))) }));
+    };
+    window.addEventListener("wheel", this._onWheel, { passive: false });
+  }
   componentWillUnmount() {
     if (this._onWheel) window.removeEventListener("wheel", this._onWheel);
   }
