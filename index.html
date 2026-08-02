@@ -363,6 +363,7 @@
       font-weight: 700;
     }
     .card-box {
+      position: relative;
       padding: 16px !important;
       gap: 13px !important;
       border: 1px solid var(--dd-border) !important;
@@ -374,6 +375,67 @@
       transform: translateY(-1px);
       border-color: #B7C1CA !important;
       box-shadow: var(--dd-shadow-panel) !important;
+    }
+    .card-box[data-active="1"] {
+      border-color: var(--dd-primary-500) !important;
+      box-shadow: 0 0 0 2px rgba(5,145,140,.12), var(--dd-shadow-panel) !important;
+    }
+    .card-summary {
+      display: none;
+      align-items: center;
+      width: 100%;
+      min-height: 52px;
+      gap: 10px;
+      padding: 10px 12px;
+      color: var(--dd-text);
+      background: var(--dd-surface);
+      border: 0;
+      text-align: left;
+      cursor: pointer;
+    }
+    .card-summary-index {
+      flex: none;
+      color: var(--dd-primary-700);
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .card-summary-name {
+      min-width: 0;
+      flex: 1;
+      overflow: hidden;
+      font-size: 13px;
+      font-weight: 700;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .card-summary-price {
+      flex: none;
+      color: var(--dd-promo-500);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .card-summary-arrow {
+      flex: none;
+      color: var(--dd-text-muted);
+      font-size: 18px;
+    }
+    .card-box[data-active="0"] {
+      min-height: 52px;
+      padding: 0 !important;
+      gap: 0 !important;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .card-box[data-active="0"] > :not(.card-summary) { display: none !important; }
+    .card-box[data-active="0"] > .card-summary { display: flex; }
+    .label-preview {
+      cursor: pointer;
+      transition: outline-color .15s ease, box-shadow .15s ease, transform .15s ease;
+    }
+    .label-preview[data-active="1"] {
+      outline: 3px solid var(--dd-primary-700);
+      outline-offset: 3px;
+      box-shadow: 0 7px 22px rgba(5,145,140,.22);
     }
     .card-box input:not([type="checkbox"]):not([type="number"]),
     .card-box select,
@@ -588,6 +650,9 @@
     .dark .panel-toggle { color: var(--dd-text); background: var(--dd-surface); border-color: var(--dd-border); }
     .dark .card-box span,
     .dark .card-box label { color: var(--dd-text-muted) !important; }
+    .dark .card-summary { color: var(--dd-text); background: var(--dd-surface); }
+    .dark .card-summary-index { color: #7BCDC9 !important; }
+    .dark .card-summary-price { color: #EE7892 !important; }
     .dark .continuous-hint { color: #D6F0ED; background: rgba(5,145,140,.15); }
     .dark .sheet { border-color: #4B565C; }
     @media (max-width: 1000px) {
@@ -625,6 +690,7 @@
       .workspace-layout { display: block !important; }
       .app-bg { background: #fff !important; }
       .sheet { border: 0 !important; box-shadow: none !important; }
+      .label-preview { transform: none !important; box-shadow: none !important; }
     }
   </style>
   <meta name="theme-color" content="#05918C">
@@ -749,7 +815,8 @@
       <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Preçário ({{ pcrCount }})</div>
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ pcrs }}" as="g" hint-placeholder-count="3">
-        <div class="card-box" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+        <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+          <button type="button" class="card-summary" onClick="{{ g.activate }}"><span class="card-summary-index">#{{ g.n }}</span><span class="card-summary-name">{{ g.summaryName }}</span><span class="card-summary-price">R$ {{ g.porShow }}</span><span class="card-summary-arrow">›</span></button>
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -817,7 +884,7 @@
             </div>
           </sc-if>
           <sc-for list="{{ pcrsGrid }}" as="g" hint-placeholder-count="3">
-            <div onClick="{{ setMvEdit }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:5 / 7; background:#FFE1E4; overflow:hidden; border:1px solid #f0dade; border-radius:2px; container-type:inline-size;">
+            <div class="label-preview" data-active="{{ g.activeOn }}" onClick="{{ g.activatePreview }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:5 / 7; background:#FFE1E4; overflow:hidden; border:1px solid #f0dade; border-radius:2px; container-type:inline-size;">
               <button class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
               <div style="position:absolute; left:0; top:58.7%; width:100%; height:41.3%; background-image:url('assets/placa/nuvem-rosa.png'); background-size:cover; background-position:center bottom; background-repeat:no-repeat;"></div>
               <div style="position:absolute; left:40%; top:38.7%; width:56.7%; aspect-ratio:1 / 1; background-image:url('assets/placa/flor-verde.png'); background-size:contain; background-repeat:no-repeat;"></div>
@@ -857,7 +924,8 @@
       <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Precificadores ({{ prCount }})</div>
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ prs }}" as="g" hint-placeholder-count="3">
-        <div class="card-box" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+        <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+          <button type="button" class="card-summary" onClick="{{ g.activate }}"><span class="card-summary-index">#{{ g.n }}</span><span class="card-summary-name">{{ g.summaryName }}</span><span class="card-summary-price">R$ {{ g.porShow }}</span><span class="card-summary-arrow">›</span></button>
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -929,7 +997,7 @@
             </div>
           </sc-if>
           <sc-for list="{{ prsGrid }}" as="g" hint-placeholder-count="3">
-            <div onClick="{{ setMvEdit }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:6.5 / 4.3; background-image:{{ g.fundoBg }}; background-size:100% 100%; background-position:top left; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
+            <div class="label-preview" data-active="{{ g.activeOn }}" onClick="{{ g.activatePreview }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:6.5 / 4.3; background-image:{{ g.fundoBg }}; background-size:100% 100%; background-position:top left; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
               <button class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
               <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:2.9%; top:5.7%; width:30.7%;">
               <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}">
@@ -960,7 +1028,8 @@
       <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Etiquetas ({{ mkCount }})</div>
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ mks }}" as="g" hint-placeholder-count="3">
-        <div class="card-box" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+        <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+          <button type="button" class="card-summary" onClick="{{ g.activate }}"><span class="card-summary-index">#{{ g.n }}</span><span class="card-summary-name">{{ g.summaryName }}</span><span class="card-summary-price">R$ {{ g.porShow }}</span><span class="card-summary-arrow">›</span></button>
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -1028,7 +1097,7 @@
             </div>
           </sc-if>
           <sc-for list="{{ mksGrid }}" as="g" hint-placeholder-count="3">
-            <div onClick="{{ setMvEdit }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:6.5 / 4.3; background-image:url('assets/precificador/fundo-verde.png'); background-size:100% 100%; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
+            <div class="label-preview" data-active="{{ g.activeOn }}" onClick="{{ g.activatePreview }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:6.5 / 4.3; background-image:url('assets/precificador/fundo-verde.png'); background-size:100% 100%; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
               <button class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
               <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:1%; top:5%; width:48%;">
               <div style="position:absolute; left:2%; top:57%; width:38%; font-size:3.25cqw; font-weight:800; line-height:1.15; color:#171717; text-transform:uppercase; text-wrap:balance;">{{ g.name }}</div>
@@ -1059,7 +1128,8 @@
       <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Placas ({{ placaCount }})</div>
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ placas }}" as="pl" hint-placeholder-count="3">
-        <div class="card-box" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+        <div class="card-box" data-active="{{ pl.activeOn }}" data-card-index="{{ pl.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+          <button type="button" class="card-summary" onClick="{{ pl.activate }}"><span class="card-summary-index">#{{ pl.n }}</span><span class="card-summary-name">{{ pl.summaryName }}</span><span class="card-summary-price">R$ {{ pl.porShow }}</span><span class="card-summary-arrow">›</span></button>
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ pl.n }}</span>
             <select value="{{ pl.brand }}" onChange="{{ pl.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -1134,7 +1204,7 @@
             </div>
           </sc-if>
           <sc-for list="{{ placasGrid }}" as="pl" hint-placeholder-count="3">
-            <div onClick="{{ setMvEdit }}" style="position:relative; width:100%; aspect-ratio:1 / 1; background:#fff; overflow:hidden; border:1px solid #eadfe2; border-radius:2px; container-type:inline-size; font-family:Axiforma, Archivo, sans-serif;">
+            <div class="label-preview" data-active="{{ pl.activeOn }}" onClick="{{ pl.activatePreview }}" style="position:relative; width:100%; aspect-ratio:1 / 1; background:#fff; overflow:hidden; border:1px solid #eadfe2; border-radius:2px; container-type:inline-size; font-family:Axiforma, Archivo, sans-serif;">
               <button class="no-print preview-delete" onClick="{{ pl.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
               <div style="position:absolute; left:0; top:45.7%; width:100%; height:54.3%; background-image:url('assets/placa/nuvem-rosa.png'); background-size:cover; background-position:center bottom; background-repeat:no-repeat;"></div>
               <div style="position:absolute; left:9.87%; top:23.08%; width:33.57%; aspect-ratio:725 / 714; background-image:url('assets/placa/flor-branca.png'); background-size:contain; background-repeat:no-repeat;"></div>
@@ -1172,6 +1242,10 @@ class Component extends DCLogic {
   state = {
     model: "placa",
     panelCollapsed: false,
+    activePcr: 0,
+    activePr: 0,
+    activeMk: 0,
+    activePlaca: 0,
    pcrs: [
       { brand: "boticario", name: "Hid. Obsessão por Baunilha 400ml", dePrice: "58,99", porPrice: "39,90" },
     ],
@@ -1210,12 +1284,63 @@ class Component extends DCLogic {
   updatePlaca(i, patch) {
     this.setState(s => ({ placas: s.placas.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
   }
+  activeKeyFor(key) {
+    return key === "placas" ? "activePlaca" : key === "pcrs" ? "activePcr" : key === "prs" ? "activePr" : "activeMk";
+  }
+  activateItem(key, i, fromPreview = false) {
+    const activeKey = this.activeKeyFor(key);
+    const patch = { [activeKey]: i };
+    if (fromPreview) {
+      patch.mobileView = "edit";
+      patch.panelCollapsed = false;
+    }
+    this.setState(patch);
+    if (fromPreview) {
+      setTimeout(() => {
+        const card = document.querySelector('.workspace-layout .card-box[data-card-index="' + i + '"]');
+        if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 100);
+    }
+  }
+  addItem(key, item) {
+    const activeKey = this.activeKeyFor(key);
+    this.setState(s => ({
+      [key]: [...s[key], item],
+      [activeKey]: s[key].length,
+      panelCollapsed: false,
+      mobileView: "edit",
+    }));
+    setTimeout(() => {
+      const cards = document.querySelectorAll(".workspace-layout .card-box");
+      const card = cards[cards.length - 1];
+      const field = card?.querySelector('input[placeholder="Nome do produto"], textarea[placeholder="Descrição do produto"]');
+      if (field) {
+        field.scrollIntoView({ behavior: "smooth", block: "center" });
+        field.focus();
+        field.select?.();
+      }
+    }, 100);
+  }
   moveItem(key, i, d) {
     this.setState(s => {
       const a = [...s[key]], j = i + d;
       if (j < 0 || j >= a.length) return null;
       [a[i], a[j]] = [a[j], a[i]];
-      return { [key]: a };
+      const activeKey = this.activeKeyFor(key);
+      let active = Number.isInteger(s[activeKey]) ? s[activeKey] : 0;
+      if (active === i) active = j;
+      else if (active === j) active = i;
+      return { [key]: a, [activeKey]: active };
+    });
+  }
+  removeItem(key, i) {
+    const activeKey = this.activeKeyFor(key);
+    this.setState(s => {
+      const items = s[key].filter((_, idx) => idx !== i);
+      let active = Number.isInteger(s[activeKey]) ? s[activeKey] : 0;
+      if (active > i) active -= 1;
+      else if (active === i) active = Math.min(i, Math.max(0, items.length - 1));
+      return { [key]: items, [activeKey]: active };
     });
   }
   removePreviewItem(key, i) {
@@ -1226,7 +1351,13 @@ class Component extends DCLogic {
       const qty = Math.max(1, parseInt(item.qty, 10) || 1);
       if (qty > 1) items[i] = { ...item, qty: qty - 1 };
       else items.splice(i, 1);
-      return { [key]: items };
+      const activeKey = this.activeKeyFor(key);
+      let active = Number.isInteger(s[activeKey]) ? s[activeKey] : 0;
+      if (qty <= 1) {
+        if (active > i) active -= 1;
+        else if (active === i) active = Math.min(i, Math.max(0, items.length - 1));
+      }
+      return { [key]: items, [activeKey]: active };
     });
   }
   splitPrice(v) {
@@ -1302,7 +1433,8 @@ class Component extends DCLogic {
       key === "prs" ? { brand: it.brand, fundo: "rosa", name: it.name, dePrice: it.dePrice, porPrice: it.porPrice } :
       key === "mks" ? { brand: it.brand, name: it.name, dePrice: it.dePrice, porPrice: it.porPrice, cada: false } :
       { brand: it.brand, name: it.name, dePrice: it.dePrice, porPrice: it.porPrice });
-    this.setState(s => ({ [key]: [...s[key], ...shaped], importOpen: false }));
+    const activeKey = this.activeKeyFor(key);
+    this.setState(s => ({ [key]: [...s[key], ...shaped], [activeKey]: s[key].length, importOpen: false }));
     window.alert(shaped.length + " etiqueta(s) importada(s) para a aba atual.");
   }
   renderVals() {
@@ -1317,6 +1449,10 @@ class Component extends DCLogic {
       const { reais, centavos } = this.splitPrice(g.porPrice);
       return {
         ...g, n: i + 1, reais, centavos, qty: parseInt(g.qty, 10) || 1,
+        cardIndex: i, activeOn: this.state.activePcr === i ? "1" : "0",
+        summaryName: (g.name || "Sem nome").trim(), porShow: this.fmtPrice(g.porPrice),
+        activate: () => this.activateItem("pcrs", i),
+        activatePreview: () => this.activateItem("pcrs", i, true),
         hasDe: !!(g.dePrice || "").trim(),
         hasBrand: g.brand !== "semmarca",
         brandBg: 'url("assets/placa/marcas/' + g.brand + '.png")',
@@ -1328,12 +1464,12 @@ class Component extends DCLogic {
         qtyMinus: () => this.updatePcr(i, { qty: Math.max(1, (parseInt(this.state.pcrs[i].qty, 10) || 1) - 1) }),
         qtyPlus: () => this.updatePcr(i, { qty: Math.min(999, (parseInt(this.state.pcrs[i].qty, 10) || 1) + 1) }),
         deShow: this.fmtPrice(g.dePrice),
-        dup: () => this.setState(s => ({ pcrs: [...s.pcrs.slice(0, i + 1), { ...s.pcrs[i] }, ...s.pcrs.slice(i + 1)] })),
+        dup: () => this.setState(s => ({ pcrs: [...s.pcrs.slice(0, i + 1), { ...s.pcrs[i] }, ...s.pcrs.slice(i + 1)], activePcr: i + 1 })),
         showCada: !!g.cada,
         setCada: e => this.updatePcr(i, { cada: e.target.checked }),
         moveUp: () => this.moveItem("pcrs", i, -1),
         moveDown: () => this.moveItem("pcrs", i, 1),
-        remove: () => this.setState(s => ({ pcrs: s.pcrs.filter((_, idx) => idx !== i) })),
+        remove: () => this.removeItem("pcrs", i),
         removePreview: e => { e?.stopPropagation?.(); this.removePreviewItem("pcrs", i); },
       };
     });
@@ -1343,6 +1479,10 @@ class Component extends DCLogic {
       const { reais, centavos } = this.splitPrice(g.porPrice);
       return {
         ...g, n: i + 1, reais, centavos, qty: parseInt(g.qty, 10) || 1,
+        cardIndex: i, activeOn: this.state.activePr === i ? "1" : "0",
+        summaryName: (g.name || "Sem nome").trim(), porShow: this.fmtPrice(g.porPrice),
+        activate: () => this.activateItem("prs", i),
+        activatePreview: () => this.activateItem("prs", i, true),
         hasDe: !!(g.dePrice || "").trim(),
         hasBrand: g.brand !== "semmarca",
         brandBg: 'url("assets/placa/marcas/' + g.brand + '.png")',
@@ -1359,12 +1499,12 @@ class Component extends DCLogic {
         qtyMinus: () => this.updatePr(i, { qty: Math.max(1, (parseInt(this.state.prs[i].qty, 10) || 1) - 1) }),
         qtyPlus: () => this.updatePr(i, { qty: Math.min(999, (parseInt(this.state.prs[i].qty, 10) || 1) + 1) }),
         deShow: this.fmtPrice(g.dePrice),
-        dup: () => this.setState(s => ({ prs: [...s.prs.slice(0, i + 1), { ...s.prs[i] }, ...s.prs.slice(i + 1)] })),
+        dup: () => this.setState(s => ({ prs: [...s.prs.slice(0, i + 1), { ...s.prs[i] }, ...s.prs.slice(i + 1)], activePr: i + 1 })),
         showCada: !!g.cada,
         setCada: e => this.updatePr(i, { cada: e.target.checked }),
         moveUp: () => this.moveItem("prs", i, -1),
         moveDown: () => this.moveItem("prs", i, 1),
-        remove: () => this.setState(s => ({ prs: s.prs.filter((_, idx) => idx !== i) })),
+        remove: () => this.removeItem("prs", i),
         removePreview: e => { e?.stopPropagation?.(); this.removePreviewItem("prs", i); },
       };
     });
@@ -1373,6 +1513,10 @@ class Component extends DCLogic {
       const { reais, centavos } = this.splitPrice(g.porPrice);
       return {
         ...g, n: i + 1, reais, centavos, qty: parseInt(g.qty, 10) || 1,
+        cardIndex: i, activeOn: this.state.activeMk === i ? "1" : "0",
+        summaryName: (g.name || "Sem nome").trim(), porShow: this.fmtPrice(g.porPrice),
+        activate: () => this.activateItem("mks", i),
+        activatePreview: () => this.activateItem("mks", i, true),
         hasDe: !!(g.dePrice || "").trim(),
         showCada: !!g.cada,
         hasBrand: g.brand !== "semmarca",
@@ -1385,11 +1529,11 @@ class Component extends DCLogic {
         qtyMinus: () => this.updateMk(i, { qty: Math.max(1, (parseInt(this.state.mks[i].qty, 10) || 1) - 1) }),
         qtyPlus: () => this.updateMk(i, { qty: Math.min(999, (parseInt(this.state.mks[i].qty, 10) || 1) + 1) }),
         deShow: this.fmtPrice(g.dePrice),
-        dup: () => this.setState(s => ({ mks: [...s.mks.slice(0, i + 1), { ...s.mks[i] }, ...s.mks.slice(i + 1)] })),
+        dup: () => this.setState(s => ({ mks: [...s.mks.slice(0, i + 1), { ...s.mks[i] }, ...s.mks.slice(i + 1)], activeMk: i + 1 })),
         moveUp: () => this.moveItem("mks", i, -1),
         moveDown: () => this.moveItem("mks", i, 1),
         setCada: e => this.updateMk(i, { cada: e.target.checked }),
-        remove: () => this.setState(s => ({ mks: s.mks.filter((_, idx) => idx !== i) })),
+        remove: () => this.removeItem("mks", i),
         removePreview: e => { e?.stopPropagation?.(); this.removePreviewItem("mks", i); },
       };
     });
@@ -1398,6 +1542,10 @@ class Component extends DCLogic {
       const { reais, centavos } = this.splitPrice(pl.porPrice);
       return {
         ...pl, n: i + 1, reais, centavos, qty: parseInt(pl.qty, 10) || 1,
+        cardIndex: i, activeOn: this.state.activePlaca === i ? "1" : "0",
+        summaryName: (pl.name || "Sem nome").trim(), porShow: this.fmtPrice(pl.porPrice),
+        activate: () => this.activateItem("placas", i),
+        activatePreview: () => this.activateItem("placas", i, true),
         hasDe: !!(pl.dePrice || "").trim(),
         hasBrand: pl.brand !== "semmarca",
         brandBg: 'url("assets/placa/marcas/' + pl.brand + '.png")',
@@ -1410,12 +1558,12 @@ class Component extends DCLogic {
         qtyMinus: () => this.updatePlaca(i, { qty: Math.max(1, (parseInt(this.state.placas[i].qty, 10) || 1) - 1) }),
         qtyPlus: () => this.updatePlaca(i, { qty: Math.min(999, (parseInt(this.state.placas[i].qty, 10) || 1) + 1) }),
         deShow: this.fmtPrice(pl.dePrice),
-        dup: () => this.setState(s => ({ placas: [...s.placas.slice(0, i + 1), { ...s.placas[i] }, ...s.placas.slice(i + 1)] })),
+        dup: () => this.setState(s => ({ placas: [...s.placas.slice(0, i + 1), { ...s.placas[i] }, ...s.placas.slice(i + 1)], activePlaca: i + 1 })),
         showCada: !!pl.cada,
         setCada: e => this.updatePlaca(i, { cada: e.target.checked }),
         moveUp: () => this.moveItem("placas", i, -1),
         moveDown: () => this.moveItem("placas", i, 1),
-        remove: () => this.setState(s => ({ placas: s.placas.filter((_, idx) => idx !== i) })),
+        remove: () => this.removeItem("placas", i),
         removePreview: e => { e?.stopPropagation?.(); this.removePreviewItem("placas", i); },
       };
     });
@@ -1451,17 +1599,17 @@ class Component extends DCLogic {
       prs, prCount: prs.length,
       pcrs, pcrCount: pcrs.length,
       placaBrandOptions: this.placaBrands,
-      addPcr: () => this.setState(s => ({ pcrs: [...s.pcrs, { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }] })),
-      addPr: () => this.setState(s => ({ prs: [...s.prs, { brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" }] })),
-      addMk: () => this.setState(s => ({ mks: [...s.mks, { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }] })),
-      addPlaca: () => this.setState(s => ({ placas: [...s.placas, { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }] })),
+      addPcr: () => this.addItem("pcrs", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }),
+      addPr: () => this.addItem("prs", { brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" }),
+      addMk: () => this.addItem("mks", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }),
+      addPlaca: () => this.addItem("placas", { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }),
       addCurrent: () => model === "make"
-        ? this.setState(s => ({ mks: [...s.mks, { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }] }))
+        ? this.addItem("mks", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false })
         : model === "prec"
-        ? this.setState(s => ({ prs: [...s.prs, { brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" }] }))
+        ? this.addItem("prs", { brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" })
         : model === "pcr"
-        ? this.setState(s => ({ pcrs: [...s.pcrs, { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }] }))
-        : this.setState(s => ({ placas: [...s.placas, { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }] })),
+        ? this.addItem("pcrs", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" })
+        : this.addItem("placas", { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }),
       doPrint: () => window.print(),
       scrollTop: () => window.scrollTo({ top: 0, behavior: "smooth" }),
       isMenuOpen: !!this.state.menuOpen,
@@ -1475,7 +1623,10 @@ class Component extends DCLogic {
       menuPrint: () => { this.setState({ menuOpen: false }); setTimeout(() => window.print(), 60); },
       menuClear: () => {
         this.setState({ menuOpen: false });
-        if (window.confirm("Limpar todas as etiquetas desta aba?")) this.setState({ [this.listKey(model)]: [] });
+        if (window.confirm("Limpar todas as etiquetas desta aba?")) {
+          const key = this.listKey(model);
+          this.setState({ [key]: [], [this.activeKeyFor(key)]: 0 });
+        }
       },
       menuDark: () => this.setState(s => {
         try { localStorage.setItem("dd-dark", s.dark ? "0" : "1"); } catch (e) {}
@@ -1528,7 +1679,10 @@ class Component extends DCLogic {
       previewLabel: pp ? "Sair da prévia" : "Prévia",
       togglePreview: () => this.setState(s => ({ preview: !s.preview })),
       clearCurrent: () => {
-        if (window.confirm("Limpar todas as etiquetas desta aba?")) this.setState({ [this.listKey(model)]: [] });
+        if (window.confirm("Limpar todas as etiquetas desta aba?")) {
+          const key = this.listKey(model);
+          this.setState({ [key]: [], [this.activeKeyFor(key)]: 0 });
+        }
       },
       doImport: () => this.setState({ importOpen: true }),
       openHelp: () => this.setState({ helpOpen: true }),
