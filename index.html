@@ -381,7 +381,7 @@
       box-shadow: 0 0 0 2px rgba(5,145,140,.12), var(--dd-shadow-panel) !important;
     }
     .card-summary {
-      display: none;
+      display: flex;
       align-items: center;
       width: 100%;
       min-height: 52px;
@@ -390,9 +390,12 @@
       color: var(--dd-text);
       background: var(--dd-surface);
       border: 0;
+      border-radius: 12px;
       text-align: left;
       cursor: pointer;
+      transition: background-color .18s ease;
     }
+    .card-summary:hover { background: var(--dd-primary-100); }
     .card-summary-index {
       flex: none;
       color: var(--dd-primary-700);
@@ -418,6 +421,17 @@
       flex: none;
       color: var(--dd-text-muted);
       font-size: 18px;
+      transform: rotate(0deg);
+      transform-origin: center;
+      transition: transform .22s cubic-bezier(.2,.8,.2,1), color .18s ease;
+    }
+    .card-box[data-active="1"] .card-summary-arrow {
+      color: var(--dd-primary-700);
+      transform: rotate(90deg);
+    }
+    .card-box[data-active="1"] > .card-summary {
+      border-bottom: 1px solid var(--dd-border);
+      border-radius: 12px 12px 8px 8px;
     }
     .card-box[data-active="0"] {
       min-height: 52px;
@@ -847,7 +861,7 @@
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ pcrs }}" as="g" hint-placeholder-count="3">
         <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
-          <button type="button" class="card-summary" onClick="{{ g.activate }}"><span class="card-summary-index">#{{ g.n }}</span><span class="card-summary-name">{{ g.summaryName }}</span><span class="card-summary-price">R$ {{ g.porShow }}</span><span class="card-summary-arrow">›</span></button>
+          <button type="button" class="card-summary" onClick="{{ g.activate }}" aria-expanded="{{ g.activeExpanded }}"><span class="card-summary-index">#{{ g.n }}</span><span class="card-summary-name">{{ g.summaryName }}</span><span class="card-summary-price">R$ {{ g.porShow }}</span><span class="card-summary-arrow">›</span></button>
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -956,7 +970,7 @@
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ prs }}" as="g" hint-placeholder-count="3">
         <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
-          <button type="button" class="card-summary" onClick="{{ g.activate }}"><span class="card-summary-index">#{{ g.n }}</span><span class="card-summary-name">{{ g.summaryName }}</span><span class="card-summary-price">R$ {{ g.porShow }}</span><span class="card-summary-arrow">›</span></button>
+          <button type="button" class="card-summary" onClick="{{ g.activate }}" aria-expanded="{{ g.activeExpanded }}"><span class="card-summary-index">#{{ g.n }}</span><span class="card-summary-name">{{ g.summaryName }}</span><span class="card-summary-price">R$ {{ g.porShow }}</span><span class="card-summary-arrow">›</span></button>
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -1060,7 +1074,7 @@
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ mks }}" as="g" hint-placeholder-count="3">
         <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
-          <button type="button" class="card-summary" onClick="{{ g.activate }}"><span class="card-summary-index">#{{ g.n }}</span><span class="card-summary-name">{{ g.summaryName }}</span><span class="card-summary-price">R$ {{ g.porShow }}</span><span class="card-summary-arrow">›</span></button>
+          <button type="button" class="card-summary" onClick="{{ g.activate }}" aria-expanded="{{ g.activeExpanded }}"><span class="card-summary-index">#{{ g.n }}</span><span class="card-summary-name">{{ g.summaryName }}</span><span class="card-summary-price">R$ {{ g.porShow }}</span><span class="card-summary-arrow">›</span></button>
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -1160,7 +1174,7 @@
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ placas }}" as="pl" hint-placeholder-count="3">
         <div class="card-box" data-active="{{ pl.activeOn }}" data-card-index="{{ pl.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
-          <button type="button" class="card-summary" onClick="{{ pl.activate }}"><span class="card-summary-index">#{{ pl.n }}</span><span class="card-summary-name">{{ pl.summaryName }}</span><span class="card-summary-price">R$ {{ pl.porShow }}</span><span class="card-summary-arrow">›</span></button>
+          <button type="button" class="card-summary" onClick="{{ pl.activate }}" aria-expanded="{{ pl.activeExpanded }}"><span class="card-summary-index">#{{ pl.n }}</span><span class="card-summary-name">{{ pl.summaryName }}</span><span class="card-summary-price">R$ {{ pl.porShow }}</span><span class="card-summary-arrow">›</span></button>
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ pl.n }}</span>
             <select value="{{ pl.brand }}" onChange="{{ pl.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -1317,6 +1331,10 @@ class Component extends DCLogic {
   }
   activeKeyFor(key) {
     return key === "placas" ? "activePlaca" : key === "pcrs" ? "activePcr" : key === "prs" ? "activePr" : "activeMk";
+  }
+  toggleItem(key, i) {
+    const activeKey = this.activeKeyFor(key);
+    this.setState(s => ({ [activeKey]: s[activeKey] === i ? -1 : i }));
   }
   activateItem(key, i, fromPreview = false) {
     const activeKey = this.activeKeyFor(key);
@@ -1529,8 +1547,9 @@ class Component extends DCLogic {
       return {
         ...g, n: i + 1, reais, centavos, qty: parseInt(g.qty, 10) || 1,
         cardIndex: i, activeOn: this.state.activePcr === i ? "1" : "0",
+        activeExpanded: this.state.activePcr === i ? "true" : "false",
         summaryName: (g.name || "Sem nome").trim(), porShow: this.fmtPrice(g.porPrice),
-        activate: () => this.activateItem("pcrs", i),
+        activate: () => this.toggleItem("pcrs", i),
         activatePreview: () => this.activateItem("pcrs", i, true),
         hasDe: !!(g.dePrice || "").trim(),
         hasBrand: g.brand !== "semmarca",
@@ -1562,8 +1581,9 @@ class Component extends DCLogic {
       return {
         ...g, n: i + 1, reais, centavos, qty: parseInt(g.qty, 10) || 1,
         cardIndex: i, activeOn: this.state.activePr === i ? "1" : "0",
+        activeExpanded: this.state.activePr === i ? "true" : "false",
         summaryName: (g.name || "Sem nome").trim(), porShow: this.fmtPrice(g.porPrice),
-        activate: () => this.activateItem("prs", i),
+        activate: () => this.toggleItem("prs", i),
         activatePreview: () => this.activateItem("prs", i, true),
         hasDe: !!(g.dePrice || "").trim(),
         hasBrand: g.brand !== "semmarca",
@@ -1599,8 +1619,9 @@ class Component extends DCLogic {
       return {
         ...g, n: i + 1, reais, centavos, qty: parseInt(g.qty, 10) || 1,
         cardIndex: i, activeOn: this.state.activeMk === i ? "1" : "0",
+        activeExpanded: this.state.activeMk === i ? "true" : "false",
         summaryName: (g.name || "Sem nome").trim(), porShow: this.fmtPrice(g.porPrice),
-        activate: () => this.activateItem("mks", i),
+        activate: () => this.toggleItem("mks", i),
         activatePreview: () => this.activateItem("mks", i, true),
         hasDe: !!(g.dePrice || "").trim(),
         showCada: !!g.cada,
@@ -1631,8 +1652,9 @@ class Component extends DCLogic {
       return {
         ...pl, n: i + 1, reais, centavos, qty: parseInt(pl.qty, 10) || 1,
         cardIndex: i, activeOn: this.state.activePlaca === i ? "1" : "0",
+        activeExpanded: this.state.activePlaca === i ? "true" : "false",
         summaryName: (pl.name || "Sem nome").trim(), porShow: this.fmtPrice(pl.porPrice),
-        activate: () => this.activateItem("placas", i),
+        activate: () => this.toggleItem("placas", i),
         activatePreview: () => this.activateItem("placas", i, true),
         hasDe: !!(pl.dePrice || "").trim(),
         hasBrand: pl.brand !== "semmarca",
