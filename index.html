@@ -66,7 +66,7 @@
     .tabbar { scrollbar-width: none; }
     .tabbar::-webkit-scrollbar { display: none; }
     .tabbar button { white-space: nowrap; flex: none; }
-    @media print { .sheet { zoom: 1 !important; } .bottombar { display: none !important; } }
+    @media print { .sheet { zoom: 1 !important; } .bottombar { display: none !important; } .editor-col { display: none !important; } }
     .pp .sheet { zoom: 1 !important; }
     .dark .bottombar { background: #2b2429 !important; border-color: #4a3e44 !important; }
     .dark .zoombar { background: #2b2429 !important; border-color: #4a3e44 !important; }
@@ -89,13 +89,21 @@
       .totop { display: flex !important; }
       .hdr-band { padding: 10px 12px 12px !important; }
       .hdr-pill { border-radius: 18px !important; padding: 10px 12px !important; }
-      .bottombar { display: flex !important; padding-bottom: calc(8px + env(safe-area-inset-bottom)) !important; }
-      .app-bg { padding-bottom: 82px !important; }
-      .mv-edit .preview-wrap { display: none !important; }
-      .mv-sheet .editor-col { display: none !important; }
+      .bottombar { bottom: calc(12px + env(safe-area-inset-bottom)) !important; }
+      .editor-col { bottom: 88px; border-radius: 18px; }
     }
     .totop { display: none; position: fixed; right: 14px; bottom: 92px; z-index: 60; width: 46px; height: 46px; border-radius: 50%; border: none; background: #05918C; color: #fff; font-size: 20px; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,.25); cursor: pointer; }
-    @media print { .totop { display: none !important; }  .splash { display: none !important; } }
+    .editor-col { position: fixed !important; left: 50%; transform: translateX(-50%); bottom: 84px; z-index: 65; width: min(560px, 94vw); max-height: min(60vh, 520px); overflow: auto; background: #fff; border: 1px solid #edf0f2 !important; border-radius: 20px; box-shadow: 0 16px 44px rgba(30,40,50,.22); padding: 14px !important; }
+    .dark .editor-col { background: #2b2429 !important; }
+    .editor-col > button { display: none !important; }
+    .editor-col .card-box[data-sel="0"] { display: none !important; }
+    .editor-col .card-box { border: none !important; box-shadow: none !important; padding: 4px 4px 2px !important; }
+    .sel-off .editor-col { display: none !important; }
+    .preview-wrap { flex: 1 1 100% !important; }
+    .app-bg { padding-bottom: 96px !important; }
+    .sheet-card { outline-offset: 3px; }
+    .sheet-card:hover { outline: 2px solid rgba(5,145,140,.35); }
+    @media print { .totop { display: none !important; } .editor-col { display: none !important; }  .splash { display: none !important; } }
     .splash { animation: ddFade .45s ease .85s forwards; }
     @keyframes ddFade { to { opacity: 0; visibility: hidden; pointer-events: none; } }
     /* inputs modernos */
@@ -116,7 +124,7 @@
   <div style="font-family:Archivo, Helvetica, Arial, sans-serif; font-size:14px; font-weight:700; letter-spacing:2.5px; color:rgba(255,255,255,.85); text-transform:uppercase;">Gerador de Etiquetas</div>
 </div>
 
-<div class="app-bg {{ ppClass }} {{ darkClass }} {{ mvClass }}" style="min-height:100vh; background:#f5f3f4; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg'); background-size:420px 420px, 200px 200px, 300px 300px; background-position:right -140px bottom -160px, right 240px bottom 220px, left -120px top 90px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
+<div class="app-bg {{ ppClass }} {{ darkClass }} {{ selClass }}" style="min-height:100vh; background:#f5f3f4; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg'); background-size:420px 420px, 200px 200px, 300px 300px; background-position:right -140px bottom -160px, right 240px bottom 220px, left -120px top 90px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
 
   <div class="no-print hdr-band" style="background:#05918C; padding:14px 22px 18px;">
     <div class="hdr-pill" style="background:#fff; border-radius:999px; padding:8px 8px 8px 20px; display:flex; align-items:center; gap:10px 18px; flex-wrap:wrap; box-shadow:0 6px 24px rgba(120,20,45,.18);">
@@ -166,17 +174,16 @@
 
   <button class="no-print totop" onClick="{{ scrollTop }}" title="Voltar ao topo">↑</button>
 
-  <div class="no-print bottombar" style="display:none; position:fixed; left:0; right:0; bottom:0; z-index:70; background:#fff; border-top:1px solid #e4d4d9; padding:8px 10px; gap:8px; align-items:center; box-shadow:0 -4px 16px rgba(0,0,0,.08);">
-    <div style="display:flex; gap:2px; background:#f7e9ec; padding:3px; border-radius:8px;">
-      <button onClick="{{ setMvEdit }}" style="{{ mvEditBtn }}">Editar</button>
-      <button onClick="{{ setMvSheet }}" style="{{ mvSheetBtn }}">Folha</button>
-    </div>
-    <div style="flex:1;"></div>
-    <button onClick="{{ addCurrent }}" style="background:#fdf1f4; color:#CD4664; border:1px solid #e0a7b6; border-radius:8px; padding:12px 14px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar</button>
-    <button onClick="{{ doPrint }}" style="background:#CD4664; color:#fff; border:none; border-radius:8px; padding:12px 16px; font-size:13px; font-weight:800; cursor:pointer;">Imprimir</button>
-  </div>
-
-  <sc-if value="{{ isHelpOpen }}" hint-placeholder-val="{{ false }}">
+  <div class="no-print bottombar" style="position:fixed; left:50%; transform:translateX(-50%); bottom:18px; z-index:70; background:#fff; border:1px solid #edf0f2; border-radius:999px; padding:7px; display:flex; align-items:center; gap:4px; box-shadow:0 10px 34px rgba(30,40,50,.18); max-width:94vw; overflow-x:auto;">
+    <button onClick="{{ addCurrent }}" title="Adicionar etiqueta" style="background:#05918C; color:#fff; border:none; border-radius:999px; padding:11px 18px; font-size:14px; font-weight:800; cursor:pointer; white-space:nowrap;">+ Etiqueta</button>
+    <button onClick="{{ doImport }}" title="Importar CSV" style="{{ barBtn }}">Importar</button>
+    <button onClick="{{ togglePreview }}" title="Prévia da folha" style="{{ barBtn }}">Prévia</button>
+    <button onClick="{{ zoomOut }}" title="Diminuir" style="{{ barIcon }}">−</button>
+    <span style="font-size:12px; font-weight:700; color:#8b97a2; min-width:40px; text-align:center;">{{ zoomPct }}</span>
+    <button onClick="{{ zoomIn }}" title="Aumentar" style="{{ barIcon }}">+</button>
+    <div style="width:1px; height:24px; background:#e7ebee; margin:0 4px;"></div>
+    <button onClick="{{ doPrint }}" title="Imprimir / PDF" style="background:#1a1d21; color:#fff; border:none; border-radius:999px; padding:11px 18px; font-size:14px; font-weight:800; cursor:pointer; white-space:nowrap;">Imprimir</button>
+  </div>  <sc-if value="{{ isHelpOpen }}" hint-placeholder-val="{{ false }}">
     <div class="no-print" style="position:fixed; inset:0; z-index:100; background:rgba(30,20,25,.45); display:flex; align-items:center; justify-content:center; padding:16px;">
       <div class="import-panel" style="background:#fff; border-radius:14px; padding:24px; width:100%; max-width:480px; max-height:90vh; overflow:auto; display:flex; flex-direction:column; gap:12px; box-shadow:0 10px 40px rgba(0,0,0,.3);">
         <div style="display:flex; align-items:center; gap:8px;">
@@ -191,8 +198,9 @@
           <div><b style="color:#CD4664;">4. Importar</b> — traga várias etiquetas de uma vez por planilha CSV; baixe o modelo dentro do painel Importar.</div>
           <div><b style="color:#CD4664;">5. Botões da etiqueta</b> — ▲▼ mudam a ordem, ⧉ duplica, ✕ remove.</div>
           <div><b style="color:#CD4664;">6. Prévia e impressão</b> — "Prévia" mostra a folha A4 com linhas de corte; "Imprimir / PDF" imprime no tamanho real.</div>
-          <div><b style="color:#CD4664;">7. No celular</b> — em "Imprimir / PDF", escolha "Salvar como PDF" (Android) ou toque em Compartilhar › Imprimir e depois no ícone de compartilhar (iPhone) para gerar o arquivo.</div>
-          <div><b style="color:#CD4664;">8. Tudo salva sozinho</b> — as etiquetas ficam guardadas no navegador e voltam quando você abrir de novo.</div>
+          <div><b style="color:#CD4664;">7. Zoom</b> — use os botões − % + na barra de baixo, ou segure Ctrl (⌘ no Mac) e role o mouse sobre a folha.</div>
+          <div><b style="color:#CD4664;">8. No celular</b> — em "Imprimir / PDF", escolha "Salvar como PDF" (Android) ou toque em Compartilhar › Imprimir e depois no ícone de compartilhar (iPhone) para gerar o arquivo.</div>
+          <div><b style="color:#CD4664;">9. Tudo salva sozinho</b> — as etiquetas ficam guardadas no navegador e voltam quando você abrir de novo.</div>
         </div>
         <button onClick="{{ closeHelp }}" style="background:#CD4664; color:#fff; border:none; border-radius:8px; padding:11px; font-size:13px; font-weight:800; cursor:pointer;">Entendi</button>
       </div>
@@ -222,9 +230,13 @@
   <sc-if value="{{ isPcr }}" hint-placeholder-val="{{ true }}">
   <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
-      <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Preçário ({{ pcrCount }})</div>
+      <div class="panel-head" style="display:flex; align-items:center; gap:8px; padding:2px 2px 0;">
+        <span style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase;">Preçário ({{ pcrCount }})</span>
+        <div style="flex:1;"></div>
+        <button onClick="{{ clearSel }}" title="Fechar" style="background:none; border:none; color:#9aa6b1; font-size:17px; cursor:pointer; line-height:1; padding:4px 6px;">✕</button>
+      </div>
       <sc-for list="{{ pcrs }}" as="g" hint-placeholder-count="3">
-        <div class="card-box" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+        <div class="card-box" data-sel="{{ g.isSel }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -272,12 +284,7 @@
       <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
         <span style="font-size:12px; font-weight:700; color:#8b97a2;">{{ pageInfo }}</span>
         <div style="flex:1;"></div>
-        <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">−</button>
-          <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">+</button>
         </div>
-      </div>
       <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-pcr" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:10px;">
           <sc-if value="{{ pcrEmpty }}" hint-placeholder-val="{{ false }}">
@@ -292,7 +299,7 @@
             </div>
           </sc-if>
           <sc-for list="{{ pcrsGrid }}" as="g" hint-placeholder-count="3">
-            <div onClick="{{ setMvEdit }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:5 / 7; background:#FFE1E4; overflow:hidden; border:1px solid #f0dade; border-radius:2px; container-type:inline-size;">
+            <div onClick="{{ g.select }}" style="cursor:pointer; font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:5 / 7; background:#FFE1E4; overflow:hidden; border:1px solid #f0dade; border-radius:2px; container-type:inline-size;">
               <div style="position:absolute; left:0; top:58.7%; width:100%; height:41.3%; background-image:url('assets/placa/nuvem-rosa.png'); background-size:cover; background-position:center bottom; background-repeat:no-repeat;"></div>
               <div style="position:absolute; left:40%; top:38.7%; width:56.7%; aspect-ratio:1 / 1; background-image:url('assets/placa/flor-verde.png'); background-size:contain; background-repeat:no-repeat;"></div>
               <img src="assets/placa/image4.png" alt="D&amp;D" style="position:absolute; left:61%; top:6.5%; width:34%;">
@@ -327,9 +334,13 @@
   <sc-if value="{{ isPrec }}" hint-placeholder-val="{{ true }}">
   <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
-      <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Precificadores ({{ prCount }})</div>
+      <div class="panel-head" style="display:flex; align-items:center; gap:8px; padding:2px 2px 0;">
+        <span style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase;">Precificadores ({{ prCount }})</span>
+        <div style="flex:1;"></div>
+        <button onClick="{{ clearSel }}" title="Fechar" style="background:none; border:none; color:#9aa6b1; font-size:17px; cursor:pointer; line-height:1; padding:4px 6px;">✕</button>
+      </div>
       <sc-for list="{{ prs }}" as="g" hint-placeholder-count="3">
-        <div class="card-box" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+        <div class="card-box" data-sel="{{ g.isSel }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -381,12 +392,7 @@
       <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
         <span style="font-size:12px; font-weight:700; color:#8b97a2;">{{ pageInfo }}</span>
         <div style="flex:1;"></div>
-        <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">−</button>
-          <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">+</button>
         </div>
-      </div>
       <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-prec" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:10px;">
           <sc-if value="{{ prEmpty }}" hint-placeholder-val="{{ false }}">
@@ -401,7 +407,7 @@
             </div>
           </sc-if>
           <sc-for list="{{ prsGrid }}" as="g" hint-placeholder-count="3">
-            <div onClick="{{ setMvEdit }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:6.5 / 4.3; background-image:{{ g.fundoBg }}; background-size:100% 100%; background-position:top left; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
+            <div onClick="{{ g.select }}" style="cursor:pointer; font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:6.5 / 4.3; background-image:{{ g.fundoBg }}; background-size:100% 100%; background-position:top left; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
               <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:2.9%; top:5.7%; width:30.7%;">
               <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}">
                 <div style="position:absolute; left:5.4%; top:44%; width:19%; height:12%; background-image:{{ g.brandBg }}; background-size:contain; background-position:left center; background-repeat:no-repeat;"></div>
@@ -427,9 +433,13 @@
   <sc-if value="{{ isMake }}" hint-placeholder-val="{{ true }}">
   <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
-      <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Etiquetas ({{ mkCount }})</div>
+      <div class="panel-head" style="display:flex; align-items:center; gap:8px; padding:2px 2px 0;">
+        <span style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase;">Etiquetas ({{ mkCount }})</span>
+        <div style="flex:1;"></div>
+        <button onClick="{{ clearSel }}" title="Fechar" style="background:none; border:none; color:#9aa6b1; font-size:17px; cursor:pointer; line-height:1; padding:4px 6px;">✕</button>
+      </div>
       <sc-for list="{{ mks }}" as="g" hint-placeholder-count="3">
-        <div class="card-box" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+        <div class="card-box" data-sel="{{ g.isSel }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -477,12 +487,7 @@
       <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
         <span style="font-size:12px; font-weight:700; color:#8b97a2;">{{ pageInfo }}</span>
         <div style="flex:1;"></div>
-        <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">−</button>
-          <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">+</button>
         </div>
-      </div>
       <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-make" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:10px;">
           <sc-if value="{{ mkEmpty }}" hint-placeholder-val="{{ false }}">
@@ -497,7 +502,7 @@
             </div>
           </sc-if>
           <sc-for list="{{ mksGrid }}" as="g" hint-placeholder-count="3">
-            <div onClick="{{ setMvEdit }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:6.5 / 4.3; background-image:url('assets/precificador/fundo-verde.png'); background-size:100% 100%; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
+            <div onClick="{{ g.select }}" style="cursor:pointer; font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:6.5 / 4.3; background-image:url('assets/precificador/fundo-verde.png'); background-size:100% 100%; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
               <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:1%; top:5%; width:48%;">
               <div style="position:absolute; left:2%; top:57%; width:38%; font-size:3.25cqw; font-weight:800; line-height:1.15; color:#171717; text-transform:uppercase; text-wrap:balance;">{{ g.name }}</div>
               <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}">
@@ -523,9 +528,13 @@
   <sc-if value="{{ isPlaca }}" hint-placeholder-val="{{ true }}">
   <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
-      <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Placas ({{ placaCount }})</div>
+      <div class="panel-head" style="display:flex; align-items:center; gap:8px; padding:2px 2px 0;">
+        <span style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase;">Placas ({{ placaCount }})</span>
+        <div style="flex:1;"></div>
+        <button onClick="{{ clearSel }}" title="Fechar" style="background:none; border:none; color:#9aa6b1; font-size:17px; cursor:pointer; line-height:1; padding:4px 6px;">✕</button>
+      </div>
       <sc-for list="{{ placas }}" as="pl" hint-placeholder-count="3">
-        <div class="card-box" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+        <div class="card-box" data-sel="{{ pl.isSel }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ pl.n }}</span>
             <select value="{{ pl.brand }}" onChange="{{ pl.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -580,12 +589,7 @@
       <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
         <span style="font-size:12px; font-weight:700; color:#8b97a2;">{{ pageInfo }}</span>
         <div style="flex:1;"></div>
-        <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">−</button>
-          <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">+</button>
         </div>
-      </div>
       <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-placa" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:10px;">
           <sc-if value="{{ placaEmpty }}" hint-placeholder-val="{{ false }}">
@@ -600,7 +604,7 @@
             </div>
           </sc-if>
           <sc-for list="{{ placasGrid }}" as="pl" hint-placeholder-count="3">
-            <div onClick="{{ setMvEdit }}" style="position:relative; width:100%; aspect-ratio:1 / 1; background:#fff; overflow:hidden; border:1px solid #eadfe2; border-radius:2px; container-type:inline-size; font-family:Axiforma, Archivo, sans-serif;">
+            <div onClick="{{ pl.select }}" style="cursor:pointer; position:relative; width:100%; aspect-ratio:1 / 1; background:#fff; overflow:hidden; border:1px solid #eadfe2; border-radius:2px; container-type:inline-size; font-family:Axiforma, Archivo, sans-serif;">
               <div style="position:absolute; left:0; top:45.7%; width:100%; height:54.3%; background-image:url('assets/placa/nuvem-rosa.png'); background-size:cover; background-position:center bottom; background-repeat:no-repeat;"></div>
               <div style="position:absolute; left:9.87%; top:23.08%; width:33.57%; aspect-ratio:725 / 714; background-image:url('assets/placa/flor-branca.png'); background-size:contain; background-repeat:no-repeat;"></div>
               <div style="position:absolute; left:34.1%; top:20.03%; width:56.88%; aspect-ratio:1 / 1; background-image:url('assets/placa/flor-verde.png'); background-size:contain; background-repeat:no-repeat;"></div>
@@ -677,7 +681,8 @@ class Component extends DCLogic {
       const a = [...s[key]], j = i + d;
       if (j < 0 || j >= a.length) return null;
       [a[i], a[j]] = [a[j], a[i]];
-      return { [key]: a };
+      const sel = s.selIdx === i ? j : (s.selIdx === j ? i : s.selIdx);
+      return { [key]: a, selIdx: sel };
     });
   }
   splitPrice(v) {
@@ -691,6 +696,9 @@ class Component extends DCLogic {
   fmtPrice(v) {
     const { reais, centavos } = this.splitPrice(v);
     return reais + "," + centavos;
+  }
+  componentWillUnmount() {
+    if (this._onWheel) window.removeEventListener("wheel", this._onWheel);
   }
   componentDidUpdate() {
     const { pcrs, prs, mks, placas } = this.state;
@@ -767,9 +775,11 @@ class Component extends DCLogic {
         dup: () => this.setState(s => ({ pcrs: [...s.pcrs.slice(0, i + 1), { ...s.pcrs[i] }, ...s.pcrs.slice(i + 1)] })),
         showCada: !!g.cada,
         setCada: e => this.updatePcr(i, { cada: e.target.checked }),
+        isSel: this.state.selIdx === i ? "1" : "0",
+        select: () => this.setState({ selIdx: i }),
         moveUp: () => this.moveItem("pcrs", i, -1),
         moveDown: () => this.moveItem("pcrs", i, 1),
-        remove: () => this.setState(s => ({ pcrs: s.pcrs.filter((_, idx) => idx !== i) })),
+        remove: () => this.setState(s => ({ pcrs: s.pcrs.filter((_, idx) => idx !== i), selIdx: s.selIdx === i ? null : (s.selIdx > i ? s.selIdx - 1 : s.selIdx) })),
       };
     });
 
@@ -797,9 +807,11 @@ class Component extends DCLogic {
         dup: () => this.setState(s => ({ prs: [...s.prs.slice(0, i + 1), { ...s.prs[i] }, ...s.prs.slice(i + 1)] })),
         showCada: !!g.cada,
         setCada: e => this.updatePr(i, { cada: e.target.checked }),
+        isSel: this.state.selIdx === i ? "1" : "0",
+        select: () => this.setState({ selIdx: i }),
         moveUp: () => this.moveItem("prs", i, -1),
         moveDown: () => this.moveItem("prs", i, 1),
-        remove: () => this.setState(s => ({ prs: s.prs.filter((_, idx) => idx !== i) })),
+        remove: () => this.setState(s => ({ prs: s.prs.filter((_, idx) => idx !== i), selIdx: s.selIdx === i ? null : (s.selIdx > i ? s.selIdx - 1 : s.selIdx) })),
       };
     });
 
@@ -820,10 +832,12 @@ class Component extends DCLogic {
         qtyPlus: () => this.updateMk(i, { qty: Math.min(999, (parseInt(this.state.mks[i].qty, 10) || 1) + 1) }),
         deShow: this.fmtPrice(g.dePrice),
         dup: () => this.setState(s => ({ mks: [...s.mks.slice(0, i + 1), { ...s.mks[i] }, ...s.mks.slice(i + 1)] })),
+        isSel: this.state.selIdx === i ? "1" : "0",
+        select: () => this.setState({ selIdx: i }),
         moveUp: () => this.moveItem("mks", i, -1),
         moveDown: () => this.moveItem("mks", i, 1),
         setCada: e => this.updateMk(i, { cada: e.target.checked }),
-        remove: () => this.setState(s => ({ mks: s.mks.filter((_, idx) => idx !== i) })),
+        remove: () => this.setState(s => ({ mks: s.mks.filter((_, idx) => idx !== i), selIdx: s.selIdx === i ? null : (s.selIdx > i ? s.selIdx - 1 : s.selIdx) })),
       };
     });
 
@@ -846,9 +860,11 @@ class Component extends DCLogic {
         dup: () => this.setState(s => ({ placas: [...s.placas.slice(0, i + 1), { ...s.placas[i] }, ...s.placas.slice(i + 1)] })),
         showCada: !!pl.cada,
         setCada: e => this.updatePlaca(i, { cada: e.target.checked }),
+        isSel: this.state.selIdx === i ? "1" : "0",
+        select: () => this.setState({ selIdx: i }),
         moveUp: () => this.moveItem("placas", i, -1),
         moveDown: () => this.moveItem("placas", i, 1),
-        remove: () => this.setState(s => ({ placas: s.placas.filter((_, idx) => idx !== i) })),
+        remove: () => this.setState(s => ({ placas: s.placas.filter((_, idx) => idx !== i), selIdx: s.selIdx === i ? null : (s.selIdx > i ? s.selIdx - 1 : s.selIdx) })),
       };
     });
 
@@ -871,10 +887,10 @@ class Component extends DCLogic {
       tabMakeStyle: model === "make" ? on : off,
       tabPrecStyle: model === "prec" ? on : off,
       tabPcrStyle: model === "pcr" ? on : off,
-      showPlaca: () => this.setState({ model: "placa" }),
-      showMake: () => this.setState({ model: "make" }),
-      showPrec: () => this.setState({ model: "prec" }),
-      showPcr: () => this.setState({ model: "pcr" }),
+      showPlaca: () => this.setState({ model: "placa", selIdx: null }),
+      showMake: () => this.setState({ model: "make", selIdx: null }),
+      showPrec: () => this.setState({ model: "prec", selIdx: null }),
+      showPcr: () => this.setState({ model: "pcr", selIdx: null }),
       placas, placaCount: placas.length,
       placaEmpty: placas.length === 0, pcrEmpty: pcrs.length === 0, prEmpty: prs.length === 0, mkEmpty: mks.length === 0,
       placasGrid: expand(placas), mksGrid: expand(mks), prsGrid: expand(prs), pcrsGrid: expand(pcrs),
@@ -887,14 +903,18 @@ class Component extends DCLogic {
       addPr: () => this.setState(s => ({ prs: [...s.prs, { brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" }] })),
       addMk: () => this.setState(s => ({ mks: [...s.mks, { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }] })),
       addPlaca: () => this.setState(s => ({ placas: [...s.placas, { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }] })),
-      addCurrent: () => model === "make"
+      addCurrent: () => { const key = this.listKey(model); const n = this.state[key].length; setTimeout(() => this.setState({ selIdx: n }), 0); return (model === "make"
         ? this.setState(s => ({ mks: [...s.mks, { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }] }))
         : model === "prec"
         ? this.setState(s => ({ prs: [...s.prs, { brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" }] }))
         : model === "pcr"
         ? this.setState(s => ({ pcrs: [...s.pcrs, { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }] }))
-        : this.setState(s => ({ placas: [...s.placas, { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }] })),
+        : this.setState(s => ({ placas: [...s.placas, { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }] }))); },
       doPrint: () => window.print(),
+      selClass: (this.state.selIdx != null && this.state.selIdx < this.state[this.listKey(model)].length) ? "sel-on" : "sel-off",
+      clearSel: () => this.setState({ selIdx: null }),
+      barBtn: "background:none; border:none; color:#5a6873; font-size:14px; font-weight:700; cursor:pointer; padding:10px 14px; border-radius:999px; white-space:nowrap;",
+      barIcon: "background:none; border:none; color:#05918C; font-size:17px; font-weight:800; cursor:pointer; padding:8px 10px; border-radius:999px; line-height:1;",
       scrollTop: () => window.scrollTo({ top: 0, behavior: "smooth" }),
       isMenuOpen: !!this.state.menuOpen,
       toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
