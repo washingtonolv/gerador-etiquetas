@@ -296,7 +296,7 @@
         border-color .24s ease;
       will-change: width;
     }
-    .workspace-layout .editor-col > :not(.panel-toggle) {
+    .workspace-layout .editor-col > :not(.panel-toggle):not(.card-box) {
       opacity: 1;
       transform: translateX(0);
       visibility: visible;
@@ -352,7 +352,7 @@
         padding: 12px 8px !important;
         overflow: hidden;
       }
-      .panel-collapsed .workspace-layout .editor-col > :not(.panel-toggle) {
+      .panel-collapsed .workspace-layout .editor-col > :not(.panel-toggle):not(.card-box) {
         opacity: 0;
         transform: translateX(-12px);
         visibility: hidden;
@@ -512,7 +512,7 @@
     @media (prefers-reduced-motion: reduce) {
       .workspace-layout,
       .workspace-layout .editor-col,
-      .workspace-layout .editor-col > :not(.panel-toggle),
+      .workspace-layout .editor-col > :not(.panel-toggle):not(.card-box),
       .panel-toggle-icon,
       .card-box,
       .card-content,
