@@ -268,7 +268,7 @@
       border-color: #B7C1CA !important;
       box-shadow: var(--dd-shadow-panel) !important;
     }
-    .card-box input,
+    .card-box input:not([type="checkbox"]):not([type="number"]),
     .card-box select,
     .card-box textarea,
     .import-panel input,
@@ -282,7 +282,7 @@
       border-radius: var(--dd-radius-field) !important;
     }
     .card-box textarea { min-height: 68px; }
-    .card-box input:focus,
+    .card-box input:not([type="checkbox"]):not([type="number"]):focus,
     .card-box select:focus,
     .card-box textarea:focus,
     .import-panel input:focus {
@@ -290,6 +290,60 @@
       background: var(--dd-surface) !important;
       border-color: var(--dd-primary-500) !important;
       box-shadow: 0 0 0 3px rgba(196,92,126,.18) !important;
+    }
+    .card-box input[type="checkbox"] {
+      appearance: auto;
+      width: 18px !important;
+      min-width: 18px;
+      height: 18px !important;
+      min-height: 18px !important;
+      margin: 0;
+      padding: 0 !important;
+      border: 1px solid var(--dd-border) !important;
+      border-radius: 4px !important;
+      box-shadow: none !important;
+      accent-color: var(--dd-primary-700);
+      cursor: pointer;
+    }
+    .card-box input[type="checkbox"]:focus-visible {
+      outline: 3px solid rgba(196,92,126,.3) !important;
+      outline-offset: 2px;
+    }
+    .card-box label:has(input[type="checkbox"]) {
+      min-height: 36px;
+      padding: 0 2px;
+      color: var(--dd-text-muted) !important;
+      white-space: nowrap;
+    }
+    .card-box input[type="number"] {
+      appearance: textfield;
+      width: 42px !important;
+      min-width: 42px;
+      height: 36px !important;
+      min-height: 36px !important;
+      margin: 0;
+      padding: 0 4px !important;
+      color: var(--dd-text) !important;
+      background: var(--dd-surface) !important;
+      border: 0 !important;
+      border-right: 1px solid var(--dd-border) !important;
+      border-left: 1px solid var(--dd-border) !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      font-weight: 700;
+      text-align: center;
+      -moz-appearance: textfield;
+    }
+    .card-box input[type="number"]::-webkit-outer-spin-button,
+    .card-box input[type="number"]::-webkit-inner-spin-button {
+      margin: 0;
+      -webkit-appearance: none;
+    }
+    .card-box input[type="number"]:focus {
+      position: relative;
+      z-index: 1;
+      outline: 2px solid var(--dd-primary-500) !important;
+      outline-offset: -2px;
     }
     .card-box button[title] {
       min-width: 34px;
@@ -300,7 +354,16 @@
     }
     .card-box button[title="Remover"] { color: var(--dd-danger) !important; }
     .card-box button[title="Menos"],
-    .card-box button[title="Mais"] { color: var(--dd-primary-700) !important; }
+    .card-box button[title="Mais"] {
+      width: 36px;
+      min-width: 36px;
+      height: 36px;
+      min-height: 36px;
+      padding: 0 !important;
+      color: var(--dd-primary-700) !important;
+      background: var(--dd-surface) !important;
+      border-radius: 0 !important;
+    }
     .editor-col > button:last-child {
       min-height: 46px;
       color: var(--dd-primary-700) !important;
