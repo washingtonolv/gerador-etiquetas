@@ -3,8 +3,8 @@
  "short_name": "Etiquetas D&D",
  "start_url": ".",
  "display": "standalone",
- "background_color": "#F8F6FB",
- "theme_color": "#7351A6",
+ "background_color": "#F7FAFA",
+ "theme_color": "#05918C",
  "icons": [
   {
    "src": "assets/icon-192.png",
