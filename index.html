@@ -10,7 +10,7 @@
 <body>
 <x-dc>
 <helmet>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --dd-primary-700: #05918C;
@@ -125,7 +125,68 @@
     }
     .totop { display: none; position: fixed; right: 14px; bottom: 92px; z-index: 60; width: 46px; height: 46px; border-radius: 50%; border: none; background: #05918C; color: #fff; font-size: 20px; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,.25); cursor: pointer; }
     @media print { .totop { display: none !important; }  .splash { display: none !important; } }
-    .splash { animation: ddFade .45s ease .85s forwards; }
+    .splash {
+      overflow: hidden;
+      background: linear-gradient(90deg, #F7FAFA 0%, #F7FAFA 76%, #EEF1F0 100%) !important;
+      animation: ddFade .55s ease 1.6s forwards;
+    }
+    .splash-logo {
+      position: absolute;
+      top: clamp(46px, 12vh, 120px);
+      right: clamp(36px, 12vw, 180px);
+      width: clamp(180px, 17vw, 270px);
+      max-width: 34vw;
+      height: auto;
+      z-index: 2;
+    }
+    .splash-title {
+      position: absolute;
+      left: clamp(36px, 11vw, 170px);
+      bottom: clamp(72px, 16vh, 170px);
+      z-index: 2;
+      margin: 0;
+      color: #05918C;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(44px, 6.2vw, 92px);
+      font-weight: 400;
+      line-height: .92;
+      letter-spacing: -.045em;
+    }
+    .splash-flower {
+      position: absolute;
+      z-index: 1;
+      display: block;
+      height: auto;
+      pointer-events: none;
+    }
+    .splash-flower--top {
+      top: clamp(-190px, -12vw, -90px);
+      left: clamp(-190px, -10vw, -85px);
+      width: clamp(330px, 34vw, 540px);
+    }
+    .splash-flower--bottom {
+      right: clamp(-180px, -9vw, -90px);
+      bottom: clamp(-205px, -13vw, -110px);
+      width: clamp(360px, 34vw, 560px);
+    }
+    .splash-flower--middle {
+      right: clamp(190px, 20vw, 330px);
+      bottom: clamp(36px, 7vh, 80px);
+      width: clamp(150px, 15vw, 230px);
+    }
+    .splash-flower--small {
+      right: clamp(150px, 15vw, 245px);
+      bottom: clamp(230px, 31vh, 330px);
+      width: clamp(68px, 7vw, 104px);
+    }
+    @media (max-width: 700px) {
+      .splash-logo { top: 56px; right: 28px; width: 160px; max-width: 48vw; }
+      .splash-title { left: 28px; bottom: 22vh; font-size: clamp(42px, 13vw, 66px); }
+      .splash-flower--top { top: -105px; left: -120px; width: 290px; }
+      .splash-flower--bottom { right: -135px; bottom: -120px; width: 330px; }
+      .splash-flower--middle { right: 16vw; bottom: 8vh; width: 130px; }
+      .splash-flower--small { right: 18vw; bottom: 28vh; width: 70px; }
+    }
     @keyframes ddFade { to { opacity: 0; visibility: hidden; pointer-events: none; } }
     /* inputs modernos */
     .card-box input, .card-box select, .card-box textarea { background:#f7f8f9; border:1px solid #e7ebee !important; border-radius:10px !important; transition: box-shadow .15s, border-color .15s, background .15s; }
@@ -521,9 +582,13 @@
   <meta name="theme-color" content="#05918C">
   <link rel="manifest" href="manifest.webmanifest">
 </helmet>
-<div class="no-print splash" id="dd-splash" style="position:fixed; inset:0; z-index:999; background:#05918C; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px;">
-  <img src="assets/placa/image4.png" alt="D&amp;D Cosméticos" style="width:190px; max-width:56vw; filter:brightness(0) invert(1);">
-  <div style="font-family:Archivo, Helvetica, Arial, sans-serif; font-size:14px; font-weight:700; letter-spacing:2.5px; color:rgba(255,255,255,.85); text-transform:uppercase;">Gerador de Etiquetas</div>
+<div class="no-print splash" id="dd-splash" style="position:fixed; inset:0; z-index:999;">
+  <svg class="splash-flower splash-flower--top" viewBox="-10 -10 220 220" aria-hidden="true"><g fill="#CD4664"><circle cx="145" cy="126" r="48"/><circle cx="100" cy="152" r="48"/><circle cx="55" cy="126" r="48"/><circle cx="55" cy="74" r="48"/><circle cx="100" cy="48" r="48"/><circle cx="145" cy="74" r="48"/><circle cx="100" cy="100" r="52"/></g><g fill="#F7FAFA"><circle cx="120.8" cy="112" r="21"/><circle cx="100" cy="124" r="21"/><circle cx="79.2" cy="112" r="21"/><circle cx="79.2" cy="88" r="21"/><circle cx="100" cy="76" r="21"/><circle cx="120.8" cy="88" r="21"/><circle cx="100" cy="100" r="24"/></g><circle cx="100" cy="100" r="13" fill="#CD4664"/></svg>
+  <svg class="splash-flower splash-flower--bottom" viewBox="-10 -10 220 220" aria-hidden="true"><g fill="#CD4664"><circle cx="145" cy="126" r="48"/><circle cx="100" cy="152" r="48"/><circle cx="55" cy="126" r="48"/><circle cx="55" cy="74" r="48"/><circle cx="100" cy="48" r="48"/><circle cx="145" cy="74" r="48"/><circle cx="100" cy="100" r="52"/></g><g fill="#F7FAFA"><circle cx="120.8" cy="112" r="21"/><circle cx="100" cy="124" r="21"/><circle cx="79.2" cy="112" r="21"/><circle cx="79.2" cy="88" r="21"/><circle cx="100" cy="76" r="21"/><circle cx="120.8" cy="88" r="21"/><circle cx="100" cy="100" r="24"/></g><circle cx="100" cy="100" r="13" fill="#CD4664"/></svg>
+  <svg class="splash-flower splash-flower--middle" viewBox="-10 -10 220 220" aria-hidden="true"><g fill="#CD4664"><circle cx="145" cy="126" r="48"/><circle cx="100" cy="152" r="48"/><circle cx="55" cy="126" r="48"/><circle cx="55" cy="74" r="48"/><circle cx="100" cy="48" r="48"/><circle cx="145" cy="74" r="48"/><circle cx="100" cy="100" r="52"/></g><g fill="#F7FAFA"><circle cx="120.8" cy="112" r="21"/><circle cx="100" cy="124" r="21"/><circle cx="79.2" cy="112" r="21"/><circle cx="79.2" cy="88" r="21"/><circle cx="100" cy="76" r="21"/><circle cx="120.8" cy="88" r="21"/><circle cx="100" cy="100" r="24"/></g><circle cx="100" cy="100" r="13" fill="#CD4664"/></svg>
+  <svg class="splash-flower splash-flower--small" viewBox="-10 -10 220 220" aria-hidden="true"><g fill="#CD4664"><circle cx="145" cy="126" r="48"/><circle cx="100" cy="152" r="48"/><circle cx="55" cy="126" r="48"/><circle cx="55" cy="74" r="48"/><circle cx="100" cy="48" r="48"/><circle cx="145" cy="74" r="48"/><circle cx="100" cy="100" r="52"/></g><g fill="#F7FAFA"><circle cx="120.8" cy="112" r="21"/><circle cx="100" cy="124" r="21"/><circle cx="79.2" cy="112" r="21"/><circle cx="79.2" cy="88" r="21"/><circle cx="100" cy="76" r="21"/><circle cx="120.8" cy="88" r="21"/><circle cx="100" cy="100" r="24"/></g><circle cx="100" cy="100" r="13" fill="#CD4664"/></svg>
+  <img class="splash-logo" src="assets/placa/image4.png" alt="D&amp;D Cosméticos">
+  <h1 class="splash-title">Gerador<br>de Etiquetas</h1>
 </div>
 
 <div class="app-bg {{ ppClass }} {{ darkClass }} {{ mvClass }}" style="min-height:100vh; background:#f5f3f4; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg'); background-size:420px 420px, 200px 200px, 300px 300px; background-position:right -140px bottom -160px, right 240px bottom 220px, left -120px top 90px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
