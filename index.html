@@ -1,15 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Crie, visualize e imprima etiquetas e placas promocionais D&amp;D.">
+<title>Gerador de Etiquetas D&amp;D</title>
 <script src="./support.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --dd-primary-700: #087C75;
+      --dd-primary-500: #0D9488;
+      --dd-primary-100: #CCFBF1;
+      --dd-promo-700: #D92D52;
+      --dd-promo-500: #FF3F64;
+      --dd-promo-100: #FFE4EA;
+      --dd-text: #181D22;
+      --dd-text-muted: #5D6875;
+      --dd-border: #D9DEE5;
+      --dd-bg: #F7F5F6;
+      --dd-surface: #FFFFFF;
+      --dd-success: #178A52;
+      --dd-warning: #B45309;
+      --dd-danger: #B42318;
+      --dd-space-1: 4px;
+      --dd-space-2: 8px;
+      --dd-space-3: 12px;
+      --dd-space-4: 16px;
+      --dd-space-6: 24px;
+      --dd-space-8: 32px;
+      --dd-radius-field: 8px;
+      --dd-radius-button: 10px;
+      --dd-radius-panel: 16px;
+      --dd-shadow-panel: 0 12px 32px rgba(24, 29, 34, .12);
+      --dd-font-ui: Inter, Archivo, Helvetica, Arial, sans-serif;
+    }
     @font-face { font-family: "Axiforma"; src: url("assets/fonts/axiforma-regular.otf") format("opentype"); font-weight: 400; }
     @font-face { font-family: "Axiforma"; src: url("assets/fonts/axiforma-black.otf") format("opentype"); font-weight: 700 900; }
     * { box-sizing: border-box; }
@@ -66,7 +95,7 @@
     .tabbar { scrollbar-width: none; }
     .tabbar::-webkit-scrollbar { display: none; }
     .tabbar button { white-space: nowrap; flex: none; }
-    @media print { .sheet { zoom: 1 !important; } .bottombar { display: none !important; } .editor-col { display: none !important; } }
+    @media print { .sheet { zoom: 1 !important; } .bottombar { display: none !important; } }
     .pp .sheet { zoom: 1 !important; }
     .dark .bottombar { background: #2b2429 !important; border-color: #4a3e44 !important; }
     .dark .zoombar { background: #2b2429 !important; border-color: #4a3e44 !important; }
@@ -77,10 +106,6 @@
       .editor-col { flex: 0 0 330px !important; }
     }
     @media (max-width: 1000px) {
-      .rail { display: none !important; }
-      .preview-wrap { padding-left: 14px !important; padding-right: 14px !important; }
-      .sel-on .preview-wrap { padding-right: 14px !important; }
-      .editor-col { left: 50% !important; right: auto !important; transform: translateX(-50%); top: auto !important; bottom: 58px !important; width: min(560px, 94vw) !important; max-height: min(58vh, 520px); border-radius: 18px; border: 1px solid #edf0f2 !important; box-shadow: 0 16px 44px rgba(30,40,50,.22); }
       .hdr-actions { display: none !important; }
       .hdr-compact { display: block !important; }
       .hdr-pill { flex-wrap: nowrap !important; padding: 8px 8px 8px 14px !important; gap: 10px !important; }
@@ -93,27 +118,13 @@
       .totop { display: flex !important; }
       .hdr-band { padding: 10px 12px 12px !important; }
       .hdr-pill { border-radius: 18px !important; padding: 10px 12px !important; }
-      .bottombar { padding-bottom: env(safe-area-inset-bottom) !important; }
+      .bottombar { display: flex !important; padding-bottom: calc(8px + env(safe-area-inset-bottom)) !important; }
+      .app-bg { padding-bottom: 82px !important; }
+      .mv-edit .preview-wrap { display: none !important; }
+      .mv-sheet .editor-col { display: none !important; }
     }
-    .totop { display: none; position: fixed; right: 14px; bottom: 62px; z-index: 60; width: 46px; height: 46px; border-radius: 50%; border: none; background: #05918C; color: #fff; font-size: 20px; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,.25); cursor: pointer; }
-    .editor-col { position: fixed !important; right: 0; top: 92px; bottom: 46px; width: 330px; z-index: 65; overflow: auto; background: #fff; border: none !important; border-left: 1px solid #edf0f2 !important; border-radius: 0; box-shadow: -6px 0 24px rgba(30,40,50,.06); padding: 16px 14px !important; }
-    @media (min-width: 1001px) {
-      .preview-wrap { padding-left: 228px !important; padding-right: 20px !important; }
-      .sel-on .preview-wrap { padding-right: 348px !important; }
-    }
-    .rail button[data-on="1"] { background: #eefaf9 !important; color: #05918C !important; }
-    .dark .rail { background: #2b2429 !important; border-color: #4a3e44 !important; }
-    .dark .bottombar { background: #2b2429 !important; border-color: #4a3e44 !important; }
-    .dark .editor-col { background: #2b2429 !important; }
-    .editor-col > button { display: none !important; }
-    .editor-col .card-box[data-sel="0"] { display: none !important; }
-    .editor-col .card-box { border: none !important; box-shadow: none !important; padding: 4px 4px 2px !important; }
-    .sel-off .editor-col { display: none !important; }
-    .preview-wrap { flex: 1 1 100% !important; }
-    @media screen { .app-bg { padding-bottom: 62px !important; } }
-    .sheet-card { outline-offset: 3px; }
-    .sheet-card:hover { outline: 2px solid rgba(5,145,140,.35); }
-    @media print { .totop { display: none !important; } .editor-col { display: none !important; } .rail { display: none !important; } .preview-wrap { padding: 0 !important; }  .splash { display: none !important; } }
+    .totop { display: none; position: fixed; right: 14px; bottom: 92px; z-index: 60; width: 46px; height: 46px; border-radius: 50%; border: none; background: #05918C; color: #fff; font-size: 20px; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,.25); cursor: pointer; }
+    @media print { .totop { display: none !important; }  .splash { display: none !important; } }
     .splash { animation: ddFade .45s ease .85s forwards; }
     @keyframes ddFade { to { opacity: 0; visibility: hidden; pointer-events: none; } }
     /* inputs modernos */
@@ -125,8 +136,273 @@
     .card-box button[title] { border-radius:8px; }
     .card-box button[title]:hover { background:#f2f4f6 !important; }
     .dark .card-box button[title]:hover { background:#3a3036 !important; }
+
+    /* Design System D&D v1 */
+    .splash { background: var(--dd-primary-700) !important; }
+    .app-bg {
+      background: var(--dd-bg) !important;
+      background-image: radial-gradient(circle at 8% 92%, rgba(255,63,100,.055), transparent 24%), radial-gradient(circle at 92% 16%, rgba(13,148,136,.06), transparent 22%) !important;
+      color: var(--dd-text) !important;
+      font-family: var(--dd-font-ui) !important;
+    }
+    .hdr-band {
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      padding: 0 !important;
+      background: var(--dd-surface) !important;
+      border-bottom: 4px solid var(--dd-primary-700);
+    }
+    .hdr-pill {
+      min-height: 72px;
+      padding: 10px 20px !important;
+      gap: 10px 18px !important;
+      border-radius: 0 !important;
+      background: var(--dd-surface) !important;
+      box-shadow: 0 4px 18px rgba(24,29,34,.07) !important;
+    }
+    .hdr-pill > div:first-child span {
+      color: var(--dd-text) !important;
+      font-weight: 700 !important;
+    }
+    .tabbar { gap: 6px !important; }
+    .tab-btn {
+      min-height: 40px;
+      padding: 9px 13px !important;
+      color: var(--dd-text-muted) !important;
+      border-radius: var(--dd-radius-button) !important;
+      font-weight: 600 !important;
+      transition: background .15s ease, color .15s ease, box-shadow .15s ease;
+    }
+    .tab-btn:hover { background: var(--dd-primary-100) !important; color: var(--dd-primary-700) !important; }
+    .tab-btn[data-on="1"] {
+      color: #fff !important;
+      background: var(--dd-primary-700) !important;
+      box-shadow: 0 5px 14px rgba(8,124,117,.2);
+    }
+    .hdr-actions { gap: 4px !important; }
+    .hdr-btn {
+      min-height: 42px;
+      padding: 9px 12px !important;
+      color: var(--dd-text-muted) !important;
+      border-radius: var(--dd-radius-button) !important;
+      font-weight: 600 !important;
+    }
+    .hdr-btn:hover { color: var(--dd-primary-700) !important; background: var(--dd-primary-100) !important; }
+    .hdr-pill .print-btn {
+      padding: 11px 18px !important;
+      color: #fff !important;
+      background: var(--dd-primary-700) !important;
+      box-shadow: 0 6px 16px rgba(8,124,117,.22);
+    }
+    .hdr-pill .print-btn:hover { background: #076B66 !important; }
+    .workspace-layout {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) minmax(340px, 390px);
+      flex: 1;
+      align-items: start !important;
+      flex-wrap: nowrap !important;
+    }
+    .workspace-layout .preview-wrap {
+      grid-column: 1;
+      grid-row: 1;
+      order: 1;
+      width: 100%;
+      padding: clamp(18px, 3vw, 34px) !important;
+    }
+    .workspace-layout .editor-col {
+      grid-column: 2;
+      grid-row: 1;
+      order: 2;
+      position: sticky;
+      top: 76px;
+      align-self: start;
+      max-height: calc(100vh - 76px);
+      overflow-y: auto;
+      padding: 22px 18px 32px !important;
+      border-right: 0 !important;
+      border-left: 1px solid var(--dd-border) !important;
+      border-bottom: 0 !important;
+      background: rgba(255,255,255,.78);
+      scrollbar-width: thin;
+      scrollbar-color: var(--dd-border) transparent;
+    }
+    .editor-col > div:first-child {
+      padding: 0 2px 2px !important;
+      color: var(--dd-text-muted) !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      letter-spacing: .08em !important;
+    }
+    .card-box {
+      padding: 16px !important;
+      gap: 13px !important;
+      border: 1px solid var(--dd-border) !important;
+      border-radius: var(--dd-radius-panel) !important;
+      background: var(--dd-surface) !important;
+      box-shadow: 0 2px 8px rgba(24,29,34,.055) !important;
+    }
+    .card-box:hover {
+      transform: translateY(-1px);
+      border-color: #B7C1CA !important;
+      box-shadow: var(--dd-shadow-panel) !important;
+    }
+    .card-box input,
+    .card-box select,
+    .card-box textarea,
+    .import-panel input,
+    .import-panel select,
+    .import-panel textarea {
+      min-height: 42px;
+      padding: 9px 10px !important;
+      color: var(--dd-text) !important;
+      background: #FAFBFC !important;
+      border: 1px solid var(--dd-border) !important;
+      border-radius: var(--dd-radius-field) !important;
+    }
+    .card-box textarea { min-height: 68px; }
+    .card-box input:focus,
+    .card-box select:focus,
+    .card-box textarea:focus,
+    .import-panel input:focus {
+      outline: none;
+      background: var(--dd-surface) !important;
+      border-color: var(--dd-primary-500) !important;
+      box-shadow: 0 0 0 3px rgba(13,148,136,.16) !important;
+    }
+    .card-box button[title] {
+      min-width: 34px;
+      min-height: 34px;
+      padding: 7px !important;
+      color: var(--dd-text-muted) !important;
+      border-radius: var(--dd-radius-field) !important;
+    }
+    .card-box button[title="Remover"] { color: var(--dd-danger) !important; }
+    .card-box button[title="Menos"],
+    .card-box button[title="Mais"] { color: var(--dd-primary-700) !important; }
+    .editor-col > button:last-child {
+      min-height: 46px;
+      color: var(--dd-primary-700) !important;
+      background: var(--dd-surface) !important;
+      border: 1.5px dashed var(--dd-primary-500) !important;
+      border-radius: var(--dd-radius-button) !important;
+    }
+    .editor-col > button:last-child:hover { background: var(--dd-primary-100) !important; }
+    .preview-wrap > div:first-child {
+      min-height: 44px;
+      padding: 6px 8px;
+    }
+    .zoombar {
+      min-height: 40px;
+      border-color: var(--dd-border) !important;
+      border-radius: var(--dd-radius-button) !important;
+      background: var(--dd-surface) !important;
+      box-shadow: 0 2px 8px rgba(24,29,34,.05);
+    }
+    .zoombar button { color: var(--dd-primary-700) !important; }
+    .sheet {
+      border: 1px solid var(--dd-border);
+      border-radius: 12px !important;
+      box-shadow: 0 16px 44px rgba(24,29,34,.12) !important;
+    }
+    .preview-wrap .sheet .no-print button:first-of-type {
+      color: #fff !important;
+      background: var(--dd-primary-700) !important;
+      border-color: var(--dd-primary-700) !important;
+    }
+    .preview-wrap .sheet .no-print button:nth-of-type(2) {
+      color: var(--dd-primary-700) !important;
+      background: var(--dd-surface) !important;
+      border-color: var(--dd-primary-500) !important;
+    }
+    .import-panel {
+      border: 1px solid var(--dd-border);
+      border-radius: var(--dd-radius-panel) !important;
+      box-shadow: 0 20px 56px rgba(24,29,34,.22) !important;
+    }
+    .menu-pop {
+      border: 1px solid var(--dd-border);
+      border-radius: var(--dd-radius-button) !important;
+      box-shadow: var(--dd-shadow-panel) !important;
+    }
+    .app-status {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      min-height: 36px;
+      padding: 8px 18px;
+      color: var(--dd-success);
+      background: var(--dd-surface);
+      border-top: 1px solid var(--dd-border);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: 3px solid rgba(13,148,136,.28) !important;
+      outline-offset: 2px;
+    }
+    .dark {
+      --dd-text: #F7FAFC;
+      --dd-text-muted: #B9C3CC;
+      --dd-border: #3E4A50;
+      --dd-bg: #151B1E;
+      --dd-surface: #20282C;
+      background: var(--dd-bg) !important;
+    }
+    .dark .hdr-band,
+    .dark .hdr-pill,
+    .dark .workspace-layout .editor-col,
+    .dark .card-box,
+    .dark .zoombar,
+    .dark .app-status { background: var(--dd-surface) !important; border-color: var(--dd-border) !important; }
+    .dark .card-box input,
+    .dark .card-box select,
+    .dark .card-box textarea { color: var(--dd-text) !important; background: #182024 !important; border-color: var(--dd-border) !important; }
+    .dark .hdr-pill > div:first-child span,
+    .dark .editor-col > div:first-child { color: var(--dd-text) !important; }
+    .dark .hdr-pill .print-btn { color: #fff !important; background: var(--dd-primary-700) !important; }
+    .dark .card-box span,
+    .dark .card-box label { color: var(--dd-text-muted) !important; }
+    .dark .sheet { border-color: #4B565C; }
+    @media (max-width: 1000px) {
+      .workspace-layout { grid-template-columns: minmax(0, 1fr) minmax(310px, 350px); }
+      .workspace-layout .editor-col { top: 72px; max-height: calc(100vh - 72px); }
+    }
+    @media (max-width: 820px) {
+      .workspace-layout { display: flex !important; flex-direction: column; }
+      .workspace-layout .editor-col {
+        position: static;
+        order: 1;
+        width: 100%;
+        max-height: none;
+        overflow: visible;
+        border-left: 0 !important;
+        border-bottom: 1px solid var(--dd-border) !important;
+      }
+      .workspace-layout .preview-wrap { order: 2; }
+      .hdr-pill { min-height: 66px; }
+    }
+    @media (max-width: 700px) {
+      .hdr-band { border-bottom-width: 3px; }
+      .hdr-pill { padding: 9px 10px !important; }
+      .workspace-layout .editor-col { padding: 16px 12px 28px !important; }
+      .workspace-layout .preview-wrap { padding: 14px 10px 24px !important; }
+      .card-box { border-radius: 12px !important; }
+      .app-status { display: none; }
+      .bottombar { background: var(--dd-surface) !important; border-color: var(--dd-border) !important; }
+      .bottombar > button:last-child { background: var(--dd-primary-700) !important; }
+      .totop { background: var(--dd-primary-700) !important; }
+    }
+    @media print {
+      .workspace-layout { display: block !important; }
+      .app-bg { background: #fff !important; }
+      .sheet { border: 0 !important; box-shadow: none !important; }
+    }
   </style>
-  <meta name="theme-color" content="#05918C">
+  <meta name="theme-color" content="#087C75">
   <link rel="manifest" href="manifest.webmanifest">
 </helmet>
 <div class="no-print splash" id="dd-splash" style="position:fixed; inset:0; z-index:999; background:#05918C; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px;">
@@ -134,19 +410,19 @@
   <div style="font-family:Archivo, Helvetica, Arial, sans-serif; font-size:14px; font-weight:700; letter-spacing:2.5px; color:rgba(255,255,255,.85); text-transform:uppercase;">Gerador de Etiquetas</div>
 </div>
 
-<div class="app-bg {{ ppClass }} {{ darkClass }} {{ selClass }}" style="min-height:100vh; background:#f5f3f4; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg'); background-size:420px 420px, 200px 200px, 300px 300px; background-position:right -140px bottom -160px, right 240px bottom 220px, left -120px top 90px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
+<div class="app-bg {{ ppClass }} {{ darkClass }} {{ mvClass }}" style="min-height:100vh; background:#f5f3f4; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg'); background-size:420px 420px, 200px 200px, 300px 300px; background-position:right -140px bottom -160px, right 240px bottom 220px, left -120px top 90px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
 
   <div class="no-print hdr-band" style="background:#05918C; padding:14px 22px 18px;">
     <div class="hdr-pill" style="background:#fff; border-radius:999px; padding:8px 8px 8px 20px; display:flex; align-items:center; gap:10px 18px; flex-wrap:wrap; box-shadow:0 6px 24px rgba(120,20,45,.18);">
       <div style="display:flex; align-items:center; gap:9px;">
         <img src="assets/placa/image4.png" alt="D&amp;D" style="height:26px; width:auto;">
-        <span style="font-size:15px; font-weight:800; color:#1a1d21; letter-spacing:.2px; white-space:nowrap;">Gerador de Etiquetas</span>
+        <span style="font-size:15px; font-weight:800; color:#1a1d21; letter-spacing:.2px; white-space:nowrap;">Etiquetas D&amp;D</span>
       </div>
       <div class="tabbar" style="display:flex; align-items:center; gap:2px; overflow-x:auto; max-width:100%;">
-        <button class="tab-btn" data-on="{{ tabPlacaOn }}" onClick="{{ showPlaca }}" style="{{ tabPlacaStyle }}">Placa Promoção</button>
+        <button class="tab-btn" data-on="{{ tabPlacaOn }}" onClick="{{ showPlaca }}" style="{{ tabPlacaStyle }}">Placas promocionais</button>
         <button class="tab-btn" data-on="{{ tabPcrOn }}" onClick="{{ showPcr }}" style="{{ tabPcrStyle }}">Preçário</button>
-        <button class="tab-btn" data-on="{{ tabPrecOn }}" onClick="{{ showPrec }}" style="{{ tabPrecStyle }}">Precificador</button>
-        <button class="tab-btn" data-on="{{ tabMakeOn }}" onClick="{{ showMake }}" style="{{ tabMakeStyle }}">Etiqueta Make</button>
+        <button class="tab-btn" data-on="{{ tabPrecOn }}" onClick="{{ showPrec }}" style="{{ tabPrecStyle }}">Etiquetas de preço</button>
+        <button class="tab-btn" data-on="{{ tabMakeOn }}" onClick="{{ showMake }}" style="{{ tabMakeStyle }}">Etiquetas Make</button>
       </div>
       <div style="flex:1;"></div>
       <div class="hdr-compact" style="display:none; position:relative;">
@@ -182,61 +458,17 @@
     </div>
   </sc-if>
 
-  <div class="no-print rail" style="position:fixed; left:0; top:92px; bottom:46px; width:212px; z-index:55; background:#fff; border-right:1px solid #edf0f2; padding:14px 10px; display:flex; flex-direction:column; gap:8px; overflow:auto;">
-    <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 6px 2px;">Etiquetas</div>
-    <sc-for list="{{ railItems }}" as="r" hint-placeholder-count="3">
-      <button onClick="{{ r.select }}" style="{{ r.railStyle }}">
-        <span style="font-size:11px; font-weight:800; color:#b3bcc4; min-width:18px;">{{ r.num }}</span>
-        <span style="flex:1; text-align:left; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ r.label }}</span>
-        <span style="font-size:11px; font-weight:700; color:#9aa6b1;">{{ r.qtyLabel }}</span>
-      </button>
-    </sc-for>
-    <button onClick="{{ addCurrent }}" style="background:#fff; color:#05918C; border:1.5px dashed #a9d8d5; border-radius:12px; padding:11px; font-size:13px; font-weight:800; cursor:pointer; margin-top:4px;" style-hover="background:#eefaf9; border-color:#05918C;">+ Nova</button>
-  </div>
-
-  <sc-if value="{{ showHint }}" hint-placeholder-val="{{ false }}">
-    <div class="no-print" style="position:fixed; left:50%; transform:translateX(-50%); bottom:62px; z-index:84; background:#fff; border:1px solid #e7ebee; border-radius:16px; padding:14px 16px; display:flex; align-items:center; gap:14px; box-shadow:0 12px 34px rgba(30,40,50,.18); max-width:94vw;">
-      <span style="font-size:13px; font-weight:600; color:#5a6873; line-height:1.5;">Toque em uma etiqueta para editar · use <b>+ Etiqueta</b> para criar · <b>Importar</b> traz uma planilha</span>
-      <button onClick="{{ dismissHint }}" style="background:#05918C; color:#fff; border:none; border-radius:999px; padding:9px 16px; font-size:13px; font-weight:800; cursor:pointer; white-space:nowrap;">Entendi</button>
-    </div>
-  </sc-if>
-
-  <sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
-    <div class="no-print" style="position:fixed; left:50%; transform:translateX(-50%); bottom:62px; z-index:85; background:#1a1d21; color:#fff; border-radius:999px; padding:10px 12px 10px 18px; display:flex; align-items:center; gap:12px; box-shadow:0 10px 30px rgba(0,0,0,.28); max-width:94vw;">
-      <span style="font-size:13px; font-weight:700; white-space:nowrap;">{{ toastMsg }}</span>
-      <button onClick="{{ doUndo }}" style="background:#05918C; color:#fff; border:none; border-radius:999px; padding:8px 16px; font-size:13px; font-weight:800; cursor:pointer; white-space:nowrap;">Desfazer</button>
-    </div>
-  </sc-if>
-
   <button class="no-print totop" onClick="{{ scrollTop }}" title="Voltar ao topo">↑</button>
 
-  <div class="no-print bottombar" style="position:fixed; left:0; right:0; bottom:0; z-index:70; background:#fff; border-top:1px solid #edf0f2; padding:0 16px; height:46px; display:flex; align-items:center; gap:14px;">
-    <span style="font-size:12px; font-weight:700; color:#5a6873; white-space:nowrap;">{{ pageInfo }}</span>
+  <div class="no-print bottombar" style="display:none; position:fixed; left:0; right:0; bottom:0; z-index:70; background:#fff; border-top:1px solid #e4d4d9; padding:8px 10px; gap:8px; align-items:center; box-shadow:0 -4px 16px rgba(0,0,0,.08);">
+    <div style="display:flex; gap:2px; background:#f7e9ec; padding:3px; border-radius:8px;">
+      <button onClick="{{ setMvEdit }}" style="{{ mvEditBtn }}">Editar</button>
+      <button onClick="{{ setMvSheet }}" style="{{ mvSheetBtn }}">Folha</button>
+    </div>
     <div style="flex:1;"></div>
-    <div style="display:flex; align-items:center; gap:2px;">
-      <button onClick="{{ zoomOut }}" title="Diminuir" style="{{ barIcon }}">−</button>
-      <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:52px; text-align:center;">Zoom {{ zoomPct }}</span>
-      <button onClick="{{ zoomIn }}" title="Aumentar" style="{{ barIcon }}">+</button>
-    </div>
-    <div style="width:1px; height:20px; background:#e7ebee;"></div>
-    <span style="font-size:12px; font-weight:700; color:#05918C; white-space:nowrap;">Salvo ✓</span>
-  </div>  <sc-if value="{{ isPrintOpen }}" hint-placeholder-val="{{ false }}">
-    <div class="no-print" style="position:fixed; inset:0; z-index:100; background:rgba(30,20,25,.45); display:flex; align-items:center; justify-content:center; padding:16px;">
-      <div class="import-panel" style="background:#fff; border-radius:18px; padding:24px; width:100%; max-width:380px; display:flex; flex-direction:column; gap:16px; box-shadow:0 16px 44px rgba(0,0,0,.3);">
-        <div style="font-size:17px; font-weight:800; color:#1a1d21;">Conferir antes de imprimir</div>
-        <div style="display:flex; flex-direction:column; gap:8px;">
-          <div style="display:flex; justify-content:space-between; font-size:14px;"><span style="color:#8b97a2; font-weight:600;">Etiquetas</span><b style="color:#1a1d21;">{{ printCount }}</b></div>
-          <div style="display:flex; justify-content:space-between; font-size:14px;"><span style="color:#8b97a2; font-weight:600;">Papel</span><b style="color:#1a1d21;">{{ printPages }}</b></div>
-          <div style="display:flex; justify-content:space-between; font-size:14px;"><span style="color:#8b97a2; font-weight:600;">Tamanho</span><b style="color:#1a1d21;">{{ printSize }}</b></div>
-        </div>
-        <div style="font-size:12px; color:#8b97a2; line-height:1.5;">As linhas tracejadas são guias de corte e saem na impressão.</div>
-        <div style="display:flex; gap:8px;">
-          <button onClick="{{ closePrint }}" style="flex:1; background:#fff; color:#5a6873; border:1px solid #e7ebee; border-radius:12px; padding:12px; font-size:13px; font-weight:700; cursor:pointer;">Cancelar</button>
-          <button onClick="{{ confirmPrint }}" style="flex:1; background:#1a1d21; color:#fff; border:none; border-radius:12px; padding:12px; font-size:13px; font-weight:800; cursor:pointer;">Imprimir</button>
-        </div>
-      </div>
-    </div>
-  </sc-if>
+    <button onClick="{{ addCurrent }}" style="background:#fdf1f4; color:#CD4664; border:1px solid #e0a7b6; border-radius:8px; padding:12px 14px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar</button>
+    <button onClick="{{ doPrint }}" style="background:#CD4664; color:#fff; border:none; border-radius:8px; padding:12px 16px; font-size:13px; font-weight:800; cursor:pointer;">Imprimir</button>
+  </div>
 
   <sc-if value="{{ isHelpOpen }}" hint-placeholder-val="{{ false }}">
     <div class="no-print" style="position:fixed; inset:0; z-index:100; background:rgba(30,20,25,.45); display:flex; align-items:center; justify-content:center; padding:16px;">
@@ -253,9 +485,8 @@
           <div><b style="color:#CD4664;">4. Importar</b> — traga várias etiquetas de uma vez por planilha CSV; baixe o modelo dentro do painel Importar.</div>
           <div><b style="color:#CD4664;">5. Botões da etiqueta</b> — ▲▼ mudam a ordem, ⧉ duplica, ✕ remove.</div>
           <div><b style="color:#CD4664;">6. Prévia e impressão</b> — "Prévia" mostra a folha A4 com linhas de corte; "Imprimir / PDF" imprime no tamanho real.</div>
-          <div><b style="color:#CD4664;">7. Zoom</b> — use os botões − % + na barra de baixo, ou segure Ctrl (⌘ no Mac) e role o mouse sobre a folha.</div>
-          <div><b style="color:#CD4664;">8. No celular</b> — em "Imprimir / PDF", escolha "Salvar como PDF" (Android) ou toque em Compartilhar › Imprimir e depois no ícone de compartilhar (iPhone) para gerar o arquivo.</div>
-          <div><b style="color:#CD4664;">9. Tudo salva sozinho</b> — as etiquetas ficam guardadas no navegador e voltam quando você abrir de novo.</div>
+          <div><b style="color:#CD4664;">7. No celular</b> — em "Imprimir / PDF", escolha "Salvar como PDF" (Android) ou toque em Compartilhar › Imprimir e depois no ícone de compartilhar (iPhone) para gerar o arquivo.</div>
+          <div><b style="color:#CD4664;">8. Tudo salva sozinho</b> — as etiquetas ficam guardadas no navegador e voltam quando você abrir de novo.</div>
         </div>
         <button onClick="{{ closeHelp }}" style="background:#CD4664; color:#fff; border:none; border-radius:8px; padding:11px; font-size:13px; font-weight:800; cursor:pointer;">Entendi</button>
       </div>
@@ -271,11 +502,10 @@
           <button onClick="{{ closeImport }}" style="background:none; border:none; color:#8b97a2; font-size:18px; cursor:pointer; line-height:1;">✕</button>
         </div>
         <div style="font-size:13px; color:#5a6873; line-height:1.5;">Uma etiqueta por linha, colunas separadas por <b>;</b><br><b>Nome ; Preço POR ; Preço DE (opcional) ; Marca (opcional)</b><br>No Excel/Planilhas, salve como CSV. As etiquetas entram na aba atual.</div>
-        <button onClick="{{ saveList }}" style="background:#eefaf9; color:#05918C; border:1px solid #a9d8d5; border-radius:10px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">⬇ Salvar minha lista (backup .json)</button>
         <button onClick="{{ downloadModel }}" style="background:#fff; color:#05918C; border:1.5px dashed #a9d8d5; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#eefaf9; border-color:#05918C;">⬇ Baixar modelo de importação (.csv)</button>
         <label style="display:flex; flex-direction:column; gap:6px; font-size:12px; font-weight:700; color:#6b7885;">
           ARQUIVO PREENCHIDO
-          <input type="file" accept=".csv,.json,text/csv,text/comma-separated-values,application/csv,application/vnd.ms-excel,text/plain,application/json" onChange="{{ importFile }}" style="width:100%; border:1px solid #d8dee4; border-radius:8px; padding:10px; font-size:13px; font-weight:400;">
+          <input type="file" accept=".csv,text/csv,text/comma-separated-values,application/csv,application/vnd.ms-excel,text/plain" onChange="{{ importFile }}" style="width:100%; border:1px solid #d8dee4; border-radius:8px; padding:10px; font-size:13px; font-weight:400;">
         </label>
         <button onClick="{{ closeImport }}" style="background:#fff; color:#5a6873; border:1px solid #d8dee4; border-radius:8px; padding:10px; font-size:13px; font-weight:700; cursor:pointer;">Cancelar</button>
       </div>
@@ -284,15 +514,11 @@
 
   <!-- ==================== MODELO: PREÇÁRIO ==================== -->
   <sc-if value="{{ isPcr }}" hint-placeholder-val="{{ true }}">
-  <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
+  <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
-      <div class="panel-head" style="display:flex; align-items:center; gap:8px; padding:2px 2px 0;">
-        <span style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase;">Preçário ({{ pcrCount }})</span>
-        <div style="flex:1;"></div>
-        <button onClick="{{ clearSel }}" title="Fechar" style="background:none; border:none; color:#9aa6b1; font-size:17px; cursor:pointer; line-height:1; padding:4px 6px;">✕</button>
-      </div>
+      <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Preçário ({{ pcrCount }})</div>
       <sc-for list="{{ pcrs }}" as="g" hint-placeholder-count="3">
-        <div class="card-box" data-sel="{{ g.isSel }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+        <div class="card-box" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -340,7 +566,12 @@
       <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
         <span style="font-size:12px; font-weight:700; color:#8b97a2;">{{ pageInfo }}</span>
         <div style="flex:1;"></div>
+        <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">−</button>
+          <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">+</button>
         </div>
+      </div>
       <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-pcr" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:10px;">
           <sc-if value="{{ pcrEmpty }}" hint-placeholder-val="{{ false }}">
@@ -355,7 +586,7 @@
             </div>
           </sc-if>
           <sc-for list="{{ pcrsGrid }}" as="g" hint-placeholder-count="3">
-            <div onClick="{{ g.select }}" style="cursor:pointer; font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:5 / 7; background:#FFE1E4; overflow:hidden; border:1px solid #f0dade; border-radius:2px; container-type:inline-size;">
+            <div onClick="{{ setMvEdit }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:5 / 7; background:#FFE1E4; overflow:hidden; border:1px solid #f0dade; border-radius:2px; container-type:inline-size;">
               <div style="position:absolute; left:0; top:58.7%; width:100%; height:41.3%; background-image:url('assets/placa/nuvem-rosa.png'); background-size:cover; background-position:center bottom; background-repeat:no-repeat;"></div>
               <div style="position:absolute; left:40%; top:38.7%; width:56.7%; aspect-ratio:1 / 1; background-image:url('assets/placa/flor-verde.png'); background-size:contain; background-repeat:no-repeat;"></div>
               <img src="assets/placa/image4.png" alt="D&amp;D" style="position:absolute; left:61%; top:6.5%; width:34%;">
@@ -388,15 +619,11 @@
 
   <!-- ==================== MODELO: PRECIFICADOR ==================== -->
   <sc-if value="{{ isPrec }}" hint-placeholder-val="{{ true }}">
-  <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
+  <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
-      <div class="panel-head" style="display:flex; align-items:center; gap:8px; padding:2px 2px 0;">
-        <span style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase;">Precificadores ({{ prCount }})</span>
-        <div style="flex:1;"></div>
-        <button onClick="{{ clearSel }}" title="Fechar" style="background:none; border:none; color:#9aa6b1; font-size:17px; cursor:pointer; line-height:1; padding:4px 6px;">✕</button>
-      </div>
+      <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Precificadores ({{ prCount }})</div>
       <sc-for list="{{ prs }}" as="g" hint-placeholder-count="3">
-        <div class="card-box" data-sel="{{ g.isSel }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+        <div class="card-box" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -448,7 +675,12 @@
       <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
         <span style="font-size:12px; font-weight:700; color:#8b97a2;">{{ pageInfo }}</span>
         <div style="flex:1;"></div>
+        <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">−</button>
+          <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">+</button>
         </div>
+      </div>
       <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-prec" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:10px;">
           <sc-if value="{{ prEmpty }}" hint-placeholder-val="{{ false }}">
@@ -463,7 +695,7 @@
             </div>
           </sc-if>
           <sc-for list="{{ prsGrid }}" as="g" hint-placeholder-count="3">
-            <div onClick="{{ g.select }}" style="cursor:pointer; font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:6.5 / 4.3; background-image:{{ g.fundoBg }}; background-size:100% 100%; background-position:top left; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
+            <div onClick="{{ setMvEdit }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:6.5 / 4.3; background-image:{{ g.fundoBg }}; background-size:100% 100%; background-position:top left; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
               <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:2.9%; top:5.7%; width:30.7%;">
               <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}">
                 <div style="position:absolute; left:5.4%; top:44%; width:19%; height:12%; background-image:{{ g.brandBg }}; background-size:contain; background-position:left center; background-repeat:no-repeat;"></div>
@@ -487,15 +719,11 @@
 
   <!-- ==================== MODELO: ETIQUETA MAKE ==================== -->
   <sc-if value="{{ isMake }}" hint-placeholder-val="{{ true }}">
-  <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
+  <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
-      <div class="panel-head" style="display:flex; align-items:center; gap:8px; padding:2px 2px 0;">
-        <span style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase;">Etiquetas ({{ mkCount }})</span>
-        <div style="flex:1;"></div>
-        <button onClick="{{ clearSel }}" title="Fechar" style="background:none; border:none; color:#9aa6b1; font-size:17px; cursor:pointer; line-height:1; padding:4px 6px;">✕</button>
-      </div>
+      <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Etiquetas ({{ mkCount }})</div>
       <sc-for list="{{ mks }}" as="g" hint-placeholder-count="3">
-        <div class="card-box" data-sel="{{ g.isSel }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+        <div class="card-box" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -543,7 +771,12 @@
       <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
         <span style="font-size:12px; font-weight:700; color:#8b97a2;">{{ pageInfo }}</span>
         <div style="flex:1;"></div>
+        <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">−</button>
+          <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">+</button>
         </div>
+      </div>
       <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-make" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:10px;">
           <sc-if value="{{ mkEmpty }}" hint-placeholder-val="{{ false }}">
@@ -558,7 +791,7 @@
             </div>
           </sc-if>
           <sc-for list="{{ mksGrid }}" as="g" hint-placeholder-count="3">
-            <div onClick="{{ g.select }}" style="cursor:pointer; font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:6.5 / 4.3; background-image:url('assets/precificador/fundo-verde.png'); background-size:100% 100%; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
+            <div onClick="{{ setMvEdit }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:6.5 / 4.3; background-image:url('assets/precificador/fundo-verde.png'); background-size:100% 100%; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
               <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:1%; top:5%; width:48%;">
               <div style="position:absolute; left:2%; top:57%; width:38%; font-size:3.25cqw; font-weight:800; line-height:1.15; color:#171717; text-transform:uppercase; text-wrap:balance;">{{ g.name }}</div>
               <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}">
@@ -582,15 +815,11 @@
 
   <!-- ==================== MODELO: PLACA PROMOÇÃO ==================== -->
   <sc-if value="{{ isPlaca }}" hint-placeholder-val="{{ true }}">
-  <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
+  <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
-      <div class="panel-head" style="display:flex; align-items:center; gap:8px; padding:2px 2px 0;">
-        <span style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase;">Placas ({{ placaCount }})</span>
-        <div style="flex:1;"></div>
-        <button onClick="{{ clearSel }}" title="Fechar" style="background:none; border:none; color:#9aa6b1; font-size:17px; cursor:pointer; line-height:1; padding:4px 6px;">✕</button>
-      </div>
+      <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Placas ({{ placaCount }})</div>
       <sc-for list="{{ placas }}" as="pl" hint-placeholder-count="3">
-        <div class="card-box" data-sel="{{ pl.isSel }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+        <div class="card-box" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ pl.n }}</span>
             <select value="{{ pl.brand }}" onChange="{{ pl.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -645,7 +874,12 @@
       <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
         <span style="font-size:12px; font-weight:700; color:#8b97a2;">{{ pageInfo }}</span>
         <div style="flex:1;"></div>
+        <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">−</button>
+          <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">+</button>
         </div>
+      </div>
       <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-placa" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:10px;">
           <sc-if value="{{ placaEmpty }}" hint-placeholder-val="{{ false }}">
@@ -660,7 +894,7 @@
             </div>
           </sc-if>
           <sc-for list="{{ placasGrid }}" as="pl" hint-placeholder-count="3">
-            <div onClick="{{ pl.select }}" style="cursor:pointer; position:relative; width:100%; aspect-ratio:1 / 1; background:#fff; overflow:hidden; border:1px solid #eadfe2; border-radius:2px; container-type:inline-size; font-family:Axiforma, Archivo, sans-serif;">
+            <div onClick="{{ setMvEdit }}" style="position:relative; width:100%; aspect-ratio:1 / 1; background:#fff; overflow:hidden; border:1px solid #eadfe2; border-radius:2px; container-type:inline-size; font-family:Axiforma, Archivo, sans-serif;">
               <div style="position:absolute; left:0; top:45.7%; width:100%; height:54.3%; background-image:url('assets/placa/nuvem-rosa.png'); background-size:cover; background-position:center bottom; background-repeat:no-repeat;"></div>
               <div style="position:absolute; left:9.87%; top:23.08%; width:33.57%; aspect-ratio:725 / 714; background-image:url('assets/placa/flor-branca.png'); background-size:contain; background-repeat:no-repeat;"></div>
               <div style="position:absolute; left:34.1%; top:20.03%; width:56.88%; aspect-ratio:1 / 1; background-image:url('assets/placa/flor-verde.png'); background-size:contain; background-repeat:no-repeat;"></div>
@@ -687,6 +921,8 @@
     </div>
   </div>
   </sc-if>
+
+  <div class="no-print app-status" role="status" aria-live="polite">✓ Alterações salvas automaticamente</div>
 
 </div>
 </x-dc>
@@ -737,8 +973,7 @@ class Component extends DCLogic {
       const a = [...s[key]], j = i + d;
       if (j < 0 || j >= a.length) return null;
       [a[i], a[j]] = [a[j], a[i]];
-      const sel = s.selIdx === i ? j : (s.selIdx === j ? i : s.selIdx);
-      return { [key]: a, selIdx: sel };
+      return { [key]: a };
     });
   }
   splitPrice(v) {
@@ -754,28 +989,19 @@ class Component extends DCLogic {
     return reais + "," + centavos;
   }
   componentDidMount() {
-    try { if (localStorage.getItem("dd-dark") === "1") this.setState({ dark: true }); } catch (e) {}
-    try { if (localStorage.getItem("dd-hint") === "1") this.setState({ hintDone: true }); } catch (e) {}
     try {
       const raw = localStorage.getItem("dd-etiquetas-v1");
-      if (raw) {
-        const d = JSON.parse(raw);
-        const patch = {};
-        for (const k of ["pcrs", "prs", "mks", "placas"]) if (Array.isArray(d[k])) patch[k] = d[k];
-        if (Object.keys(patch).length) { this._last = raw; this.setState(patch); }
-      }
-    } catch (e) {}
-    this._onWheel = e => {
-      if (!(e.ctrlKey || e.metaKey)) return;
-      if (e.target.closest && e.target.closest(".editor-col, .bottombar, .hdr-band")) return;
-      e.preventDefault();
-      const step = e.deltaY > 0 ? -0.08 : 0.08;
-      this.setState(s => ({ zoom: Math.max(0.4, Math.min(2.5, +(((s.zoom || 1) + step).toFixed(2)))) }));
-    };
-    window.addEventListener("wheel", this._onWheel, { passive: false });
-  }
-  componentWillUnmount() {
-    if (this._onWheel) window.removeEventListener("wheel", this._onWheel);
+      const saved = raw ? JSON.parse(raw) : null;
+      const restored = {};
+      if (saved && Array.isArray(saved.pcrs)) restored.pcrs = saved.pcrs;
+      if (saved && Array.isArray(saved.prs)) restored.prs = saved.prs;
+      if (saved && Array.isArray(saved.mks)) restored.mks = saved.mks;
+      if (saved && Array.isArray(saved.placas)) restored.placas = saved.placas;
+      restored.dark = localStorage.getItem("dd-dark") === "1";
+      if (Object.keys(restored).length) this.setState(restored);
+    } catch (e) {
+      /* Dados antigos inválidos não impedem o aplicativo de abrir. */
+    }
   }
   componentDidUpdate() {
     const { pcrs, prs, mks, placas } = this.state;
@@ -785,30 +1011,10 @@ class Component extends DCLogic {
       try { localStorage.setItem("dd-etiquetas-v1", data); } catch (e) {}
     }
   }
-  snapshot(msg) {
-    const { pcrs, prs, mks, placas } = this.state;
-    this._undo = { pcrs, prs, mks, placas, selIdx: this.state.selIdx };
-    this.setState({ toast: msg });
-    clearTimeout(this._toastT);
-    this._toastT = setTimeout(() => this.setState({ toast: null }), 7000);
-  }
-  undo() {
-    if (!this._undo) return;
-    const u = this._undo;
-    this._undo = null;
-    clearTimeout(this._toastT);
-    this.setState({ pcrs: u.pcrs, prs: u.prs, mks: u.mks, placas: u.placas, selIdx: u.selIdx, toast: null });
-  }
   listKey(model) {
     return model === "placa" ? "placas" : model === "pcr" ? "pcrs" : model === "prec" ? "prs" : "mks";
   }
   importText(txt) {
-    try {
-      const d = JSON.parse(txt);
-      const patch = {};
-      for (const k of ["pcrs", "prs", "mks", "placas"]) if (Array.isArray(d[k])) patch[k] = d[k];
-      if (Object.keys(patch).length) { this.snapshot("Lista carregada"); patch.importOpen = false; patch.selIdx = null; this.setState(patch); return; }
-    } catch (e) {}
     const norm = t => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]/g, "");
     const brandByName = {};
     for (const b of this.placaBrands) brandByName[norm(b.label)] = b.key;
@@ -843,8 +1049,8 @@ class Component extends DCLogic {
       key === "prs" ? { brand: it.brand, fundo: "rosa", name: it.name, dePrice: it.dePrice, porPrice: it.porPrice } :
       key === "mks" ? { brand: it.brand, name: it.name, dePrice: it.dePrice, porPrice: it.porPrice, cada: false } :
       { brand: it.brand, name: it.name, dePrice: it.dePrice, porPrice: it.porPrice });
-    this.snapshot(shaped.length + " etiqueta(s) importada(s)");
     this.setState(s => ({ [key]: [...s[key], ...shaped], importOpen: false }));
+    window.alert(shaped.length + " etiqueta(s) importada(s) para a aba atual.");
   }
   renderVals() {
     const model = this.state.model;
@@ -872,11 +1078,9 @@ class Component extends DCLogic {
         dup: () => this.setState(s => ({ pcrs: [...s.pcrs.slice(0, i + 1), { ...s.pcrs[i] }, ...s.pcrs.slice(i + 1)] })),
         showCada: !!g.cada,
         setCada: e => this.updatePcr(i, { cada: e.target.checked }),
-        isSel: this.state.selIdx === i ? "1" : "0",
-        select: () => this.setState({ selIdx: i }),
         moveUp: () => this.moveItem("pcrs", i, -1),
         moveDown: () => this.moveItem("pcrs", i, 1),
-        remove: () => { this.snapshot("Etiqueta removida"); this.setState(s => ({ pcrs: s.pcrs.filter((_, idx) => idx !== i), selIdx: s.selIdx === i ? null : (s.selIdx > i ? s.selIdx - 1 : s.selIdx) })); },
+        remove: () => this.setState(s => ({ pcrs: s.pcrs.filter((_, idx) => idx !== i) })),
       };
     });
 
@@ -904,11 +1108,9 @@ class Component extends DCLogic {
         dup: () => this.setState(s => ({ prs: [...s.prs.slice(0, i + 1), { ...s.prs[i] }, ...s.prs.slice(i + 1)] })),
         showCada: !!g.cada,
         setCada: e => this.updatePr(i, { cada: e.target.checked }),
-        isSel: this.state.selIdx === i ? "1" : "0",
-        select: () => this.setState({ selIdx: i }),
         moveUp: () => this.moveItem("prs", i, -1),
         moveDown: () => this.moveItem("prs", i, 1),
-        remove: () => { this.snapshot("Etiqueta removida"); this.setState(s => ({ prs: s.prs.filter((_, idx) => idx !== i), selIdx: s.selIdx === i ? null : (s.selIdx > i ? s.selIdx - 1 : s.selIdx) })); },
+        remove: () => this.setState(s => ({ prs: s.prs.filter((_, idx) => idx !== i) })),
       };
     });
 
@@ -929,12 +1131,10 @@ class Component extends DCLogic {
         qtyPlus: () => this.updateMk(i, { qty: Math.min(999, (parseInt(this.state.mks[i].qty, 10) || 1) + 1) }),
         deShow: this.fmtPrice(g.dePrice),
         dup: () => this.setState(s => ({ mks: [...s.mks.slice(0, i + 1), { ...s.mks[i] }, ...s.mks.slice(i + 1)] })),
-        isSel: this.state.selIdx === i ? "1" : "0",
-        select: () => this.setState({ selIdx: i }),
         moveUp: () => this.moveItem("mks", i, -1),
         moveDown: () => this.moveItem("mks", i, 1),
         setCada: e => this.updateMk(i, { cada: e.target.checked }),
-        remove: () => { this.snapshot("Etiqueta removida"); this.setState(s => ({ mks: s.mks.filter((_, idx) => idx !== i), selIdx: s.selIdx === i ? null : (s.selIdx > i ? s.selIdx - 1 : s.selIdx) })); },
+        remove: () => this.setState(s => ({ mks: s.mks.filter((_, idx) => idx !== i) })),
       };
     });
 
@@ -957,11 +1157,9 @@ class Component extends DCLogic {
         dup: () => this.setState(s => ({ placas: [...s.placas.slice(0, i + 1), { ...s.placas[i] }, ...s.placas.slice(i + 1)] })),
         showCada: !!pl.cada,
         setCada: e => this.updatePlaca(i, { cada: e.target.checked }),
-        isSel: this.state.selIdx === i ? "1" : "0",
-        select: () => this.setState({ selIdx: i }),
         moveUp: () => this.moveItem("placas", i, -1),
         moveDown: () => this.moveItem("placas", i, 1),
-        remove: () => { this.snapshot("Etiqueta removida"); this.setState(s => ({ placas: s.placas.filter((_, idx) => idx !== i), selIdx: s.selIdx === i ? null : (s.selIdx > i ? s.selIdx - 1 : s.selIdx) })); },
+        remove: () => this.setState(s => ({ placas: s.placas.filter((_, idx) => idx !== i) })),
       };
     });
 
@@ -969,7 +1167,6 @@ class Component extends DCLogic {
     const perPage = { placa: 4, pcr: 9, prec: 10, make: 10 };
     const activeCount = expand(model === "placa" ? placas : model === "pcr" ? pcrs : model === "prec" ? prs : mks).length;
     const pages = Math.max(1, Math.ceil(activeCount / perPage[model]));
-    const sizeLabel = { placa: "9 × 9 cm", pcr: "5 × 7 cm", prec: "6,5 × 4,3 cm", make: "6,5 × 4,3 cm" };
     const pageInfo = activeCount + " etiqueta" + (activeCount === 1 ? "" : "s") + " · " + pages + " folha" + (pages === 1 ? "" : "s") + " A4";
 
     return {
@@ -985,10 +1182,10 @@ class Component extends DCLogic {
       tabMakeStyle: model === "make" ? on : off,
       tabPrecStyle: model === "prec" ? on : off,
       tabPcrStyle: model === "pcr" ? on : off,
-      showPlaca: () => this.setState({ model: "placa", selIdx: null }),
-      showMake: () => this.setState({ model: "make", selIdx: null }),
-      showPrec: () => this.setState({ model: "prec", selIdx: null }),
-      showPcr: () => this.setState({ model: "pcr", selIdx: null }),
+      showPlaca: () => this.setState({ model: "placa" }),
+      showMake: () => this.setState({ model: "make" }),
+      showPrec: () => this.setState({ model: "prec" }),
+      showPcr: () => this.setState({ model: "pcr" }),
       placas, placaCount: placas.length,
       placaEmpty: placas.length === 0, pcrEmpty: pcrs.length === 0, prEmpty: prs.length === 0, mkEmpty: mks.length === 0,
       placasGrid: expand(placas), mksGrid: expand(mks), prsGrid: expand(prs), pcrsGrid: expand(pcrs),
@@ -1001,36 +1198,14 @@ class Component extends DCLogic {
       addPr: () => this.setState(s => ({ prs: [...s.prs, { brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" }] })),
       addMk: () => this.setState(s => ({ mks: [...s.mks, { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }] })),
       addPlaca: () => this.setState(s => ({ placas: [...s.placas, { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }] })),
-      addCurrent: () => { const key = this.listKey(model); const n = this.state[key].length; setTimeout(() => this.setState({ selIdx: n }), 0); return (model === "make"
+      addCurrent: () => model === "make"
         ? this.setState(s => ({ mks: [...s.mks, { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }] }))
         : model === "prec"
         ? this.setState(s => ({ prs: [...s.prs, { brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" }] }))
         : model === "pcr"
         ? this.setState(s => ({ pcrs: [...s.pcrs, { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }] }))
-        : this.setState(s => ({ placas: [...s.placas, { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }] }))); },
-      doPrint: () => this.setState({ printOpen: true }),
-      isPrintOpen: !!this.state.printOpen,
-      closePrint: () => this.setState({ printOpen: false }),
-      confirmPrint: () => { this.setState({ printOpen: false }); setTimeout(() => window.print(), 120); },
-      printCount: activeCount + (activeCount === 1 ? " etiqueta" : " etiquetas"),
-      printPages: pages + (pages === 1 ? " folha A4" : " folhas A4"),
-      printSize: sizeLabel[model],
-      hasToast: !!this.state.toast,
-      toastMsg: this.state.toast || "",
-      doUndo: () => this.undo(),
-      showHint: !this.state.hintDone && !this.state.toast,
-      dismissHint: () => { try { localStorage.setItem("dd-hint", "1"); } catch (e) {} this.setState({ hintDone: true }); },
-      railItems: (model === "placa" ? placas : model === "pcr" ? pcrs : model === "prec" ? prs : mks).map(it => ({
-        num: String(it.n).padStart(2, "0"),
-        label: (it.name || "Sem nome").split("\n")[0],
-        qtyLabel: it.qty > 1 ? "×" + it.qty : "",
-        select: it.select,
-        railStyle: "display:flex; align-items:center; gap:8px; width:100%; text-align:left; background:" + (it.isSel === "1" ? "#eefaf9" : "transparent") + "; color:" + (it.isSel === "1" ? "#05918C" : "#5a6873") + "; border:none; border-radius:10px; padding:10px 8px; font-size:13px; font-weight:700; cursor:pointer;",
-      })),
-      selClass: (this.state.selIdx != null && this.state.selIdx < this.state[this.listKey(model)].length) ? "sel-on" : "sel-off",
-      clearSel: () => this.setState({ selIdx: null }),
-      barBtn: "background:none; border:none; color:#5a6873; font-size:14px; font-weight:700; cursor:pointer; padding:10px 14px; border-radius:999px; white-space:nowrap;",
-      barIcon: "background:none; border:none; color:#05918C; font-size:17px; font-weight:800; cursor:pointer; padding:8px 10px; border-radius:999px; line-height:1;",
+        : this.setState(s => ({ placas: [...s.placas, { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }] })),
+      doPrint: () => window.print(),
       scrollTop: () => window.scrollTo({ top: 0, behavior: "smooth" }),
       isMenuOpen: !!this.state.menuOpen,
       toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
@@ -1040,10 +1215,10 @@ class Component extends DCLogic {
       menuImport: () => this.setState({ menuOpen: false, importOpen: true }),
       menuPreview: () => this.setState(s => ({ menuOpen: false, preview: !s.preview })),
       menuHelp: () => this.setState({ menuOpen: false, helpOpen: true }),
-      menuPrint: () => this.setState({ menuOpen: false, printOpen: true }),
+      menuPrint: () => { this.setState({ menuOpen: false }); setTimeout(() => window.print(), 60); },
       menuClear: () => {
         this.setState({ menuOpen: false });
-        if (window.confirm("Limpar todas as etiquetas desta aba?")) { this.snapshot("Etiquetas apagadas"); this.setState({ [this.listKey(model)]: [], selIdx: null }); }
+        if (window.confirm("Limpar todas as etiquetas desta aba?")) this.setState({ [this.listKey(model)]: [] });
       },
       menuDark: () => this.setState(s => {
         try { localStorage.setItem("dd-dark", s.dark ? "0" : "1"); } catch (e) {}
@@ -1074,7 +1249,7 @@ class Component extends DCLogic {
       previewLabel: pp ? "Sair da prévia" : "Prévia",
       togglePreview: () => this.setState(s => ({ preview: !s.preview })),
       clearCurrent: () => {
-        if (window.confirm("Limpar todas as etiquetas desta aba?")) { this.snapshot("Etiquetas apagadas"); this.setState({ [this.listKey(model)]: [], selIdx: null }); }
+        if (window.confirm("Limpar todas as etiquetas desta aba?")) this.setState({ [this.listKey(model)]: [] });
       },
       doImport: () => this.setState({ importOpen: true }),
       openHelp: () => this.setState({ helpOpen: true }),
@@ -1088,15 +1263,6 @@ class Component extends DCLogic {
         const a = document.createElement("a");
         a.href = URL.createObjectURL(blob);
         a.download = "modelo-importacao.csv";
-        a.click();
-        URL.revokeObjectURL(a.href);
-      },
-      saveList: () => {
-        const { pcrs, prs, mks, placas } = this.state;
-        const blob = new Blob([JSON.stringify({ pcrs, prs, mks, placas }, null, 1)], { type: "application/json" });
-        const a = document.createElement("a");
-        a.href = URL.createObjectURL(blob);
-        a.download = "etiquetas-dd-backup.json";
         a.click();
         URL.revokeObjectURL(a.href);
       },
