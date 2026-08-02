@@ -13,16 +13,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --dd-primary-700: #9C3557;
-      --dd-primary-500: #C45C7E;
-      --dd-primary-100: #F8E7ED;
-      --dd-promo-700: #7B5365;
-      --dd-promo-500: #D9829D;
-      --dd-promo-100: #FFF0F4;
-      --dd-text: #342B31;
-      --dd-text-muted: #74656E;
-      --dd-border: #E6D7DE;
-      --dd-bg: #FBF7F9;
+      --dd-primary-700: #7351A6;
+      --dd-primary-500: #9B7BC7;
+      --dd-primary-100: #F1EAF9;
+      --dd-promo-700: #58456F;
+      --dd-promo-500: #B39AD5;
+      --dd-promo-100: #F8F4FC;
+      --dd-text: #302A38;
+      --dd-text-muted: #756D80;
+      --dd-border: #E5DDEE;
+      --dd-bg: #F8F6FB;
       --dd-surface: #FFFFFF;
       --dd-success: #5C7A66;
       --dd-warning: #A56524;
@@ -44,8 +44,8 @@
     * { box-sizing: border-box; }
     body { margin: 0; }
     input, select, button, textarea { font-family: inherit; }
-    a { color: #B24668; }
-    a:hover { color: #a83450; }
+    a { color: #7351A6; }
+    a:hover { color: #5E3F8B; }
     @media print {
       @page { size: A4 portrait; margin: 10mm; }
       .no-print { display: none !important; }
@@ -75,21 +75,21 @@
       .import-panel button, .import-panel input[type=file] { min-height: 46px !important; }
       input, select, textarea, button { font-size: 15px !important; }
     }
-      .dark { background-color:#221c20 !important; }
-    .dark .editor-col { border-color:#4a3e44 !important; }
-    .dark .card-box { background:#2b2429 !important; border-color:#4a3e44 !important; }
-    .dark .card-box span, .dark .card-box label { color:#cbbcc3 !important; }
-    .dark .editor-col > div:first-child { color:#cbbcc3 !important; }
-    .dark input, .dark select, .dark textarea { background:#1c171a; color:#f2e9ed; border-color:#4a3e44 !important; }
-    .dark input::placeholder, .dark textarea::placeholder { color:#8a7a81; }
-    .dark .hdr-pill { background:#2b2429 !important; }
-    .dark .hdr-pill span { color:#f2e9ed !important; }
-    .dark .hdr-pill .tab-btn { color:#cbbcc3 !important; }
+      .dark { background-color:#1F1B26 !important; }
+    .dark .editor-col { border-color:#4A4256 !important; }
+    .dark .card-box { background:#292330 !important; border-color:#4A4256 !important; }
+    .dark .card-box span, .dark .card-box label { color:#CEC3D8 !important; }
+    .dark .editor-col > div:first-child { color:#CEC3D8 !important; }
+    .dark input, .dark select, .dark textarea { background:#19161F; color:#F2ECF7; border-color:#4A4256 !important; }
+    .dark input::placeholder, .dark textarea::placeholder { color:#93889D; }
+    .dark .hdr-pill { background:#292330 !important; }
+    .dark .hdr-pill span { color:#F2ECF7 !important; }
+    .dark .hdr-pill .tab-btn { color:#CEC3D8 !important; }
     .dark .hdr-pill .tab-btn[data-on="1"] { color:#fff !important; }
-    .dark .hdr-pill .hdr-btn { color:#cbbcc3 !important; }
-    .dark .hdr-pill .hdr-btn:hover { background:#3a3036 !important; color:#f5c9d4 !important; }
-    .dark .hdr-pill .print-btn { background:#B24668 !important; color:#fff !important; }
-    .dark .card-box button[title="Menos"], .dark .card-box button[title="Mais"] { background:#1c171a !important; }
+    .dark .hdr-pill .hdr-btn { color:#CEC3D8 !important; }
+    .dark .hdr-pill .hdr-btn:hover { background:#393143 !important; color:#EADDF8 !important; }
+    .dark .hdr-pill .print-btn { background:#7351A6 !important; color:#fff !important; }
+    .dark .card-box button[title="Menos"], .dark .card-box button[title="Mais"] { background:#19161F !important; }
     .card-box select { min-width: 0; }
     .card-box > div { min-width: 0; flex-wrap: wrap; }
     .tabbar { scrollbar-width: none; }
@@ -97,8 +97,8 @@
     .tabbar button { white-space: nowrap; flex: none; }
     @media print { .sheet { zoom: 1 !important; } .bottombar { display: none !important; } }
     .pp .sheet { zoom: 1 !important; }
-    .dark .bottombar { background: #2b2429 !important; border-color: #4a3e44 !important; }
-    .dark .zoombar { background: #2b2429 !important; border-color: #4a3e44 !important; }
+    .dark .bottombar { background: #292330 !important; border-color: #4A4256 !important; }
+    .dark .zoombar { background: #292330 !important; border-color: #4A4256 !important; }
     @media (min-width: 1101px) {
       .editor-col { flex: 0 0 380px !important; }
     }
@@ -111,7 +111,7 @@
       .hdr-pill { flex-wrap: nowrap !important; padding: 8px 8px 8px 14px !important; gap: 10px !important; }
       .hdr-pill .tabbar { flex: 1 1 auto; min-width: 0; }
       .hdr-pill > div:first-child span { display: none; }
-      .dark .menu-pop { background:#2b2429 !important; }
+      .dark .menu-pop { background:#292330 !important; }
     }
     @media (max-width: 700px) {
       .card-box button[title="Mover para cima"], .card-box button[title="Mover para baixo"], .card-box button[title="Duplicar"], .card-box button[title="Remover"] { min-width: 44px; min-height: 44px; font-size: 18px !important; }
@@ -123,25 +123,25 @@
       .mv-edit .preview-wrap { display: none !important; }
       .mv-sheet .editor-col { display: none !important; }
     }
-    .totop { display: none; position: fixed; right: 14px; bottom: 92px; z-index: 60; width: 46px; height: 46px; border-radius: 50%; border: none; background: #9C3557; color: #fff; font-size: 20px; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,.25); cursor: pointer; }
+    .totop { display: none; position: fixed; right: 14px; bottom: 92px; z-index: 60; width: 46px; height: 46px; border-radius: 50%; border: none; background: #7351A6; color: #fff; font-size: 20px; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,.25); cursor: pointer; }
     @media print { .totop { display: none !important; }  .splash { display: none !important; } }
     .splash { animation: ddFade .45s ease .85s forwards; }
     @keyframes ddFade { to { opacity: 0; visibility: hidden; pointer-events: none; } }
     /* inputs modernos */
     .card-box input, .card-box select, .card-box textarea { background:#f7f8f9; border:1px solid #e7ebee !important; border-radius:10px !important; transition: box-shadow .15s, border-color .15s, background .15s; }
-    .card-box input:focus, .card-box select:focus, .card-box textarea:focus { outline:none; background:#fff; border-color:#9C3557 !important; box-shadow:0 0 0 3px rgba(5,145,140,.15); }
-    .dark .card-box input, .dark .card-box select, .dark .card-box textarea { background:#211b1f; border-color:#4a3e44 !important; }
+    .card-box input:focus, .card-box select:focus, .card-box textarea:focus { outline:none; background:#fff; border-color:#7351A6 !important; box-shadow:0 0 0 3px rgba(155,123,199,.18); }
+    .dark .card-box input, .dark .card-box select, .dark .card-box textarea { background:#1B1722; border-color:#4A4256 !important; }
     .card-box { transition: box-shadow .18s, transform .18s; }
     .card-box:hover { box-shadow: 0 6px 22px rgba(30,40,50,.09); }
     .card-box button[title] { border-radius:8px; }
     .card-box button[title]:hover { background:#f2f4f6 !important; }
-    .dark .card-box button[title]:hover { background:#3a3036 !important; }
+    .dark .card-box button[title]:hover { background:#393143 !important; }
 
     /* Design System D&D v1 */
     .splash { background: var(--dd-primary-700) !important; }
     .app-bg {
       background: var(--dd-bg) !important;
-      background-image: radial-gradient(circle at 8% 92%, rgba(196,92,126,.09), transparent 24%), radial-gradient(circle at 92% 16%, rgba(123,83,101,.07), transparent 22%) !important;
+      background-image: radial-gradient(circle at 8% 92%, rgba(155,123,199,.09), transparent 24%), radial-gradient(circle at 92% 16%, rgba(88,69,111,.07), transparent 22%) !important;
       color: var(--dd-text) !important;
       font-family: var(--dd-font-ui) !important;
     }
@@ -178,7 +178,7 @@
     .tab-btn[data-on="1"] {
       color: #fff !important;
       background: var(--dd-primary-700) !important;
-      box-shadow: 0 5px 14px rgba(156,53,87,.2);
+      box-shadow: 0 5px 14px rgba(115,81,166,.2);
     }
     .hdr-actions { gap: 4px !important; }
     .hdr-btn {
@@ -193,9 +193,9 @@
       padding: 11px 18px !important;
       color: #fff !important;
       background: var(--dd-primary-700) !important;
-      box-shadow: 0 6px 16px rgba(156,53,87,.22);
+      box-shadow: 0 6px 16px rgba(115,81,166,.22);
     }
-    .hdr-pill .print-btn:hover { background: #842A49 !important; }
+    .hdr-pill .print-btn:hover { background: #5E3F8B !important; }
     .workspace-layout {
       display: grid !important;
       grid-template-columns: minmax(340px, 390px) minmax(0, 1fr);
@@ -289,7 +289,7 @@
       outline: none;
       background: var(--dd-surface) !important;
       border-color: var(--dd-primary-500) !important;
-      box-shadow: 0 0 0 3px rgba(196,92,126,.18) !important;
+      box-shadow: 0 0 0 3px rgba(155,123,199,.18) !important;
     }
     .card-box input[type="checkbox"] {
       appearance: auto;
@@ -306,7 +306,7 @@
       cursor: pointer;
     }
     .card-box input[type="checkbox"]:focus-visible {
-      outline: 3px solid rgba(196,92,126,.3) !important;
+      outline: 3px solid rgba(155,123,199,.3) !important;
       outline-offset: 2px;
     }
     .card-box label:has(input[type="checkbox"]) {
@@ -455,15 +455,15 @@
     input:focus-visible,
     select:focus-visible,
     textarea:focus-visible {
-      outline: 3px solid rgba(196,92,126,.3) !important;
+      outline: 3px solid rgba(155,123,199,.3) !important;
       outline-offset: 2px;
     }
     .dark {
-      --dd-text: #FFF8FB;
-      --dd-text-muted: #D8C7D0;
-      --dd-border: #57464F;
-      --dd-bg: #211A1F;
-      --dd-surface: #2C2329;
+      --dd-text: #F7F3FC;
+      --dd-text-muted: #C9BED5;
+      --dd-border: #4A4256;
+      --dd-bg: #1F1B26;
+      --dd-surface: #292330;
       background: var(--dd-bg) !important;
     }
     .dark .hdr-band,
@@ -474,13 +474,13 @@
     .dark .app-status { background: var(--dd-surface) !important; border-color: var(--dd-border) !important; }
     .dark .card-box input,
     .dark .card-box select,
-    .dark .card-box textarea { color: var(--dd-text) !important; background: #182024 !important; border-color: var(--dd-border) !important; }
+    .dark .card-box textarea { color: var(--dd-text) !important; background: #1B1722 !important; border-color: var(--dd-border) !important; }
     .dark .hdr-pill > div:first-child span,
     .dark .editor-col > div:first-child { color: var(--dd-text) !important; }
     .dark .hdr-pill .print-btn { color: #fff !important; background: var(--dd-primary-700) !important; }
     .dark .card-box span,
     .dark .card-box label { color: var(--dd-text-muted) !important; }
-    .dark .continuous-hint { color: #F6DDE6; background: rgba(196,92,126,.15); }
+    .dark .continuous-hint { color: #EDE5F7; background: rgba(155,123,199,.15); }
     .dark .sheet { border-color: #4B565C; }
     @media (max-width: 1000px) {
       .workspace-layout { grid-template-columns: minmax(310px, 350px) minmax(0, 1fr); }
@@ -518,17 +518,17 @@
       .sheet { border: 0 !important; box-shadow: none !important; }
     }
   </style>
-  <meta name="theme-color" content="#9C3557">
+  <meta name="theme-color" content="#7351A6">
   <link rel="manifest" href="manifest.webmanifest">
 </helmet>
-<div class="no-print splash" id="dd-splash" style="position:fixed; inset:0; z-index:999; background:#9C3557; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px;">
+<div class="no-print splash" id="dd-splash" style="position:fixed; inset:0; z-index:999; background:#7351A6; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px;">
   <img src="assets/placa/image4.png" alt="D&amp;D Cosméticos" style="width:190px; max-width:56vw; filter:brightness(0) invert(1);">
   <div style="font-family:Archivo, Helvetica, Arial, sans-serif; font-size:14px; font-weight:700; letter-spacing:2.5px; color:rgba(255,255,255,.85); text-transform:uppercase;">Gerador de Etiquetas</div>
 </div>
 
 <div class="app-bg {{ ppClass }} {{ darkClass }} {{ mvClass }}" style="min-height:100vh; background:#f5f3f4; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg'); background-size:420px 420px, 200px 200px, 300px 300px; background-position:right -140px bottom -160px, right 240px bottom 220px, left -120px top 90px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
 
-  <div class="no-print hdr-band" style="background:#9C3557; padding:14px 22px 18px;">
+  <div class="no-print hdr-band" style="background:#7351A6; padding:14px 22px 18px;">
     <div class="hdr-pill" style="background:#fff; border-radius:999px; padding:8px 8px 8px 20px; display:flex; align-items:center; gap:10px 18px; flex-wrap:wrap; box-shadow:0 6px 24px rgba(120,20,45,.18);">
       <div style="display:flex; align-items:center; gap:9px;">
         <img src="assets/placa/image4.png" alt="D&amp;D" style="height:26px; width:auto;">
@@ -556,21 +556,21 @@
         </sc-if>
       </div>
       <div class="hdr-actions" style="display:flex; align-items:center; gap:2px; flex-wrap:wrap;">
-        <button onClick="{{ addCurrent }}" class="hdr-btn" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#fdf1f4; color:#B24668;">+ Adicionar</button>
-        <button onClick="{{ doImport }}" class="hdr-btn" title="Importar CSV" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#fdf1f4; color:#B24668;">Importar</button>
-        <button onClick="{{ togglePreview }}" class="hdr-btn" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#fdf1f4; color:#B24668;">{{ previewLabel }}</button>
-        <button onClick="{{ clearCurrent }}" class="hdr-btn" title="Limpar a aba atual" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#fdf1f4; color:#B24668;">Limpar</button>
-        <button onClick="{{ toggleDark }}" class="hdr-btn" title="Modo escuro" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px; padding:8px;" style-hover="background:#fdf1f4;">{{ darkIcon }}</button>
-        <button onClick="{{ openHelp }}" class="hdr-btn" title="Guia rápido" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px; padding:8px 12px;" style-hover="background:#fdf1f4; color:#B24668;">?</button>
-        <button onClick="{{ doPrint }}" class="hdr-btn print-btn" style="background:#1a1d21; color:#fff; border:none; border-radius:999px; padding:12px 22px; font-size:14px; font-weight:800; cursor:pointer; white-space:nowrap;" style-hover="background:#B24668;">Imprimir / PDF</button>
+        <button onClick="{{ addCurrent }}" class="hdr-btn" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#F4EFFA; color:#7351A6;">+ Adicionar</button>
+        <button onClick="{{ doImport }}" class="hdr-btn" title="Importar CSV" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#F4EFFA; color:#7351A6;">Importar</button>
+        <button onClick="{{ togglePreview }}" class="hdr-btn" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#F4EFFA; color:#7351A6;">{{ previewLabel }}</button>
+        <button onClick="{{ clearCurrent }}" class="hdr-btn" title="Limpar a aba atual" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#F4EFFA; color:#7351A6;">Limpar</button>
+        <button onClick="{{ toggleDark }}" class="hdr-btn" title="Modo escuro" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px; padding:8px;" style-hover="background:#F4EFFA;">{{ darkIcon }}</button>
+        <button onClick="{{ openHelp }}" class="hdr-btn" title="Guia rápido" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px; padding:8px 12px;" style-hover="background:#F4EFFA; color:#7351A6;">?</button>
+        <button onClick="{{ doPrint }}" class="hdr-btn print-btn" style="background:#1a1d21; color:#fff; border:none; border-radius:999px; padding:12px 22px; font-size:14px; font-weight:800; cursor:pointer; white-space:nowrap;" style-hover="background:#7351A6;">Imprimir / PDF</button>
       </div>
     </div>
   </div>
 
   <sc-if value="{{ isPreview }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed; top:14px; right:14px; z-index:50; display:flex; gap:8px;">
-      <button onClick="{{ togglePreview }}" style="background:#B24668; color:#fff; border:none; border-radius:8px; padding:12px 18px; font-size:14px; font-weight:800; cursor:pointer; box-shadow:0 2px 10px rgba(0,0,0,.25);">✕ Sair da prévia</button>
-      <button onClick="{{ doPrint }}" style="background:#fff; color:#B24668; border:none; border-radius:8px; padding:12px 18px; font-size:14px; font-weight:800; cursor:pointer; box-shadow:0 2px 10px rgba(0,0,0,.25);">Imprimir / PDF</button>
+      <button onClick="{{ togglePreview }}" style="background:#7351A6; color:#fff; border:none; border-radius:8px; padding:12px 18px; font-size:14px; font-weight:800; cursor:pointer; box-shadow:0 2px 10px rgba(0,0,0,.25);">✕ Sair da prévia</button>
+      <button onClick="{{ doPrint }}" style="background:#fff; color:#7351A6; border:none; border-radius:8px; padding:12px 18px; font-size:14px; font-weight:800; cursor:pointer; box-shadow:0 2px 10px rgba(0,0,0,.25);">Imprimir / PDF</button>
     </div>
   </sc-if>
 
@@ -582,8 +582,8 @@
       <button onClick="{{ setMvSheet }}" style="{{ mvSheetBtn }}">Folha</button>
     </div>
     <div style="flex:1;"></div>
-    <button onClick="{{ addCurrent }}" style="background:#fdf1f4; color:#B24668; border:1px solid #e0a7b6; border-radius:8px; padding:12px 14px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar</button>
-    <button onClick="{{ doPrint }}" style="background:#B24668; color:#fff; border:none; border-radius:8px; padding:12px 16px; font-size:13px; font-weight:800; cursor:pointer;">Imprimir</button>
+    <button onClick="{{ addCurrent }}" style="background:#F4EFFA; color:#7351A6; border:1px solid #C8B6E4; border-radius:8px; padding:12px 14px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar</button>
+    <button onClick="{{ doPrint }}" style="background:#7351A6; color:#fff; border:none; border-radius:8px; padding:12px 16px; font-size:13px; font-weight:800; cursor:pointer;">Imprimir</button>
   </div>
 
   <sc-if value="{{ isHelpOpen }}" hint-placeholder-val="{{ false }}">
@@ -595,16 +595,16 @@
           <button onClick="{{ closeHelp }}" style="background:none; border:none; color:#8b97a2; font-size:18px; cursor:pointer; line-height:1;">✕</button>
         </div>
         <div style="display:flex; flex-direction:column; gap:10px; font-size:13px; color:#5a6873; line-height:1.55;">
-          <div><b style="color:#B24668;">1. Escolha o modelo</b> — as abas no topo trocam entre Placa, Preçário, Precificador e Etiqueta Make.</div>
-          <div><b style="color:#B24668;">2. Preencha a etiqueta</b> — marca, nome e preços no painel à esquerda; a folha ao lado mostra o resultado na hora.</div>
-          <div><b style="color:#B24668;">3. QTD</b> — repete a mesma etiqueta N vezes na folha (ex.: 10 unidades do mesmo produto).</div>
-          <div><b style="color:#B24668;">4. Importar</b> — traga várias etiquetas de uma vez por planilha CSV; baixe o modelo dentro do painel Importar.</div>
-          <div><b style="color:#B24668;">5. Botões da etiqueta</b> — ▲▼ mudam a ordem, ⧉ duplica, ✕ remove.</div>
-          <div><b style="color:#B24668;">6. Prévia e impressão</b> — "Prévia" mostra a folha A4 com linhas de corte; "Imprimir / PDF" imprime no tamanho real.</div>
-          <div><b style="color:#B24668;">7. No celular</b> — em "Imprimir / PDF", escolha "Salvar como PDF" (Android) ou toque em Compartilhar › Imprimir e depois no ícone de compartilhar (iPhone) para gerar o arquivo.</div>
-          <div><b style="color:#B24668;">8. Tudo salva sozinho</b> — as etiquetas ficam guardadas no navegador e voltam quando você abrir de novo.</div>
+          <div><b style="color:#7351A6;">1. Escolha o modelo</b> — as abas no topo trocam entre Placa, Preçário, Precificador e Etiqueta Make.</div>
+          <div><b style="color:#7351A6;">2. Preencha a etiqueta</b> — marca, nome e preços no painel à esquerda; a folha ao lado mostra o resultado na hora.</div>
+          <div><b style="color:#7351A6;">3. QTD</b> — repete a mesma etiqueta N vezes na folha (ex.: 10 unidades do mesmo produto).</div>
+          <div><b style="color:#7351A6;">4. Importar</b> — traga várias etiquetas de uma vez por planilha CSV; baixe o modelo dentro do painel Importar.</div>
+          <div><b style="color:#7351A6;">5. Botões da etiqueta</b> — ▲▼ mudam a ordem, ⧉ duplica, ✕ remove.</div>
+          <div><b style="color:#7351A6;">6. Prévia e impressão</b> — "Prévia" mostra a folha A4 com linhas de corte; "Imprimir / PDF" imprime no tamanho real.</div>
+          <div><b style="color:#7351A6;">7. No celular</b> — em "Imprimir / PDF", escolha "Salvar como PDF" (Android) ou toque em Compartilhar › Imprimir e depois no ícone de compartilhar (iPhone) para gerar o arquivo.</div>
+          <div><b style="color:#7351A6;">8. Tudo salva sozinho</b> — as etiquetas ficam guardadas no navegador e voltam quando você abrir de novo.</div>
         </div>
-        <button onClick="{{ closeHelp }}" style="background:#B24668; color:#fff; border:none; border-radius:8px; padding:11px; font-size:13px; font-weight:800; cursor:pointer;">Entendi</button>
+        <button onClick="{{ closeHelp }}" style="background:#7351A6; color:#fff; border:none; border-radius:8px; padding:11px; font-size:13px; font-weight:800; cursor:pointer;">Entendi</button>
       </div>
     </div>
   </sc-if>
@@ -618,7 +618,7 @@
           <button onClick="{{ closeImport }}" style="background:none; border:none; color:#8b97a2; font-size:18px; cursor:pointer; line-height:1;">✕</button>
         </div>
         <div style="font-size:13px; color:#5a6873; line-height:1.5;">Uma etiqueta por linha, colunas separadas por <b>;</b><br><b>Nome ; Preço POR ; Preço DE (opcional) ; Marca (opcional)</b><br>No Excel/Planilhas, salve como CSV. As etiquetas entram na aba atual.</div>
-        <button onClick="{{ downloadModel }}" style="background:#fff; color:#9C3557; border:1.5px dashed #DFA9BC; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#FCEFF3; border-color:#9C3557;">⬇ Baixar modelo de importação (.csv)</button>
+        <button onClick="{{ downloadModel }}" style="background:#fff; color:#7351A6; border:1.5px dashed #C8B6E4; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#F4EFFA; border-color:#7351A6;">⬇ Baixar modelo de importação (.csv)</button>
         <label style="display:flex; flex-direction:column; gap:6px; font-size:12px; font-weight:700; color:#6b7885;">
           ARQUIVO PREENCHIDO
           <input type="file" accept=".csv,text/csv,text/comma-separated-values,application/csv,application/vnd.ms-excel,text/plain" onChange="{{ importFile }}" style="width:100%; border:1px solid #d8dee4; border-radius:8px; padding:10px; font-size:13px; font-weight:400;">
@@ -656,8 +656,8 @@
               <input value="{{ g.dePrice }}" onChange="{{ g.setDe }}" inputMode="decimal" placeholder="opcional" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
             </div>
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
-              <span style="font-size:10px; font-weight:700; color:#B24668; letter-spacing:.4px;">POR R$</span>
-              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" style="width:100%; border:1px solid #e8b4c2; border-radius:6px; padding:7px; font-size:13px;">
+              <span style="font-size:10px; font-weight:700; color:#7351A6; letter-spacing:.4px;">POR R$</span>
+              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" style="width:100%; border:1px solid #D8CBEA; border-radius:6px; padding:7px; font-size:13px;">
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
@@ -667,16 +667,16 @@
             <div style="flex:1;"></div>
             <div style="display:flex; align-items:center; gap:6px;">
               <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
-                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#B24668; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#7351A6; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
                 <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
-                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#B24668; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#7351A6; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
               </div>
               <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
             </div>
           </div>
         </div>
       </sc-for>
-      <button onClick="{{ addPcr }}" style="background:#fff; color:#9C3557; border:1.5px dashed #DFA9BC; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#FCEFF3; border-color:#9C3557;">+ Adicionar produto</button>
+      <button onClick="{{ addPcr }}" style="background:#fff; color:#7351A6; border:1.5px dashed #C8B6E4; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#F4EFFA; border-color:#7351A6;">+ Adicionar produto</button>
     </div>
 
     <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
@@ -684,21 +684,21 @@
         <span style="font-size:12px; font-weight:700; color:#8b97a2;">{{ pageInfo }}</span>
         <div style="flex:1;"></div>
         <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#B24668; cursor:pointer; padding:4px 10px;">−</button>
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#7351A6; cursor:pointer; padding:4px 10px;">−</button>
           <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#B24668; cursor:pointer; padding:4px 10px;">+</button>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#7351A6; cursor:pointer; padding:4px 10px;">+</button>
         </div>
       </div>
       <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-pcr" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:10px;">
           <sc-if value="{{ pcrEmpty }}" hint-placeholder-val="{{ false }}">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
-              <div style="width:56px; height:56px; border-radius:50%; background:#fdf1f4; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="width:56px; height:56px; border-radius:50%; background:#F4EFFA; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
               <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta ainda</div>
               <div style="font-size:13px; color:#8b97a2; max-width:300px;">Adicione a primeira etiqueta ou importe várias de uma vez por planilha CSV.</div>
               <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
-                <button onClick="{{ addCurrent }}" style="background:#B24668; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
-                <button onClick="{{ doImport }}" style="background:#fff; color:#B24668; border:1px solid #e0a7b6; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;">Importar CSV</button>
+                <button onClick="{{ addCurrent }}" style="background:#7351A6; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
+                <button onClick="{{ doImport }}" style="background:#fff; color:#7351A6; border:1px solid #C8B6E4; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;">Importar CSV</button>
               </div>
             </div>
           </sc-if>
@@ -767,8 +767,8 @@
               <input value="{{ g.dePrice }}" onChange="{{ g.setDe }}" inputMode="decimal" placeholder="opcional" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
             </div>
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
-              <span style="font-size:10px; font-weight:700; color:#B24668; letter-spacing:.4px;">POR R$</span>
-              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" style="width:100%; border:1px solid #e8b4c2; border-radius:6px; padding:7px; font-size:13px;">
+              <span style="font-size:10px; font-weight:700; color:#7351A6; letter-spacing:.4px;">POR R$</span>
+              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" style="width:100%; border:1px solid #D8CBEA; border-radius:6px; padding:7px; font-size:13px;">
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
@@ -778,16 +778,16 @@
             <div style="flex:1;"></div>
             <div style="display:flex; align-items:center; gap:6px;">
               <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
-                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#B24668; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#7351A6; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
                 <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
-                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#B24668; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#7351A6; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
               </div>
               <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
             </div>
           </div>
         </div>
       </sc-for>
-      <button onClick="{{ addPr }}" style="background:#fff; color:#9C3557; border:1.5px dashed #DFA9BC; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#FCEFF3; border-color:#9C3557;">+ Adicionar precificador</button>
+      <button onClick="{{ addPr }}" style="background:#fff; color:#7351A6; border:1.5px dashed #C8B6E4; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#F4EFFA; border-color:#7351A6;">+ Adicionar precificador</button>
     </div>
 
     <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
@@ -795,21 +795,21 @@
         <span style="font-size:12px; font-weight:700; color:#8b97a2;">{{ pageInfo }}</span>
         <div style="flex:1;"></div>
         <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#B24668; cursor:pointer; padding:4px 10px;">−</button>
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#7351A6; cursor:pointer; padding:4px 10px;">−</button>
           <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#B24668; cursor:pointer; padding:4px 10px;">+</button>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#7351A6; cursor:pointer; padding:4px 10px;">+</button>
         </div>
       </div>
       <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-prec" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:10px;">
           <sc-if value="{{ prEmpty }}" hint-placeholder-val="{{ false }}">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
-              <div style="width:56px; height:56px; border-radius:50%; background:#fdf1f4; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="width:56px; height:56px; border-radius:50%; background:#F4EFFA; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
               <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta ainda</div>
               <div style="font-size:13px; color:#8b97a2; max-width:300px;">Adicione a primeira etiqueta ou importe várias de uma vez por planilha CSV.</div>
               <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
-                <button onClick="{{ addCurrent }}" style="background:#B24668; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
-                <button onClick="{{ doImport }}" style="background:#fff; color:#B24668; border:1px solid #e0a7b6; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;">Importar CSV</button>
+                <button onClick="{{ addCurrent }}" style="background:#7351A6; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
+                <button onClick="{{ doImport }}" style="background:#fff; color:#7351A6; border:1px solid #C8B6E4; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;">Importar CSV</button>
               </div>
             </div>
           </sc-if>
@@ -865,8 +865,8 @@
               <input value="{{ g.dePrice }}" onChange="{{ g.setDe }}" inputMode="decimal" placeholder="opcional" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
             </div>
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
-              <span style="font-size:10px; font-weight:700; color:#9C3557; letter-spacing:.4px;">POR R$</span>
-              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" style="width:100%; border:1px solid #E0AFC0; border-radius:6px; padding:7px; font-size:13px;">
+              <span style="font-size:10px; font-weight:700; color:#7351A6; letter-spacing:.4px;">POR R$</span>
+              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" style="width:100%; border:1px solid #D8CBEA; border-radius:6px; padding:7px; font-size:13px;">
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
@@ -876,16 +876,16 @@
             <div style="flex:1;"></div>
             <div style="display:flex; align-items:center; gap:6px;">
               <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
-                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#B24668; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#7351A6; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
                 <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
-                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#B24668; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#7351A6; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
               </div>
               <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
             </div>
           </div>
         </div>
       </sc-for>
-      <button onClick="{{ addMk }}" style="background:#fff; color:#9C3557; border:1.5px dashed #DFA9BC; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#FCEFF3; border-color:#9C3557;">+ Adicionar etiqueta</button>
+      <button onClick="{{ addMk }}" style="background:#fff; color:#7351A6; border:1.5px dashed #C8B6E4; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#F4EFFA; border-color:#7351A6;">+ Adicionar etiqueta</button>
     </div>
 
     <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
@@ -893,21 +893,21 @@
         <span style="font-size:12px; font-weight:700; color:#8b97a2;">{{ pageInfo }}</span>
         <div style="flex:1;"></div>
         <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#B24668; cursor:pointer; padding:4px 10px;">−</button>
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#7351A6; cursor:pointer; padding:4px 10px;">−</button>
           <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#B24668; cursor:pointer; padding:4px 10px;">+</button>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#7351A6; cursor:pointer; padding:4px 10px;">+</button>
         </div>
       </div>
       <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-make" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:10px;">
           <sc-if value="{{ mkEmpty }}" hint-placeholder-val="{{ false }}">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
-              <div style="width:56px; height:56px; border-radius:50%; background:#fdf1f4; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="width:56px; height:56px; border-radius:50%; background:#F4EFFA; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
               <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta ainda</div>
               <div style="font-size:13px; color:#8b97a2; max-width:300px;">Adicione a primeira etiqueta ou importe várias de uma vez por planilha CSV.</div>
               <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
-                <button onClick="{{ addCurrent }}" style="background:#B24668; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
-                <button onClick="{{ doImport }}" style="background:#fff; color:#B24668; border:1px solid #e0a7b6; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;">Importar CSV</button>
+                <button onClick="{{ addCurrent }}" style="background:#7351A6; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
+                <button onClick="{{ doImport }}" style="background:#fff; color:#7351A6; border:1px solid #C8B6E4; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;">Importar CSV</button>
               </div>
             </div>
           </sc-if>
@@ -970,8 +970,8 @@
               <input value="{{ pl.dePrice }}" onChange="{{ pl.setDe }}" inputMode="decimal" placeholder="opcional" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
             </div>
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
-              <span style="font-size:10px; font-weight:700; color:#B24668; letter-spacing:.4px;">POR R$</span>
-              <input value="{{ pl.porPrice }}" onChange="{{ pl.setPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" style="width:100%; border:1px solid #e8b4c2; border-radius:6px; padding:7px; font-size:13px;">
+              <span style="font-size:10px; font-weight:700; color:#7351A6; letter-spacing:.4px;">POR R$</span>
+              <input value="{{ pl.porPrice }}" onChange="{{ pl.setPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" style="width:100%; border:1px solid #D8CBEA; border-radius:6px; padding:7px; font-size:13px;">
             </div>
           </div>
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
@@ -981,16 +981,16 @@
             <div style="flex:1;"></div>
             <div style="display:flex; align-items:center; gap:6px;">
               <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
-                <button onClick="{{ pl.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#B24668; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                <button onClick="{{ pl.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#7351A6; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
                 <input type="number" min="1" value="{{ pl.qty }}" onChange="{{ pl.setQty }}" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
-                <button onClick="{{ pl.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#B24668; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+                <button onClick="{{ pl.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#7351A6; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
               </div>
               <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
             </div>
           </div>
         </div>
       </sc-for>
-      <button onClick="{{ addPlaca }}" style="background:#fff; color:#9C3557; border:1.5px dashed #DFA9BC; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#FCEFF3; border-color:#9C3557;">+ Adicionar placa</button>
+      <button onClick="{{ addPlaca }}" style="background:#fff; color:#7351A6; border:1.5px dashed #C8B6E4; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#F4EFFA; border-color:#7351A6;">+ Adicionar placa</button>
     </div>
 
     <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
@@ -998,21 +998,21 @@
         <span style="font-size:12px; font-weight:700; color:#8b97a2;">{{ pageInfo }}</span>
         <div style="flex:1;"></div>
         <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#B24668; cursor:pointer; padding:4px 10px;">−</button>
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#7351A6; cursor:pointer; padding:4px 10px;">−</button>
           <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#B24668; cursor:pointer; padding:4px 10px;">+</button>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#7351A6; cursor:pointer; padding:4px 10px;">+</button>
         </div>
       </div>
       <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-placa" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:10px;">
           <sc-if value="{{ placaEmpty }}" hint-placeholder-val="{{ false }}">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
-              <div style="width:56px; height:56px; border-radius:50%; background:#fdf1f4; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="width:56px; height:56px; border-radius:50%; background:#F4EFFA; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
               <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta ainda</div>
               <div style="font-size:13px; color:#8b97a2; max-width:300px;">Adicione a primeira etiqueta ou importe várias de uma vez por planilha CSV.</div>
               <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
-                <button onClick="{{ addCurrent }}" style="background:#B24668; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
-                <button onClick="{{ doImport }}" style="background:#fff; color:#B24668; border:1px solid #e0a7b6; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;">Importar CSV</button>
+                <button onClick="{{ addCurrent }}" style="background:#7351A6; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
+                <button onClick="{{ doImport }}" style="background:#fff; color:#7351A6; border:1px solid #C8B6E4; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;">Importar CSV</button>
               </div>
             </div>
           </sc-if>
@@ -1229,8 +1229,8 @@ class Component extends DCLogic {
         hasBrand: g.brand !== "semmarca",
         brandBg: 'url("assets/placa/marcas/' + g.brand + '.png")',
         fundoBg: g.fundo === "verde" ? 'url("assets/precificador/fundo-verde2.png")' : 'url("assets/precificador/fundo-rosa.png")',
-        rosaBtnStyle: fBtn + (g.fundo !== "verde" ? "background:#B24668; color:#fff; border:1px solid #B24668;" : "background:#fff; color:#8a6b73; border:1px solid #d8dee4;"),
-        verdeBtnStyle: fBtn + (g.fundo === "verde" ? "background:#9C3557; color:#fff; border:1px solid #9C3557;" : "background:#fff; color:#74656E; border:1px solid #d8dee4;"),
+        rosaBtnStyle: fBtn + (g.fundo !== "verde" ? "background:#D65C7A; color:#fff; border:1px solid #D65C7A;" : "background:#fff; color:#756D80; border:1px solid #d8dee4;"),
+        verdeBtnStyle: fBtn + (g.fundo === "verde" ? "background:#148F8A; color:#fff; border:1px solid #148F8A;" : "background:#fff; color:#756D80; border:1px solid #d8dee4;"),
         setRosa: () => this.updatePr(i, { fundo: "rosa" }),
         setVerde: () => this.updatePr(i, { fundo: "verde" }),
         setBrand: e => this.updatePr(i, { brand: e.target.value }),
@@ -1348,7 +1348,7 @@ class Component extends DCLogic {
       scrollTop: () => window.scrollTo({ top: 0, behavior: "smooth" }),
       isMenuOpen: !!this.state.menuOpen,
       toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
-      menuItemStyle: "background:none; border:none; text-align:left; padding:12px; font-size:14px; font-weight:600; color:" + (this.state.dark ? "#f2e9ed" : "#1a1d21") + "; cursor:pointer; border-radius:8px;",
+      menuItemStyle: "background:none; border:none; text-align:left; padding:12px; font-size:14px; font-weight:600; color:" + (this.state.dark ? "#F2ECF7" : "#1a1d21") + "; cursor:pointer; border-radius:8px;",
       darkLabel: this.state.dark ? "Modo claro" : "Modo escuro",
       menuAdd: () => { this.setState({ menuOpen: false }); this.renderVals().addCurrent(); },
       menuImport: () => this.setState({ menuOpen: false, importOpen: true }),
@@ -1366,8 +1366,8 @@ class Component extends DCLogic {
       mvClass: this.state.mobileView === "sheet" ? "mv-sheet" : "mv-edit",
       setMvEdit: () => this.setState({ mobileView: "edit" }),
       setMvSheet: () => this.setState({ mobileView: "sheet" }),
-      mvEditBtn: "border:none; border-radius:6px; padding:9px 14px; font-size:13px; font-weight:700; cursor:pointer;" + (this.state.mobileView !== "sheet" ? "background:#B24668; color:#fff;" : "background:transparent; color:#8a6b73;"),
-      mvSheetBtn: "border:none; border-radius:6px; padding:9px 14px; font-size:13px; font-weight:700; cursor:pointer;" + (this.state.mobileView === "sheet" ? "background:#B24668; color:#fff;" : "background:transparent; color:#8a6b73;"),
+      mvEditBtn: "border:none; border-radius:6px; padding:9px 14px; font-size:13px; font-weight:700; cursor:pointer;" + (this.state.mobileView !== "sheet" ? "background:#7351A6; color:#fff;" : "background:transparent; color:#756D80;"),
+      mvSheetBtn: "border:none; border-radius:6px; padding:9px 14px; font-size:13px; font-weight:700; cursor:pointer;" + (this.state.mobileView === "sheet" ? "background:#7351A6; color:#fff;" : "background:transparent; color:#756D80;"),
       zoomVal: this.state.zoom || 1,
       zoomPct: Math.round((this.state.zoom || 1) * 100) + "%",
       zoomIn: () => this.setState(s => ({ zoom: Math.min(2, +(((s.zoom || 1) + 0.15).toFixed(2))) })),
