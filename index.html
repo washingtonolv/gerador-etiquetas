@@ -95,12 +95,28 @@
       .mv-sheet .editor-col { display: none !important; }
     }
     .totop { display: none; position: fixed; right: 14px; bottom: 92px; z-index: 60; width: 46px; height: 46px; border-radius: 50%; border: none; background: #05918C; color: #fff; font-size: 20px; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,.25); cursor: pointer; }
-    @media print { .totop { display: none !important; } }
+    @media print { .totop { display: none !important; }  .splash { display: none !important; } }
+    .splash { animation: ddFade .45s ease .85s forwards; }
+    @keyframes ddFade { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+    /* inputs modernos */
+    .card-box input, .card-box select, .card-box textarea { background:#f7f8f9; border:1px solid #e7ebee !important; border-radius:10px !important; transition: box-shadow .15s, border-color .15s, background .15s; }
+    .card-box input:focus, .card-box select:focus, .card-box textarea:focus { outline:none; background:#fff; border-color:#05918C !important; box-shadow:0 0 0 3px rgba(5,145,140,.15); }
+    .dark .card-box input, .dark .card-box select, .dark .card-box textarea { background:#211b1f; border-color:#4a3e44 !important; }
+    .card-box { transition: box-shadow .18s, transform .18s; }
+    .card-box:hover { box-shadow: 0 6px 22px rgba(30,40,50,.09); }
+    .card-box button[title] { border-radius:8px; }
+    .card-box button[title]:hover { background:#f2f4f6 !important; }
+    .dark .card-box button[title]:hover { background:#3a3036 !important; }
   </style>
   <meta name="theme-color" content="#05918C">
   <link rel="manifest" href="manifest.webmanifest">
 </helmet>
-<div class="app-bg {{ ppClass }} {{ darkClass }} {{ mvClass }}" style="min-height:100vh; background:#f2f0f0; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg'); background-size:260px 260px, 120px 120px, 180px 180px; background-position:right -60px bottom -70px, right 200px bottom 160px, left -50px top 120px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
+<div class="no-print splash" id="dd-splash" style="position:fixed; inset:0; z-index:999; background:#05918C; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px;">
+  <img src="assets/placa/image4.png" alt="D&amp;D Cosméticos" style="width:190px; max-width:56vw; filter:brightness(0) invert(1);">
+  <div style="font-family:Archivo, Helvetica, Arial, sans-serif; font-size:14px; font-weight:700; letter-spacing:2.5px; color:rgba(255,255,255,.85); text-transform:uppercase;">Gerador de Etiquetas</div>
+</div>
+
+<div class="app-bg {{ ppClass }} {{ darkClass }} {{ mvClass }}" style="min-height:100vh; background:#f5f3f4; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg'); background-size:420px 420px, 200px 200px, 300px 300px; background-position:right -140px bottom -160px, right 240px bottom 220px, left -120px top 90px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
 
   <div class="no-print hdr-band" style="background:#05918C; padding:14px 22px 18px;">
     <div class="hdr-pill" style="background:#fff; border-radius:999px; padding:8px 8px 8px 20px; display:flex; align-items:center; gap:10px 18px; flex-wrap:wrap; box-shadow:0 6px 24px rgba(120,20,45,.18);">
@@ -192,7 +208,7 @@
           <button onClick="{{ closeImport }}" style="background:none; border:none; color:#8b97a2; font-size:18px; cursor:pointer; line-height:1;">✕</button>
         </div>
         <div style="font-size:13px; color:#5a6873; line-height:1.5;">Uma etiqueta por linha, colunas separadas por <b>;</b><br><b>Nome ; Preço POR ; Preço DE (opcional) ; Marca (opcional)</b><br>No Excel/Planilhas, salve como CSV. As etiquetas entram na aba atual.</div>
-        <button onClick="{{ downloadModel }}" style="background:#fdf1f4; color:#CD4664; border:1px dashed #e0a7b6; border-radius:8px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">⬇ Baixar modelo de importação (.csv)</button>
+        <button onClick="{{ downloadModel }}" style="background:#fff; color:#05918C; border:1.5px dashed #a9d8d5; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#eefaf9; border-color:#05918C;">⬇ Baixar modelo de importação (.csv)</button>
         <label style="display:flex; flex-direction:column; gap:6px; font-size:12px; font-weight:700; color:#6b7885;">
           ARQUIVO PREENCHIDO
           <input type="file" accept=".csv,text/csv,text/comma-separated-values,application/csv,application/vnd.ms-excel,text/plain" onChange="{{ importFile }}" style="width:100%; border:1px solid #d8dee4; border-radius:8px; padding:10px; font-size:13px; font-weight:400;">
@@ -205,10 +221,10 @@
   <!-- ==================== MODELO: PREÇÁRIO ==================== -->
   <sc-if value="{{ isPcr }}" hint-placeholder-val="{{ true }}">
   <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
-    <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
-      <div style="font-size:12px; font-weight:800; letter-spacing:.6px; color:#6b7885; text-transform:uppercase;">Preçário ({{ pcrCount }})</div>
+    <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
+      <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Preçário ({{ pcrCount }})</div>
       <sc-for list="{{ pcrs }}" as="g" hint-placeholder-count="3">
-        <div class="card-box" style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
+        <div class="card-box" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -249,7 +265,7 @@
           </div>
         </div>
       </sc-for>
-      <button onClick="{{ addPcr }}" style="background:#fdf1f4; color:#CD4664; border:1px dashed #e0a7b6; border-radius:8px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar produto</button>
+      <button onClick="{{ addPcr }}" style="background:#fff; color:#05918C; border:1.5px dashed #a9d8d5; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#eefaf9; border-color:#05918C;">+ Adicionar produto</button>
     </div>
 
     <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
@@ -262,7 +278,7 @@
           <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">+</button>
         </div>
       </div>
-      <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
+      <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-pcr" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:10px;">
           <sc-if value="{{ pcrEmpty }}" hint-placeholder-val="{{ false }}">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
@@ -310,10 +326,10 @@
   <!-- ==================== MODELO: PRECIFICADOR ==================== -->
   <sc-if value="{{ isPrec }}" hint-placeholder-val="{{ true }}">
   <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
-    <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
-      <div style="font-size:12px; font-weight:800; letter-spacing:.6px; color:#6b7885; text-transform:uppercase;">Precificadores ({{ prCount }})</div>
+    <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
+      <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Precificadores ({{ prCount }})</div>
       <sc-for list="{{ prs }}" as="g" hint-placeholder-count="3">
-        <div class="card-box" style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
+        <div class="card-box" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -358,7 +374,7 @@
           </div>
         </div>
       </sc-for>
-      <button onClick="{{ addPr }}" style="background:#fdf1f4; color:#CD4664; border:1px dashed #e0a7b6; border-radius:8px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar precificador</button>
+      <button onClick="{{ addPr }}" style="background:#fff; color:#05918C; border:1.5px dashed #a9d8d5; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#eefaf9; border-color:#05918C;">+ Adicionar precificador</button>
     </div>
 
     <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
@@ -371,7 +387,7 @@
           <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">+</button>
         </div>
       </div>
-      <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
+      <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-prec" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:10px;">
           <sc-if value="{{ prEmpty }}" hint-placeholder-val="{{ false }}">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
@@ -410,10 +426,10 @@
   <!-- ==================== MODELO: ETIQUETA MAKE ==================== -->
   <sc-if value="{{ isMake }}" hint-placeholder-val="{{ true }}">
   <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
-    <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
-      <div style="font-size:12px; font-weight:800; letter-spacing:.6px; color:#6b7885; text-transform:uppercase;">Etiquetas ({{ mkCount }})</div>
+    <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
+      <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Etiquetas ({{ mkCount }})</div>
       <sc-for list="{{ mks }}" as="g" hint-placeholder-count="3">
-        <div class="card-box" style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
+        <div class="card-box" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
             <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -454,7 +470,7 @@
           </div>
         </div>
       </sc-for>
-      <button onClick="{{ addMk }}" style="background:#fdf1f4; color:#CD4664; border:1px dashed #e0a7b6; border-radius:8px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar etiqueta</button>
+      <button onClick="{{ addMk }}" style="background:#fff; color:#05918C; border:1.5px dashed #a9d8d5; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#eefaf9; border-color:#05918C;">+ Adicionar etiqueta</button>
     </div>
 
     <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
@@ -467,7 +483,7 @@
           <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">+</button>
         </div>
       </div>
-      <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
+      <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-make" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:10px;">
           <sc-if value="{{ mkEmpty }}" hint-placeholder-val="{{ false }}">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
@@ -506,10 +522,10 @@
   <!-- ==================== MODELO: PLACA PROMOÇÃO ==================== -->
   <sc-if value="{{ isPlaca }}" hint-placeholder-val="{{ true }}">
   <div style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
-    <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:16px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #d3dae0;">
-      <div style="font-size:12px; font-weight:800; letter-spacing:.6px; color:#6b7885; text-transform:uppercase;">Placas ({{ placaCount }})</div>
+    <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
+      <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Placas ({{ placaCount }})</div>
       <sc-for list="{{ placas }}" as="pl" hint-placeholder-count="3">
-        <div class="card-box" style="background:#fff; border:1px solid #d8dee4; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px;">
+        <div class="card-box" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ pl.n }}</span>
             <select value="{{ pl.brand }}" onChange="{{ pl.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
@@ -557,7 +573,7 @@
           </div>
         </div>
       </sc-for>
-      <button onClick="{{ addPlaca }}" style="background:#fdf1f4; color:#CD4664; border:1px dashed #e0a7b6; border-radius:8px; padding:11px; font-size:13px; font-weight:700; cursor:pointer;">+ Adicionar placa</button>
+      <button onClick="{{ addPlaca }}" style="background:#fff; color:#05918C; border:1.5px dashed #a9d8d5; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#eefaf9; border-color:#05918C;">+ Adicionar placa</button>
     </div>
 
     <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
@@ -570,7 +586,7 @@
           <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#CD4664; cursor:pointer; padding:4px 10px;">+</button>
         </div>
       </div>
-      <div class="sheet" style="background:#fff; box-shadow:0 2px 18px rgba(30,50,70,.12); border-radius:4px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
+      <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-placa" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:10px;">
           <sc-if value="{{ placaEmpty }}" hint-placeholder-val="{{ false }}">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
