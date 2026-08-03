@@ -67,7 +67,7 @@
     .pp .g-pcr { grid-template-columns: repeat(3, 50mm) !important; gap: 6mm !important; }
     .pp .g-prec > div, .pp .g-make > div, .pp .g-placa > div, .pp .g-pcr > div { outline: 0.3mm dashed #9aa6b1; outline-offset: 1mm; }
     .pp .sheet { width: 210mm !important; max-width: none !important; padding: 10mm !important; }
-    .fold-label { aspect-ratio: 6.5 / 4; background:#fff; }
+    .fold-label { aspect-ratio: 6.5 / 5; background:#fff; }
     .fold-label-face { position:absolute; inset:0; width:100%; height:100%; background-size:100% 100%; background-position:top left; background-repeat:no-repeat; overflow:hidden; }
     .fold-label-flap { display:none; }
     @media (max-width: 900px) {
@@ -1811,7 +1811,7 @@ class Component extends DCLogic {
     });
 
     const expand = a => a.flatMap(g => Array(Math.max(1, parseInt(g.qty, 10) || 1)).fill(g));
-    const perPage = { placa: 4, pcr: 9, prec: 12, make: 12 };
+    const perPage = { placa: 4, pcr: 9, prec: 10, make: 10 };
     const activeCount = expand(model === "placa" ? placas : model === "pcr" ? pcrs : model === "prec" ? prs : mks).length;
     const pages = Math.max(1, Math.ceil(activeCount / perPage[model]));
     const pageInfo = activeCount + " etiqueta" + (activeCount === 1 ? "" : "s") + " · " + pages + " folha" + (pages === 1 ? "" : "s") + " A4";
