@@ -3,7 +3,7 @@
  "short_name": "Etiquetas D&D",
  "start_url": ".",
  "display": "standalone",
- "background_color": "#F7FAFA",
+ "background_color": "#f2f0f0",
  "theme_color": "#05918C",
  "icons": [
   {

@@ -54,20 +54,25 @@
       .preview-wrap { padding: 0 !important; display: block !important; }
       .sheet { box-shadow: none !important; border: none !important; margin: 0 !important; padding: 0 !important; max-width: none !important; border-radius: 0 !important; }
       .g-prec { grid-template-columns: repeat(2, 65mm) !important; gap: 6mm !important; justify-content:center !important; }
-      .g-make { grid-template-columns: repeat(2, 65mm) !important; gap: 6mm !important; justify-content:center !important; }
+      .g-make { grid-template-columns: repeat(2, 64mm) !important; gap: 6mm !important; justify-content:center !important; }
+      .g-make2 { grid-template-columns: repeat(3, 55mm) !important; gap: 4mm 3mm !important; justify-content:center !important; }
       .g-placa { grid-template-columns: repeat(2, 90mm) !important; gap: 5mm !important; }
-      .g-pcr { grid-template-columns: repeat(3, 50mm) !important; gap: 5mm !important; }
-      .g-prec > div, .g-make > div, .g-placa > div, .g-pcr > div { break-inside: avoid; outline: 0.3mm dashed #9aa6b1 !important; outline-offset: 1mm; border: none !important; border-radius: 0 !important; }
+      .g-pcr { grid-template-columns: repeat(2, 48mm) !important; gap: 6mm !important; justify-content:center !important; }
+      .g-prec > div, .g-make > div, .g-make2 > div, .g-placa > div, .g-pcr > div { break-inside: avoid; outline: 0.3mm dashed #9aa6b1 !important; outline-offset: 1mm; border: none !important; border-radius: 0 !important; }
       .g-placa, .g-pcr { gap: 6mm !important; }
     }
     .pp .no-print { display: none !important; }
     .pp .preview-wrap { padding: 16px !important; }
-    .pp .g-prec, .pp .g-make { grid-template-columns: repeat(2, 65mm) !important; gap: 6mm !important; justify-content:center !important; }
+    .pp .g-prec { grid-template-columns: repeat(2, 65mm) !important; gap: 6mm !important; justify-content:center !important; }
+    .pp .g-make { grid-template-columns: repeat(2, 64mm) !important; gap: 6mm !important; justify-content:center !important; }
+    .pp .g-make2 { grid-template-columns: repeat(3, 55mm) !important; gap: 4mm 3mm !important; justify-content:center !important; }
     .pp .g-placa { grid-template-columns: repeat(2, 90mm) !important; gap: 6mm !important; }
-    .pp .g-pcr { grid-template-columns: repeat(3, 50mm) !important; gap: 6mm !important; }
-    .pp .g-prec > div, .pp .g-make > div, .pp .g-placa > div, .pp .g-pcr > div { outline: 0.3mm dashed #9aa6b1; outline-offset: 1mm; }
+    .pp .g-pcr { grid-template-columns: repeat(2, 48mm) !important; gap: 6mm !important; justify-content:center !important; }
+    .pp .g-prec > div, .pp .g-make > div, .pp .g-make2 > div, .pp .g-placa > div, .pp .g-pcr > div { outline: 0.3mm dashed #9aa6b1; outline-offset: 1mm; }
     .pp .sheet { width: 210mm !important; max-width: none !important; padding: 10mm !important; }
-    .fold-label { aspect-ratio: 6.5 / 3.9; background:#fff; }
+    .fold-label { aspect-ratio: 6.4 / 3.9; background:#fff; }
+    .g-make2 .fold-label { aspect-ratio: 5.5 / 2.7; }
+    .g-make2 > div { outline: none !important; border: 0.2mm solid #444 !important; }
     .fold-label-face { position:absolute; inset:0; width:100%; height:100%; background-size:100% 100%; background-position:top left; background-repeat:no-repeat; overflow:hidden; }
     .fold-label-flap { display:none; }
     @media (max-width: 900px) {
@@ -818,7 +823,7 @@
   <h1 class="splash-title">Gerador<br>de Etiquetas</h1>
 </div>
 
-<div class="app-bg {{ ppClass }} {{ darkClass }} {{ mvClass }} {{ panelClass }}" style="min-height:100vh; background:#f5f3f4; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg'); background-size:420px 420px, 200px 200px, 300px 300px; background-position:right -140px bottom -160px, right 240px bottom 220px, left -120px top 90px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
+<div class="app-bg {{ ppClass }} {{ darkClass }} {{ mvClass }} {{ panelClass }}" style="min-height:100vh; background:#f5f3f4; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg');ts/flor.svg'); background-size:420px 420px, 200px 200px, 300px 300px; background-position:right -140px bottom -160px, right 240px bottom 220px, left -120px top 90px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
 
   <div class="no-print hdr-band" style="background:#05918C; padding:14px 22px 18px;">
     <div class="hdr-pill" style="background:#fff; border-radius:999px; padding:8px 8px 8px 20px; display:flex; align-items:center; gap:10px 18px; flex-wrap:wrap; box-shadow:0 6px 24px rgba(120,20,45,.18);">
@@ -827,10 +832,11 @@
         <span style="font-size:15px; font-weight:800; color:#1a1d21; letter-spacing:.2px; white-space:nowrap;">Etiquetas D&amp;D</span>
       </div>
       <div class="tabbar" style="display:flex; align-items:center; gap:2px; overflow-x:auto; max-width:100%;">
+        <button class="tab-btn" data-on="{{ tabMakeOn }}" onClick="{{ showMake }}" style="{{ tabMakeStyle }}">Etiquetas Padrão</button>
+        <button class="tab-btn" data-on="{{ tabMake2On }}" onClick="{{ showMake2 }}" style="{{ tabMake2Style }}">Régua de Preços</button>
+        <button class="tab-btn" data-on="{{ tabPrecOn }}" onClick="{{ showPrec }}" style="{{ tabPrecStyle }}">Etiquetas Promocionais</button>
         <button class="tab-btn" data-on="{{ tabPlacaOn }}" onClick="{{ showPlaca }}" style="{{ tabPlacaStyle }}">Placas promocionais</button>
         <button class="tab-btn" data-on="{{ tabPcrOn }}" onClick="{{ showPcr }}" style="{{ tabPcrStyle }}">Preçário</button>
-        <button class="tab-btn" data-on="{{ tabPrecOn }}" onClick="{{ showPrec }}" style="{{ tabPrecStyle }}">Etiquetas de preço</button>
-        <button class="tab-btn" data-on="{{ tabMakeOn }}" onClick="{{ showMake }}" style="{{ tabMakeStyle }}">Etiquetas Make</button>
       </div>
       <div style="flex:1;"></div>
       <div class="hdr-compact" style="display:none; position:relative;">
@@ -856,7 +862,7 @@
         <button onClick="{{ clearCurrent }}" class="hdr-btn" title="Limpar a aba atual" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px;" style-hover="background:#ECF8F7; color:#05918C;">Limpar</button>
         <button onClick="{{ toggleDark }}" class="hdr-btn" title="Modo escuro" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px; padding:8px;" style-hover="background:#ECF8F7;">{{ darkIcon }}</button>
         <button onClick="{{ openHelp }}" class="hdr-btn" title="Guia rápido" style="background:none; border:none; color:#7c6b71; font-size:15px; font-weight:700; cursor:pointer; padding:8px 10px; border-radius:999px; padding:8px 12px;" style-hover="background:#ECF8F7; color:#05918C;">?</button>
-        <button onClick="{{ doPrint }}" class="hdr-btn print-btn" style="background:#1a1d21; color:#fff; border:none; border-radius:999px; padding:12px 22px; font-size:14px; font-weight:800; cursor:pointer; white-space:nowrap;" style-hover="background:#05918C;">Imprimir / PDF</button>
+<button onClick="{{ doPrint }}" class="hdr-btn print-btn" style="background:#1a1d21; color:#fff; border:none; border-radius:999px; padding:12px 22px; font-size:14px; font-weight:800; cursor:pointer; white-space:nowrap;" style-hover="background:#05918C;">Imprimir / PDF</button>
       </div>
     </div>
   </div>
@@ -1034,7 +1040,7 @@
             </div>
           </sc-if>
           <sc-for list="{{ pcrsGrid }}" as="g" hint-placeholder-count="3">
-            <div class="label-preview" data-active="{{ g.activeOn }}" onClick="{{ g.activatePreview }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:5 / 7; background:#FFE1E4; overflow:hidden; border:1px solid #f0dade; border-radius:2px; container-type:inline-size;">
+            <div class="label-preview" data-active="{{ g.activeOn }}" onClick="{{ g.activatePreview }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:4.8 / 6.8; background:#FFE1E4; overflow:hidden; border:1px solid #f0dade; border-radius:2px; container-type:inline-size;">
               <button class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
               <div style="position:absolute; left:0; top:58.7%; width:100%; height:41.3%; background-image:url('assets/placa/nuvem-rosa.png'); background-size:cover; background-position:center bottom; background-repeat:no-repeat;"></div>
               <div style="position:absolute; left:40%; top:38.7%; width:56.7%; aspect-ratio:1 / 1; background-image:url('assets/placa/flor-verde.png'); background-size:contain; background-repeat:no-repeat;"></div>
@@ -1288,6 +1294,114 @@
   </div>
   </sc-if>
 
+  <sc-if value="{{ isMake2 }}" hint-placeholder-val="{{ true }}">
+  <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
+    <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
+      <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
+      <div class="editor-panel-content">
+      <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Etiquetas ({{ mk2Count }})</div>
+      <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
+      <sc-for list="{{ mks2 }}" as="g" hint-placeholder-count="3">
+        <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+          <button type="button" class="card-summary" onClick="{{ g.activate }}" aria-expanded="{{ g.activeExpanded }}"><span class="card-summary-index">#{{ g.n }}</span><span class="card-summary-name">{{ g.summaryName }}</span><span class="card-summary-price">R$ {{ g.porShow }}</span><span class="card-summary-arrow">›</span></button>
+          <div class="card-content">
+            <div class="card-content-inner">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
+            <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
+              <sc-for list="{{ placaBrandOptions }}" as="b" hint-placeholder-count="17">
+                <option value="{{ b.key }}">{{ b.label }}</option>
+              </sc-for>
+            </select>
+            <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}"><div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ g.brandBg }};"></div></sc-if>
+            <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
+            <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
+            <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
+            <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+          </div>
+          <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Descrição do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:600;"></textarea>
+          <div style="display:flex; gap:8px;">
+            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+              <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">DE (ANTES)</span>
+              <input value="{{ g.dePrice }}" onChange="{{ g.setDe }}" onFocus="{{ g.selectPrice }}" onBlur="{{ g.formatDe }}" inputMode="decimal" placeholder="opcional" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
+            </div>
+            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+              <span style="font-size:10px; font-weight:700; color:#CD4664; letter-spacing:.4px;">POR R$</span>
+              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onFocus="{{ g.selectPrice }}" onBlur="{{ g.formatPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" style="width:100%; border:1px solid #B9DEDC; border-radius:6px; padding:7px; font-size:13px;">
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <label style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#5a6873; cursor:pointer;">
+              <input type="checkbox" checked="{{ g.cada }}" onChange="{{ g.setCada }}"> Mostrar "cada"
+            </label>
+            <div style="flex:1;"></div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
+                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
+                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+              </div>
+              <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
+            </div>
+          </div>
+                              </div>
+</div>
+</div>
+      </sc-for>
+      <button onClick="{{ addMk2 }}" style="background:#fff; color:#05918C; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#ECF8F7; border-color:#05918C;">+ Adicionar etiqueta</button>
+          </div>
+</div>
+
+    <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
+      <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
+        <span style="font-size:12px; font-weight:700; color:#8b97a2;">{{ pageInfo }}</span>
+        <div style="flex:1;"></div>
+        <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#05918C; cursor:pointer; padding:4px 10px;">−</button>
+          <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#05918C; cursor:pointer; padding:4px 10px;">+</button>
+        </div>
+      </div>
+      <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
+        <div class="g-make2" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:10px;">
+          <sc-if value="{{ mk2Empty }}" hint-placeholder-val="{{ false }}">
+            <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
+              <div style="width:56px; height:56px; border-radius:50%; background:#ECF8F7; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta ainda</div>
+              <div style="font-size:13px; color:#8b97a2; max-width:300px;">Adicione a primeira etiqueta ou importe várias de uma vez por planilha CSV.</div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+                <button onClick="{{ addCurrent }}" style="background:#05918C; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
+                <button onClick="{{ doImport }}" style="background:#fff; color:#05918C; border:1px solid #A9DAD7; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;">Importar CSV</button>
+              </div>
+            </div>
+          </sc-if>
+          <sc-for list="{{ mks2Grid }}" as="g" hint-placeholder-count="3">
+            <div class="label-preview fold-label" data-active="{{ g.activeOn }}" onClick="{{ g.activatePreview }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
+              <button class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+              <div class="fold-label-face" style="background-image:url('assets/precificador/fundo-verde.png');">
+              <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:1.5%; top:6%; width:30%;">
+              <div style="position:absolute; left:2%; top:54%; width:40%; font-size:3.25cqw; font-weight:800; line-height:1.15; color:#171717; text-transform:uppercase; text-wrap:balance;">{{ g.name }}</div>
+              <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}">
+                <div style="position:absolute; left:2%; top:79%; width:20%; height:16%; background-image:{{ g.brandBg }}; background-size:contain; background-position:left center; background-repeat:no-repeat;"></div>
+              </sc-if>
+              <sc-if value="{{ g.hasDe }}" hint-placeholder-val="{{ true }}">
+                <div style="position:absolute; left:58%; top:33%; font-size:5.1cqw; font-weight:700; color:#fff;">DE: R$ {{ g.deShow }}</div>
+              </sc-if>
+              <div style="position:absolute; right:44%; top:52%; text-align:right; font-size:4.2cqw; font-weight:700; color:#fff; line-height:1.35;">POR:<br>R$</div>
+              <div style="position:absolute; left:57.5%; top:46%; display:flex; align-items:flex-start; color:#fff;">
+                <span style="font-size:14.8cqw; font-weight:900; line-height:1;">{{ g.reais }}</span>
+                <span style="font-size:8.3cqw; font-weight:700; line-height:1.1; margin-top:5.8cqw;">,{{ g.centavos }}<sc-if value="{{ g.showCada }}" hint-placeholder-val="{{ true }}"><span style="display:block; font-size:4.4cqw; font-weight:700; line-height:1.1; text-align:center;">cada</span></sc-if></span>
+              </div>
+              </div>
+              <div class="fold-label-flap"></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
   <!-- ==================== MODELO: PLACA PROMOÇÃO ==================== -->
   <sc-if value="{{ isPlaca }}" hint-placeholder-val="{{ true }}">
   <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
@@ -1419,6 +1533,7 @@ class Component extends DCLogic {
     activePcr: 0,
     activePr: 0,
     activeMk: 0,
+    activeMk2: 0,
     activePlaca: 0,
    pcrs: [
       { brand: "boticario", name: "Hid. Obsessão por Baunilha 400ml", dePrice: "58,99", porPrice: "39,90" },
@@ -1427,6 +1542,9 @@ class Component extends DCLogic {
       { brand: "avon", fundo: "rosa", name: "Pó Bronzer", dePrice: "75,00", porPrice: "56,90" },
     ],
     mks: [
+      { brand: "semmarca", name: "Blush Retinol", dePrice: "", porPrice: "53,99", cada: true },
+    ],
+    mks2: [
       { brand: "semmarca", name: "Blush Retinol", dePrice: "", porPrice: "53,99", cada: true },
     ],
     placas: [
@@ -1455,11 +1573,14 @@ class Component extends DCLogic {
   updateMk(i, patch) {
     this.setState(s => ({ mks: s.mks.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
   }
+  updateMk2(i, patch) {
+    this.setState(s => ({ mks2: s.mks2.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
+  }
   updatePlaca(i, patch) {
     this.setState(s => ({ placas: s.placas.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
   }
   activeKeyFor(key) {
-    return key === "placas" ? "activePlaca" : key === "pcrs" ? "activePcr" : key === "prs" ? "activePr" : "activeMk";
+    return key === "placas" ? "activePlaca" : key === "pcrs" ? "activePcr" : key === "prs" ? "activePr" : key === "mks2" ? "activeMk2" : "activeMk";
   }
   toggleItem(key, i) {
     const activeKey = this.activeKeyFor(key);
@@ -1564,6 +1685,7 @@ class Component extends DCLogic {
         pcrs: this.state.pcrs,
         prs: this.state.prs,
         mks: this.state.mks,
+        mks2: this.state.mks2,
         placas: this.state.placas,
       },
     };
@@ -1585,10 +1707,12 @@ class Component extends DCLogic {
         pcrs: data.pcrs,
         prs: data.prs,
         mks: data.mks,
+        mks2: data.mks2 || this.state.mks2,
         placas: data.placas,
         activePcr: 0,
         activePr: 0,
         activeMk: 0,
+    activeMk2: 0,
         activePlaca: 0,
         importOpen: false,
       });
@@ -1622,7 +1746,7 @@ class Component extends DCLogic {
     }
   }
   listKey(model) {
-    return model === "placa" ? "placas" : model === "pcr" ? "pcrs" : model === "prec" ? "prs" : "mks";
+    return model === "placa" ? "placas" : model === "pcr" ? "pcrs" : model === "prec" ? "prs" : model === "make2" ? "mks2" : "mks";
   }
   importText(txt) {
     const norm = t => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]/g, "");
@@ -1657,7 +1781,7 @@ class Component extends DCLogic {
     const shaped = items.map(it =>
       key === "placas" ? { brand: it.brand, name: it.name, desc: "", dePrice: it.dePrice, porPrice: it.porPrice } :
       key === "prs" ? { brand: it.brand, fundo: "rosa", name: it.name, dePrice: it.dePrice, porPrice: it.porPrice } :
-      key === "mks" ? { brand: it.brand, name: it.name, dePrice: it.dePrice, porPrice: it.porPrice, cada: false } :
+      (key === "mks" || key === "mks2") ? { brand: it.brand, name: it.name, dePrice: it.dePrice, porPrice: it.porPrice, cada: false } :
       { brand: it.brand, name: it.name, dePrice: it.dePrice, porPrice: it.porPrice });
     const activeKey = this.activeKeyFor(key);
     this.setState(s => ({ [key]: [...s[key], ...shaped], [activeKey]: s[key].length, importOpen: false }));
@@ -1776,6 +1900,39 @@ class Component extends DCLogic {
       };
     });
 
+    const mks2 = this.state.mks2.map((g, i) => {
+      const { reais, centavos } = this.splitPrice(g.porPrice);
+      return {
+        ...g, n: i + 1, reais, centavos, qty: parseInt(g.qty, 10) || 1,
+        cardIndex: i, activeOn: this.state.activeMk2 === i ? "1" : "0",
+        activeExpanded: this.state.activeMk2 === i ? "true" : "false",
+        summaryName: (g.name || "Sem nome").trim(), porShow: this.fmtPrice(g.porPrice),
+        activate: () => this.toggleItem("mks2", i),
+        activatePreview: () => this.activateItem("mks2", i, true),
+        hasDe: !!(g.dePrice || "").trim(),
+        showCada: !!g.cada,
+        hasBrand: g.brand !== "semmarca",
+        brandBg: 'url("assets/placa/marcas/' + g.brand + '.png")',
+        setBrand: e => this.updateMk2(i, { brand: e.target.value }),
+        setName: e => this.updateMk2(i, { name: e.target.value }),
+        setDe: e => this.updateMk2(i, { dePrice: e.target.value }),
+        setPor: e => this.updateMk2(i, { porPrice: e.target.value }),
+        selectPrice: e => e.target.select(),
+        formatDe: () => this.updateMk2(i, { dePrice: this.normalizePriceField(this.state.mks2[i].dePrice, true) }),
+        formatPor: () => this.updateMk2(i, { porPrice: this.normalizePriceField(this.state.mks2[i].porPrice) }),
+        setQty: e => this.updateMk2(i, { qty: e.target.value }),
+        qtyMinus: () => this.updateMk2(i, { qty: Math.max(1, (parseInt(this.state.mks2[i].qty, 10) || 1) - 1) }),
+        qtyPlus: () => this.updateMk2(i, { qty: Math.min(999, (parseInt(this.state.mks2[i].qty, 10) || 1) + 1) }),
+        deShow: this.fmtPrice(g.dePrice),
+        dup: () => this.setState(s => ({ mks2: [...s.mks2.slice(0, i + 1), { ...s.mks2[i] }, ...s.mks2.slice(i + 1)], activeMk2: i + 1 })),
+        moveUp: () => this.moveItem("mks2", i, -1),
+        moveDown: () => this.moveItem("mks2", i, 1),
+        setCada: e => this.updateMk2(i, { cada: e.target.checked }),
+        remove: () => this.removeItem("mks2", i),
+        removePreview: e => { e?.stopPropagation?.(); this.removePreviewItem("mks2", i); },
+      };
+    });
+
     const placas = this.state.placas.map((pl, i) => {
       const { reais, centavos } = this.splitPrice(pl.porPrice);
       return {
@@ -1811,33 +1968,38 @@ class Component extends DCLogic {
     });
 
     const expand = a => a.flatMap(g => Array(Math.max(1, parseInt(g.qty, 10) || 1)).fill(g));
-    const perPage = { placa: 4, pcr: 9, prec: 12, make: 12 };
-    const activeCount = expand(model === "placa" ? placas : model === "pcr" ? pcrs : model === "prec" ? prs : mks).length;
+    const perPage = { placa: 4, pcr: 9, prec: 12, make: 12, make2: 30 };
+    const activeCount = expand(model === "placa" ? placas : model === "pcr" ? pcrs : model === "prec" ? prs : model === "make2" ? mks2 : mks).length;
     const pages = Math.max(1, Math.ceil(activeCount / perPage[model]));
     const pageInfo = activeCount + " etiqueta" + (activeCount === 1 ? "" : "s") + " · " + pages + " folha" + (pages === 1 ? "" : "s") + " A4";
 
     return {
       isPlaca: model === "placa",
       isMake: model === "make",
+      isMake2: model === "make2",
       isPrec: model === "prec",
       isPcr: model === "pcr",
       tabPlacaOn: model === "placa" ? "1" : "0",
       tabPcrOn: model === "pcr" ? "1" : "0",
       tabPrecOn: model === "prec" ? "1" : "0",
       tabMakeOn: model === "make" ? "1" : "0",
+      tabMake2On: model === "make2" ? "1" : "0",
       tabPlacaStyle: model === "placa" ? on : off,
       tabMakeStyle: model === "make" ? on : off,
+      tabMake2Style: model === "make2" ? on : off,
       tabPrecStyle: model === "prec" ? on : off,
       tabPcrStyle: model === "pcr" ? on : off,
       showPlaca: () => this.setState({ model: "placa" }),
       showMake: () => this.setState({ model: "make" }),
+      showMake2: () => this.setState({ model: "make2" }),
       showPrec: () => this.setState({ model: "prec" }),
       showPcr: () => this.setState({ model: "pcr" }),
       placas, placaCount: placas.length,
-      placaEmpty: placas.length === 0, pcrEmpty: pcrs.length === 0, prEmpty: prs.length === 0, mkEmpty: mks.length === 0,
-      placasGrid: expand(placas), mksGrid: expand(mks), prsGrid: expand(prs), pcrsGrid: expand(pcrs),
+      placaEmpty: placas.length === 0, pcrEmpty: pcrs.length === 0, prEmpty: prs.length === 0, mkEmpty: mks.length === 0, mk2Empty: mks2.length === 0,
+      placasGrid: expand(placas), mksGrid: expand(mks), mks2Grid: expand(mks2), prsGrid: expand(prs), pcrsGrid: expand(pcrs),
       pageInfo,
       mks, mkCount: mks.length,
+      mks2, mk2Count: mks2.length,
       prs, prCount: prs.length,
       pcrs, pcrCount: pcrs.length,
       placaBrandOptions: this.placaBrands,
@@ -1847,6 +2009,8 @@ class Component extends DCLogic {
       addPlaca: () => this.addItem("placas", { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }),
       addCurrent: () => model === "make"
         ? this.addItem("mks", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false })
+        : model === "make2"
+        ? this.addItem("mks2", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false })
         : model === "prec"
         ? this.addItem("prs", { brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" })
         : model === "pcr"
@@ -1943,7 +2107,7 @@ class Component extends DCLogic {
       confirmPrint: () => { this.setState({ printOpen: false }); setTimeout(() => window.print(), 80); },
       printCount: activeCount,
       printPages: pages,
-      printModel: model === "placa" ? "Placas promocionais" : model === "pcr" ? "Preçário" : model === "prec" ? "Etiquetas de preço" : "Etiquetas Make",
+      printModel: model === "placa" ? "Placas promocionais" : model === "pcr" ? "Preçário" : model === "prec" ? "Etiquetas Promocionais" : model === "make2" ? "Régua de Preços" : "Etiquetas Padrão",
       isImportOpen: !!this.state.importOpen,
       closeImport: () => this.setState({ importOpen: false }),
       downloadModel: () => {
