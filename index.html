@@ -67,6 +67,9 @@
     .pp .g-pcr { grid-template-columns: repeat(3, 50mm) !important; gap: 6mm !important; }
     .pp .g-prec > div, .pp .g-make > div, .pp .g-placa > div, .pp .g-pcr > div { outline: 0.3mm dashed #9aa6b1; outline-offset: 1mm; }
     .pp .sheet { width: 210mm !important; max-width: none !important; padding: 10mm !important; }
+    .fold-label { aspect-ratio: 6.5 / 5.5; background:#fff; }
+    .fold-label-face { position:absolute; inset:0 0 auto; width:100%; height:63.6364%; background-size:100% 100%; background-position:top left; background-repeat:no-repeat; overflow:hidden; }
+    .fold-label-flap { position:absolute; inset:auto 0 0; width:100%; height:36.3636%; background:#fff; border-top:1px dashed #9aa6b1; display:flex; align-items:center; justify-content:center; color:#7b858d; font-size:2.25cqw; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
     @media (max-width: 900px) {
       .hdr-btn { min-height: 44px !important; }
       .tab-btn { min-height: 40px !important; }
@@ -1150,8 +1153,9 @@
             </div>
           </sc-if>
           <sc-for list="{{ prsGrid }}" as="g" hint-placeholder-count="3">
-            <div class="label-preview" data-active="{{ g.activeOn }}" onClick="{{ g.activatePreview }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:6.5 / 4.3; background-image:{{ g.fundoBg }}; background-size:100% 100%; background-position:top left; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
+            <div class="label-preview fold-label" data-active="{{ g.activeOn }}" onClick="{{ g.activatePreview }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
               <button class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+              <div class="fold-label-face" style="background-image:{{ g.fundoBg }};">
               <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:2.9%; top:5.7%; width:30.7%;">
               <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}">
                 <div style="position:absolute; left:5.4%; top:44%; width:19%; height:12%; background-image:{{ g.brandBg }}; background-size:contain; background-position:left center; background-repeat:no-repeat;"></div>
@@ -1165,6 +1169,8 @@
                 <span style="font-size:16cqw; font-weight:900; line-height:1;">{{ g.reais }}</span>
                 <span style="font-size:7.5cqw; font-weight:700; line-height:1.1; margin-top:6.5cqw;">,{{ g.centavos }}<sc-if value="{{ g.showCada }}" hint-placeholder-val="{{ true }}"><span style="display:block; font-size:4cqw; font-weight:700; line-height:1.1; text-align:center;">cada</span></sc-if></span>
               </div>
+              </div>
+              <div class="fold-label-flap">aba de dobra · 2 cm</div>
             </div>
           </sc-for>
         </div>
@@ -1256,8 +1262,9 @@
             </div>
           </sc-if>
           <sc-for list="{{ mksGrid }}" as="g" hint-placeholder-count="3">
-            <div class="label-preview" data-active="{{ g.activeOn }}" onClick="{{ g.activatePreview }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:6.5 / 4.3; background-image:url('assets/precificador/fundo-verde.png'); background-size:100% 100%; background-repeat:no-repeat; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
+            <div class="label-preview fold-label" data-active="{{ g.activeOn }}" onClick="{{ g.activatePreview }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
               <button class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+              <div class="fold-label-face" style="background-image:url('assets/precificador/fundo-verde.png');">
               <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:1%; top:5%; width:48%;">
               <div style="position:absolute; left:2%; top:57%; width:38%; font-size:3.25cqw; font-weight:800; line-height:1.15; color:#171717; text-transform:uppercase; text-wrap:balance;">{{ g.name }}</div>
               <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}">
@@ -1271,6 +1278,8 @@
                 <span style="font-size:14.8cqw; font-weight:900; line-height:1;">{{ g.reais }}</span>
                 <span style="font-size:8.3cqw; font-weight:700; line-height:1.1; margin-top:5.8cqw;">,{{ g.centavos }}<sc-if value="{{ g.showCada }}" hint-placeholder-val="{{ true }}"><span style="display:block; font-size:4.4cqw; font-weight:700; line-height:1.1; text-align:center;">cada</span></sc-if></span>
               </div>
+              </div>
+              <div class="fold-label-flap">aba de dobra · 2 cm</div>
             </div>
           </sc-for>
         </div>
@@ -1802,7 +1811,7 @@ class Component extends DCLogic {
     });
 
     const expand = a => a.flatMap(g => Array(Math.max(1, parseInt(g.qty, 10) || 1)).fill(g));
-    const perPage = { placa: 4, pcr: 9, prec: 10, make: 10 };
+    const perPage = { placa: 4, pcr: 9, prec: 8, make: 8 };
     const activeCount = expand(model === "placa" ? placas : model === "pcr" ? pcrs : model === "prec" ? prs : mks).length;
     const pages = Math.max(1, Math.ceil(activeCount / perPage[model]));
     const pageInfo = activeCount + " etiqueta" + (activeCount === 1 ? "" : "s") + " · " + pages + " folha" + (pages === 1 ? "" : "s") + " A4";
