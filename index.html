@@ -53,8 +53,8 @@
       .app-bg { background: #fff !important; min-height: 0 !important; }
       .preview-wrap { padding: 0 !important; display: block !important; }
       .sheet { box-shadow: none !important; border: none !important; margin: 0 !important; padding: 0 !important; max-width: none !important; border-radius: 0 !important; }
-      .g-prec { grid-template-columns: 65mm !important; gap: 6mm !important; justify-content:center !important; }
-      .g-make { grid-template-columns: 65mm !important; gap: 6mm !important; justify-content:center !important; }
+      .g-prec { grid-template-columns: repeat(2, 65mm) !important; gap: 6mm !important; justify-content:center !important; }
+      .g-make { grid-template-columns: repeat(2, 65mm) !important; gap: 6mm !important; justify-content:center !important; }
       .g-placa { grid-template-columns: repeat(2, 90mm) !important; gap: 5mm !important; }
       .g-pcr { grid-template-columns: repeat(3, 50mm) !important; gap: 5mm !important; }
       .g-prec > div, .g-make > div, .g-placa > div, .g-pcr > div { break-inside: avoid; outline: 0.3mm dashed #9aa6b1 !important; outline-offset: 1mm; border: none !important; border-radius: 0 !important; }
@@ -62,7 +62,7 @@
     }
     .pp .no-print { display: none !important; }
     .pp .preview-wrap { padding: 16px !important; }
-    .pp .g-prec, .pp .g-make { grid-template-columns: 65mm !important; gap: 6mm !important; justify-content:center !important; }
+    .pp .g-prec, .pp .g-make { grid-template-columns: repeat(2, 65mm) !important; gap: 6mm !important; justify-content:center !important; }
     .pp .g-placa { grid-template-columns: repeat(2, 90mm) !important; gap: 6mm !important; }
     .pp .g-pcr { grid-template-columns: repeat(3, 50mm) !important; gap: 6mm !important; }
     .pp .g-prec > div, .pp .g-make > div, .pp .g-placa > div, .pp .g-pcr > div { outline: 0.3mm dashed #9aa6b1; outline-offset: 1mm; }
@@ -1811,7 +1811,7 @@ class Component extends DCLogic {
     });
 
     const expand = a => a.flatMap(g => Array(Math.max(1, parseInt(g.qty, 10) || 1)).fill(g));
-    const perPage = { placa: 4, pcr: 9, prec: 5, make: 5 };
+    const perPage = { placa: 4, pcr: 9, prec: 10, make: 10 };
     const activeCount = expand(model === "placa" ? placas : model === "pcr" ? pcrs : model === "prec" ? prs : mks).length;
     const pages = Math.max(1, Math.ceil(activeCount / perPage[model]));
     const pageInfo = activeCount + " etiqueta" + (activeCount === 1 ? "" : "s") + " · " + pages + " folha" + (pages === 1 ? "" : "s") + " A4";
