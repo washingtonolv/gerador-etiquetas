@@ -69,7 +69,7 @@
     .pp .sheet { width: 210mm !important; max-width: none !important; padding: 10mm !important; }
     .fold-label { aspect-ratio: 6.5 / 5.5; background:#fff; }
     .fold-label-face { position:absolute; inset:0 0 auto; width:100%; height:63.6364%; background-size:100% 100%; background-position:top left; background-repeat:no-repeat; overflow:hidden; }
-    .fold-label-flap { position:absolute; inset:auto 0 0; width:100%; height:36.3636%; background:#fff; border-top:1px dashed #9aa6b1; display:flex; align-items:center; justify-content:center; color:#7b858d; font-size:2.25cqw; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+    .fold-label-flap { position:absolute; inset:auto 0 0; width:100%; height:36.3636%; background:#fff; }
     @media (max-width: 900px) {
       .hdr-btn { min-height: 44px !important; }
       .tab-btn { min-height: 40px !important; }
@@ -1170,7 +1170,7 @@
                 <span style="font-size:7.5cqw; font-weight:700; line-height:1.1; margin-top:6.5cqw;">,{{ g.centavos }}<sc-if value="{{ g.showCada }}" hint-placeholder-val="{{ true }}"><span style="display:block; font-size:4cqw; font-weight:700; line-height:1.1; text-align:center;">cada</span></sc-if></span>
               </div>
               </div>
-              <div class="fold-label-flap">aba de dobra · 2 cm</div>
+              <div class="fold-label-flap"></div>
             </div>
           </sc-for>
         </div>
@@ -1279,7 +1279,7 @@
                 <span style="font-size:8.3cqw; font-weight:700; line-height:1.1; margin-top:5.8cqw;">,{{ g.centavos }}<sc-if value="{{ g.showCada }}" hint-placeholder-val="{{ true }}"><span style="display:block; font-size:4.4cqw; font-weight:700; line-height:1.1; text-align:center;">cada</span></sc-if></span>
               </div>
               </div>
-              <div class="fold-label-flap">aba de dobra · 2 cm</div>
+              <div class="fold-label-flap"></div>
             </div>
           </sc-for>
         </div>
