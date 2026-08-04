@@ -100,7 +100,7 @@
     .pais6-page:not(.pp) .pais6-label {
       width: 100% !important;
       height: auto !important;
-      aspect-ratio: 1.013 / 1 !important;
+      aspect-ratio: 105 / 148 !important;
       background-size: 100% 100% !important;
     }
     @media (max-width: 700px) {
@@ -1679,16 +1679,17 @@
           <sc-for list="{{ pss6Grid }}" as="g" hint-placeholder-count="3">
             <div class="label-preview pais6-label" data-active="{{ g.activeOn }}" onClick="{{ g.activatePreview }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:105 / 148; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-color:#00928d; background-repeat:no-repeat; background-position:top center; background-size:100% auto; background-image:{{ g.pais6Bg }};">
               <button class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
-              <div style="position:absolute; left:6.9%; top:27cqw; width:41%; max-height:26cqw; overflow:hidden; font-size:{{ g.nameSize }}; font-weight:800; line-height:1.15; color:#171717; text-transform:uppercase; text-wrap:balance; overflow-wrap:break-word;">{{ g.name }}</div>
+              <div style="position:absolute; left:5%; top:33.6%; width:47%; max-height:13.5%; overflow:hidden; font-size:{{ g.nameSize }}; font-weight:800; line-height:1.15; color:#171717; text-transform:uppercase; text-wrap:balance; overflow-wrap:break-word;">{{ g.name }}</div>
               <sc-if value="{{ g.hasDe }}" hint-placeholder-val="{{ true }}">
-                <div style="position:absolute; left:52%; top:39cqw; width:40%; display:flex; align-items:flex-start; justify-content:center; color:#FFE3C0; text-decoration:line-through;">
-                  <span style="font-size:8cqw; font-weight:800; line-height:1;">{{ g.deReais }}</span>
-                  <span style="font-size:6.7cqw; font-weight:700; line-height:1.1;">,{{ g.deCentavos }}</span>
+                <div style="position:absolute; left:25.5%; top:58.3%; width:61%; display:flex; align-items:baseline; justify-content:flex-start; gap:1.2cqw; color:#FFE3C0; white-space:nowrap;">
+                  <span style="font-size:5cqw; font-weight:700; line-height:1;">de: R$</span>
+                  <span style="font-size:7cqw; font-weight:800; line-height:1; text-decoration:line-through;">{{ g.deReais }},{{ g.deCentavos }}</span>
                 </div>
               </sc-if>
-              <div style="position:absolute; left:24%; top:48cqw; width:70%; display:flex; align-items:flex-start; justify-content:center; color:#fff; white-space:nowrap;">
-                <span style="font-size:{{ g.reaisSize }}; font-weight:900; line-height:1;">{{ g.reais }}</span>
-                <span style="font-size:12cqw; font-weight:800; line-height:1.1; margin-top:2cqw;">,{{ g.centavos }}<sc-if value="{{ g.showCada }}" hint-placeholder-val="{{ true }}"><span style="display:block; font-size:6cqw; font-weight:700; line-height:1.1; text-align:center;">cada</span></sc-if></span>
+              <div style="position:absolute; left:7.5%; top:70.8%; width:89%; display:flex; align-items:center; color:#fff; white-space:nowrap;">
+                <span style="flex:none; width:18%; font-size:5cqw; font-weight:800; line-height:1.05;">Por:<br>R$</span>
+                <span style="font-size:{{ g.reaisSize }}; font-weight:900; line-height:.9;">{{ g.reais }}</span>
+                <span style="font-size:9.9cqw; font-weight:800; line-height:1.1; margin-top:-5cqw;">,{{ g.centavos }}<sc-if value="{{ g.showCada }}" hint-placeholder-val="{{ true }}"><span style="display:block; font-size:5cqw; font-weight:700; line-height:1.1; text-align:center;">cada</span></sc-if></span>
               </div>
             </div>
           </sc-for>
@@ -2456,9 +2457,9 @@ class Component extends DCLogic {
       const { reais, centavos } = this.splitPrice(g.porPrice);
       return {
         ...g, n: i + 1, reais, centavos,
-        pais6Bg: "url('assets/pais/" + (this.paisArt.indexOf(g.brand) !== -1 ? g.brand : "semmarca") + ".png')",
-        reaisSize: String(reais).length > 3 ? "18cqw" : String(reais).length > 2 ? "22cqw" : "26.7cqw",
-        nameSize: (g.name || "").length > 46 ? "3.5cqw" : (g.name || "").length > 32 ? "4.3cqw" : (g.name || "").length > 20 ? "4.9cqw" : "5.6cqw",
+        pais6Bg: "url('assets/pais6/" + (this.pais6Art.indexOf(g.brand) !== -1 ? g.brand : "semmarca") + ".png')",
+        reaisSize: String(reais).length > 3 ? "20cqw" : String(reais).length > 2 ? "24cqw" : "28.2cqw",
+        nameSize: (g.name || "").length > 46 ? "4cqw" : (g.name || "").length > 32 ? "4.7cqw" : (g.name || "").length > 20 ? "5.3cqw" : "6.4cqw",
         deReais: this.splitPrice(g.dePrice).reais,
         deCentavos: this.splitPrice(g.dePrice).centavos, qty: parseInt(g.qty, 10) || 1,
         cardIndex: i, activeOn: this.state.activePs6 === i ? "1" : "0",
@@ -2469,7 +2470,7 @@ class Component extends DCLogic {
         hasDe: !!(g.dePrice || "").trim(),
         showCada: !!g.cada,
         hasBrand: g.brand !== "semmarca",
-        brandBg: 'url("assets/pais/' + (this.paisArt.indexOf(g.brand) !== -1 ? g.brand : "semmarca") + '.png")',
+        brandBg: 'url("assets/pais6/' + (this.pais6Art.indexOf(g.brand) !== -1 ? g.brand : "semmarca") + '.png")',
         setBrand: e => this.updatePs6(i, { brand: e.target.value }),
         setName: e => this.updatePs6(i, { name: e.target.value }),
         setDe: e => this.updatePs6(i, { dePrice: e.target.value }),
