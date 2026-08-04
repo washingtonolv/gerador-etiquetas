@@ -55,24 +55,26 @@
       .sheet { box-shadow: none !important; border: none !important; margin: 0 !important; padding: 0 !important; max-width: none !important; border-radius: 0 !important; }
       .g-prec { grid-template-columns: repeat(2, 65mm) !important; gap: 6mm !important; justify-content:center !important; }
       .g-make { grid-template-columns: repeat(2, 64mm) !important; gap: 6mm !important; justify-content:center !important; }
-      .g-make2 { grid-template-columns: repeat(3, 55mm) !important; gap: 4mm 3mm !important; justify-content:center !important; }
+      .g-make2, .g-make3 { grid-template-columns: repeat(3, 55mm) !important; gap: 4mm 3mm !important; justify-content:center !important; }
+      .g-pais { grid-template-columns: repeat(2, 70mm) !important; gap: 5mm !important; justify-content:center !important; }
       .g-placa { grid-template-columns: repeat(2, 90mm) !important; gap: 5mm !important; }
       .g-pcr { grid-template-columns: repeat(2, 48mm) !important; gap: 6mm !important; justify-content:center !important; }
-      .g-prec > div, .g-make > div, .g-make2 > div, .g-placa > div, .g-pcr > div { break-inside: avoid; outline: 0.3mm dashed #9aa6b1 !important; outline-offset: 1mm; border: none !important; border-radius: 0 !important; }
+      .g-prec > div, .g-make > div, .g-make2 > div, .g-make3 > div, .g-pais > div, .g-placa > div, .g-pcr > div { break-inside: avoid; outline: 0.3mm dashed #9aa6b1 !important; outline-offset: 1mm; border: none !important; border-radius: 0 !important; }
       .g-placa, .g-pcr { gap: 6mm !important; }
     }
     .pp .no-print { display: none !important; }
     .pp .preview-wrap { padding: 16px !important; }
     .pp .g-prec { grid-template-columns: repeat(2, 65mm) !important; gap: 6mm !important; justify-content:center !important; }
     .pp .g-make { grid-template-columns: repeat(2, 64mm) !important; gap: 6mm !important; justify-content:center !important; }
-    .pp .g-make2 { grid-template-columns: repeat(3, 55mm) !important; gap: 4mm 3mm !important; justify-content:center !important; }
+    .pp .g-make2, .pp .g-make3 { grid-template-columns: repeat(3, 55mm) !important; gap: 4mm 3mm !important; justify-content:center !important; }
+    .pp .g-pais { grid-template-columns: repeat(2, 70mm) !important; gap: 5mm !important; justify-content:center !important; }
     .pp .g-placa { grid-template-columns: repeat(2, 90mm) !important; gap: 6mm !important; }
     .pp .g-pcr { grid-template-columns: repeat(2, 48mm) !important; gap: 6mm !important; justify-content:center !important; }
-    .pp .g-prec > div, .pp .g-make > div, .pp .g-make2 > div, .pp .g-placa > div, .pp .g-pcr > div { outline: 0.3mm dashed #9aa6b1; outline-offset: 1mm; }
+    .pp .g-prec > div, .pp .g-make > div, .pp .g-make2 > div, .pp .g-make3 > div, .pp .g-pais > div, .pp .g-placa > div, .pp .g-pcr > div { outline: 0.3mm dashed #9aa6b1; outline-offset: 1mm; }
     .pp .sheet { width: 210mm !important; max-width: none !important; padding: 10mm !important; }
     .fold-label { aspect-ratio: 6.4 / 3.9; background:#fff; }
-    .g-make2 .fold-label { aspect-ratio: 5.5 / 2.7; }
-    .g-make2 > div { outline: none !important; border: 0.2mm solid #444 !important; }
+    .g-make2 .fold-label, .g-make3 .fold-label { aspect-ratio: 5.5 / 2.7; }
+    .g-make2 > div, .g-make3 > div { outline: none !important; border: 0.2mm solid #444 !important; }
     .fold-label-face { position:absolute; inset:0; width:100%; height:100%; background-size:100% 100%; background-position:top left; background-repeat:no-repeat; overflow:hidden; }
     .fold-label-flap { display:none; }
     @media (max-width: 900px) {
@@ -569,6 +571,16 @@
       border-radius: var(--dd-radius-field) !important;
     }
     .card-box textarea { min-height: 68px; }
+    .dark .card-box input:not([type="checkbox"]):not([type="number"]),
+    .dark .card-box select,
+    .dark .card-box textarea,
+    .dark .import-panel input,
+    .dark .import-panel select,
+    .dark .import-panel textarea {
+      background: #132423 !important;
+      color: #F2FBFA !important;
+      border-color: #3C5250 !important;
+    }
     .card-box input:not([type="checkbox"]):not([type="number"]):focus,
     .card-box select:focus,
     .card-box textarea:focus,
@@ -823,6 +835,13 @@
   <h1 class="splash-title">Gerador<br>de Etiquetas</h1>
 </div>
 
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" fill="#05918C"/>
+    <text x="50" y="60" font-size="26" font-family="Georgia,serif" font-weight="bold" fill="#fff" text-anchor="middle">D&amp;D</text>
+  </svg>
+</template>
+
 <div class="app-bg {{ ppClass }} {{ darkClass }} {{ mvClass }} {{ panelClass }}" style="min-height:100vh; background:#f5f3f4; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg');ts/flor.svg'); background-size:420px 420px, 200px 200px, 300px 300px; background-position:right -140px bottom -160px, right 240px bottom 220px, left -120px top 90px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
 
   <div class="no-print hdr-band" style="background:#05918C; padding:14px 22px 18px;">
@@ -834,6 +853,8 @@
       <div class="tabbar" style="display:flex; align-items:center; gap:2px; overflow-x:auto; max-width:100%;">
         <button class="tab-btn" data-on="{{ tabMakeOn }}" onClick="{{ showMake }}" style="{{ tabMakeStyle }}">Etiquetas Padrão</button>
         <button class="tab-btn" data-on="{{ tabMake2On }}" onClick="{{ showMake2 }}" style="{{ tabMake2Style }}">Régua de Preços</button>
+        <button class="tab-btn" data-on="{{ tabMake3On }}" onClick="{{ showMake3 }}" style="{{ tabMake3Style }}">Régua de Preços Rosa</button>
+        <button class="tab-btn" data-on="{{ tabPaisOn }}" onClick="{{ showPais }}" style="{{ tabPaisStyle }}">Etiqueta Pais</button>
         <button class="tab-btn" data-on="{{ tabPrecOn }}" onClick="{{ showPrec }}" style="{{ tabPrecStyle }}">Etiquetas Promocionais</button>
         <button class="tab-btn" data-on="{{ tabPlacaOn }}" onClick="{{ showPlaca }}" style="{{ tabPlacaStyle }}">Placas promocionais</button>
         <button class="tab-btn" data-on="{{ tabPcrOn }}" onClick="{{ showPcr }}" style="{{ tabPcrStyle }}">Preçário</button>
@@ -1402,6 +1423,217 @@
   </div>
   </sc-if>
 
+  <sc-if value="{{ isPais }}" hint-placeholder-val="{{ true }}">
+  <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
+    <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
+      <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
+      <div class="editor-panel-content">
+      <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Etiquetas ({{ psCount }})</div>
+      <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
+      <sc-for list="{{ pss }}" as="g" hint-placeholder-count="3">
+        <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+          <button type="button" class="card-summary" onClick="{{ g.activate }}" aria-expanded="{{ g.activeExpanded }}"><span class="card-summary-index">#{{ g.n }}</span><span class="card-summary-name">{{ g.summaryName }}</span><span class="card-summary-price">R$ {{ g.porShow }}</span><span class="card-summary-arrow">›</span></button>
+          <div class="card-content">
+            <div class="card-content-inner">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
+            <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
+              <sc-for list="{{ paisBrandOptions }}" as="b" hint-placeholder-count="15">
+                <option value="{{ b.key }}">{{ b.label }}</option>
+              </sc-for>
+            </select>
+            <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}"><div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ g.brandBg }};"></div></sc-if>
+            <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
+            <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
+            <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
+            <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+          </div>
+          <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Descrição do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:600;"></textarea>
+          <div style="display:flex; gap:8px;">
+            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+              <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">DE (ANTES)</span>
+              <input value="{{ g.dePrice }}" onChange="{{ g.setDe }}" onFocus="{{ g.selectPrice }}" onBlur="{{ g.formatDe }}" inputMode="decimal" placeholder="opcional" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
+            </div>
+            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+              <span style="font-size:10px; font-weight:700; color:#CD4664; letter-spacing:.4px;">POR R$</span>
+              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onFocus="{{ g.selectPrice }}" onBlur="{{ g.formatPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" style="width:100%; border:1px solid #B9DEDC; border-radius:6px; padding:7px; font-size:13px;">
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <label style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#5a6873; cursor:pointer;">
+              <input type="checkbox" checked="{{ g.cada }}" onChange="{{ g.setCada }}"> Mostrar "cada"
+            </label>
+            <div style="flex:1;"></div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
+                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
+                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+              </div>
+              <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
+            </div>
+          </div>
+                              </div>
+</div>
+</div>
+      </sc-for>
+      <button onClick="{{ addPs }}" style="background:#fff; color:#05918C; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#ECF8F7; border-color:#05918C;">+ Adicionar etiqueta</button>
+          </div>
+</div>
+
+    <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
+      <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
+        <span style="font-size:12px; font-weight:700; color:#8b97a2;">{{ pageInfo }}</span>
+        <div style="flex:1;"></div>
+        <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#05918C; cursor:pointer; padding:4px 10px;">−</button>
+          <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#05918C; cursor:pointer; padding:4px 10px;">+</button>
+        </div>
+      </div>
+      <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
+        <div class="g-pais" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:10px;">
+          <sc-if value="{{ psEmpty }}" hint-placeholder-val="{{ false }}">
+            <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
+              <div style="width:56px; height:56px; border-radius:50%; background:#ECF8F7; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta ainda</div>
+              <div style="font-size:13px; color:#8b97a2; max-width:300px;">Adicione a primeira etiqueta ou importe várias de uma vez por planilha CSV.</div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+                <button onClick="{{ addCurrent }}" style="background:#05918C; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
+                <button onClick="{{ doImport }}" style="background:#fff; color:#05918C; border:1px solid #A9DAD7; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;">Importar CSV</button>
+              </div>
+            </div>
+          </sc-if>
+          <sc-for list="{{ pssGrid }}" as="g" hint-placeholder-count="3">
+            <div class="label-preview pais-label" data-active="{{ g.activeOn }}" onClick="{{ g.activatePreview }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:1.013 / 1; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-repeat:no-repeat; background-size:100% 100%; background-image:{{ g.paisBg }};">
+              <button class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+              <div style="position:absolute; left:6.9%; top:27%; width:41%; max-height:26%; overflow:hidden; font-size:{{ g.nameSize }}; font-weight:800; line-height:1.15; color:#171717; text-transform:uppercase; text-wrap:balance; overflow-wrap:break-word;">{{ g.name }}</div>
+              <sc-if value="{{ g.hasDe }}" hint-placeholder-val="{{ true }}">
+                <div style="position:absolute; left:52%; top:39%; width:40%; display:flex; align-items:flex-start; justify-content:center; color:#FFE3C0; text-decoration:line-through;">
+                  <span style="font-size:8cqw; font-weight:800; line-height:1;">{{ g.deReais }}</span>
+                  <span style="font-size:6.7cqw; font-weight:700; line-height:1.1;">,{{ g.deCentavos }}</span>
+                </div>
+              </sc-if>
+              <div style="position:absolute; left:24%; top:48%; width:70%; display:flex; align-items:flex-start; justify-content:center; color:#fff; white-space:nowrap;">
+                <span style="font-size:{{ g.reaisSize }}; font-weight:900; line-height:1;">{{ g.reais }}</span>
+                <span style="font-size:12cqw; font-weight:800; line-height:1.1; margin-top:2cqw;">,{{ g.centavos }}<sc-if value="{{ g.showCada }}" hint-placeholder-val="{{ true }}"><span style="display:block; font-size:6cqw; font-weight:700; line-height:1.1; text-align:center;">cada</span></sc-if></span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isMake3 }}" hint-placeholder-val="{{ true }}">
+  <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
+    <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
+      <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
+      <div class="editor-panel-content">
+      <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#9aa6b1; text-transform:uppercase; padding:0 2px;">Etiquetas ({{ mk3Count }})</div>
+      <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
+      <sc-for list="{{ mks3 }}" as="g" hint-placeholder-count="3">
+        <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+          <button type="button" class="card-summary" onClick="{{ g.activate }}" aria-expanded="{{ g.activeExpanded }}"><span class="card-summary-index">#{{ g.n }}</span><span class="card-summary-name">{{ g.summaryName }}</span><span class="card-summary-price">R$ {{ g.porShow }}</span><span class="card-summary-arrow">›</span></button>
+          <div class="card-content">
+            <div class="card-content-inner">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
+            <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
+              <sc-for list="{{ placaBrandOptions }}" as="b" hint-placeholder-count="17">
+                <option value="{{ b.key }}">{{ b.label }}</option>
+              </sc-for>
+            </select>
+            <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}"><div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ g.brandBg }};"></div></sc-if>
+            <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
+            <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
+            <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
+            <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+          </div>
+          <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Descrição do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:600;"></textarea>
+          <div style="display:flex; gap:8px;">
+            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+              <span style="font-size:10px; font-weight:700; color:#8b97a2; letter-spacing:.4px;">DE (ANTES)</span>
+              <input value="{{ g.dePrice }}" onChange="{{ g.setDe }}" onFocus="{{ g.selectPrice }}" onBlur="{{ g.formatDe }}" inputMode="decimal" placeholder="opcional" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
+            </div>
+            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+              <span style="font-size:10px; font-weight:700; color:#CD4664; letter-spacing:.4px;">POR R$</span>
+              <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onFocus="{{ g.selectPrice }}" onBlur="{{ g.formatPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" style="width:100%; border:1px solid #B9DEDC; border-radius:6px; padding:7px; font-size:13px;">
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <label style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#5a6873; cursor:pointer;">
+              <input type="checkbox" checked="{{ g.cada }}" onChange="{{ g.setCada }}"> Mostrar "cada"
+            </label>
+            <div style="flex:1;"></div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
+                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
+                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+              </div>
+              <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
+            </div>
+          </div>
+                              </div>
+</div>
+</div>
+      </sc-for>
+      <button onClick="{{ addMk3 }}" style="background:#fff; color:#05918C; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#ECF8F7; border-color:#05918C;">+ Adicionar etiqueta</button>
+          </div>
+</div>
+
+    <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
+      <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
+        <span style="font-size:12px; font-weight:700; color:#8b97a2;">{{ pageInfo }}</span>
+        <div style="flex:1;"></div>
+        <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#05918C; cursor:pointer; padding:4px 10px;">−</button>
+          <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#05918C; cursor:pointer; padding:4px 10px;">+</button>
+        </div>
+      </div>
+      <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
+        <div class="g-make3" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:10px;">
+          <sc-if value="{{ mk3Empty }}" hint-placeholder-val="{{ false }}">
+            <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
+              <div style="width:56px; height:56px; border-radius:50%; background:#ECF8F7; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta ainda</div>
+              <div style="font-size:13px; color:#8b97a2; max-width:300px;">Adicione a primeira etiqueta ou importe várias de uma vez por planilha CSV.</div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+                <button onClick="{{ addCurrent }}" style="background:#05918C; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
+                <button onClick="{{ doImport }}" style="background:#fff; color:#05918C; border:1px solid #A9DAD7; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;">Importar CSV</button>
+              </div>
+            </div>
+          </sc-if>
+          <sc-for list="{{ mks3Grid }}" as="g" hint-placeholder-count="3">
+            <div class="label-preview fold-label" data-active="{{ g.activeOn }}" onClick="{{ g.activatePreview }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
+              <button class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+              <div class="fold-label-face" style="background-image:url('assets/precificador/fundo-rosa.png');">
+              <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:1.5%; top:6%; width:30%;">
+              <div style="position:absolute; left:2%; top:54%; width:40%; font-size:3.25cqw; font-weight:800; line-height:1.15; color:#171717; text-transform:uppercase; text-wrap:balance;">{{ g.name }}</div>
+              <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}">
+                <div style="position:absolute; left:2%; top:79%; width:20%; height:16%; background-image:{{ g.brandBg }}; background-size:contain; background-position:left center; background-repeat:no-repeat;"></div>
+              </sc-if>
+              <sc-if value="{{ g.hasDe }}" hint-placeholder-val="{{ true }}">
+                <div style="position:absolute; left:58%; top:33%; font-size:5.1cqw; font-weight:700; color:#fff;">DE: R$ {{ g.deShow }}</div>
+              </sc-if>
+              <div style="position:absolute; right:44%; top:52%; text-align:right; font-size:4.2cqw; font-weight:700; color:#fff; line-height:1.35;">POR:<br>R$</div>
+              <div style="position:absolute; left:57.5%; top:46%; display:flex; align-items:flex-start; color:#fff;">
+                <span style="font-size:14.8cqw; font-weight:900; line-height:1;">{{ g.reais }}</span>
+                <span style="font-size:8.3cqw; font-weight:700; line-height:1.1; margin-top:5.8cqw;">,{{ g.centavos }}<sc-if value="{{ g.showCada }}" hint-placeholder-val="{{ true }}"><span style="display:block; font-size:4.4cqw; font-weight:700; line-height:1.1; text-align:center;">cada</span></sc-if></span>
+              </div>
+              </div>
+              <div class="fold-label-flap"></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
   <!-- ==================== MODELO: PLACA PROMOÇÃO ==================== -->
   <sc-if value="{{ isPlaca }}" hint-placeholder-val="{{ true }}">
   <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
@@ -1534,6 +1766,8 @@ class Component extends DCLogic {
     activePr: 0,
     activeMk: 0,
     activeMk2: 0,
+    activeMk3: 0,
+    activePs: 0,
     activePlaca: 0,
    pcrs: [
       { brand: "boticario", name: "Hid. Obsessão por Baunilha 400ml", dePrice: "58,99", porPrice: "39,90" },
@@ -1547,12 +1781,19 @@ class Component extends DCLogic {
     mks2: [
       { brand: "semmarca", name: "Blush Retinol", dePrice: "", porPrice: "53,99", cada: true },
     ],
+    mks3: [
+      { brand: "semmarca", name: "Blush Retinol", dePrice: "", porPrice: "53,99", cada: true },
+    ],
+    pss: [
+      { brand: "boticario", name: "Malbec Desodorante Colônia", dePrice: "299,00", porPrice: "259,90", cada: false },
+    ],
     placas: [
       { brand: "avon", name: "Creme Renew", desc: "Ultimate Dia Firmeza\n45+ Fps 25", dePrice: "174,90", porPrice: "99,90" },
     ],
   };
 
 
+  paisArt = ["semmarca", "avon", "boticario", "ciclo", "eudora", "fhader", "hinode", "jequiti", "kiss", "larive", "mahogany", "marykay", "pariselysees", "rubykisses", "vizzela"];
   placaBrands = [
     { key: "avon", label: "Avon" }, { key: "boticario", label: "O Boticário" },
     { key: "ciclo", label: "Ciclo" }, { key: "eudora", label: "Eudora" },
@@ -1576,11 +1817,17 @@ class Component extends DCLogic {
   updateMk2(i, patch) {
     this.setState(s => ({ mks2: s.mks2.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
   }
+  updateMk3(i, patch) {
+    this.setState(s => ({ mks3: s.mks3.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
+  }
+  updatePs(i, patch) {
+    this.setState(s => ({ pss: s.pss.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
+  }
   updatePlaca(i, patch) {
     this.setState(s => ({ placas: s.placas.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
   }
   activeKeyFor(key) {
-    return key === "placas" ? "activePlaca" : key === "pcrs" ? "activePcr" : key === "prs" ? "activePr" : key === "mks2" ? "activeMk2" : "activeMk";
+    return key === "placas" ? "activePlaca" : key === "pcrs" ? "activePcr" : key === "prs" ? "activePr" : key === "mks2" ? "activeMk2" : key === "mks3" ? "activeMk3" : key === "pss" ? "activePs" : "activeMk";
   }
   toggleItem(key, i) {
     const activeKey = this.activeKeyFor(key);
@@ -1686,6 +1933,8 @@ class Component extends DCLogic {
         prs: this.state.prs,
         mks: this.state.mks,
         mks2: this.state.mks2,
+        mks3: this.state.mks3,
+        pss: this.state.pss,
         placas: this.state.placas,
       },
     };
@@ -1708,11 +1957,16 @@ class Component extends DCLogic {
         prs: data.prs,
         mks: data.mks,
         mks2: data.mks2 || this.state.mks2,
+        mks3: data.mks3 || this.state.mks3,
+        pss: data.pss || this.state.pss,
         placas: data.placas,
         activePcr: 0,
         activePr: 0,
         activeMk: 0,
     activeMk2: 0,
+        activeMk3: 0,
+        activePs: 0,
+    activePs: 0,
         activePlaca: 0,
         importOpen: false,
       });
@@ -1746,7 +2000,7 @@ class Component extends DCLogic {
     }
   }
   listKey(model) {
-    return model === "placa" ? "placas" : model === "pcr" ? "pcrs" : model === "prec" ? "prs" : model === "make2" ? "mks2" : "mks";
+    return model === "placa" ? "placas" : model === "pcr" ? "pcrs" : model === "prec" ? "prs" : model === "make2" ? "mks2" : model === "make3" ? "mks3" : model === "pais" ? "pss" : "mks";
   }
   importText(txt) {
     const norm = t => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]/g, "");
@@ -1781,7 +2035,7 @@ class Component extends DCLogic {
     const shaped = items.map(it =>
       key === "placas" ? { brand: it.brand, name: it.name, desc: "", dePrice: it.dePrice, porPrice: it.porPrice } :
       key === "prs" ? { brand: it.brand, fundo: "rosa", name: it.name, dePrice: it.dePrice, porPrice: it.porPrice } :
-      (key === "mks" || key === "mks2") ? { brand: it.brand, name: it.name, dePrice: it.dePrice, porPrice: it.porPrice, cada: false } :
+      (key === "mks" || key === "mks2" || key === "mks3" || key === "pss") ? { brand: it.brand, name: it.name, dePrice: it.dePrice, porPrice: it.porPrice, cada: false } :
       { brand: it.brand, name: it.name, dePrice: it.dePrice, porPrice: it.porPrice });
     const activeKey = this.activeKeyFor(key);
     this.setState(s => ({ [key]: [...s[key], ...shaped], [activeKey]: s[key].length, importOpen: false }));
@@ -1933,6 +2187,77 @@ class Component extends DCLogic {
       };
     });
 
+    const mks3 = this.state.mks3.map((g, i) => {
+      const { reais, centavos } = this.splitPrice(g.porPrice);
+      return {
+        ...g, n: i + 1, reais, centavos, qty: parseInt(g.qty, 10) || 1,
+        cardIndex: i, activeOn: this.state.activeMk3 === i ? "1" : "0",
+        activeExpanded: this.state.activeMk3 === i ? "true" : "false",
+        summaryName: (g.name || "Sem nome").trim(), porShow: this.fmtPrice(g.porPrice),
+        activate: () => this.toggleItem("mks3", i),
+        activatePreview: () => this.activateItem("mks3", i, true),
+        hasDe: !!(g.dePrice || "").trim(),
+        showCada: !!g.cada,
+        hasBrand: g.brand !== "semmarca",
+        brandBg: 'url("assets/placa/marcas/' + g.brand + '.png")',
+        setBrand: e => this.updateMk3(i, { brand: e.target.value }),
+        setName: e => this.updateMk3(i, { name: e.target.value }),
+        setDe: e => this.updateMk3(i, { dePrice: e.target.value }),
+        setPor: e => this.updateMk3(i, { porPrice: e.target.value }),
+        selectPrice: e => e.target.select(),
+        formatDe: () => this.updateMk3(i, { dePrice: this.normalizePriceField(this.state.mks3[i].dePrice, true) }),
+        formatPor: () => this.updateMk3(i, { porPrice: this.normalizePriceField(this.state.mks3[i].porPrice) }),
+        setQty: e => this.updateMk3(i, { qty: e.target.value }),
+        qtyMinus: () => this.updateMk3(i, { qty: Math.max(1, (parseInt(this.state.mks3[i].qty, 10) || 1) - 1) }),
+        qtyPlus: () => this.updateMk3(i, { qty: Math.min(999, (parseInt(this.state.mks3[i].qty, 10) || 1) + 1) }),
+        deShow: this.fmtPrice(g.dePrice),
+        dup: () => this.setState(s => ({ mks3: [...s.mks3.slice(0, i + 1), { ...s.mks3[i] }, ...s.mks3.slice(i + 1)], activeMk3: i + 1 })),
+        moveUp: () => this.moveItem("mks3", i, -1),
+        moveDown: () => this.moveItem("mks3", i, 1),
+        setCada: e => this.updateMk3(i, { cada: e.target.checked }),
+        remove: () => this.removeItem("mks3", i),
+        removePreview: e => { e?.stopPropagation?.(); this.removePreviewItem("mks3", i); },
+      };
+    });
+
+    const pss = this.state.pss.map((g, i) => {
+      const { reais, centavos } = this.splitPrice(g.porPrice);
+      return {
+        ...g, n: i + 1, reais, centavos,
+        paisBg: "url('assets/pais/" + (this.paisArt.indexOf(g.brand) !== -1 ? g.brand : "semmarca") + ".png')",
+        reaisSize: String(reais).length > 3 ? "18cqw" : String(reais).length > 2 ? "22cqw" : "26.7cqw",
+        nameSize: (g.name || "").length > 46 ? "3.5cqw" : (g.name || "").length > 32 ? "4.3cqw" : (g.name || "").length > 20 ? "4.9cqw" : "5.6cqw",
+        deReais: this.splitPrice(g.dePrice).reais,
+        deCentavos: this.splitPrice(g.dePrice).centavos, qty: parseInt(g.qty, 10) || 1,
+        cardIndex: i, activeOn: this.state.activePs === i ? "1" : "0",
+        activeExpanded: this.state.activePs === i ? "true" : "false",
+        summaryName: (g.name || "Sem nome").trim(), porShow: this.fmtPrice(g.porPrice),
+        activate: () => this.toggleItem("pss", i),
+        activatePreview: () => this.activateItem("pss", i, true),
+        hasDe: !!(g.dePrice || "").trim(),
+        showCada: !!g.cada,
+        hasBrand: g.brand !== "semmarca",
+        brandBg: 'url("assets/placa/marcas/' + g.brand + '.png")',
+        setBrand: e => this.updatePs(i, { brand: e.target.value }),
+        setName: e => this.updatePs(i, { name: e.target.value }),
+        setDe: e => this.updatePs(i, { dePrice: e.target.value }),
+        setPor: e => this.updatePs(i, { porPrice: e.target.value }),
+        selectPrice: e => e.target.select(),
+        formatDe: () => this.updatePs(i, { dePrice: this.normalizePriceField(this.state.pss[i].dePrice, true) }),
+        formatPor: () => this.updatePs(i, { porPrice: this.normalizePriceField(this.state.pss[i].porPrice) }),
+        setQty: e => this.updatePs(i, { qty: e.target.value }),
+        qtyMinus: () => this.updatePs(i, { qty: Math.max(1, (parseInt(this.state.pss[i].qty, 10) || 1) - 1) }),
+        qtyPlus: () => this.updatePs(i, { qty: Math.min(999, (parseInt(this.state.pss[i].qty, 10) || 1) + 1) }),
+        deShow: this.fmtPrice(g.dePrice),
+        dup: () => this.setState(s => ({ pss: [...s.pss.slice(0, i + 1), { ...s.pss[i] }, ...s.pss.slice(i + 1)], activePs: i + 1 })),
+        moveUp: () => this.moveItem("pss", i, -1),
+        moveDown: () => this.moveItem("pss", i, 1),
+        setCada: e => this.updatePs(i, { cada: e.target.checked }),
+        remove: () => this.removeItem("pss", i),
+        removePreview: e => { e?.stopPropagation?.(); this.removePreviewItem("pss", i); },
+      };
+    });
+
     const placas = this.state.placas.map((pl, i) => {
       const { reais, centavos } = this.splitPrice(pl.porPrice);
       return {
@@ -1968,8 +2293,8 @@ class Component extends DCLogic {
     });
 
     const expand = a => a.flatMap(g => Array(Math.max(1, parseInt(g.qty, 10) || 1)).fill(g));
-    const perPage = { placa: 4, pcr: 9, prec: 12, make: 12, make2: 30 };
-    const activeCount = expand(model === "placa" ? placas : model === "pcr" ? pcrs : model === "prec" ? prs : model === "make2" ? mks2 : mks).length;
+    const perPage = { placa: 4, pcr: 9, prec: 12, make: 12, make2: 30, make3: 30, pais: 8 };
+    const activeCount = expand(model === "placa" ? placas : model === "pcr" ? pcrs : model === "prec" ? prs : model === "make2" ? mks2 : model === "make3" ? mks3 : model === "pais" ? pss : mks).length;
     const pages = Math.max(1, Math.ceil(activeCount / perPage[model]));
     const pageInfo = activeCount + " etiqueta" + (activeCount === 1 ? "" : "s") + " · " + pages + " folha" + (pages === 1 ? "" : "s") + " A4";
 
@@ -1977,6 +2302,9 @@ class Component extends DCLogic {
       isPlaca: model === "placa",
       isMake: model === "make",
       isMake2: model === "make2",
+      isMake3: model === "make3",
+      isPais: model === "pais",
+      paisBrandOptions: this.placaBrands.filter(b => this.paisArt.indexOf(b.key) !== -1),
       isPrec: model === "prec",
       isPcr: model === "pcr",
       tabPlacaOn: model === "placa" ? "1" : "0",
@@ -1984,33 +2312,48 @@ class Component extends DCLogic {
       tabPrecOn: model === "prec" ? "1" : "0",
       tabMakeOn: model === "make" ? "1" : "0",
       tabMake2On: model === "make2" ? "1" : "0",
+      tabMake3On: model === "make3" ? "1" : "0",
+      tabPaisOn: model === "pais" ? "1" : "0",
       tabPlacaStyle: model === "placa" ? on : off,
       tabMakeStyle: model === "make" ? on : off,
       tabMake2Style: model === "make2" ? on : off,
+      tabMake3Style: model === "make3" ? on : off,
+      tabPaisStyle: model === "pais" ? on : off,
       tabPrecStyle: model === "prec" ? on : off,
       tabPcrStyle: model === "pcr" ? on : off,
       showPlaca: () => this.setState({ model: "placa" }),
       showMake: () => this.setState({ model: "make" }),
       showMake2: () => this.setState({ model: "make2" }),
+      showMake3: () => this.setState({ model: "make3" }),
+      showPais: () => this.setState({ model: "pais" }),
       showPrec: () => this.setState({ model: "prec" }),
       showPcr: () => this.setState({ model: "pcr" }),
       placas, placaCount: placas.length,
-      placaEmpty: placas.length === 0, pcrEmpty: pcrs.length === 0, prEmpty: prs.length === 0, mkEmpty: mks.length === 0, mk2Empty: mks2.length === 0,
-      placasGrid: expand(placas), mksGrid: expand(mks), mks2Grid: expand(mks2), prsGrid: expand(prs), pcrsGrid: expand(pcrs),
+      placaEmpty: placas.length === 0, pcrEmpty: pcrs.length === 0, prEmpty: prs.length === 0, mkEmpty: mks.length === 0, mk2Empty: mks2.length === 0, mk3Empty: mks3.length === 0, psEmpty: pss.length === 0,
+      placasGrid: expand(placas), mksGrid: expand(mks), mks2Grid: expand(mks2), mks3Grid: expand(mks3), pssGrid: expand(pss), prsGrid: expand(prs), pcrsGrid: expand(pcrs),
       pageInfo,
       mks, mkCount: mks.length,
       mks2, mk2Count: mks2.length,
+      mks3, mk3Count: mks3.length,
+      pss, psCount: pss.length,
       prs, prCount: prs.length,
       pcrs, pcrCount: pcrs.length,
       placaBrandOptions: this.placaBrands,
       addPcr: () => this.addItem("pcrs", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }),
       addPr: () => this.addItem("prs", { brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" }),
       addMk: () => this.addItem("mks", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }),
+      addMk2: () => this.addItem("mks2", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }),
+      addMk3: () => this.addItem("mks3", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }),
+      addPs: () => this.addItem("pss", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }),
       addPlaca: () => this.addItem("placas", { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }),
       addCurrent: () => model === "make"
         ? this.addItem("mks", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false })
         : model === "make2"
         ? this.addItem("mks2", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false })
+        : model === "make3"
+        ? this.addItem("mks3", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false })
+        : model === "pais"
+        ? this.addItem("pss", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false })
         : model === "prec"
         ? this.addItem("prs", { brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" })
         : model === "pcr"
@@ -2107,7 +2450,7 @@ class Component extends DCLogic {
       confirmPrint: () => { this.setState({ printOpen: false }); setTimeout(() => window.print(), 80); },
       printCount: activeCount,
       printPages: pages,
-      printModel: model === "placa" ? "Placas promocionais" : model === "pcr" ? "Preçário" : model === "prec" ? "Etiquetas Promocionais" : model === "make2" ? "Régua de Preços" : "Etiquetas Padrão",
+      printModel: model === "placa" ? "Placas promocionais" : model === "pcr" ? "Preçário" : model === "prec" ? "Etiquetas Promocionais" : model === "make2" ? "Régua de Preços" : model === "make3" ? "Régua de Preços Rosa" : model === "pais" ? "Etiqueta Pais" : "Etiquetas Padrão",
       isImportOpen: !!this.state.importOpen,
       closeImport: () => this.setState({ importOpen: false }),
       downloadModel: () => {
