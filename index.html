@@ -76,6 +76,54 @@
     .pp .g-pcr { grid-template-columns: repeat(2, 48mm) !important; gap: 6mm !important; justify-content:center !important; }
     .pp .g-prec > div, .pp .g-make > div, .pp .g-make2 > div, .pp .g-make3 > div, .pp .g-pais > div, .pp .g-pais6 > div, .pp .g-placa > div, .pp .g-pcr > div { outline: 0.3mm dashed #9aa6b1; outline-offset: 1mm; }
     .pp .sheet { width: 210mm !important; max-width: none !important; padding: 10mm !important; }
+    /* A6: a folha inteira precisa acomodar 2 colunas x 2 linhas (4 etiquetas). */
+    .pais6-page .sheet {
+      width: min(100%, 794px) !important;
+      max-width: 794px !important;
+      padding: 0 !important;
+      aspect-ratio: 210 / 297;
+      overflow: hidden;
+    }
+    .pais6-page .g-pais6 {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
+      gap: 0 !important;
+      width: 100%;
+      height: 100%;
+      align-content: center;
+      justify-content: center;
+    }
+    .pais6-page .pais6-label {
+      width: 100% !important;
+      height: 100% !important;
+      aspect-ratio: auto !important;
+    }
+    .pp.pais6-page .sheet {
+      width: 210mm !important;
+      max-width: none !important;
+      height: 297mm !important;
+      padding: 0 !important;
+    }
+    .pp.pais6-page .g-pais6 {
+      grid-template-columns: repeat(2, 105mm) !important;
+      grid-template-rows: repeat(2, 148mm) !important;
+      align-content: center !important;
+    }
+    @media print {
+      .pais6-page .sheet {
+        width: 210mm !important;
+        height: 297mm !important;
+        padding: 0 !important;
+      }
+      .pais6-page .g-pais6 {
+        grid-template-columns: repeat(2, 105mm) !important;
+        grid-template-rows: repeat(2, 148mm) !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        align-content: center !important;
+      }
+    }
     .fold-label { aspect-ratio: 6.4 / 3.9; background:#fff; }
     .g-make2 .fold-label, .g-make3 .fold-label { aspect-ratio: 5.5 / 2.7; }
     .g-make2 > div, .g-make3 > div { outline: none !important; border: 0.2mm solid #444 !important; }
@@ -2397,7 +2445,7 @@ class Component extends DCLogic {
       const { reais, centavos } = this.splitPrice(g.porPrice);
       return {
         ...g, n: i + 1, reais, centavos,
-        pais6Bg: "url('assets/pais6/" + (this.pais6Art.indexOf(g.brand) !== -1 ? g.brand : "semmarca") + ".png')",
+        pais6Bg: "url('assets/pais/" + (this.paisArt.indexOf(g.brand) !== -1 ? g.brand : "semmarca") + ".png')",
         reaisSize: String(reais).length > 3 ? "20cqw" : String(reais).length > 2 ? "24cqw" : "28.2cqw",
         nameSize: (g.name || "").length > 46 ? "4cqw" : (g.name || "").length > 32 ? "4.7cqw" : (g.name || "").length > 20 ? "5.3cqw" : "6.4cqw",
         deReais: this.splitPrice(g.dePrice).reais,
@@ -2410,7 +2458,7 @@ class Component extends DCLogic {
         hasDe: !!(g.dePrice || "").trim(),
         showCada: !!g.cada,
         hasBrand: g.brand !== "semmarca",
-        brandBg: 'url("assets/pais6/' + (this.pais6Art.indexOf(g.brand) !== -1 ? g.brand : "semmarca") + '.png")',
+        brandBg: 'url("assets/pais/' + (this.paisArt.indexOf(g.brand) !== -1 ? g.brand : "semmarca") + '.png")',
         setBrand: e => this.updatePs6(i, { brand: e.target.value }),
         setName: e => this.updatePs6(i, { name: e.target.value }),
         setDe: e => this.updatePs6(i, { dePrice: e.target.value }),
@@ -2422,7 +2470,7 @@ class Component extends DCLogic {
         qtyMinus: () => this.updatePs6(i, { qty: Math.max(1, (parseInt(this.state.pss6[i].qty, 10) || 1) - 1) }),
         qtyPlus: () => this.updatePs6(i, { qty: Math.min(999, (parseInt(this.state.pss6[i].qty, 10) || 1) + 1) }),
         deShow: this.fmtPrice(g.dePrice),
-        dup: () => this.setState(s => ({ pss: [...s.pss6.slice(0, i + 1), { ...s.pss6[i] }, ...s.pss6.slice(i + 1)], activePs6: i + 1 })),
+        dup: () => this.setState(s => ({ pss6: [...s.pss6.slice(0, i + 1), { ...s.pss6[i] }, ...s.pss6.slice(i + 1)], activePs6: i + 1 })),
         moveUp: () => this.moveItem("pss6", i, -1),
         moveDown: () => this.moveItem("pss6", i, 1),
         setCada: e => this.updatePs6(i, { cada: e.target.checked }),
