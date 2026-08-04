@@ -76,28 +76,36 @@
     .pp .g-pcr { grid-template-columns: repeat(2, 48mm) !important; gap: 6mm !important; justify-content:center !important; }
     .pp .g-prec > div, .pp .g-make > div, .pp .g-make2 > div, .pp .g-make3 > div, .pp .g-pais > div, .pp .g-pais6 > div, .pp .g-placa > div, .pp .g-pcr > div { outline: 0.3mm dashed #9aa6b1; outline-offset: 1mm; }
     .pp .sheet { width: 210mm !important; max-width: none !important; padding: 10mm !important; }
-    /* A6: a folha inteira precisa acomodar 2 colunas x 2 linhas (4 etiquetas). */
-    .pais6-page .sheet {
-      width: min(100%, 794px) !important;
-      max-width: 794px !important;
-      padding: 0 !important;
-      aspect-ratio: 210 / 297;
-      overflow: hidden;
+    /* A6 na tela: mostra apenas as etiquetas existentes, sem simular a folha inteira. */
+    .pais6-page:not(.pp) .sheet {
+      width: min(100%, 740px) !important;
+      max-width: 740px !important;
+      height: auto !important;
+      min-height: 0 !important;
+      padding: 16px !important;
+      aspect-ratio: auto !important;
+      overflow: visible;
     }
-    .pais6-page .g-pais6 {
+    .pais6-page:not(.pp) .g-pais6 {
       display: grid !important;
-      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-      grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
-      gap: 0 !important;
+      grid-template-columns: repeat(2, minmax(0, 320px)) !important;
+      grid-template-rows: none !important;
+      grid-auto-rows: auto !important;
+      gap: 16px !important;
       width: 100%;
-      height: 100%;
-      align-content: center;
+      height: auto !important;
+      align-content: start;
       justify-content: center;
     }
-    .pais6-page .pais6-label {
+    .pais6-page:not(.pp) .pais6-label {
       width: 100% !important;
-      height: 100% !important;
-      aspect-ratio: auto !important;
+      height: auto !important;
+      aspect-ratio: 105 / 148 !important;
+    }
+    @media (max-width: 700px) {
+      .pais6-page:not(.pp) .g-pais6 {
+        grid-template-columns: minmax(0, 360px) !important;
+      }
     }
     .pp.pais6-page .sheet {
       width: 210mm !important;
@@ -121,7 +129,13 @@
         grid-template-rows: repeat(2, 148mm) !important;
         width: 210mm !important;
         height: 297mm !important;
+        gap: 0 !important;
         align-content: center !important;
+      }
+      .pais6-page .pais6-label {
+        width: 105mm !important;
+        height: 148mm !important;
+        aspect-ratio: auto !important;
       }
     }
     .fold-label { aspect-ratio: 6.4 / 3.9; background:#fff; }
