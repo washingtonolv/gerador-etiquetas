@@ -65,12 +65,13 @@
       .g-prec { grid-template-columns: repeat(2, 65mm) !important; gap: 6mm !important; justify-content:center !important; }
       .g-make { grid-template-columns: repeat(2, 64mm) !important; gap: 6mm !important; justify-content:center !important; }
       .g-make2, .g-make3 { grid-template-columns: repeat(3, 55mm) !important; gap: 4mm 3mm !important; justify-content:center !important; }
-      .g-pais { grid-template-columns: repeat(5, 34mm) !important; gap: 4mm !important; justify-content:center !important; }
+      .g-pais { grid-template-columns: repeat(4, 40mm) !important; gap: 4mm !important; justify-content:center !important; }
       .g-pais6 { grid-template-columns: repeat(2, 105mm) !important; grid-auto-rows: 148mm !important; gap: 0 !important; justify-content:center !important; }
       .pais6-page .sheet { padding: 0 !important; }
       .g-placa { grid-template-columns: repeat(2, 90mm) !important; gap: 5mm !important; }
       .g-pcr { grid-template-columns: repeat(2, 48mm) !important; gap: 6mm !important; justify-content:center !important; }
       .g-prec > div, .g-make > div, .g-make2 > div, .g-make3 > div, .g-pais > div, .g-pais6 > div, .g-placa > div, .g-pcr > div { break-inside: avoid; outline: 0.3mm dashed #9aa6b1 !important; outline-offset: 1mm; border: none !important; border-radius: 0 !important; }
+      .g-pais > div { width: 40mm !important; height: 50mm !important; aspect-ratio: auto !important; }
       .g-placa, .g-pcr { gap: 6mm !important; }
       .pais-label { background-image: var(--pais-print-bg) !important; }
     }
@@ -79,11 +80,12 @@
     .pp .g-prec { grid-template-columns: repeat(2, 65mm) !important; gap: 6mm !important; justify-content:center !important; }
     .pp .g-make { grid-template-columns: repeat(2, 64mm) !important; gap: 6mm !important; justify-content:center !important; }
     .pp .g-make2, .pp .g-make3 { grid-template-columns: repeat(3, 55mm) !important; gap: 4mm 3mm !important; justify-content:center !important; }
-    .pp .g-pais { grid-template-columns: repeat(5, 34mm) !important; gap: 4mm !important; justify-content:center !important; }
+    .pp .g-pais { grid-template-columns: repeat(4, 40mm) !important; gap: 4mm !important; justify-content:center !important; }
     .pp .g-pais6 { grid-template-columns: repeat(2, 105mm) !important; grid-auto-rows: 148mm !important; gap: 0 !important; justify-content:center !important; }
     .pp .g-placa { grid-template-columns: repeat(2, 90mm) !important; gap: 6mm !important; }
     .pp .g-pcr { grid-template-columns: repeat(2, 48mm) !important; gap: 6mm !important; justify-content:center !important; }
     .pp .pais-label { background-image: var(--pais-print-bg) !important; }
+    .pp .g-pais > div { width: 40mm !important; height: 50mm !important; aspect-ratio: auto !important; }
     .pp .g-prec > div, .pp .g-make > div, .pp .g-make2 > div, .pp .g-make3 > div, .pp .g-pais > div, .pp .g-pais6 > div, .pp .g-placa > div, .pp .g-pcr > div { outline: 0.3mm dashed #9aa6b1; outline-offset: 1mm; }
     .pp .sheet { width: 210mm !important; max-width: none !important; padding: 10mm !important; }
     /* A6 na tela: mostra apenas as etiquetas existentes, sem simular a folha inteira. */
@@ -1927,7 +1929,7 @@
             </div>
           </sc-if>
           <sc-for list="{{ pssGrid }}" as="g" hint-placeholder-count="3">
-            <div class="label-preview pais-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:1.013 / 1; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-repeat:no-repeat; background-size:100% 100%; background-image:{{ g.paisBg }}; --pais-print-bg:{{ g.paisPrintBg }};">
+            <div class="label-preview pais-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:4 / 5; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-repeat:no-repeat; background-size:100% 100%; background-image:{{ g.paisBg }}; --pais-print-bg:{{ g.paisPrintBg }};">
               <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar esta etiqueta"></button>
               <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
               <div style="position:absolute; left:6.9%; top:27%; width:41%; max-height:26%; overflow:hidden; font-size:{{ g.nameSize }}; font-weight:800; line-height:1.15; color:#171717; text-transform:uppercase; text-wrap:balance; overflow-wrap:break-word;">{{ g.name }}</div>
@@ -2957,7 +2959,7 @@ class Component extends DCLogic {
     });
 
     const expand = a => a.flatMap(g => Array(Math.max(1, parseInt(g.qty, 10) || 1)).fill(g));
-    const perPage = { placa: 4, pcr: 9, prec: 12, make: 12, make2: 30, make3: 30, pais: 25, pais6: 4 };
+    const perPage = { placa: 4, pcr: 9, prec: 12, make: 12, make2: 30, make3: 30, pais: 20, pais6: 4 };
     const activeCount = expand(model === "placa" ? placas : model === "pcr" ? pcrs : model === "prec" ? prs : model === "make2" ? mks2 : model === "make3" ? mks3 : model === "pais" ? pss : model === "pais6" ? pss6 : mks).length;
     const pages = Math.max(1, Math.ceil(activeCount / perPage[model]));
     const pageInfo = activeCount + " etiqueta" + (activeCount === 1 ? "" : "s") + " · " + pages + " folha" + (pages === 1 ? "" : "s") + " A4";
