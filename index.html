@@ -2532,7 +2532,11 @@ class Component extends DCLogic {
     const isDialogOpen = !!(this.state.helpOpen || this.state.onboardingOpen || this.state.importOpen || this.state.printOpen);
     if (!wasDialogOpen && isDialogOpen) {
       this._focusBeforeDialog = document.activeElement;
-      requestAnimationFrame(() => document.querySelector('[role="dialog"]')?.focus());
+      requestAnimationFrame(() => {
+        const dialog = document.querySelector('[role="dialog"]');
+        const firstControl = dialog?.querySelector('button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [href]');
+        (firstControl || dialog)?.focus();
+      });
     } else if (wasDialogOpen && !isDialogOpen && this._focusBeforeDialog?.focus) {
       requestAnimationFrame(() => this._focusBeforeDialog.focus());
     }
