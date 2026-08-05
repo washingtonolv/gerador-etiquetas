@@ -39,6 +39,7 @@
       --dd-shadow-panel: 0 12px 32px rgba(24, 29, 34, .12);
       --dd-font-ui: Inter, Archivo, Helvetica, Arial, sans-serif;
     }
+    @font-face { font-family: "Bochan"; src: url("assets/fonts/bochan.otf") format("opentype"); font-weight: 400; font-display: swap; }
     @font-face { font-family: "Axiforma"; src: url("assets/fonts/axiforma-regular.otf") format("opentype"); font-weight: 400; }
     @font-face { font-family: "Axiforma"; src: url("assets/fonts/axiforma-black.otf") format("opentype"); font-weight: 700 900; }
     * { box-sizing: border-box; }
@@ -889,6 +890,113 @@
       .sheet { border: 0 !important; box-shadow: none !important; }
       .label-preview { transform: none !important; box-shadow: none !important; }
     }
+
+    /* Fluidez v2 */
+    html { scroll-behavior: smooth; }
+    .app-bg { -webkit-font-smoothing: antialiased; }
+    .workspace-layout .editor-col, .preview-wrap, .tabbar, .import-panel, .menu-pop { -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+    .tab-btn, .hdr-btn, .card-summary, .label-preview, .preview-delete, .panel-toggle, .card-box button[title], .editor-col > button:last-child, .bottombar button, .zoombar button {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      transition: background-color .16s ease, color .16s ease, border-color .16s ease, box-shadow .16s ease, transform .16s cubic-bezier(.22,1,.36,1);
+    }
+    .tab-btn:active, .hdr-btn:active, .card-summary:active, .editor-col > button:last-child:active, .bottombar button:active, .zoombar button:active, .card-box button[title]:active { transform: scale(.97); }
+    .label-preview:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(24,29,34,.13); }
+    .label-preview:active { transform: scale(.995); }
+    .card-box, .sheet, .import-panel, .menu-pop { will-change: auto; }
+    .sheet { transition: box-shadow .24s ease; }
+    .import-panel, .menu-pop { animation: ddPop .22s cubic-bezier(.22,1,.36,1) both; }
+    @keyframes ddPop { from { opacity: 0; transform: translateY(6px) scale(.985); } to { opacity: 1; transform: none; } }
+    .card-box { animation: ddCardIn .28s cubic-bezier(.22,1,.36,1) both; }
+    @keyframes ddCardIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .workspace-layout .editor-col::-webkit-scrollbar { width: 8px; }
+    .workspace-layout .editor-col::-webkit-scrollbar-thumb { background: var(--dd-border); border-radius: 8px; }
+    .workspace-layout .editor-col::-webkit-scrollbar-track { background: transparent; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .card-box, .import-panel, .menu-pop { animation: none !important; }
+      .label-preview:hover { transform: none; }
+    }
+
+    /* ============ SKIN MANUAL DE MARCA D&D ============ */
+    :root {
+      --dd-bg: #FBF6EE;
+      --dd-surface: #FFFFFF;
+      --dd-border: #EADFCD;
+      --dd-text: #2A2333;
+      --dd-text-muted: #7A7183;
+      --dd-cream: #FAF0DC;
+      --dd-ink: #463273;
+      --dd-radius-field: 12px;
+      --dd-radius-button: 14px;
+      --dd-radius-panel: 20px;
+      --dd-shadow-panel: 0 14px 34px rgba(70,50,115,.10);
+    }
+    .app-bg { background: var(--dd-bg) !important; }
+    .dark { --dd-cream:#1E3231; --dd-ink:#EEF8F7; --dd-border:#3C5554; }
+
+    /* Cabeçalho: faixa creme + pílula branca (menos "propaganda", mais ferramenta) */
+    .hdr-band { background: var(--dd-cream) !important; border-bottom: 1px solid var(--dd-border) !important; padding: 14px 22px 16px !important; }
+    .dark .hdr-band { background: #162928 !important; }
+    .hdr-pill { border-radius: 22px !important; border: 1px solid var(--dd-border) !important; box-shadow: 0 8px 26px rgba(70,50,115,.08) !important; }
+    .hdr-pill > div:first-child span {
+      font-family: Bochan, Georgia, serif !important;
+      font-weight: 400 !important;
+      font-size: 20px !important;
+      letter-spacing: .2px !important;
+      color: var(--dd-primary-700) !important;
+      text-transform: none !important;
+    }
+    .tab-btn {
+      border-radius: 999px !important;
+      font-weight: 600 !important;
+      letter-spacing: .1px !important;
+      color: var(--dd-text-muted) !important;
+    }
+    .tab-btn:hover { background: var(--dd-primary-100) !important; color: var(--dd-primary-700) !important; }
+    .tab-btn[data-on="1"] {
+      background: var(--dd-primary-700) !important;
+      color: #fff !important;
+      box-shadow: 0 4px 12px rgba(5,145,140,.26) !important;
+    }
+    .hdr-btn { border-radius: 999px !important; }
+    .hdr-pill .print-btn { border-radius: 999px !important; box-shadow: 0 6px 16px rgba(205,70,100,.20) !important; }
+
+    /* Painéis e cartões: superfícies quentes, cantos generosos */
+    .workspace-layout .editor-col { background: var(--dd-surface) !important; border-color: var(--dd-border) !important; }
+    .card-box { border-radius: var(--dd-radius-panel) !important; box-shadow: 0 2px 10px rgba(70,50,115,.05) !important; }
+    .card-box:hover { border-color: #D8C7EA !important; }
+    .card-box[data-active="1"] { border-color: var(--dd-primary-500) !important; box-shadow: 0 0 0 2px rgba(5,145,140,.14), var(--dd-shadow-panel) !important; }
+    .card-box input, .card-box select, .card-box textarea, .import-panel input, .import-panel select {
+      border-radius: var(--dd-radius-field) !important;
+      border-color: var(--dd-border) !important;
+      background: #FDFAF5 !important;
+    }
+    .card-box input:focus, .card-box select:focus, .card-box textarea:focus {
+      background: #fff !important;
+      border-color: var(--dd-primary-500) !important;
+      box-shadow: 0 0 0 3px rgba(5,145,140,.14) !important;
+    }
+    .dark .card-box input, .dark .card-box select, .dark .card-box textarea { background:#132423 !important; }
+
+    /* Títulos de seção com a voz da marca */
+    .editor-panel-content > div:first-child,
+    .rail > div:first-child {
+      font-family: Bochan, Georgia, serif !important;
+      font-weight: 400 !important;
+      letter-spacing: .2px !important;
+      text-transform: none !important;
+      font-size: 17px !important;
+      color: var(--dd-ink) !important;
+    }
+    .dark .editor-panel-content > div:first-child, .dark .rail > div:first-child { color: #EEF8F7 !important; }
+
+    /* Folha e barras */
+    .sheet { border-radius: 22px !important; box-shadow: 0 14px 40px rgba(70,50,115,.10) !important; }
+    .bottombar, .rail { background: var(--dd-surface) !important; border-color: var(--dd-border) !important; }
+    .totop { box-shadow: 0 8px 20px rgba(5,145,140,.28) !important; }
+    .import-panel, .menu-pop { border-radius: var(--dd-radius-panel) !important; border: 1px solid var(--dd-border) !important; }
+    .splash { background: var(--dd-primary-700) !important; }
   </style>
   <meta name="theme-color" content="#05918C">
   <link rel="manifest" href="manifest.webmanifest">
@@ -915,7 +1023,7 @@
   <div class="no-print hdr-band" style="background:#05918C; padding:14px 22px 18px;">
     <div class="hdr-pill" style="background:#fff; border-radius:999px; padding:8px 8px 8px 20px; display:flex; align-items:center; gap:10px 18px; flex-wrap:wrap; box-shadow:0 6px 24px rgba(120,20,45,.18);">
       <div style="display:flex; align-items:center; gap:9px;">
-        <img src="assets/placa/image4.png" alt="D&amp;D" style="height:26px; width:auto;">
+        <img src="assets/placa/image4.png" alt="D&amp;D Cosméticos" style="width:100px; height:auto; flex:none;">
         <span style="font-size:15px; font-weight:800; color:#1a1d21; letter-spacing:.2px; white-space:nowrap;">Etiquetas D&amp;D</span>
       </div>
       <div class="tabbar" style="display:flex; align-items:center; gap:2px; overflow-x:auto; max-width:100%;">
@@ -2169,7 +2277,18 @@ class Component extends DCLogic {
       window.alert("Este arquivo não é um backup válido de etiquetas D&D.");
     }
   }
+  centerActiveTab() {
+    const bar = document.querySelector(".tabbar");
+    if (!bar) return;
+    const act = bar.querySelector('.tab-btn[data-on="1"]');
+    if (!act) return;
+    bar.scrollLeft = Math.max(0, act.offsetLeft - (bar.clientWidth - act.offsetWidth) / 2);
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState && prevState.model !== this.state.model) this.centerActiveTab();
+  }
   componentDidMount() {
+    setTimeout(() => this.centerActiveTab(), 60);
     try {
       const raw = localStorage.getItem("dd-etiquetas-v1");
       const saved = raw ? JSON.parse(raw) : null;
