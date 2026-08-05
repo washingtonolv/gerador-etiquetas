@@ -1,0 +1,7 @@
+{
+  "name": "gerador-etiquetas-dd",
+  "private": true,
+  "scripts": {
+    "test": "node tests/smoke.mjs"
+  }
+}

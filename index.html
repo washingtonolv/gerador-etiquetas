@@ -1267,8 +1267,8 @@
         <button onClick="{{ clearCurrent }}" class="hdr-btn hdr-more" title="Limpar a aba atual" style="background:none; border:none; color:#7A7183; font-size:14px; font-weight:700; cursor:pointer; padding:9px 12px; border-radius:999px;" style-hover="background:#E7F6F5; color:#05918C;">Limpar aba</button>
         <button onClick="{{ toggleDark }}" class="hdr-btn hdr-more" title="Modo escuro" style="background:none; border:none; color:#7A7183; font-size:14px; font-weight:700; cursor:pointer; padding:9px 12px; border-radius:999px;" style-hover="background:#E7F6F5; color:#05918C;">{{ darkIcon }}</button>
         <button onClick="{{ openHelp }}" class="hdr-btn hdr-more" title="Guia rápido" style="background:none; border:none; color:#7A7183; font-size:14px; font-weight:700; cursor:pointer; padding:9px 12px; border-radius:999px;" style-hover="background:#E7F6F5; color:#05918C;">?</button>
-        <div style="position:relative;">
-          <button onClick="{{ toggleMenu }}" class="hdr-btn" title="Mais opções" aria-expanded="{{ menuExpanded }}" style="background:none; border:none; color:#7A7183; font-size:14px; font-weight:700; cursor:pointer; padding:9px 12px; border-radius:999px; font-size:19px; padding:7px 12px; line-height:1;" style-hover="background:#E7F6F5; color:#05918C;">⋯</button>
+        <div class="hdr-menu" style="position:relative;">
+          <button onClick="{{ toggleMenu }}" class="hdr-btn" title="Mais opções" aria-label="Mais opções" aria-expanded="{{ menuExpanded }}" style="background:none; border:none; color:#7A7183; font-size:14px; font-weight:700; cursor:pointer; padding:9px 12px; border-radius:999px; font-size:19px; padding:7px 12px; line-height:1;" style-hover="background:#E7F6F5; color:#05918C;">⋯</button>
           <sc-if value="{{ isMenuOpen }}" hint-placeholder-val="{{ false }}">
             <div class="menu-pop" style="position:absolute; right:0; top:calc(100% + 10px); z-index:95; background:#fff; border-radius:18px; box-shadow:0 16px 40px rgba(70,50,115,.18); padding:8px; display:flex; flex-direction:column; min-width:220px;">
               <button onClick="{{ menuAdd }}" style="{{ menuItemStyle }}">+ Adicionar etiqueta</button>
@@ -1443,7 +1443,7 @@
             <div style="display:flex; align-items:center; gap:6px;">
               <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
                 <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
-                <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
+                <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
                 <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
               </div>
               <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
@@ -1563,7 +1563,7 @@
             <div style="display:flex; align-items:center; gap:6px;">
               <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
                 <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
-                <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
+                <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
                 <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
               </div>
               <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
@@ -1673,7 +1673,7 @@
             <div style="display:flex; align-items:center; gap:6px;">
               <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
                 <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
-                <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
+                <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
                 <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
               </div>
               <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
@@ -1782,7 +1782,7 @@
             <div style="display:flex; align-items:center; gap:6px;">
               <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
                 <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
-                <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
+                <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
                 <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
               </div>
               <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
@@ -1891,7 +1891,7 @@
             <div style="display:flex; align-items:center; gap:6px;">
               <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
                 <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
-                <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
+                <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
                 <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
               </div>
               <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
@@ -1995,7 +1995,7 @@
             <div style="display:flex; align-items:center; gap:6px;">
               <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
                 <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
-                <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
+                <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
                 <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
               </div>
               <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
@@ -2100,7 +2100,7 @@
             <div style="display:flex; align-items:center; gap:6px;">
               <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
                 <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
-                <input type="number" min="1" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
+                <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
                 <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
               </div>
               <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
@@ -2217,7 +2217,7 @@
             <div style="display:flex; align-items:center; gap:6px;">
               <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
                 <button onClick="{{ pl.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
-                <input type="number" min="1" value="{{ pl.qty }}" onChange="{{ pl.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
+                <input type="number" min="1" max="999" value="{{ pl.qty }}" onChange="{{ pl.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
                 <button onClick="{{ pl.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#05918C; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
               </div>
               <span style="font-size:12px; font-weight:600; color:#8b97a2;">cópias</span>
@@ -2297,6 +2297,15 @@ class Component extends DCLogic {
     model: "placa",
     panelCollapsed: false,
     modelsCollapsed: false,
+    mobileView: "edit",
+    preview: false,
+    menuOpen: false,
+    helpOpen: false,
+    onboardingOpen: false,
+    importOpen: false,
+    printOpen: false,
+    dark: false,
+    undo: null,
     activePcr: 0,
     activePr: 0,
     activeMk: 0,
@@ -2356,32 +2365,52 @@ class Component extends DCLogic {
     { key: "rubykisses", label: "Ruby Kisses" }, { key: "truss", label: "Truss" },
     { key: "vizzela", label: "Vizzela" }, { key: "semmarca", label: "Sem marca" },
   ];
-  updatePcr(i, patch) {
-    this.setState(s => ({ pcrs: s.pcrs.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
+  modelMeta = {
+    placa: { key: "placas", activeKey: "activePlaca", label: "Etiqueta Vitrine", perPage: 4, create: () => ({ brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }) },
+    pcr: { key: "pcrs", activeKey: "activePcr", label: "Expositor Madeira", perPage: 9, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }) },
+    prec: { key: "prs", activeKey: "activePr", label: "Placa de Acrílico Promoção", perPage: 12, create: () => ({ brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" }) },
+    make: { key: "mks", activeKey: "activeMk", label: "Placa de Acrílico", perPage: 12, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
+    make2: { key: "mks2", activeKey: "activeMk2", label: "Régua de Preços", perPage: 30, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
+    make3: { key: "mks3", activeKey: "activeMk3", label: "Régua de Preço Promoção", perPage: 30, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
+    pais: { key: "pss", activeKey: "activePs", label: "Etiqueta Especial Dia dos Pais", perPage: 20, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
+    pais6: { key: "pss6", activeKey: "activePs6", label: "Pancarta A6 Dia dos Pais", perPage: 4, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
+  };
+  getModelMeta(model = this.state.model) {
+    return this.modelMeta[model] || this.modelMeta.make;
   }
-  updatePr(i, patch) {
-    this.setState(s => ({ prs: s.prs.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
-  }
-  updateMk(i, patch) {
-    this.setState(s => ({ mks: s.mks.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
-  }
-  updateMk2(i, patch) {
-    this.setState(s => ({ mks2: s.mks2.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
-  }
-  updateMk3(i, patch) {
-    this.setState(s => ({ mks3: s.mks3.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
-  }
-  updatePs(i, patch) {
-    this.setState(s => ({ pss: s.pss.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
-  }
-  updatePs6(i, patch) {
-    this.setState(s => ({ pss6: s.pss6.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
-  }
-  updatePlaca(i, patch) {
-    this.setState(s => ({ placas: s.placas.map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
+  updateItem(key, i, patch) {
+    this.setState(s => ({ [key]: s[key].map((it, idx) => idx === i ? { ...it, ...patch } : it) }));
   }
   activeKeyFor(key) {
-    return key === "placas" ? "activePlaca" : key === "pcrs" ? "activePcr" : key === "prs" ? "activePr" : key === "mks2" ? "activeMk2" : key === "mks3" ? "activeMk3" : key === "pss" ? "activePs" : key === "pss6" ? "activePs6" : "activeMk";
+    const meta = Object.values(this.modelMeta).find(item => item.key === key);
+    return meta ? meta.activeKey : "activeMk";
+  }
+  listKey(model = this.state.model) {
+    return this.getModelMeta(model).key;
+  }
+  clampQty(value) {
+    const parsed = parseInt(value, 10);
+    return Number.isFinite(parsed) ? Math.min(999, Math.max(1, parsed)) : 1;
+  }
+  sanitizeList(items) {
+    return items
+      .filter(item => item && typeof item === "object" && !Array.isArray(item))
+      .map(item => ({
+        ...item,
+        brand: typeof item.brand === "string" ? item.brand : "semmarca",
+        name: String(item.name == null ? "" : item.name),
+        dePrice: String(item.dePrice == null ? "" : item.dePrice),
+        porPrice: String(item.porPrice == null ? "" : item.porPrice),
+        qty: this.clampQty(item.qty),
+      }));
+  }
+  addCurrentItem() {
+    const meta = this.getModelMeta();
+    this.addItem(meta.key, meta.create());
+  }
+  selectModel(model) {
+    if (!this.modelMeta[model]) return;
+    this.setState({ model });
   }
   toggleItem(key, i) {
     const activeKey = this.activeKeyFor(key);
@@ -2420,6 +2449,58 @@ class Component extends DCLogic {
         field.select?.();
       }
     }, 100);
+  }
+  duplicateItem(key, i) {
+    const activeKey = this.activeKeyFor(key);
+    this.setState(s => {
+      const item = s[key][i];
+      if (!item) return null;
+      return {
+        [key]: [...s[key].slice(0, i + 1), { ...item }, ...s[key].slice(i + 1)],
+        [activeKey]: i + 1,
+      };
+    });
+  }
+  buildItem(key, item, i) {
+    const activeKey = this.activeKeyFor(key);
+    const { reais, centavos } = this.splitPrice(item.porPrice);
+    const update = patch => this.updateItem(key, i, patch);
+    const current = () => (this.state[key] && this.state[key][i]) || item;
+    return {
+      ...item,
+      n: i + 1,
+      reais,
+      centavos,
+      qty: this.clampQty(item.qty),
+      cardIndex: i,
+      activeOn: this.state[activeKey] === i ? "1" : "0",
+      activeExpanded: this.state[activeKey] === i ? "true" : "false",
+      summaryName: String(item.name || "Sem nome").trim(),
+      porShow: this.fmtPrice(item.porPrice),
+      deShow: this.fmtPrice(item.dePrice),
+      activate: () => this.toggleItem(key, i),
+      activatePreview: () => this.activateItem(key, i, true),
+      hasDe: !!String(item.dePrice || "").trim(),
+      showCada: !!item.cada,
+      hasBrand: item.brand !== "semmarca",
+      brandBg: 'url("assets/placa/marcas/' + item.brand + '.png")',
+      setBrand: e => update({ brand: e.target.value }),
+      setName: e => update({ name: e.target.value }),
+      setDe: e => update({ dePrice: e.target.value }),
+      setPor: e => update({ porPrice: e.target.value }),
+      setCada: e => update({ cada: e.target.checked }),
+      setQty: e => update({ qty: this.clampQty(e.target.value) }),
+      selectPrice: e => e.target.select(),
+      formatDe: () => update({ dePrice: this.normalizePriceField(current().dePrice, true) }),
+      formatPor: () => update({ porPrice: this.normalizePriceField(current().porPrice) }),
+      qtyMinus: () => update({ qty: Math.max(1, this.clampQty(current().qty) - 1) }),
+      qtyPlus: () => update({ qty: Math.min(999, this.clampQty(current().qty) + 1) }),
+      dup: () => this.duplicateItem(key, i),
+      moveUp: () => this.moveItem(key, i, -1),
+      moveDown: () => this.moveItem(key, i, 1),
+      remove: () => this.removeItem(key, i),
+      removePreview: e => { e?.stopPropagation?.(); this.removePreviewItem(key, i); },
+    };
   }
   moveItem(key, i, d) {
     this.setState(s => {
@@ -2516,18 +2597,18 @@ class Component extends DCLogic {
       if (!data || !keys.every(key => Array.isArray(data[key]))) throw new Error("Formato inválido");
       if (!window.confirm("Restaurar este backup e substituir as etiquetas atuais?")) return;
       this.setState({
-        pcrs: data.pcrs,
-        prs: data.prs,
-        mks: data.mks,
-        mks2: data.mks2 || this.state.mks2,
-        mks3: data.mks3 || this.state.mks3,
-        pss: data.pss || this.state.pss,
-        pss6: data.pss6 || this.state.pss6,
-        placas: data.placas,
+        pcrs: this.sanitizeList(data.pcrs),
+        prs: this.sanitizeList(data.prs),
+        mks: this.sanitizeList(data.mks),
+        mks2: this.sanitizeList(data.mks2 || this.state.mks2),
+        mks3: this.sanitizeList(data.mks3 || this.state.mks3),
+        pss: this.sanitizeList(data.pss || this.state.pss),
+        pss6: this.sanitizeList(data.pss6 || this.state.pss6),
+        placas: this.sanitizeList(data.placas),
         activePcr: 0,
         activePr: 0,
         activeMk: 0,
-    activeMk2: 0,
+        activeMk2: 0,
         activeMk3: 0,
         activePs: 0,
         activePs6: 0,
@@ -2541,8 +2622,8 @@ class Component extends DCLogic {
   }
   centerActiveTab() {
     const bar = document.querySelector(".model-rail");
-    if (bar && bar.scrollWidth <= bar.clientWidth) return;
     if (!bar) return;
+    if (bar.scrollWidth <= bar.clientWidth) return;
     const act = bar.querySelector('.model-item[data-on="1"]');
     if (!act) return;
     bar.scrollLeft = Math.max(0, act.offsetLeft - (bar.clientWidth - act.offsetWidth) / 2);
@@ -2575,13 +2656,17 @@ class Component extends DCLogic {
       this.setState({ helpOpen: false, onboardingOpen: false, importOpen: false, printOpen: false, menuOpen: false });
     };
     document.addEventListener("keydown", this._onKeyDown);
+    this._onPointerDown = e => {
+      if (this.state.menuOpen && !e.target.closest?.(".hdr-menu")) this.setState({ menuOpen: false });
+    };
+    document.addEventListener("pointerdown", this._onPointerDown);
     try {
       const raw = localStorage.getItem("dd-etiquetas-v2") || localStorage.getItem("dd-etiquetas-v1");
       const saved = raw ? JSON.parse(raw) : null;
       const restored = {};
       const listKeys = ["pcrs", "prs", "mks", "mks2", "mks3", "pss", "pss6", "placas"];
       for (const key of listKeys) {
-        if (saved && Array.isArray(saved[key])) restored[key] = saved[key];
+        if (saved && Array.isArray(saved[key])) restored[key] = this.sanitizeList(saved[key]);
       }
       const validModels = ["placa", "pcr", "prec", "make", "make2", "make3", "pais", "pais6"];
       if (saved && validModels.includes(saved.model)) restored.model = saved.model;
@@ -2594,6 +2679,8 @@ class Component extends DCLogic {
   }
   componentWillUnmount() {
     if (this._onKeyDown) document.removeEventListener("keydown", this._onKeyDown);
+    if (this._onPointerDown) document.removeEventListener("pointerdown", this._onPointerDown);
+    if (this._undoTimer) clearTimeout(this._undoTimer);
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevState && prevState.model !== this.state.model) this.centerActiveTab();
@@ -2611,9 +2698,11 @@ class Component extends DCLogic {
       requestAnimationFrame(() => this._focusBeforeDialog.focus());
     }
 
-    const { model, pcrs, prs, mks, mks2, mks3, pss, pss6, placas } = this.state;
-    const data = JSON.stringify({ version: 2, model, pcrs, prs, mks, mks2, mks3, pss, pss6, placas });
-    if (data !== this._last) {
+    const listKeys = ["pcrs", "prs", "mks", "mks2", "mks3", "pss", "pss6", "placas"];
+    const shouldPersist = !prevState || prevState.model !== this.state.model || listKeys.some(key => prevState[key] !== this.state[key]);
+    if (shouldPersist) {
+      const { model, pcrs, prs, mks, mks2, mks3, pss, pss6, placas } = this.state;
+      const data = JSON.stringify({ version: 2, model, pcrs, prs, mks, mks2, mks3, pss, pss6, placas });
       this._last = data;
       const status = document.querySelector(".app-status");
       try {
@@ -2624,14 +2713,11 @@ class Component extends DCLogic {
       }
     }
   }
-  listKey(model) {
-    return model === "placa" ? "placas" : model === "pcr" ? "pcrs" : model === "prec" ? "prs" : model === "make2" ? "mks2" : model === "make3" ? "mks3" : model === "pais" ? "pss" : model === "pais6" ? "pss6" : "mks";
-  }
   importText(txt) {
     const norm = t => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]/g, "");
     const brandByName = {};
-    for (const b of this.placaBrands) brandByName[norm(b.label)] = b.key;
-    const isPrice = t => /^r?\$?\s*\d{1,6}([,.]\d{1,2})?$/.test(String(t).trim());
+    for (const b of [...this.placaBrands, ...this.pais6Brands]) brandByName[norm(b.label)] = b.key;
+    const isPrice = t => /^r?\$?\s*(?:\d{1,3}(?:\.\d{3})+|\d{1,6})(?:[,.]\d{1,2})?$/.test(String(t).trim());
     const clean = t => String(t).trim().replace(/^r\$\s*/i, "").replace(/^"|"$/g, "");
     const rows = txt.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
     const items = [];
@@ -2669,299 +2755,69 @@ class Component extends DCLogic {
   renderVals() {
     const model = this.state.model;
     const pp = !!this.state.preview;
-    const tabBase = "border:none; background:transparent; border-radius:999px; padding:9px 14px; font-size:14px; cursor:pointer; white-space:nowrap;";
-    const on = tabBase + "color:#1a1d21; font-weight:800;";
-    const off = tabBase + "color:#7c6b71; font-weight:500;";
-
-
-    const pcrs = this.state.pcrs.map((g, i) => {
-      const { reais, centavos } = this.splitPrice(g.porPrice);
-      return {
-        ...g, n: i + 1, reais, centavos, qty: parseInt(g.qty, 10) || 1,
-        cardIndex: i, activeOn: this.state.activePcr === i ? "1" : "0",
-        activeExpanded: this.state.activePcr === i ? "true" : "false",
-        summaryName: (g.name || "Sem nome").trim(), porShow: this.fmtPrice(g.porPrice),
-        activate: () => this.toggleItem("pcrs", i),
-        activatePreview: () => this.activateItem("pcrs", i, true),
-        hasDe: !!(g.dePrice || "").trim(),
-        hasBrand: g.brand !== "semmarca",
-        brandBg: 'url("assets/placa/marcas/' + g.brand + '.png")',
-        setBrand: e => this.updatePcr(i, { brand: e.target.value }),
-        setName: e => this.updatePcr(i, { name: e.target.value }),
-        setDe: e => this.updatePcr(i, { dePrice: e.target.value }),
-        setPor: e => this.updatePcr(i, { porPrice: e.target.value }),
-        selectPrice: e => e.target.select(),
-        formatDe: () => this.updatePcr(i, { dePrice: this.normalizePriceField(this.state.pcrs[i].dePrice, true) }),
-        formatPor: () => this.updatePcr(i, { porPrice: this.normalizePriceField(this.state.pcrs[i].porPrice) }),
-        setQty: e => this.updatePcr(i, { qty: e.target.value }),
-        qtyMinus: () => this.updatePcr(i, { qty: Math.max(1, (parseInt(this.state.pcrs[i].qty, 10) || 1) - 1) }),
-        qtyPlus: () => this.updatePcr(i, { qty: Math.min(999, (parseInt(this.state.pcrs[i].qty, 10) || 1) + 1) }),
-        deShow: this.fmtPrice(g.dePrice),
-        dup: () => this.setState(s => ({ pcrs: [...s.pcrs.slice(0, i + 1), { ...s.pcrs[i] }, ...s.pcrs.slice(i + 1)], activePcr: i + 1 })),
-        showCada: !!g.cada,
-        setCada: e => this.updatePcr(i, { cada: e.target.checked }),
-        moveUp: () => this.moveItem("pcrs", i, -1),
-        moveDown: () => this.moveItem("pcrs", i, 1),
-        remove: () => this.removeItem("pcrs", i),
-        removePreview: e => { e?.stopPropagation?.(); this.removePreviewItem("pcrs", i); },
-      };
-    });
+    const pcrs = this.state.pcrs.map((g, i) => this.buildItem("pcrs", g, i));
 
     const fBtn = "flex:1; border-radius:6px; padding:7px; font-size:12px; font-weight:700; cursor:pointer;";
     const prs = this.state.prs.map((g, i) => {
-      const { reais, centavos } = this.splitPrice(g.porPrice);
+      const { reais } = this.splitPrice(g.porPrice);
+      const item = this.buildItem("prs", g, i);
       return {
-        ...g, n: i + 1, reais, centavos,
-        reaisSize: String(reais).length > 3 ? "11cqw" : String(reais).length > 2 ? "13cqw" : "16cqw", qty: parseInt(g.qty, 10) || 1,
-        cardIndex: i, activeOn: this.state.activePr === i ? "1" : "0",
-        activeExpanded: this.state.activePr === i ? "true" : "false",
-        summaryName: (g.name || "Sem nome").trim(), porShow: this.fmtPrice(g.porPrice),
-        activate: () => this.toggleItem("prs", i),
-        activatePreview: () => this.activateItem("prs", i, true),
-        hasDe: !!(g.dePrice || "").trim(),
-        hasBrand: g.brand !== "semmarca",
-        brandBg: 'url("assets/placa/marcas/' + g.brand + '.png")',
+        ...item,
+        reaisSize: String(reais).length > 3 ? "11cqw" : String(reais).length > 2 ? "13cqw" : "16cqw",
         fundoBg: g.fundo === "verde" ? 'url("assets/precificador/fundo-verde2.png")' : 'url("assets/precificador/fundo-rosa.png")',
         rosaBtnStyle: fBtn + (g.fundo !== "verde" ? "background:#CD4664; color:#fff; border:1px solid #CD4664;" : "background:#fff; color:#657575; border:1px solid #d8dee4;"),
         verdeBtnStyle: fBtn + (g.fundo === "verde" ? "background:#05918C; color:#fff; border:1px solid #05918C;" : "background:#fff; color:#657575; border:1px solid #d8dee4;"),
-        setRosa: () => this.updatePr(i, { fundo: "rosa" }),
-        setVerde: () => this.updatePr(i, { fundo: "verde" }),
-        setBrand: e => this.updatePr(i, { brand: e.target.value }),
-        setName: e => this.updatePr(i, { name: e.target.value }),
-        setDe: e => this.updatePr(i, { dePrice: e.target.value }),
-        setPor: e => this.updatePr(i, { porPrice: e.target.value }),
-        selectPrice: e => e.target.select(),
-        formatDe: () => this.updatePr(i, { dePrice: this.normalizePriceField(this.state.prs[i].dePrice, true) }),
-        formatPor: () => this.updatePr(i, { porPrice: this.normalizePriceField(this.state.prs[i].porPrice) }),
-        setQty: e => this.updatePr(i, { qty: e.target.value }),
-        qtyMinus: () => this.updatePr(i, { qty: Math.max(1, (parseInt(this.state.prs[i].qty, 10) || 1) - 1) }),
-        qtyPlus: () => this.updatePr(i, { qty: Math.min(999, (parseInt(this.state.prs[i].qty, 10) || 1) + 1) }),
-        deShow: this.fmtPrice(g.dePrice),
-        dup: () => this.setState(s => ({ prs: [...s.prs.slice(0, i + 1), { ...s.prs[i] }, ...s.prs.slice(i + 1)], activePr: i + 1 })),
-        showCada: !!g.cada,
-        setCada: e => this.updatePr(i, { cada: e.target.checked }),
-        moveUp: () => this.moveItem("prs", i, -1),
-        moveDown: () => this.moveItem("prs", i, 1),
-        remove: () => this.removeItem("prs", i),
-        removePreview: e => { e?.stopPropagation?.(); this.removePreviewItem("prs", i); },
+        setRosa: () => this.updateItem("prs", i, { fundo: "rosa" }),
+        setVerde: () => this.updateItem("prs", i, { fundo: "verde" }),
       };
     });
 
-    const mks = this.state.mks.map((g, i) => {
-      const { reais, centavos } = this.splitPrice(g.porPrice);
-      return {
-        ...g, n: i + 1, reais, centavos, qty: parseInt(g.qty, 10) || 1,
-        cardIndex: i, activeOn: this.state.activeMk === i ? "1" : "0",
-        activeExpanded: this.state.activeMk === i ? "true" : "false",
-        summaryName: (g.name || "Sem nome").trim(), porShow: this.fmtPrice(g.porPrice),
-        activate: () => this.toggleItem("mks", i),
-        activatePreview: () => this.activateItem("mks", i, true),
-        hasDe: !!(g.dePrice || "").trim(),
-        showCada: !!g.cada,
-        hasBrand: g.brand !== "semmarca",
-        brandBg: 'url("assets/placa/marcas/' + g.brand + '.png")',
-        setBrand: e => this.updateMk(i, { brand: e.target.value }),
-        setName: e => this.updateMk(i, { name: e.target.value }),
-        setDe: e => this.updateMk(i, { dePrice: e.target.value }),
-        setPor: e => this.updateMk(i, { porPrice: e.target.value }),
-        selectPrice: e => e.target.select(),
-        formatDe: () => this.updateMk(i, { dePrice: this.normalizePriceField(this.state.mks[i].dePrice, true) }),
-        formatPor: () => this.updateMk(i, { porPrice: this.normalizePriceField(this.state.mks[i].porPrice) }),
-        setQty: e => this.updateMk(i, { qty: e.target.value }),
-        qtyMinus: () => this.updateMk(i, { qty: Math.max(1, (parseInt(this.state.mks[i].qty, 10) || 1) - 1) }),
-        qtyPlus: () => this.updateMk(i, { qty: Math.min(999, (parseInt(this.state.mks[i].qty, 10) || 1) + 1) }),
-        deShow: this.fmtPrice(g.dePrice),
-        dup: () => this.setState(s => ({ mks: [...s.mks.slice(0, i + 1), { ...s.mks[i] }, ...s.mks.slice(i + 1)], activeMk: i + 1 })),
-        moveUp: () => this.moveItem("mks", i, -1),
-        moveDown: () => this.moveItem("mks", i, 1),
-        setCada: e => this.updateMk(i, { cada: e.target.checked }),
-        remove: () => this.removeItem("mks", i),
-        removePreview: e => { e?.stopPropagation?.(); this.removePreviewItem("mks", i); },
-      };
-    });
-
-    const mks2 = this.state.mks2.map((g, i) => {
-      const { reais, centavos } = this.splitPrice(g.porPrice);
-      return {
-        ...g, n: i + 1, reais, centavos, qty: parseInt(g.qty, 10) || 1,
-        cardIndex: i, activeOn: this.state.activeMk2 === i ? "1" : "0",
-        activeExpanded: this.state.activeMk2 === i ? "true" : "false",
-        summaryName: (g.name || "Sem nome").trim(), porShow: this.fmtPrice(g.porPrice),
-        activate: () => this.toggleItem("mks2", i),
-        activatePreview: () => this.activateItem("mks2", i, true),
-        hasDe: !!(g.dePrice || "").trim(),
-        showCada: !!g.cada,
-        hasBrand: g.brand !== "semmarca",
-        brandBg: 'url("assets/placa/marcas/' + g.brand + '.png")',
-        setBrand: e => this.updateMk2(i, { brand: e.target.value }),
-        setName: e => this.updateMk2(i, { name: e.target.value }),
-        setDe: e => this.updateMk2(i, { dePrice: e.target.value }),
-        setPor: e => this.updateMk2(i, { porPrice: e.target.value }),
-        selectPrice: e => e.target.select(),
-        formatDe: () => this.updateMk2(i, { dePrice: this.normalizePriceField(this.state.mks2[i].dePrice, true) }),
-        formatPor: () => this.updateMk2(i, { porPrice: this.normalizePriceField(this.state.mks2[i].porPrice) }),
-        setQty: e => this.updateMk2(i, { qty: e.target.value }),
-        qtyMinus: () => this.updateMk2(i, { qty: Math.max(1, (parseInt(this.state.mks2[i].qty, 10) || 1) - 1) }),
-        qtyPlus: () => this.updateMk2(i, { qty: Math.min(999, (parseInt(this.state.mks2[i].qty, 10) || 1) + 1) }),
-        deShow: this.fmtPrice(g.dePrice),
-        dup: () => this.setState(s => ({ mks2: [...s.mks2.slice(0, i + 1), { ...s.mks2[i] }, ...s.mks2.slice(i + 1)], activeMk2: i + 1 })),
-        moveUp: () => this.moveItem("mks2", i, -1),
-        moveDown: () => this.moveItem("mks2", i, 1),
-        setCada: e => this.updateMk2(i, { cada: e.target.checked }),
-        remove: () => this.removeItem("mks2", i),
-        removePreview: e => { e?.stopPropagation?.(); this.removePreviewItem("mks2", i); },
-      };
-    });
-
-    const mks3 = this.state.mks3.map((g, i) => {
-      const { reais, centavos } = this.splitPrice(g.porPrice);
-      return {
-        ...g, n: i + 1, reais, centavos, qty: parseInt(g.qty, 10) || 1,
-        cardIndex: i, activeOn: this.state.activeMk3 === i ? "1" : "0",
-        activeExpanded: this.state.activeMk3 === i ? "true" : "false",
-        summaryName: (g.name || "Sem nome").trim(), porShow: this.fmtPrice(g.porPrice),
-        activate: () => this.toggleItem("mks3", i),
-        activatePreview: () => this.activateItem("mks3", i, true),
-        hasDe: !!(g.dePrice || "").trim(),
-        showCada: !!g.cada,
-        hasBrand: g.brand !== "semmarca",
-        brandBg: 'url("assets/placa/marcas/' + g.brand + '.png")',
-        setBrand: e => this.updateMk3(i, { brand: e.target.value }),
-        setName: e => this.updateMk3(i, { name: e.target.value }),
-        setDe: e => this.updateMk3(i, { dePrice: e.target.value }),
-        setPor: e => this.updateMk3(i, { porPrice: e.target.value }),
-        selectPrice: e => e.target.select(),
-        formatDe: () => this.updateMk3(i, { dePrice: this.normalizePriceField(this.state.mks3[i].dePrice, true) }),
-        formatPor: () => this.updateMk3(i, { porPrice: this.normalizePriceField(this.state.mks3[i].porPrice) }),
-        setQty: e => this.updateMk3(i, { qty: e.target.value }),
-        qtyMinus: () => this.updateMk3(i, { qty: Math.max(1, (parseInt(this.state.mks3[i].qty, 10) || 1) - 1) }),
-        qtyPlus: () => this.updateMk3(i, { qty: Math.min(999, (parseInt(this.state.mks3[i].qty, 10) || 1) + 1) }),
-        deShow: this.fmtPrice(g.dePrice),
-        dup: () => this.setState(s => ({ mks3: [...s.mks3.slice(0, i + 1), { ...s.mks3[i] }, ...s.mks3.slice(i + 1)], activeMk3: i + 1 })),
-        moveUp: () => this.moveItem("mks3", i, -1),
-        moveDown: () => this.moveItem("mks3", i, 1),
-        setCada: e => this.updateMk3(i, { cada: e.target.checked }),
-        remove: () => this.removeItem("mks3", i),
-        removePreview: e => { e?.stopPropagation?.(); this.removePreviewItem("mks3", i); },
-      };
-    });
+    const mks = this.state.mks.map((g, i) => this.buildItem("mks", g, i));
+    const mks2 = this.state.mks2.map((g, i) => this.buildItem("mks2", g, i));
+    const mks3 = this.state.mks3.map((g, i) => this.buildItem("mks3", g, i));
 
     const pss = this.state.pss.map((g, i) => {
-      const { reais, centavos } = this.splitPrice(g.porPrice);
+      const { reais } = this.splitPrice(g.porPrice);
+      const item = this.buildItem("pss", g, i);
       return {
-        ...g, n: i + 1, reais, centavos,
+        ...item,
         paisBg: "url('assets/pais-preview/" + (this.paisArt.indexOf(g.brand) !== -1 ? g.brand : "semmarca") + ".webp')",
         paisPrintBg: "url('assets/pais/" + (this.paisArt.indexOf(g.brand) !== -1 ? g.brand : "semmarca") + ".png')",
         reaisSize: String(reais).length > 3 ? "18cqw" : String(reais).length > 2 ? "22cqw" : "26.7cqw",
         nameSize: (g.name || "").length > 46 ? "3.5cqw" : (g.name || "").length > 32 ? "4.3cqw" : (g.name || "").length > 20 ? "4.9cqw" : "5.6cqw",
         deReais: this.splitPrice(g.dePrice).reais,
-        deCentavos: this.splitPrice(g.dePrice).centavos, qty: parseInt(g.qty, 10) || 1,
-        cardIndex: i, activeOn: this.state.activePs === i ? "1" : "0",
-        activeExpanded: this.state.activePs === i ? "true" : "false",
-        summaryName: (g.name || "Sem nome").trim(), porShow: this.fmtPrice(g.porPrice),
-        activate: () => this.toggleItem("pss", i),
-        activatePreview: () => this.activateItem("pss", i, true),
-        hasDe: !!(g.dePrice || "").trim(),
-        showCada: !!g.cada,
-        hasBrand: g.brand !== "semmarca",
-        brandBg: 'url("assets/placa/marcas/' + g.brand + '.png")',
-        setBrand: e => this.updatePs(i, { brand: e.target.value }),
-        setName: e => this.updatePs(i, { name: e.target.value }),
-        setDe: e => this.updatePs(i, { dePrice: e.target.value }),
-        setPor: e => this.updatePs(i, { porPrice: e.target.value }),
-        selectPrice: e => e.target.select(),
-        formatDe: () => this.updatePs(i, { dePrice: this.normalizePriceField(this.state.pss[i].dePrice, true) }),
-        formatPor: () => this.updatePs(i, { porPrice: this.normalizePriceField(this.state.pss[i].porPrice) }),
-        setQty: e => this.updatePs(i, { qty: e.target.value }),
-        qtyMinus: () => this.updatePs(i, { qty: Math.max(1, (parseInt(this.state.pss[i].qty, 10) || 1) - 1) }),
-        qtyPlus: () => this.updatePs(i, { qty: Math.min(999, (parseInt(this.state.pss[i].qty, 10) || 1) + 1) }),
-        deShow: this.fmtPrice(g.dePrice),
-        dup: () => this.setState(s => ({ pss: [...s.pss.slice(0, i + 1), { ...s.pss[i] }, ...s.pss.slice(i + 1)], activePs: i + 1 })),
-        moveUp: () => this.moveItem("pss", i, -1),
-        moveDown: () => this.moveItem("pss", i, 1),
-        setCada: e => this.updatePs(i, { cada: e.target.checked }),
-        remove: () => this.removeItem("pss", i),
-        removePreview: e => { e?.stopPropagation?.(); this.removePreviewItem("pss", i); },
+        deCentavos: this.splitPrice(g.dePrice).centavos,
       };
     });
 
     const pss6 = this.state.pss6.map((g, i) => {
-      const { reais, centavos } = this.splitPrice(g.porPrice);
+      const { reais } = this.splitPrice(g.porPrice);
+      const item = this.buildItem("pss6", g, i);
       return {
-        ...g, n: i + 1, reais, centavos,
+        ...item,
         pais6Bg: "url('assets/pais6-preview/" + (this.pais6Art.indexOf(g.brand) !== -1 ? g.brand : "semmarca") + ".webp')",
         pais6PrintBg: "url('assets/pais6/" + (this.pais6Art.indexOf(g.brand) !== -1 ? g.brand : "semmarca") + ".png')",
         reaisSize: String(reais).length > 3 ? "20cqw" : String(reais).length > 2 ? "24cqw" : "28.2cqw",
         nameSize: (g.name || "").length > 46 ? "4cqw" : (g.name || "").length > 32 ? "4.7cqw" : (g.name || "").length > 20 ? "5.3cqw" : "6.4cqw",
         deReais: this.splitPrice(g.dePrice).reais,
-        deCentavos: this.splitPrice(g.dePrice).centavos, qty: parseInt(g.qty, 10) || 1,
-        cardIndex: i, activeOn: this.state.activePs6 === i ? "1" : "0",
-        activeExpanded: this.state.activePs6 === i ? "true" : "false",
-        summaryName: (g.name || "Sem nome").trim(), porShow: this.fmtPrice(g.porPrice),
-        activate: () => this.toggleItem("pss6", i),
-        activatePreview: () => this.activateItem("pss6", i, true),
-        hasDe: !!(g.dePrice || "").trim(),
-        showCada: !!g.cada,
-        hasBrand: g.brand !== "semmarca",
+        deCentavos: this.splitPrice(g.dePrice).centavos,
         brandBg: 'url("assets/pais6-preview/' + (this.pais6Art.indexOf(g.brand) !== -1 ? g.brand : "semmarca") + '.webp")',
-        setBrand: e => this.updatePs6(i, { brand: e.target.value }),
-        setName: e => this.updatePs6(i, { name: e.target.value }),
-        setDe: e => this.updatePs6(i, { dePrice: e.target.value }),
-        setPor: e => this.updatePs6(i, { porPrice: e.target.value }),
-        selectPrice: e => e.target.select(),
-        formatDe: () => this.updatePs6(i, { dePrice: this.normalizePriceField(this.state.pss6[i].dePrice, true) }),
-        formatPor: () => this.updatePs6(i, { porPrice: this.normalizePriceField(this.state.pss6[i].porPrice) }),
-        setQty: e => this.updatePs6(i, { qty: e.target.value }),
-        qtyMinus: () => this.updatePs6(i, { qty: Math.max(1, (parseInt(this.state.pss6[i].qty, 10) || 1) - 1) }),
-        qtyPlus: () => this.updatePs6(i, { qty: Math.min(999, (parseInt(this.state.pss6[i].qty, 10) || 1) + 1) }),
-        deShow: this.fmtPrice(g.dePrice),
-        dup: () => this.setState(s => ({ pss6: [...s.pss6.slice(0, i + 1), { ...s.pss6[i] }, ...s.pss6.slice(i + 1)], activePs6: i + 1 })),
-        moveUp: () => this.moveItem("pss6", i, -1),
-        moveDown: () => this.moveItem("pss6", i, 1),
-        setCada: e => this.updatePs6(i, { cada: e.target.checked }),
-        remove: () => this.removeItem("pss6", i),
-        removePreview: e => { e?.stopPropagation?.(); this.removePreviewItem("pss6", i); },
       };
     });
 
     const placas = this.state.placas.map((pl, i) => {
-      const { reais, centavos } = this.splitPrice(pl.porPrice);
+      const item = this.buildItem("placas", pl, i);
       return {
-        ...pl, n: i + 1, reais, centavos, qty: parseInt(pl.qty, 10) || 1,
-        cardIndex: i, activeOn: this.state.activePlaca === i ? "1" : "0",
-        activeExpanded: this.state.activePlaca === i ? "true" : "false",
-        summaryName: (pl.name || "Sem nome").trim(), porShow: this.fmtPrice(pl.porPrice),
-        activate: () => this.toggleItem("placas", i),
-        activatePreview: () => this.activateItem("placas", i, true),
-        hasDe: !!(pl.dePrice || "").trim(),
-        hasBrand: pl.brand !== "semmarca",
-        brandBg: 'url("assets/placa/marcas/' + pl.brand + '.png")',
-        setBrand: e => this.updatePlaca(i, { brand: e.target.value }),
-        setName: e => this.updatePlaca(i, { name: e.target.value }),
-        setDesc: e => this.updatePlaca(i, { desc: e.target.value }),
-        setDe: e => this.updatePlaca(i, { dePrice: e.target.value }),
-        setPor: e => this.updatePlaca(i, { porPrice: e.target.value }),
-        selectPrice: e => e.target.select(),
-        formatDe: () => this.updatePlaca(i, { dePrice: this.normalizePriceField(this.state.placas[i].dePrice, true) }),
-        formatPor: () => this.updatePlaca(i, { porPrice: this.normalizePriceField(this.state.placas[i].porPrice) }),
-        setQty: e => this.updatePlaca(i, { qty: e.target.value }),
-        qtyMinus: () => this.updatePlaca(i, { qty: Math.max(1, (parseInt(this.state.placas[i].qty, 10) || 1) - 1) }),
-        qtyPlus: () => this.updatePlaca(i, { qty: Math.min(999, (parseInt(this.state.placas[i].qty, 10) || 1) + 1) }),
-        deShow: this.fmtPrice(pl.dePrice),
-        dup: () => this.setState(s => ({ placas: [...s.placas.slice(0, i + 1), { ...s.placas[i] }, ...s.placas.slice(i + 1)], activePlaca: i + 1 })),
-        showCada: !!pl.cada,
-        setCada: e => this.updatePlaca(i, { cada: e.target.checked }),
-        moveUp: () => this.moveItem("placas", i, -1),
-        moveDown: () => this.moveItem("placas", i, 1),
-        remove: () => this.removeItem("placas", i),
-        removePreview: e => { e?.stopPropagation?.(); this.removePreviewItem("placas", i); },
+        ...item,
+        setDesc: e => this.updateItem("placas", i, { desc: e.target.value }),
       };
     });
 
-    const expand = a => a.flatMap(g => Array(Math.max(1, parseInt(g.qty, 10) || 1)).fill(g));
-    const perPage = { placa: 4, pcr: 9, prec: 12, make: 12, make2: 30, make3: 30, pais: 20, pais6: 4 };
-    const activeCount = expand(model === "placa" ? placas : model === "pcr" ? pcrs : model === "prec" ? prs : model === "make2" ? mks2 : model === "make3" ? mks3 : model === "pais" ? pss : model === "pais6" ? pss6 : mks).length;
-    const pages = Math.max(1, Math.ceil(activeCount / perPage[model]));
+    const expand = items => items.flatMap(item => Array(this.clampQty(item.qty)).fill(item));
+    const renderedLists = { placas, pcrs, prs, mks, mks2, mks3, pss, pss6 };
+    const modelMeta = this.getModelMeta(model);
+    const activeCount = expand(renderedLists[modelMeta.key]).length;
+    const pages = Math.max(1, Math.ceil(activeCount / modelMeta.perPage));
     const pageInfo = activeCount + " etiqueta" + (activeCount === 1 ? "" : "s") + " · " + pages + " folha" + (pages === 1 ? "" : "s") + " A4";
 
     return {
@@ -2974,8 +2830,8 @@ class Component extends DCLogic {
       pais6PageClass: model === "pais6" ? "pais6-page" : "",
       pais6PageCss: model === "pais6" ? "@media print { @page { size: A4 portrait; margin: 0; } }" : "",
       pais6BrandOptions: this.pais6Brands,
+      modelRailStyle: "",
       tabPais6On: model === "pais6" ? "1" : "0",
-      showPais6: () => this.setState({ model: "pais6" }),
       paisBrandOptions: this.placaBrands.filter(b => this.paisArt.indexOf(b.key) !== -1),
       isPrec: model === "prec",
       isPcr: model === "pcr",
@@ -2994,21 +2850,6 @@ class Component extends DCLogic {
       tabMake3Pressed: model === "make3" ? "true" : "false",
       tabPaisPressed: model === "pais" ? "true" : "false",
       tabPais6Pressed: model === "pais6" ? "true" : "false",
-      tabPlacaStyle: model === "placa" ? on : off,
-      tabMakeStyle: model === "make" ? on : off,
-      tabMake2Style: model === "make2" ? on : off,
-      tabMake3Style: model === "make3" ? on : off,
-      tabPaisStyle: model === "pais" ? on : off,
-      tabPais6Style: model === "pais6" ? on : off,
-      tabPrecStyle: model === "prec" ? on : off,
-      tabPcrStyle: model === "pcr" ? on : off,
-      showPlaca: () => this.setState({ model: "placa" }),
-      showMake: () => this.setState({ model: "make" }),
-      showMake2: () => this.setState({ model: "make2" }),
-      showMake3: () => this.setState({ model: "make3" }),
-      showPais: () => this.setState({ model: "pais" }),
-      showPrec: () => this.setState({ model: "prec" }),
-      showPcr: () => this.setState({ model: "pcr" }),
       placas, placaCount: placas.length,
       placaEmpty: placas.length === 0, pcrEmpty: pcrs.length === 0, prEmpty: prs.length === 0, mkEmpty: mks.length === 0, mk2Empty: mks2.length === 0, mk3Empty: mks3.length === 0, ps6Empty: pss6.length === 0, psEmpty: pss.length === 0,
       placasGrid: expand(placas), mksGrid: expand(mks), mks2Grid: expand(mks2), mks3Grid: expand(mks3), pssGrid: expand(pss), pss6Grid: expand(pss6), prsGrid: expand(prs), pcrsGrid: expand(pcrs),
@@ -3021,29 +2862,15 @@ class Component extends DCLogic {
       prs, prCount: prs.length,
       pcrs, pcrCount: pcrs.length,
       placaBrandOptions: this.placaBrands,
-      addPcr: () => this.addItem("pcrs", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }),
-      addPr: () => this.addItem("prs", { brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" }),
-      addMk: () => this.addItem("mks", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }),
-      addMk2: () => this.addItem("mks2", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }),
-      addMk3: () => this.addItem("mks3", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }),
-      addPs: () => this.addItem("pss", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }),
-      addPs6: () => this.addItem("pss6", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }),
-      addPlaca: () => this.addItem("placas", { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }),
-      addCurrent: () => model === "make"
-        ? this.addItem("mks", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false })
-        : model === "make2"
-        ? this.addItem("mks2", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false })
-        : model === "make3"
-        ? this.addItem("mks3", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false })
-        : model === "pais"
-        ? this.addItem("pss", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false })
-        : model === "pais6"
-        ? this.addItem("pss6", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false })
-        : model === "prec"
-        ? this.addItem("prs", { brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" })
-        : model === "pcr"
-        ? this.addItem("pcrs", { brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" })
-        : this.addItem("placas", { brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }),
+      addPcr: () => this.addItem("pcrs", this.modelMeta.pcr.create()),
+      addPr: () => this.addItem("prs", this.modelMeta.prec.create()),
+      addMk: () => this.addItem("mks", this.modelMeta.make.create()),
+      addMk2: () => this.addItem("mks2", this.modelMeta.make2.create()),
+      addMk3: () => this.addItem("mks3", this.modelMeta.make3.create()),
+      addPs: () => this.addItem("pss", this.modelMeta.pais.create()),
+      addPs6: () => this.addItem("pss6", this.modelMeta.pais6.create()),
+      addPlaca: () => this.addItem("placas", this.modelMeta.placa.create()),
+      addCurrent: () => this.addCurrentItem(),
       doPrint: () => activeCount ? this.setState({ printOpen: true }) : window.alert("Adicione pelo menos uma etiqueta antes de imprimir."),
       scrollTop: () => window.scrollTo({ top: 0, behavior: "smooth" }),
       isMenuOpen: !!this.state.menuOpen,
@@ -3056,27 +2883,26 @@ class Component extends DCLogic {
         if (this._undoTimer) clearTimeout(this._undoTimer);
         this.setState({ [u.key]: u.snap, undo: null });
       },
-      dismissUndo: () => this.setState({ undo: null }),
-      isModelsOpen: !!this.state.modelsOpen,
-      toggleModels: () => this.setState(s => ({ modelsOpen: !s.modelsOpen, menuOpen: false })),
-      modelItemStyle: "background:none; border:none; border-radius:12px; padding:11px 12px; font-size:13.5px; font-weight:700; color:#2A2333; text-align:left; cursor:pointer;",
-      pickMake: () => this.setState({ model: "make", modelsOpen: false }),
-      pickMake2: () => this.setState({ model: "make2", modelsOpen: false }),
-      pickMake3: () => this.setState({ model: "make3", modelsOpen: false }),
-      pickPais: () => this.setState({ model: "pais", modelsOpen: false }),
-      pickPais6: () => this.setState({ model: "pais6", modelsOpen: false }),
-      pickPrec: () => this.setState({ model: "prec", modelsOpen: false }),
-      pickPlaca: () => this.setState({ model: "placa", modelsOpen: false }),
-      pickPcr: () => this.setState({ model: "pcr", modelsOpen: false }),
-      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen, modelsOpen: false })),
+      dismissUndo: () => {
+        if (this._undoTimer) clearTimeout(this._undoTimer);
+        this.setState({ undo: null });
+      },
+      pickMake: () => this.selectModel("make"),
+      pickMake2: () => this.selectModel("make2"),
+      pickMake3: () => this.selectModel("make3"),
+      pickPais: () => this.selectModel("pais"),
+      pickPais6: () => this.selectModel("pais6"),
+      pickPrec: () => this.selectModel("prec"),
+      pickPlaca: () => this.selectModel("placa"),
+      pickPcr: () => this.selectModel("pcr"),
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
       menuItemStyle: "background:none; border:none; text-align:left; padding:12px; font-size:14px; font-weight:600; color:" + (this.state.dark ? "#EEF8F7" : "#1a1d21") + "; cursor:pointer; border-radius:8px;",
       darkLabel: this.state.dark ? "Modo claro" : "Modo escuro",
-      menuAdd: () => { this.setState({ menuOpen: false }); this.renderVals().addCurrent(); },
+      menuAdd: () => { this.setState({ menuOpen: false }); this.addCurrentItem(); },
       menuImport: () => this.setState({ menuOpen: false, importOpen: true }),
       menuExport: () => { this.setState({ menuOpen: false }); this.exportLabels(); },
       menuPreview: () => this.setState(s => ({ menuOpen: false, preview: !s.preview })),
       menuHelp: () => this.setState({ menuOpen: false, helpOpen: true }),
-      menuPrint: () => activeCount ? this.setState({ menuOpen: false, printOpen: true }) : window.alert("Adicione pelo menos uma etiqueta antes de imprimir."),
       menuClear: () => {
         const key = this.listKey(model);
         this.setState({ menuOpen: false });
@@ -3116,7 +2942,7 @@ class Component extends DCLogic {
       addOnEnter: e => {
         if (e.key !== "Enter" || e.repeat) return;
         e.preventDefault();
-        this.renderVals().addCurrent();
+        this.addCurrentItem();
         setTimeout(() => {
           const editor = document.querySelector(".workspace-layout .editor-col");
           if (!editor) return;
@@ -3161,7 +2987,7 @@ class Component extends DCLogic {
       confirmPrint: () => { this.setState({ printOpen: false }); setTimeout(() => window.print(), 80); },
       printCount: activeCount,
       printPages: pages,
-      printModel: model === "placa" ? "Etiqueta Vitrine" : model === "pcr" ? "Expositor Madeira" : model === "prec" ? "Placa de Acrílico Promoção" : model === "make2" ? "Régua de Preços" : model === "make3" ? "Régua de Preço Promoção" : model === "pais" ? "Etiqueta Especial Dia dos Pais" : model === "pais6" ? "Pancarta A6 Dia dos Pais" : "Placa de Acrílico",
+      printModel: modelMeta.label,
       isImportOpen: !!this.state.importOpen,
       closeImport: () => this.setState({ importOpen: false }),
       downloadModel: () => {
@@ -3171,7 +2997,7 @@ class Component extends DCLogic {
         a.href = URL.createObjectURL(blob);
         a.download = "modelo-importacao.csv";
         a.click();
-        URL.revokeObjectURL(a.href);
+        setTimeout(() => URL.revokeObjectURL(a.href), 1000);
       },
       importFile: e => {
         const f = e.target.files && e.target.files[0];
