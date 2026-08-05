@@ -956,6 +956,53 @@
       border-radius: 22px;
       box-shadow: 0 14px 34px rgba(70,50,115,.10);
       scrollbar-width: thin;
+      transition: width .3s cubic-bezier(.22,1,.36,1), padding .3s cubic-bezier(.22,1,.36,1);
+    }
+    .model-rail-toggle {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      color: var(--dd-primary-700);
+      background: var(--dd-surface);
+      border: 1px solid var(--dd-border);
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(24,29,34,.08);
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1;
+      cursor: pointer;
+      transition: color .15s ease, background .15s ease;
+    }
+    .model-rail-toggle:hover { color:#fff; background:var(--dd-primary-700); }
+    .model-rail-toggle-icon {
+      display: block;
+      transition: transform .3s cubic-bezier(.22,1,.36,1);
+    }
+    .model-rail.is-collapsed .model-rail-toggle-icon { transform: rotate(180deg); }
+    .model-rail.is-collapsed {
+      width: 58px;
+      padding: 54px 7px 10px;
+      overflow: hidden;
+    }
+    .model-rail.is-collapsed .model-rail-toggle { left: 12px; }
+    .model-rail.is-collapsed .model-rail-title { display: none; }
+    .model-rail.is-collapsed .model-item {
+      justify-content: center;
+      min-height: 42px;
+      padding: 8px;
+    }
+    .model-rail.is-collapsed .model-item > span:not(.model-thumb) { display: none; }
+    .models-collapsed .workspace-layout { padding-right: 90px; }
+    .dark .model-rail-toggle {
+      color: var(--dd-text);
+      background: var(--dd-surface);
+      border-color: var(--dd-border);
     }
     .model-rail-title {
       font-family: Bochan, Georgia, serif;
@@ -1004,9 +1051,28 @@
         border-radius: 18px;
         padding: 10px;
       }
+      .model-rail-toggle {
+        position: sticky;
+        left: 0;
+        top: auto;
+        flex: none;
+        width: 40px;
+        height: 40px;
+        background: var(--dd-surface);
+      }
       .model-rail-title { display: none; }
       .model-rail .model-item { width: auto; white-space: nowrap; padding: 10px 14px; }
       .model-n { display: none; }
+      .model-rail.is-collapsed {
+        width: 60px;
+        min-height: 60px;
+        margin-left: auto;
+        padding: 10px;
+        overflow: hidden;
+      }
+      .model-rail.is-collapsed .model-rail-toggle { position: static; }
+      .model-rail.is-collapsed .model-item { display: none; }
+      .models-collapsed .workspace-layout { padding-right: 0; }
     }
     @media print { .model-rail { display: none !important; } .workspace-layout { padding-left: 0 !important; } }
     /* ---- escala tipográfica ---- */
@@ -1182,7 +1248,7 @@
 </template>
 
 <style>{{ pais6PageCss }}</style>
-<div class="app-bg {{ pais6PageClass }} {{ ppClass }} {{ darkClass }} {{ mvClass }} {{ panelClass }}" style="min-height:100vh; background:#f5f3f4; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg'); background-size:420px 420px, 200px 200px, 300px 300px; background-position:right -140px bottom -160px, right 240px bottom 220px, left -120px top 90px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
+<div class="app-bg {{ pais6PageClass }} {{ ppClass }} {{ darkClass }} {{ mvClass }} {{ panelClass }} {{ modelsClass }}" style="min-height:100vh; background:#f5f3f4; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg'); background-size:420px 420px, 200px 200px, 300px 300px; background-position:right -140px bottom -160px, right 240px bottom 220px, left -120px top 90px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
   <h1 class="sr-only">Gerador de Etiquetas D&amp;D</h1>
 
   <div class="no-print hdr-band" style="background:#05918C; padding:14px 22px 18px;">
@@ -1226,16 +1292,17 @@
     </div>
   </sc-if>
 
-  <nav class="no-print model-rail" aria-label="Modelos de etiqueta">
+  <nav class="no-print model-rail {{ modelsRailClass }}" aria-label="Modelos de etiqueta">
+    <button class="model-rail-toggle" onClick="{{ toggleModelsPanel }}" title="{{ modelsToggleTitle }}" aria-label="{{ modelsToggleTitle }}" aria-expanded="{{ modelsExpanded }}"><span class="model-rail-toggle-icon">›</span></button>
     <div class="model-rail-title">Modelo<br>de Etiquetas</div>
-      <button onClick="{{ pickMake }}" data-on="{{ tabMakeOn }}" aria-pressed="{{ tabMakePressed }}" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-verde.png');"></span><span class="model-n">#1</span><span>Placa de Acrílico</span></button>
-      <button onClick="{{ pickPrec }}" data-on="{{ tabPrecOn }}" aria-pressed="{{ tabPrecPressed }}" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-verde2.png');"></span><span class="model-n">#2</span><span>Placa de Acrílico Promoção</span></button>
-      <button onClick="{{ pickMake2 }}" data-on="{{ tabMake2On }}" aria-pressed="{{ tabMake2Pressed }}" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-verde.png');"></span><span class="model-n">#3</span><span>Régua de Preços</span></button>
-      <button onClick="{{ pickMake3 }}" data-on="{{ tabMake3On }}" aria-pressed="{{ tabMake3Pressed }}" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-rosa.png');"></span><span class="model-n">#4</span><span>Régua de Preço Promoção</span></button>
-      <button onClick="{{ pickPais }}" data-on="{{ tabPaisOn }}" aria-pressed="{{ tabPaisPressed }}" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/pais-preview/semmarca.webp');"></span><span class="model-n">#5</span><span>Etiqueta Especial Dia dos Pais</span></button>
-      <button onClick="{{ pickPais6 }}" data-on="{{ tabPais6On }}" aria-pressed="{{ tabPais6Pressed }}" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/pais6-preview/semmarca.webp');"></span><span class="model-n">#6</span><span>Pancarta A6 Dia dos Pais</span></button>
-      <button onClick="{{ pickPlaca }}" data-on="{{ tabPlacaOn }}" aria-pressed="{{ tabPlacaPressed }}" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/placa/nuvem-rosa.png');"></span><span class="model-n">#7</span><span>Etiqueta Vitrine</span></button>
-      <button onClick="{{ pickPcr }}" data-on="{{ tabPcrOn }}" aria-pressed="{{ tabPcrPressed }}" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precario/template.png');"></span><span class="model-n">#8</span><span>Expositor Madeira</span></button>
+      <button onClick="{{ pickMake }}" data-on="{{ tabMakeOn }}" aria-pressed="{{ tabMakePressed }}" aria-label="Placa de Acrílico" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-verde.png');"></span><span class="model-n">#1</span><span>Placa de Acrílico</span></button>
+      <button onClick="{{ pickPrec }}" data-on="{{ tabPrecOn }}" aria-pressed="{{ tabPrecPressed }}" aria-label="Placa de Acrílico Promoção" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-verde2.png');"></span><span class="model-n">#2</span><span>Placa de Acrílico Promoção</span></button>
+      <button onClick="{{ pickMake2 }}" data-on="{{ tabMake2On }}" aria-pressed="{{ tabMake2Pressed }}" aria-label="Régua de Preços" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-verde.png');"></span><span class="model-n">#3</span><span>Régua de Preços</span></button>
+      <button onClick="{{ pickMake3 }}" data-on="{{ tabMake3On }}" aria-pressed="{{ tabMake3Pressed }}" aria-label="Régua de Preço Promoção" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-rosa.png');"></span><span class="model-n">#4</span><span>Régua de Preço Promoção</span></button>
+      <button onClick="{{ pickPais }}" data-on="{{ tabPaisOn }}" aria-pressed="{{ tabPaisPressed }}" aria-label="Etiqueta Especial Dia dos Pais" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/pais-preview/semmarca.webp');"></span><span class="model-n">#5</span><span>Etiqueta Especial Dia dos Pais</span></button>
+      <button onClick="{{ pickPais6 }}" data-on="{{ tabPais6On }}" aria-pressed="{{ tabPais6Pressed }}" aria-label="Pancarta A6 Dia dos Pais" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/pais6-preview/semmarca.webp');"></span><span class="model-n">#6</span><span>Pancarta A6 Dia dos Pais</span></button>
+      <button onClick="{{ pickPlaca }}" data-on="{{ tabPlacaOn }}" aria-pressed="{{ tabPlacaPressed }}" aria-label="Etiqueta Vitrine" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/placa/nuvem-rosa.png');"></span><span class="model-n">#7</span><span>Etiqueta Vitrine</span></button>
+      <button onClick="{{ pickPcr }}" data-on="{{ tabPcrOn }}" aria-pressed="{{ tabPcrPressed }}" aria-label="Expositor Madeira" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precario/template.png');"></span><span class="model-n">#8</span><span>Expositor Madeira</span></button>
   </nav>
 
   <sc-if value="{{ isPreview }}" hint-placeholder-val="{{ false }}">
@@ -2227,6 +2294,7 @@ class Component extends DCLogic {
   state = {
     model: "placa",
     panelCollapsed: false,
+    modelsCollapsed: false,
     activePcr: 0,
     activePr: 0,
     activeMk: 0,
@@ -3024,6 +3092,11 @@ class Component extends DCLogic {
       panelExpanded: this.state.panelCollapsed ? "false" : "true",
       panelToggleTitle: this.state.panelCollapsed ? "Mostrar painel de edição" : "Recolher painel de edição",
       togglePanel: () => this.setState(s => ({ panelCollapsed: !s.panelCollapsed })),
+      modelsClass: this.state.modelsCollapsed ? "models-collapsed" : "",
+      modelsRailClass: this.state.modelsCollapsed ? "is-collapsed" : "",
+      modelsExpanded: this.state.modelsCollapsed ? "false" : "true",
+      modelsToggleTitle: this.state.modelsCollapsed ? "Mostrar painel de modelos" : "Recolher painel de modelos",
+      toggleModelsPanel: () => this.setState(s => ({ modelsCollapsed: !s.modelsCollapsed })),
       setMvEdit: () => this.setState({ mobileView: "edit" }),
       setMvSheet: () => this.setState({ mobileView: "sheet" }),
       mvEditBtn: "border:none; border-radius:6px; padding:9px 14px; font-size:13px; font-weight:700; cursor:pointer;" + (this.state.mobileView !== "sheet" ? "background:#05918C; color:#fff;" : "background:transparent; color:#657575;"),
