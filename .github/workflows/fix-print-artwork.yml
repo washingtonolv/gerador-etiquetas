@@ -1,0 +1,81 @@
+name: Corrigir arte na impressão
+
+on:
+  push:
+    paths:
+      - .github/workflows/fix-print-artwork.yml
+
+permissions:
+  contents: write
+
+jobs:
+  corrigir:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v4
+
+      - name: Pré-carregar artes antes da impressão
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("index.html")
+          content = path.read_text(encoding="utf-8")
+
+          old = '      confirmPrint: () => { this.setState({ printOpen: false }); setTimeout(() => window.print(), 80); },'
+          new = '''      confirmPrint: () => {
+        this.setState({ printOpen: false });
+        setTimeout(async () => {
+          const printBackgrounds = Array.from(document.querySelectorAll(".pais-label, .pais6-label"))
+            .flatMap((el) => {
+              const styles = getComputedStyle(el);
+              return [
+                styles.getPropertyValue("--pais-print-bg").trim(),
+                styles.getPropertyValue("--pais6-print-bg").trim(),
+              ];
+            })
+            .map((value) => {
+              const match = value.match(/url\\((['\"]?)(.*?)\\1\\)/);
+              return match ? match[2] : "";
+            })
+            .filter(Boolean);
+
+          const loadImages = Promise.all(Array.from(new Set(printBackgrounds)).map((src) => new Promise((resolve) => {
+            const image = new Image();
+            image.onload = resolve;
+            image.onerror = resolve;
+            image.src = src;
+          })));
+
+          await Promise.race([
+            loadImages,
+            new Promise((resolve) => setTimeout(resolve, 4000)),
+          ]);
+
+          if (document.fonts && document.fonts.ready) {
+            await Promise.race([
+              document.fonts.ready,
+              new Promise((resolve) => setTimeout(resolve, 1500)),
+            ]);
+          }
+
+          window.print();
+        }, 120);
+      },'''
+
+          if old not in content:
+              raise SystemExit("Trecho confirmPrint não encontrado; nenhuma alteração aplicada.")
+
+          path.write_text(content.replace(old, new, 1), encoding="utf-8")
+          PY
+
+      - name: Publicar correção
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Corrige arte da etiqueta Dia dos Pais na impressão"
+          git push
