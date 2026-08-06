@@ -2984,7 +2984,7 @@ class Component extends DCLogic {
       exportLabels: () => this.exportLabels(),
       isPrintOpen: !!this.state.printOpen,
       closePrint: () => this.setState({ printOpen: false }),
-      confirmPrint: () => { this.setState({ printOpen: false }); setTimeout(() => window.print(), 80); },
+      confirmPrint: () => { this.setState({ printOpen: false }); setTimeout(async () => { const values = Array.from(document.querySelectorAll(".pais-label, .pais6-label")).flatMap((el) => { const styles = getComputedStyle(el); return [styles.getPropertyValue("--pais-print-bg").trim(), styles.getPropertyValue("--pais6-print-bg").trim()]; }).filter(Boolean); const urls = values.map((value) => { const start = value.indexOf("("); const end = value.lastIndexOf(")"); return start >= 0 && end > start ? value.slice(start + 1, end).replace(/^['"]|['"]$/g, "") : ""; }).filter(Boolean); const loadImages = Promise.all(Array.from(new Set(urls)).map((src) => new Promise((resolve) => { const image = new Image(); image.onload = resolve; image.onerror = resolve; image.src = src; }))); await Promise.race([loadImages, new Promise((resolve) => setTimeout(resolve, 4000))]); if (document.fonts && document.fonts.ready) await Promise.race([document.fonts.ready, new Promise((resolve) => setTimeout(resolve, 1500))]); window.print(); }, 120); },
       printCount: activeCount,
       printPages: pages,
       printModel: modelMeta.label,
