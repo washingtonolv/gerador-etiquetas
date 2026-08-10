@@ -1,0 +1,57 @@
+name: Ajustar etiquetas 4x5 cm
+
+on:
+  push:
+    paths:
+      - .github/workflows/force-pais-4x5.yml
+
+permissions:
+  contents: write
+
+jobs:
+  ajustar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Aplicar dimensões físicas exatas
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          s = s.replace(
+              '.g-pais { grid-template-columns: repeat(4, 40mm) !important; gap: 4mm !important; justify-content:center !important; }',
+              '.g-pais { display:grid !important; grid-template-columns:repeat(4, 40mm) !important; grid-auto-rows:50mm !important; column-gap:4mm !important; row-gap:4mm !important; justify-content:center !important; align-content:start !important; width:172mm !important; max-width:172mm !important; }',
+              1
+          )
+          s = s.replace(
+              '.g-pais > div { width: 40mm !important; height: 50mm !important; aspect-ratio: auto !important; }',
+              '.g-pais > div, .g-pais .pais-label { box-sizing:border-box !important; width:40mm !important; min-width:40mm !important; max-width:40mm !important; height:50mm !important; min-height:50mm !important; max-height:50mm !important; aspect-ratio:auto !important; transform:none !important; flex:none !important; }',
+              1
+          )
+          s = s.replace(
+              '.pp .g-pais { grid-template-columns: repeat(4, 40mm) !important; gap: 4mm !important; justify-content:center !important; }',
+              '.pp .g-pais { display:grid !important; grid-template-columns:repeat(4, 40mm) !important; grid-auto-rows:50mm !important; column-gap:4mm !important; row-gap:4mm !important; justify-content:center !important; align-content:start !important; width:172mm !important; max-width:172mm !important; }',
+              1
+          )
+          s = s.replace(
+              '.pp .g-pais > div { width: 40mm !important; height: 50mm !important; aspect-ratio: auto !important; }',
+              '.pp .g-pais > div, .pp .g-pais .pais-label { box-sizing:border-box !important; width:40mm !important; min-width:40mm !important; max-width:40mm !important; height:50mm !important; min-height:50mm !important; max-height:50mm !important; aspect-ratio:auto !important; transform:none !important; flex:none !important; }',
+              1
+          )
+
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Publicar ajuste
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Trava etiqueta Dia dos Pais em 4x5 cm na impressão"
+          git push
