@@ -65,13 +65,13 @@
       .g-prec { grid-template-columns: repeat(2, 65mm) !important; gap: 6mm !important; justify-content:center !important; }
       .g-make { grid-template-columns: repeat(2, 64mm) !important; gap: 6mm !important; justify-content:center !important; }
       .g-make2, .g-make3 { grid-template-columns: repeat(3, 55mm) !important; gap: 4mm 3mm !important; justify-content:center !important; }
-      .g-pais { grid-template-columns: repeat(4, 40mm) !important; gap: 4mm !important; justify-content:center !important; }
+      .g-pais { display:grid !important; grid-template-columns:repeat(4, 40mm) !important; grid-auto-rows:50mm !important; column-gap:4mm !important; row-gap:4mm !important; justify-content:center !important; align-content:start !important; width:172mm !important; max-width:172mm !important; }
       .g-pais6 { grid-template-columns: repeat(2, 105mm) !important; grid-auto-rows: 148mm !important; gap: 0 !important; justify-content:center !important; }
       .pais6-page .sheet { padding: 0 !important; }
       .g-placa { grid-template-columns: repeat(2, 90mm) !important; gap: 5mm !important; }
       .g-pcr { grid-template-columns: repeat(2, 48mm) !important; gap: 6mm !important; justify-content:center !important; }
       .g-prec > div, .g-make > div, .g-make2 > div, .g-make3 > div, .g-pais > div, .g-pais6 > div, .g-placa > div, .g-pcr > div { break-inside: avoid; outline: 0.3mm dashed #9aa6b1 !important; outline-offset: 1mm; border: none !important; border-radius: 0 !important; }
-      .g-pais > div { width: 40mm !important; height: 50mm !important; aspect-ratio: auto !important; }
+      .g-pais > div, .g-pais .pais-label { box-sizing:border-box !important; width:40mm !important; min-width:40mm !important; max-width:40mm !important; height:50mm !important; min-height:50mm !important; max-height:50mm !important; aspect-ratio:auto !important; transform:none !important; flex:none !important; }
       .g-placa, .g-pcr { gap: 6mm !important; }
       .pais-label { background-image: var(--pais-print-bg) !important; }
     }
@@ -80,12 +80,12 @@
     .pp .g-prec { grid-template-columns: repeat(2, 65mm) !important; gap: 6mm !important; justify-content:center !important; }
     .pp .g-make { grid-template-columns: repeat(2, 64mm) !important; gap: 6mm !important; justify-content:center !important; }
     .pp .g-make2, .pp .g-make3 { grid-template-columns: repeat(3, 55mm) !important; gap: 4mm 3mm !important; justify-content:center !important; }
-    .pp .g-pais { grid-template-columns: repeat(4, 40mm) !important; gap: 4mm !important; justify-content:center !important; }
+    .pp .g-pais { display:grid !important; grid-template-columns:repeat(4, 40mm) !important; grid-auto-rows:50mm !important; column-gap:4mm !important; row-gap:4mm !important; justify-content:center !important; align-content:start !important; width:172mm !important; max-width:172mm !important; }
     .pp .g-pais6 { grid-template-columns: repeat(2, 105mm) !important; grid-auto-rows: 148mm !important; gap: 0 !important; justify-content:center !important; }
     .pp .g-placa { grid-template-columns: repeat(2, 90mm) !important; gap: 6mm !important; }
     .pp .g-pcr { grid-template-columns: repeat(2, 48mm) !important; gap: 6mm !important; justify-content:center !important; }
     .pp .pais-label { background-image: var(--pais-print-bg) !important; }
-    .pp .g-pais > div { width: 40mm !important; height: 50mm !important; aspect-ratio: auto !important; }
+    .pp .g-pais > div, .pp .g-pais .pais-label { box-sizing:border-box !important; width:40mm !important; min-width:40mm !important; max-width:40mm !important; height:50mm !important; min-height:50mm !important; max-height:50mm !important; aspect-ratio:auto !important; transform:none !important; flex:none !important; }
     .pp .g-prec > div, .pp .g-make > div, .pp .g-make2 > div, .pp .g-make3 > div, .pp .g-pais > div, .pp .g-pais6 > div, .pp .g-placa > div, .pp .g-pcr > div { outline: 0.3mm dashed #9aa6b1; outline-offset: 1mm; }
     .pp .sheet { width: 210mm !important; max-width: none !important; padding: 10mm !important; }
     /* A6 na tela: mostra apenas as etiquetas existentes, sem simular a folha inteira. */
