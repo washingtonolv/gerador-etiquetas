@@ -1267,7 +1267,7 @@
     <div class="hdr-pill" style="background:#fff; border-radius:999px; padding:8px 8px 8px 20px; display:flex; align-items:center; gap:10px 18px; flex-wrap:wrap; box-shadow:0 6px 24px rgba(120,20,45,.18);">
       <div style="display:flex; align-items:center; gap:9px;">
         <img src="assets/placa/image4.png" alt="D&amp;D Cosméticos" style="width:100px; height:auto; flex:none;">
-        <span style="font-size:15px; font-weight:800; color:#1a1d21; letter-spacing:.2px; white-space:nowrap;">Etiquetas D&amp;D</span>
+        <span style="font-size:15px; font-weight:600; color:#1a1d21; letter-spacing:.2px; white-space:nowrap;">Etiquetas D&amp;D</span>
       </div>
       <div style="flex:1;"></div>
       <div class="hdr-actions" style="display:flex; align-items:center; gap:2px;">
@@ -1340,7 +1340,7 @@
     <div class="no-print dialog-backdrop" style="position:fixed; inset:0; z-index:100; background:rgba(30,20,25,.45); display:flex; align-items:center; justify-content:center; padding:16px;">
       <div class="import-panel" role="dialog" aria-modal="true" aria-labelledby="help-dialog-title" tabindex="-1" style="background:#fff; border-radius:14px; padding:24px; width:100%; max-width:480px; max-height:90vh; overflow:auto; display:flex; flex-direction:column; gap:12px; box-shadow:0 10px 40px rgba(0,0,0,.3);">
         <div style="display:flex; align-items:center; gap:8px;">
-          <div id="help-dialog-title" style="font-size:17px; font-weight:800; color:#1a1d21;">Guia rápido</div>
+          <div id="help-dialog-title" style="font-size:17px; font-weight:600; color:#1a1d21;">Guia rápido</div>
           <div style="flex:1;"></div>
           <button onClick="{{ closeHelp }}" aria-label="Fechar guia rápido" style="background:none; border:none; color:#657575; font-size:18px; cursor:pointer; line-height:1;">✕</button>
         </div>
@@ -1363,7 +1363,7 @@
     <div class="no-print dialog-backdrop" style="position:fixed; inset:0; z-index:105; background:rgba(21,38,37,.58); display:flex; align-items:center; justify-content:center; padding:16px;">
       <div class="import-panel" role="dialog" aria-modal="true" aria-labelledby="onboarding-dialog-title" tabindex="-1" style="background:#fff; border-radius:18px; padding:26px; width:100%; max-width:620px; max-height:90vh; overflow:auto; display:flex; flex-direction:column; gap:18px; box-shadow:0 18px 60px rgba(0,0,0,.3);">
         <div style="display:flex; align-items:flex-start; gap:12px;">
-          <div><div id="onboarding-dialog-title" style="font-size:21px; font-weight:800; color:#263737;">Crie suas etiquetas em 3 passos</div><div style="margin-top:4px; font-size:13px; color:#657575;">O sistema salva tudo automaticamente neste navegador.</div></div>
+          <div><div id="onboarding-dialog-title" style="font-size:21px; font-weight:600; color:#263737;">Crie suas etiquetas em 3 passos</div><div style="margin-top:4px; font-size:13px; color:#657575;">O sistema salva tudo automaticamente neste navegador.</div></div>
           <div style="flex:1;"></div>
           <button onClick="{{ closeOnboarding }}" title="Fechar" aria-label="Fechar introdução" style="background:none; border:none; color:#657575; font-size:20px; cursor:pointer; line-height:1;">✕</button>
         </div>
@@ -1381,7 +1381,7 @@
     <div class="no-print dialog-backdrop" style="position:fixed; inset:0; z-index:100; background:rgba(30,20,25,.45); display:flex; align-items:center; justify-content:center; padding:16px;">
       <div class="import-panel" role="dialog" aria-modal="true" aria-labelledby="import-dialog-title" tabindex="-1" style="background:#fff; border-radius:14px; padding:24px; width:100%; max-width:440px; max-height:90vh; overflow:auto; display:flex; flex-direction:column; gap:14px; box-shadow:0 10px 40px rgba(0,0,0,.3);">
         <div style="display:flex; align-items:center; gap:8px;">
-          <div id="import-dialog-title" style="font-size:17px; font-weight:800; color:#1a1d21;">Importar ou restaurar etiquetas</div>
+          <div id="import-dialog-title" style="font-size:17px; font-weight:600; color:#1a1d21;">Importar ou restaurar etiquetas</div>
           <div style="flex:1;"></div>
           <button onClick="{{ closeImport }}" aria-label="Fechar importação" style="background:none; border:none; color:#657575; font-size:18px; cursor:pointer; line-height:1;">✕</button>
         </div>
@@ -1399,7 +1399,7 @@
   <sc-if value="{{ isPrintOpen }}" hint-placeholder-val="{{ false }}">
     <div class="no-print dialog-backdrop" style="position:fixed; inset:0; z-index:110; background:rgba(21,38,37,.58); display:flex; align-items:center; justify-content:center; padding:16px;">
       <div class="import-panel" role="dialog" aria-modal="true" aria-labelledby="print-dialog-title" tabindex="-1" style="background:#fff; border-radius:18px; padding:26px; width:100%; max-width:500px; max-height:90vh; overflow:auto; display:flex; flex-direction:column; gap:18px; box-shadow:0 18px 60px rgba(0,0,0,.3);">
-        <div style="display:flex; align-items:center; gap:10px;"><div style="width:42px; height:42px; display:grid; place-items:center; border-radius:12px; background:#FCECEF; color:#A72F50; font-size:21px;">🖨</div><div><div id="print-dialog-title" style="font-size:19px; font-weight:800; color:#263737;">Tudo pronto para imprimir?</div><div style="font-size:12px; color:#657575; margin-top:3px;">{{ printModel }}</div></div><div style="flex:1;"></div><button onClick="{{ closePrint }}" aria-label="Fechar confirmação de impressão" style="background:none; border:none; color:#657575; font-size:20px; cursor:pointer;">✕</button></div>
+        <div style="display:flex; align-items:center; gap:10px;"><div style="width:42px; height:42px; display:grid; place-items:center; border-radius:12px; background:#FCECEF; color:#A72F50; font-size:21px;">🖨</div><div><div id="print-dialog-title" style="font-size:19px; font-weight:600; color:#263737;">Tudo pronto para imprimir?</div><div style="font-size:12px; color:#657575; margin-top:3px;">{{ printModel }}</div></div><div style="flex:1;"></div><button onClick="{{ closePrint }}" aria-label="Fechar confirmação de impressão" style="background:none; border:none; color:#657575; font-size:20px; cursor:pointer;">✕</button></div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;"><div style="padding:14px; border-radius:12px; background:#F7FAFA; border:1px solid #DCE9E8;"><div style="font-size:24px; font-weight:800; color:#006B67;">{{ printCount }}</div><div style="font-size:12px; color:#657575;">etiquetas</div></div><div style="padding:14px; border-radius:12px; background:#F7FAFA; border:1px solid #DCE9E8;"><div style="font-size:24px; font-weight:800; color:#006B67;">{{ printPages }}</div><div style="font-size:12px; color:#657575;">folhas A4</div></div></div>
         <div style="display:flex; flex-direction:column; gap:9px; padding:14px; border-radius:12px; background:#FFF8F9; border:1px solid #F0CAD3; font-size:13px; color:#4E5555;"><div>✓ Papel: <b>A4</b></div><div>✓ Escala: <b>100% ou tamanho real</b></div><div>✓ Desative <b>cabeçalhos e rodapés</b></div><div>✓ Não use “Ajustar à página”</div></div>
         <div style="display:flex; gap:10px;"><button onClick="{{ closePrint }}" style="flex:1; background:#fff; color:#657575; border:1px solid #DCE9E8; border-radius:10px; padding:12px; font-size:13px; font-weight:700; cursor:pointer;">Voltar</button><button onClick="{{ confirmPrint }}" style="flex:1.4; background:#A72F50; color:#fff; border:none; border-radius:10px; padding:12px; font-size:13px; font-weight:800; cursor:pointer;">Imprimir agora</button></div>
@@ -1414,7 +1414,7 @@
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
       <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
       <div class="editor-panel-content">
-      <h2 style="font-size:11px; font-weight:800; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Expositor Madeira ({{ pcrCount }})</h2>
+      <h2 style="font-size:11px; font-weight:600; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Expositor Madeira ({{ pcrCount }})</h2>
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ pcrs }}" as="g" hint-placeholder-count="3">
         <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
@@ -1530,7 +1530,7 @@
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
       <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
       <div class="editor-panel-content">
-      <h2 style="font-size:11px; font-weight:800; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Placa de Acrílico — Promoção ({{ prCount }})</h2>
+      <h2 style="font-size:11px; font-weight:600; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Placa de Acrílico — Promoção ({{ prCount }})</h2>
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ prs }}" as="g" hint-placeholder-count="3">
         <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
@@ -1644,7 +1644,7 @@
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
       <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
       <div class="editor-panel-content">
-      <h2 style="font-size:11px; font-weight:800; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Placa de Acrílico ({{ mkCount }})</h2>
+      <h2 style="font-size:11px; font-weight:600; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Placa de Acrílico ({{ mkCount }})</h2>
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ mks }}" as="g" hint-placeholder-count="3">
         <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
@@ -1753,7 +1753,7 @@
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
       <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
       <div class="editor-panel-content">
-      <h2 style="font-size:11px; font-weight:800; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Régua de Preços ({{ mk2Count }})</h2>
+      <h2 style="font-size:11px; font-weight:600; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Régua de Preços ({{ mk2Count }})</h2>
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ mks2 }}" as="g" hint-placeholder-count="3">
         <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
@@ -1862,7 +1862,7 @@
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
       <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
       <div class="editor-panel-content">
-      <h2 style="font-size:11px; font-weight:800; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Etiqueta Especial — Dia dos Pais ({{ psCount }})</h2>
+      <h2 style="font-size:11px; font-weight:600; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Etiqueta Especial — Dia dos Pais ({{ psCount }})</h2>
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ pss }}" as="g" hint-placeholder-count="3">
         <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
@@ -1966,7 +1966,7 @@
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
       <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
       <div class="editor-panel-content">
-      <h2 style="font-size:11px; font-weight:800; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Pancarta A6 — Dia dos Pais ({{ ps6Count }})</h2>
+      <h2 style="font-size:11px; font-weight:600; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Pancarta A6 — Dia dos Pais ({{ ps6Count }})</h2>
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ pss6 }}" as="g" hint-placeholder-count="3">
         <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
@@ -2071,7 +2071,7 @@
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
       <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
       <div class="editor-panel-content">
-      <h2 style="font-size:11px; font-weight:800; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Régua de Preço — Promoção ({{ mk3Count }})</h2>
+      <h2 style="font-size:11px; font-weight:600; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Régua de Preço — Promoção ({{ mk3Count }})</h2>
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ mks3 }}" as="g" hint-placeholder-count="3">
         <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
@@ -2181,7 +2181,7 @@
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
       <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
       <div class="editor-panel-content">
-      <h2 style="font-size:11px; font-weight:800; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Etiqueta Vitrine ({{ placaCount }})</h2>
+      <h2 style="font-size:11px; font-weight:600; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Etiqueta Vitrine ({{ placaCount }})</h2>
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ placas }}" as="pl" hint-placeholder-count="3">
         <div class="card-box" data-active="{{ pl.activeOn }}" data-card-index="{{ pl.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
