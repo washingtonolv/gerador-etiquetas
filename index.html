@@ -68,10 +68,11 @@
       .g-pais { display:grid !important; grid-template-columns:repeat(4, 40mm) !important; grid-auto-rows:50mm !important; column-gap:4mm !important; row-gap:4mm !important; justify-content:center !important; align-content:start !important; width:172mm !important; max-width:172mm !important; }
       .g-pais6 { grid-template-columns: repeat(2, 105mm) !important; grid-auto-rows: 148mm !important; gap: 0 !important; justify-content:center !important; }
       .pais6-page .sheet { padding: 0 !important; }
-      .g-placa { grid-template-columns: repeat(2, 90mm) !important; gap: 5mm !important; }
+      .g-placa { grid-template-columns: repeat(3, 50mm) !important; grid-auto-rows: 60mm !important; gap: 6mm !important; justify-content:center !important; }
       .g-pcr { grid-template-columns: repeat(2, 48mm) !important; gap: 6mm !important; justify-content:center !important; }
       .g-prec > div, .g-make > div, .g-make2 > div, .g-make3 > div, .g-pais > div, .g-pais6 > div, .g-placa > div, .g-pcr > div { break-inside: avoid; outline: 0.3mm dashed #9aa6b1 !important; outline-offset: 1mm; border: none !important; border-radius: 0 !important; }
       .g-pais > div, .g-pais .pais-label { box-sizing:border-box !important; width:40mm !important; min-width:40mm !important; max-width:40mm !important; height:50mm !important; min-height:50mm !important; max-height:50mm !important; aspect-ratio:auto !important; transform:none !important; flex:none !important; }
+      .g-placa > div { box-sizing:border-box !important; width:50mm !important; min-width:50mm !important; max-width:50mm !important; height:60mm !important; min-height:60mm !important; max-height:60mm !important; aspect-ratio:auto !important; }
       .g-placa, .g-pcr { gap: 6mm !important; }
       .pais-label { background-image: var(--pais-print-bg) !important; }
     }
@@ -82,10 +83,11 @@
     .pp .g-make2, .pp .g-make3 { grid-template-columns: repeat(3, 55mm) !important; gap: 4mm 3mm !important; justify-content:center !important; }
     .pp .g-pais { display:grid !important; grid-template-columns:repeat(4, 40mm) !important; grid-auto-rows:50mm !important; column-gap:4mm !important; row-gap:4mm !important; justify-content:center !important; align-content:start !important; width:172mm !important; max-width:172mm !important; }
     .pp .g-pais6 { grid-template-columns: repeat(2, 105mm) !important; grid-auto-rows: 148mm !important; gap: 0 !important; justify-content:center !important; }
-    .pp .g-placa { grid-template-columns: repeat(2, 90mm) !important; gap: 6mm !important; }
+    .pp .g-placa { grid-template-columns: repeat(3, 50mm) !important; grid-auto-rows: 60mm !important; gap: 6mm !important; justify-content:center !important; }
     .pp .g-pcr { grid-template-columns: repeat(2, 48mm) !important; gap: 6mm !important; justify-content:center !important; }
     .pp .pais-label { background-image: var(--pais-print-bg) !important; }
     .pp .g-pais > div, .pp .g-pais .pais-label { box-sizing:border-box !important; width:40mm !important; min-width:40mm !important; max-width:40mm !important; height:50mm !important; min-height:50mm !important; max-height:50mm !important; aspect-ratio:auto !important; transform:none !important; flex:none !important; }
+    .pp .g-placa > div { box-sizing:border-box !important; width:50mm !important; min-width:50mm !important; max-width:50mm !important; height:60mm !important; min-height:60mm !important; max-height:60mm !important; aspect-ratio:auto !important; }
     .pp .g-prec > div, .pp .g-make > div, .pp .g-make2 > div, .pp .g-make3 > div, .pp .g-pais > div, .pp .g-pais6 > div, .pp .g-placa > div, .pp .g-pcr > div { outline: 0.3mm dashed #9aa6b1; outline-offset: 1mm; }
     .pp .sheet { width: 210mm !important; max-width: none !important; padding: 10mm !important; }
     /* A6 na tela: mostra apenas as etiquetas existentes, sem simular a folha inteira. */
@@ -2255,7 +2257,7 @@
             </div>
           </sc-if>
           <sc-for list="{{ placasGrid }}" as="pl" hint-placeholder-count="3">
-            <div class="label-preview" data-active="{{ pl.activeOn }}" style="position:relative; width:100%; aspect-ratio:1 / 1; background:#fff; overflow:hidden; border:1px solid #eadfe2; border-radius:2px; container-type:inline-size; font-family:Axiforma, Archivo, sans-serif;">
+            <div class="label-preview" data-active="{{ pl.activeOn }}" style="position:relative; width:100%; aspect-ratio:5 / 6; background:#fff; overflow:hidden; border:1px solid #eadfe2; border-radius:2px; container-type:inline-size; font-family:Axiforma, Archivo, sans-serif;">
               <button type="button" class="no-print preview-activate" onClick="{{ pl.activatePreview }}" aria-label="Editar esta etiqueta"></button>
               <button type="button" class="no-print preview-delete" onClick="{{ pl.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
               <div style="position:absolute; left:0; top:45.7%; width:100%; height:54.3%; background-image:url('assets/placa/nuvem-rosa.png'); background-size:cover; background-position:center bottom; background-repeat:no-repeat;"></div>
@@ -2366,7 +2368,7 @@ class Component extends DCLogic {
     { key: "vizzela", label: "Vizzela" }, { key: "semmarca", label: "Sem marca" },
   ];
   modelMeta = {
-    placa: { key: "placas", activeKey: "activePlaca", label: "Etiqueta Vitrine", perPage: 4, create: () => ({ brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }) },
+    placa: { key: "placas", activeKey: "activePlaca", label: "Etiqueta Vitrine", perPage: 12, create: () => ({ brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }) },
     pcr: { key: "pcrs", activeKey: "activePcr", label: "Expositor Madeira", perPage: 9, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }) },
     prec: { key: "prs", activeKey: "activePr", label: "Placa de Acrílico Promoção", perPage: 12, create: () => ({ brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" }) },
     make: { key: "mks", activeKey: "activeMk", label: "Placa de Acrílico", perPage: 12, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
