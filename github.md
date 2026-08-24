@@ -5,7 +5,7 @@ branch: main
 date: 2026-08-05
 
 ### Updated in this project
-- Oito modelos de etiquetas editáveis com persistência automática
+- Oito modelos no gerador e o PowerPoint editável BLITZ A5 para download
 - Prévia otimizada e impressão A4 em dimensões reais
 - Painéis de edição e modelos recolhíveis
 - Testes de regressão para dados, quantidades, importação e modelos
