@@ -5,7 +5,8 @@ branch: main
 date: 2026-08-24
 
 ### Updated in this project
-- Nove modelos editáveis no gerador, incluindo o BLITZ A5 com 18 artes de marca
+- Dez modelos editáveis no gerador, incluindo o BLITZ A5 e o Preçário BLITZ
+- Preçário BLITZ com 15 artes de marca, peças de 53 × 52 mm e impressão de 8 unidades por A4 paisagem
 - PowerPoint BLITZ corrigido para o tamanho A5 exato (14,8 × 21 cm)
 - Prévia otimizada e impressão A4 em dimensões reais
 - Painéis de edição e modelos recolhíveis

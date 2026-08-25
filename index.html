@@ -8,6 +8,7 @@
 <style id="dd-print-page-default" media="print">@page { size: A4 portrait; margin: 10mm; }</style>
 <style id="dd-print-page-pais6" media="not all">@page { size: A4 portrait; margin: 0; }</style>
 <style id="dd-print-page-blitz" media="not all">@page { size: 297mm 210mm; margin: 0; }</style>
+<style id="dd-print-page-blitzpreco" media="not all">@page { size: A4 landscape; margin: 0; }</style>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -77,6 +78,7 @@
       .g-pais { display:grid !important; grid-template-columns:repeat(4, 40mm) !important; grid-auto-rows:50mm !important; column-gap:4mm !important; row-gap:4mm !important; justify-content:center !important; align-content:start !important; width:172mm !important; max-width:172mm !important; }
       .g-pais6 { grid-template-columns: repeat(2, 105mm) !important; grid-auto-rows: 148mm !important; gap: 0 !important; justify-content:center !important; }
       .g-blitz { grid-template-columns: repeat(2, 148mm) !important; grid-auto-rows: 210mm !important; gap: 0 1mm !important; justify-content:center !important; }
+      .g-blitz-preco { grid-template-columns: repeat(4, 53mm) !important; grid-template-rows: repeat(2, 52mm) !important; gap: 13mm 7mm !important; justify-content:center !important; align-content:center !important; }
       .pais6-page .sheet { padding: 0 !important; }
       .blitz-page { display:block !important; width:297mm !important; min-height:0 !important; }
       .blitz-page .workspace-layout { display:block !important; width:297mm !important; max-width:none !important; }
@@ -84,6 +86,12 @@
       .blitz-page .blitz-sheets { display:block !important; width:297mm !important; }
       .blitz-page .blitz-sheet { box-sizing:border-box !important; width:297mm !important; height:210mm !important; padding:0 !important; overflow:hidden !important; break-inside:avoid-page !important; break-after:page !important; }
       .blitz-page .blitz-sheet:last-child { break-after:auto !important; }
+      .blitz-preco-page { display:block !important; width:297mm !important; min-height:0 !important; }
+      .blitz-preco-page .workspace-layout { display:block !important; width:297mm !important; max-width:none !important; }
+      .blitz-preco-page .preview-wrap { display:block !important; width:297mm !important; max-width:none !important; padding:0 !important; flex:none !important; }
+      .blitz-preco-page .blitz-preco-sheets { display:block !important; width:297mm !important; }
+      .blitz-preco-page .blitz-preco-sheet { box-sizing:border-box !important; width:297mm !important; height:210mm !important; padding:0 !important; overflow:hidden !important; break-inside:avoid-page !important; break-after:page !important; }
+      .blitz-preco-page .blitz-preco-sheet:last-child { break-after:auto !important; }
       .g-placa { grid-template-columns: repeat(3, 50mm) !important; grid-auto-rows: 60mm !important; gap: 6mm !important; justify-content:center !important; }
       .g-pcr { grid-template-columns: repeat(2, 48mm) !important; gap: 6mm !important; justify-content:center !important; }
       .g-prec > div, .g-make > div, .g-make2 > div, .g-make3 > div, .g-pais > div, .g-pais6 > div, .g-blitz > div, .g-placa > div, .g-pcr > div { break-inside: avoid; outline: 0.3mm dashed #9aa6b1 !important; outline-offset: 1mm; border: none !important; border-radius: 0 !important; }
@@ -253,6 +261,21 @@
         aspect-ratio: auto !important;
         background-image: var(--blitz-bg) !important;
       }
+    }
+    /* PREÇÁRIO BLITZ: oito artes de 53 x 52 mm por folha A4 paisagem. */
+    .blitz-preco-page:not(.pp) .blitz-preco-sheets { width:100%; display:flex; flex-direction:column; align-items:center; gap:18px; }
+    .blitz-preco-page:not(.pp) .blitz-preco-sheet { width:min(100%, 920px) !important; max-width:920px !important; height:auto !important; min-height:0 !important; padding:16px !important; aspect-ratio:auto !important; overflow:visible; }
+    .blitz-preco-page:not(.pp) .g-blitz-preco { display:grid !important; grid-template-columns:repeat(auto-fit, minmax(180px, 220px)) !important; grid-auto-rows:auto !important; gap:16px !important; width:100% !important; height:auto !important; justify-content:center !important; }
+    .blitz-preco-page:not(.pp) .blitz-preco-label { width:100% !important; height:auto !important; aspect-ratio:53 / 52 !important; background-size:100% 100% !important; }
+    @media (max-width:760px) { .blitz-preco-page:not(.pp) .g-blitz-preco { grid-template-columns:minmax(0, 260px) !important; } }
+    .pp.blitz-preco-page .blitz-preco-sheets { display:block !important; width:297mm !important; }
+    .pp.blitz-preco-page .blitz-preco-sheet { width:297mm !important; height:210mm !important; padding:0 !important; break-after:page !important; }
+    .pp.blitz-preco-page .blitz-preco-sheet:last-child { break-after:auto !important; }
+    .pp.blitz-preco-page .g-blitz-preco { width:297mm !important; height:210mm !important; grid-template-columns:repeat(4, 53mm) !important; grid-template-rows:repeat(2, 52mm) !important; column-gap:7mm !important; row-gap:13mm !important; align-content:center !important; justify-content:center !important; }
+    .pp.blitz-preco-page .blitz-preco-label { width:53mm !important; height:52mm !important; aspect-ratio:auto !important; background-image:var(--blitz-preco-bg) !important; }
+    @media print {
+      .blitz-preco-page .g-blitz-preco { width:297mm !important; height:210mm !important; grid-template-columns:repeat(4, 53mm) !important; grid-template-rows:repeat(2, 52mm) !important; column-gap:7mm !important; row-gap:13mm !important; align-content:center !important; justify-content:center !important; }
+      .blitz-preco-page .blitz-preco-label { box-sizing:border-box !important; width:53mm !important; min-width:53mm !important; max-width:53mm !important; height:52mm !important; min-height:52mm !important; max-height:52mm !important; aspect-ratio:auto !important; background-image:var(--blitz-preco-bg) !important; }
     }
     .fold-label { aspect-ratio: 6.4 / 3.9; background:#fff; }
     .g-make2 .fold-label, .g-make3 .fold-label { aspect-ratio: 5.5 / 2.7; }
@@ -1348,8 +1371,8 @@
   </svg>
 </template>
 
-<style>{{ pais6PageCss }}{{ blitzPageCss }}</style>
-<div class="app-bg {{ pais6PageClass }} {{ blitzPageClass }} {{ ppClass }} {{ darkClass }} {{ mvClass }} {{ panelClass }} {{ modelsClass }}" style="min-height:100vh; background:#f5f3f4; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg'); background-size:420px 420px, 200px 200px, 300px 300px; background-position:right -140px bottom -160px, right 240px bottom 220px, left -120px top 90px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
+<style>{{ pais6PageCss }}{{ blitzPageCss }}{{ blitzPrecoPageCss }}</style>
+<div class="app-bg {{ pais6PageClass }} {{ blitzPageClass }} {{ blitzPrecoPageClass }} {{ ppClass }} {{ darkClass }} {{ mvClass }} {{ panelClass }} {{ modelsClass }}" style="min-height:100vh; background:#f5f3f4; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg'); background-size:420px 420px, 200px 200px, 300px 300px; background-position:right -140px bottom -160px, right 240px bottom 220px, left -120px top 90px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
   <h1 class="sr-only">Gerador de Etiquetas D&amp;D</h1>
 
   <div class="no-print hdr-band" style="background:#006B67; padding:14px 22px 18px;">
@@ -1405,6 +1428,7 @@
       <button onClick="{{ pickPlaca }}" data-on="{{ tabPlacaOn }}" aria-pressed="{{ tabPlacaPressed }}" aria-label="Etiqueta Vitrine" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/placa/nuvem-rosa.png');"></span><span class="model-n">#7</span><span>Etiqueta Vitrine</span></button>
       <button onClick="{{ pickPcr }}" data-on="{{ tabPcrOn }}" aria-pressed="{{ tabPcrPressed }}" aria-label="Expositor Madeira" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precario/template.png');"></span><span class="model-n">#8</span><span>Expositor Madeira</span></button>
       <button onClick="{{ pickBlitz }}" data-on="{{ tabBlitzOn }}" aria-pressed="{{ tabBlitzPressed }}" aria-label="BLITZ A5" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/blitz/semmarca.jpg');"></span><span class="model-n">#9</span><span>BLITZ A5</span></button>
+      <button onClick="{{ pickBlitzPreco }}" data-on="{{ tabBlitzPrecoOn }}" aria-pressed="{{ tabBlitzPrecoPressed }}" aria-label="Preçário BLITZ" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/blitz-preco/semmarca.png');"></span><span class="model-n">#10</span><span>Preçário BLITZ</span></button>
   </nav>
 
   <sc-if value="{{ isPreview }}" hint-placeholder-val="{{ false }}">
@@ -2259,6 +2283,99 @@
   </div>
   </sc-if>
 
+  <sc-if value="{{ isBlitzPreco }}" hint-placeholder-val="true">
+  <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
+    <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
+      <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
+      <div class="editor-panel-content">
+        <h2 style="font-size:11px; font-weight:600; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Preçário BLITZ ({{ blitzPrecoCount }})</h2>
+        <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir o próximo preçário.</span></div>
+        <sc-for list="{{ blitzPrecos }}" as="g" hint-placeholder-count="2">
+          <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+            <button type="button" class="card-summary" onClick="{{ g.activate }}" aria-expanded="{{ g.activeExpanded }}"><span class="card-summary-index">#{{ g.n }}</span><span class="card-summary-name">{{ g.summaryName }}</span><span class="card-summary-price">R$ {{ g.porShow }}</span><span class="card-summary-arrow">›</span></button>
+            <div class="card-content"><div class="card-content-inner">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
+                <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" aria-label="Marca do Preçário BLITZ" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
+                  <sc-for list="{{ blitzPrecoBrandOptions }}" as="b" hint-placeholder-count="15"><option value="{{ b.key }}">{{ b.label }}</option></sc-for>
+                </select>
+                <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
+                <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
+                <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
+                <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+              </div>
+              <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Nome do produto" aria-label="Nome do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:700;"></textarea>
+              <div style="display:flex; gap:8px;">
+                <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+                  <span style="font-size:10px; font-weight:700; color:#475569; letter-spacing:.4px;">DE (ANTES)</span>
+                  <input value="{{ g.dePrice }}" onChange="{{ g.setDe }}" onFocus="{{ g.selectPrice }}" onBlur="{{ g.formatDe }}" inputMode="decimal" placeholder="opcional" aria-label="Preço anterior" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
+                </div>
+                <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+                  <span style="font-size:10px; font-weight:700; color:#A72F50; letter-spacing:.4px;">POR R$</span>
+                  <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onFocus="{{ g.selectPrice }}" onBlur="{{ g.formatPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" aria-label="Preço atual" style="width:100%; border:1px solid #B9DEDC; border-radius:6px; padding:7px; font-size:13px;">
+                </div>
+              </div>
+              <div style="display:flex; align-items:center; justify-content:flex-end; gap:6px;">
+                <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
+                  <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                  <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
+                  <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+                </div>
+                <span style="font-size:12px; font-weight:600; color:#475569;">cópias</span>
+              </div>
+            </div></div>
+          </div>
+        </sc-for>
+        <button onClick="{{ addBlitzPreco }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;">+ Adicionar preçário</button>
+      </div>
+    </div>
+
+    <div class="preview-wrap" style="flex:9999 1 520px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
+      <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
+        <span style="font-size:12px; font-weight:700; color:#475569;">{{ pageInfo }}</span><div style="flex:1;"></div>
+        <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">−</button>
+          <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">+</button>
+        </div>
+      </div>
+      <div class="blitz-preco-sheets">
+        <sc-if value="{{ blitzPrecoEmpty }}" hint-placeholder-val="false">
+          <div class="sheet blitz-preco-sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
+            <div class="g-blitz-preco" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:10px;">
+              <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
+                <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+                <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhum Preçário BLITZ ainda</div>
+                <button onClick="{{ addBlitzPreco }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar preçário</button>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ blitzPrecoHasItems }}" hint-placeholder-val="true">
+          <sc-for list="{{ blitzPrecoPages }}" as="bp" hint-placeholder-count="1">
+            <div class="sheet blitz-preco-sheet" data-page="{{ bp.n }}" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
+              <div class="g-blitz-preco" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:10px;">
+                <sc-for list="{{ bp.items }}" as="g" hint-placeholder-count="8">
+                  <div class="label-preview blitz-preco-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:53 / 52; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-color:#d000c4; background-repeat:no-repeat; background-position:center; background-size:100% 100%; background-image:{{ g.blitzPrecoBg }}; --blitz-preco-bg:{{ g.blitzPrecoBg }};">
+                    <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar este preçário"></button>
+                    <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir preçário" aria-label="Excluir preçário">×</button>
+                    <div style="position:absolute; left:6.9%; top:23.8%; width:46%; max-height:11%; overflow:hidden; font-size:{{ g.blitzPrecoNameSize }}; font-weight:500; line-height:1.08; color:#fff; text-wrap:balance; overflow-wrap:break-word;">{{ g.name }}</div>
+                    <sc-if value="{{ g.hasDe }}" hint-placeholder-val="true"><div style="position:absolute; left:20.3%; top:51.8%; width:38%; overflow:hidden; font-size:6.1cqw; font-weight:700; line-height:1; color:#000; white-space:nowrap;">{{ g.deShow }}</div></sc-if>
+                    <div style="position:absolute; left:20.3%; top:60.4%; width:58%; display:flex; align-items:flex-start; color:#000; white-space:nowrap;">
+                      <span style="font-size:{{ g.blitzPrecoReaisSize }}; font-weight:900; line-height:.9; letter-spacing:-.5cqw;">{{ g.reais }}</span>
+                      <span style="font-size:9.6cqw; font-weight:800; line-height:1; margin-top:7.2cqw; margin-left:2.2cqw;">,{{ g.centavos }}</span>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
   <sc-if value="{{ isMake3 }}" hint-placeholder-val="{{ true }}">
   <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
@@ -2517,6 +2634,7 @@ class Component extends DCLogic {
     activePs: 0,
     activePs6: 0,
     activeBlitz: 0,
+    activeBlitzPreco: 0,
     activePlaca: 0,
    pcrs: [
       { brand: "boticario", name: "Hid. Obsessão por Baunilha 400ml", dePrice: "58,99", porPrice: "39,90" },
@@ -2542,6 +2660,9 @@ class Component extends DCLogic {
     blitzs: [
       { brand: "avon", name: "PRODUTO", desc: "Descrição", dePrice: "350,99", porPrice: "259,99", qty: 1 },
     ],
+    blitzPrecos: [
+      { brand: "avon", name: "Produto", dePrice: "350,99", porPrice: "259,99", qty: 1 },
+    ],
     placas: [
       { brand: "avon", name: "Creme Renew", desc: "Ultimate Dia Firmeza\n45+ Fps 25", dePrice: "174,90", porPrice: "99,90" },
     ],
@@ -2561,6 +2682,17 @@ class Component extends DCLogic {
     { key: "vizzela", label: "Vizzela" }, { key: "semmarca", label: "Sem marca" },
   ];
   paisArt = ["semmarca", "avon", "boticario", "ciclo", "eudora", "fhader", "hinode", "jequiti", "kiss", "larive", "mahogany", "marykay", "pariselysees", "rubykisses", "vizzela"];
+  blitzPrecoArt = ["semmarca", "avon", "boticario", "ciclo", "eudora", "fhader", "hinode", "jequiti", "kiss", "larive", "mahogany", "marykay", "pariselysees", "rubykisses", "vizzela"];
+  blitzPrecoBrands = [
+    { key: "avon", label: "Avon" }, { key: "boticario", label: "O Boticário" },
+    { key: "ciclo", label: "Ciclo" }, { key: "eudora", label: "Eudora" },
+    { key: "fhader", label: "Fhader" }, { key: "hinode", label: "Hinode" },
+    { key: "jequiti", label: "Jequiti" }, { key: "kiss", label: "Kiss New York" },
+    { key: "larive", label: "La Rive" }, { key: "mahogany", label: "Mahogany" },
+    { key: "marykay", label: "Mary Kay" }, { key: "pariselysees", label: "Paris Elysees" },
+    { key: "rubykisses", label: "Ruby Kisses" }, { key: "vizzela", label: "Vizzela" },
+    { key: "semmarca", label: "Sem marca" },
+  ];
   placaBrands = [
     { key: "avon", label: "Avon" }, { key: "boticario", label: "O Boticário" },
     { key: "ciclo", label: "Ciclo" }, { key: "eudora", label: "Eudora" },
@@ -2582,6 +2714,7 @@ class Component extends DCLogic {
     pais: { key: "pss", activeKey: "activePs", label: "Etiqueta Especial Dia dos Pais", perPage: 20, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
     pais6: { key: "pss6", activeKey: "activePs6", label: "Pancarta A6 Dia dos Pais", perPage: 4, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
     blitz: { key: "blitzs", activeKey: "activeBlitz", label: "BLITZ A5", perPage: 2, create: () => ({ brand: "semmarca", name: "NOVO PRODUTO", desc: "Descrição", dePrice: "", porPrice: "0,00" }) },
+    blitzpreco: { key: "blitzPrecos", activeKey: "activeBlitzPreco", label: "Preçário BLITZ", perPage: 8, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }) },
   };
   getModelMeta(model = this.state.model) {
     return this.modelMeta[model] || this.modelMeta.make;
@@ -2789,6 +2922,7 @@ class Component extends DCLogic {
         pss: this.state.pss,
         pss6: this.state.pss6,
         blitzs: this.state.blitzs,
+        blitzPrecos: this.state.blitzPrecos,
         placas: this.state.placas,
       },
     };
@@ -2815,6 +2949,7 @@ class Component extends DCLogic {
         pss: this.sanitizeList(data.pss || this.state.pss),
         pss6: this.sanitizeList(data.pss6 || this.state.pss6),
         blitzs: this.sanitizeList(data.blitzs || this.state.blitzs),
+        blitzPrecos: this.sanitizeList(data.blitzPrecos || this.state.blitzPrecos),
         placas: this.sanitizeList(data.placas),
         activePcr: 0,
         activePr: 0,
@@ -2823,6 +2958,7 @@ class Component extends DCLogic {
         activeMk3: 0,
         activePs: 0,
         activePs6: 0,
+        activeBlitzPreco: 0,
         activeBlitz: 0,
         activePlaca: 0,
         importOpen: false,
@@ -2841,8 +2977,8 @@ class Component extends DCLogic {
     bar.scrollLeft = Math.max(0, act.offsetLeft - (bar.clientWidth - act.offsetWidth) / 2);
   }
   applyPrintPage(model = this.state.model) {
-    const activeId = model === "blitz" ? "dd-print-page-blitz" : model === "pais6" ? "dd-print-page-pais6" : "dd-print-page-default";
-    const ids = ["dd-print-page-default", "dd-print-page-pais6", "dd-print-page-blitz"];
+    const activeId = model === "blitz" ? "dd-print-page-blitz" : model === "blitzpreco" ? "dd-print-page-blitzpreco" : model === "pais6" ? "dd-print-page-pais6" : "dd-print-page-default";
+    const ids = ["dd-print-page-default", "dd-print-page-pais6", "dd-print-page-blitz", "dd-print-page-blitzpreco"];
     for (const id of ids) {
       const style = document.getElementById(id);
       if (style) style.media = id === activeId ? "print" : "not all";
@@ -2936,6 +3072,87 @@ ${assets}
     printWindow.print();
     return true;
   }
+  async printBlitzPrecoDocument() {
+    const source = document.querySelector(".blitz-preco-sheets");
+    if (!source) return false;
+
+    const printable = source.cloneNode(true);
+    printable.querySelectorAll(".no-print, button").forEach((el) => el.remove());
+
+    const frame = document.createElement("iframe");
+    frame.title = "Impressão Preçário BLITZ";
+    frame.setAttribute("aria-hidden", "true");
+    frame.setAttribute("data-dd-blitz-preco-print-frame", "");
+    frame.style.cssText = "position:fixed; left:-10000px; top:0; width:1px; height:1px; border:0; opacity:0; pointer-events:none;";
+    document.body.appendChild(frame);
+
+    const printDocument = frame.contentDocument;
+    if (!printDocument) {
+      frame.remove();
+      return false;
+    }
+
+    const assets = Array.from(document.querySelectorAll('link[rel="stylesheet"], style'))
+      .filter((el) => !el.id?.startsWith("dd-print-page-"))
+      .map((el) => el.outerHTML)
+      .join("\n");
+    const baseHref = String(document.baseURI || location.href).replace(/"/g, "&quot;");
+    printDocument.open();
+    printDocument.write(`<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<base href="${baseHref}">
+${assets}
+<style id="dd-blitz-preco-isolated-print">
+  @page { size: A4 landscape; margin: 0; }
+  html, body { margin:0 !important; padding:0 !important; width:297mm !important; min-width:297mm !important; height:auto !important; background:#fff !important; }
+  body.blitz-preco-page { display:block !important; min-height:0 !important; }
+  body.blitz-preco-page .preview-wrap { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
+  body.blitz-preco-page .blitz-preco-sheets { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
+  body.blitz-preco-page .blitz-preco-sheet { display:block !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
+  body.blitz-preco-page .blitz-preco-sheet:last-child { break-after:auto !important; page-break-after:auto !important; }
+  body.blitz-preco-page .g-blitz-preco { display:grid !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; grid-template-columns:repeat(4, 53mm) !important; grid-template-rows:repeat(2, 52mm) !important; grid-auto-rows:52mm !important; column-gap:7mm !important; row-gap:13mm !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
+  body.blitz-preco-page .blitz-preco-label { box-sizing:border-box !important; width:53mm !important; min-width:53mm !important; max-width:53mm !important; height:52mm !important; min-height:52mm !important; max-height:52mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:.25mm dashed #9aa6b1 !important; outline-offset:-.25mm !important; aspect-ratio:auto !important; background-image:var(--blitz-preco-bg) !important; background-size:100% 100% !important; background-position:center !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
+  .no-print, button { display:none !important; }
+</style>
+</head>
+<body class="blitz-preco-page pp"><div class="preview-wrap">${printable.outerHTML}</div></body>
+</html>`);
+    printDocument.close();
+
+    const backgroundUrls = Array.from(printDocument.querySelectorAll(".blitz-preco-label")).map((label) => {
+      const value = printDocument.defaultView?.getComputedStyle(label).backgroundImage || "";
+      const start = value.indexOf("(");
+      const end = value.lastIndexOf(")");
+      return start >= 0 && end > start ? value.slice(start + 1, end).replace(/^['"]|['"]$/g, "") : "";
+    }).filter(Boolean);
+    const backgroundReady = Promise.all(Array.from(new Set(backgroundUrls)).map((src) => new Promise((resolve) => {
+      const image = new Image();
+      image.onload = resolve;
+      image.onerror = resolve;
+      image.src = src;
+    })));
+    await Promise.race([backgroundReady, new Promise((resolve) => setTimeout(resolve, 4000))]);
+    if (printDocument.fonts?.ready) await Promise.race([printDocument.fonts.ready, new Promise((resolve) => setTimeout(resolve, 1500))]);
+
+    const printWindow = frame.contentWindow;
+    if (!printWindow) {
+      frame.remove();
+      return false;
+    }
+    let removed = false;
+    const cleanup = () => {
+      if (removed) return;
+      removed = true;
+      frame.remove();
+    };
+    printWindow.addEventListener("afterprint", () => setTimeout(cleanup, 1000), { once: true });
+    setTimeout(cleanup, 120000);
+    printWindow.focus();
+    printWindow.print();
+    return true;
+  }
   componentDidMount() {
     setTimeout(() => this.centerActiveTab(), 60);
     this._onKeyDown = e => {
@@ -2974,11 +3191,11 @@ ${assets}
       const raw = localStorage.getItem("dd-etiquetas-v2") || localStorage.getItem("dd-etiquetas-v1");
       const saved = raw ? JSON.parse(raw) : null;
       const restored = {};
-      const listKeys = ["pcrs", "prs", "mks", "mks2", "mks3", "pss", "pss6", "blitzs", "placas"];
+      const listKeys = ["pcrs", "prs", "mks", "mks2", "mks3", "pss", "pss6", "blitzs", "blitzPrecos", "placas"];
       for (const key of listKeys) {
         if (saved && Array.isArray(saved[key])) restored[key] = this.sanitizeList(saved[key]);
       }
-      const validModels = ["placa", "pcr", "prec", "make", "make2", "make3", "pais", "pais6", "blitz"];
+      const validModels = ["placa", "pcr", "prec", "make", "make2", "make3", "pais", "pais6", "blitz", "blitzpreco"];
       if (saved && validModels.includes(saved.model)) restored.model = saved.model;
       restored.dark = localStorage.getItem("dd-dark") === "1";
       restored.onboardingOpen = false;
@@ -3009,11 +3226,11 @@ ${assets}
       requestAnimationFrame(() => this._focusBeforeDialog.focus());
     }
 
-    const listKeys = ["pcrs", "prs", "mks", "mks2", "mks3", "pss", "pss6", "blitzs", "placas"];
+    const listKeys = ["pcrs", "prs", "mks", "mks2", "mks3", "pss", "pss6", "blitzs", "blitzPrecos", "placas"];
     const shouldPersist = !prevState || prevState.model !== this.state.model || listKeys.some(key => prevState[key] !== this.state[key]);
     if (shouldPersist) {
-      const { model, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, placas } = this.state;
-      const data = JSON.stringify({ version: 2, model, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, placas });
+      const { model, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, blitzPrecos, placas } = this.state;
+      const data = JSON.stringify({ version: 2, model, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, blitzPrecos, placas });
       this._last = data;
       const status = document.querySelector(".app-status");
       try {
@@ -3027,7 +3244,7 @@ ${assets}
   importText(txt) {
     const norm = t => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]/g, "");
     const brandByName = {};
-    for (const b of [...this.placaBrands, ...this.pais6Brands]) brandByName[norm(b.label)] = b.key;
+    for (const b of [...this.placaBrands, ...this.pais6Brands, ...this.blitzPrecoBrands]) brandByName[norm(b.label)] = b.key;
     const isPrice = t => /^r?\$?\s*(?:\d{1,3}(?:\.\d{3})+|\d{1,6})(?:[,.]\d{1,2})?$/.test(String(t).trim());
     const clean = t => String(t).trim().replace(/^r\$\s*/i, "").replace(/^"|"$/g, "");
     const rows = txt.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
@@ -3058,6 +3275,7 @@ ${assets}
       key === "placas" ? { brand: it.brand, name: it.name, desc: "", dePrice: it.dePrice, porPrice: it.porPrice } :
       key === "prs" ? { brand: it.brand, fundo: "rosa", name: it.name, dePrice: it.dePrice, porPrice: it.porPrice } :
       key === "blitzs" ? { brand: it.brand, name: it.name, desc: "", dePrice: it.dePrice, porPrice: it.porPrice } :
+      key === "blitzPrecos" ? { brand: it.brand, name: it.name, dePrice: it.dePrice, porPrice: it.porPrice } :
       (key === "mks" || key === "mks2" || key === "mks3" || key === "pss" || key === "pss6") ? { brand: it.brand, name: it.name, dePrice: it.dePrice, porPrice: it.porPrice, cada: false } :
       { brand: it.brand, name: it.name, dePrice: it.dePrice, porPrice: it.porPrice });
     const activeKey = this.activeKeyFor(key);
@@ -3133,6 +3351,18 @@ ${assets}
       };
     });
 
+    const blitzPrecos = this.state.blitzPrecos.map((g, i) => {
+      const { reais } = this.splitPrice(g.porPrice);
+      const item = this.buildItem("blitzPrecos", g, i);
+      const brand = this.blitzPrecoArt.indexOf(g.brand) !== -1 ? g.brand : "semmarca";
+      return {
+        ...item,
+        blitzPrecoBg: "url('assets/blitz-preco/" + brand + ".png')",
+        blitzPrecoReaisSize: String(reais).length > 4 ? "13cqw" : String(reais).length > 3 ? "16.5cqw" : "21.5cqw",
+        blitzPrecoNameSize: (g.name || "").length > 30 ? "4.2cqw" : (g.name || "").length > 18 ? "5.2cqw" : "6.7cqw",
+      };
+    });
+
     const placas = this.state.placas.map((pl, i) => {
       const item = this.buildItem("placas", pl, i);
       return {
@@ -3142,10 +3372,13 @@ ${assets}
     });
 
     const expand = items => items.flatMap(item => Array(this.clampQty(item.qty)).fill(item));
-    const renderedLists = { placas, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs };
+    const renderedLists = { placas, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, blitzPrecos };
     const blitzGrid = expand(blitzs);
     const blitzPages = [];
     for (let i = 0; i < blitzGrid.length; i += 2) blitzPages.push({ n: blitzPages.length + 1, items: blitzGrid.slice(i, i + 2) });
+    const blitzPrecoGrid = expand(blitzPrecos);
+    const blitzPrecoPages = [];
+    for (let i = 0; i < blitzPrecoGrid.length; i += 8) blitzPrecoPages.push({ n: blitzPrecoPages.length + 1, items: blitzPrecoGrid.slice(i, i + 8) });
     const modelMeta = this.getModelMeta(model);
     const activeCount = expand(renderedLists[modelMeta.key]).length;
     const pages = Math.max(1, Math.ceil(activeCount / modelMeta.perPage));
@@ -3159,15 +3392,20 @@ ${assets}
       isPais: model === "pais",
       isPais6: model === "pais6",
       isBlitz: model === "blitz",
+      isBlitzPreco: model === "blitzpreco",
       pais6PageClass: model === "pais6" ? "pais6-page" : "",
       pais6PageCss: "",
       blitzPageClass: model === "blitz" ? "blitz-page" : "",
       blitzPageCss: "",
+      blitzPrecoPageClass: model === "blitzpreco" ? "blitz-preco-page" : "",
+      blitzPrecoPageCss: "",
       pais6BrandOptions: this.pais6Brands,
       blitzBrandOptions: this.pais6Brands,
+      blitzPrecoBrandOptions: this.blitzPrecoBrands,
       modelRailStyle: "",
       tabPais6On: model === "pais6" ? "1" : "0",
       tabBlitzOn: model === "blitz" ? "1" : "0",
+      tabBlitzPrecoOn: model === "blitzpreco" ? "1" : "0",
       paisBrandOptions: this.placaBrands.filter(b => this.paisArt.indexOf(b.key) !== -1),
       isPrec: model === "prec",
       isPcr: model === "pcr",
@@ -3187,9 +3425,10 @@ ${assets}
       tabPaisPressed: model === "pais" ? "true" : "false",
       tabPais6Pressed: model === "pais6" ? "true" : "false",
       tabBlitzPressed: model === "blitz" ? "true" : "false",
+      tabBlitzPrecoPressed: model === "blitzpreco" ? "true" : "false",
       placas, placaCount: placas.length,
-      placaEmpty: placas.length === 0, pcrEmpty: pcrs.length === 0, prEmpty: prs.length === 0, mkEmpty: mks.length === 0, mk2Empty: mks2.length === 0, mk3Empty: mks3.length === 0, ps6Empty: pss6.length === 0, psEmpty: pss.length === 0, blitzEmpty: blitzs.length === 0, blitzHasItems: blitzs.length > 0,
-      placasGrid: expand(placas), mksGrid: expand(mks), mks2Grid: expand(mks2), mks3Grid: expand(mks3), pssGrid: expand(pss), pss6Grid: expand(pss6), blitzGrid, blitzPages, prsGrid: expand(prs), pcrsGrid: expand(pcrs),
+      placaEmpty: placas.length === 0, pcrEmpty: pcrs.length === 0, prEmpty: prs.length === 0, mkEmpty: mks.length === 0, mk2Empty: mks2.length === 0, mk3Empty: mks3.length === 0, ps6Empty: pss6.length === 0, psEmpty: pss.length === 0, blitzEmpty: blitzs.length === 0, blitzHasItems: blitzs.length > 0, blitzPrecoEmpty: blitzPrecos.length === 0, blitzPrecoHasItems: blitzPrecos.length > 0,
+      placasGrid: expand(placas), mksGrid: expand(mks), mks2Grid: expand(mks2), mks3Grid: expand(mks3), pssGrid: expand(pss), pss6Grid: expand(pss6), blitzGrid, blitzPages, blitzPrecoGrid, blitzPrecoPages, prsGrid: expand(prs), pcrsGrid: expand(pcrs),
       pageInfo,
       mks, mkCount: mks.length,
       mks2, mk2Count: mks2.length,
@@ -3197,6 +3436,7 @@ ${assets}
       pss, psCount: pss.length,
       pss6, ps6Count: pss6.length,
       blitzs, blitzCount: blitzs.length,
+      blitzPrecos, blitzPrecoCount: blitzPrecos.length,
       prs, prCount: prs.length,
       pcrs, pcrCount: pcrs.length,
       placaBrandOptions: this.placaBrands,
@@ -3208,6 +3448,7 @@ ${assets}
       addPs: () => this.addItem("pss", this.modelMeta.pais.create()),
       addPs6: () => this.addItem("pss6", this.modelMeta.pais6.create()),
       addBlitz: () => this.addItem("blitzs", this.modelMeta.blitz.create()),
+      addBlitzPreco: () => this.addItem("blitzPrecos", this.modelMeta.blitzpreco.create()),
       addPlaca: () => this.addItem("placas", this.modelMeta.placa.create()),
       addCurrent: () => this.addCurrentItem(),
       doPrint: () => {
@@ -3236,6 +3477,7 @@ ${assets}
       pickPais: () => this.selectModel("pais"),
       pickPais6: () => this.selectModel("pais6"),
       pickBlitz: () => this.selectModel("blitz"),
+      pickBlitzPreco: () => this.selectModel("blitzpreco"),
       pickPrec: () => this.selectModel("prec"),
       pickPlaca: () => this.selectModel("placa"),
       pickPcr: () => this.selectModel("pcr"),
@@ -3336,6 +3578,10 @@ ${assets}
             await this.printBlitzDocument();
             return;
           }
+          if (model === "blitzpreco") {
+            await this.printBlitzPrecoDocument();
+            return;
+          }
           const values = Array.from(document.querySelectorAll(".pais-label, .pais6-label, .blitz-label")).flatMap((el) => {
             const styles = getComputedStyle(el);
             return [styles.getPropertyValue("--pais-print-bg").trim(), styles.getPropertyValue("--pais6-print-bg").trim(), styles.getPropertyValue("--blitz-bg").trim()];
@@ -3360,8 +3606,8 @@ ${assets}
       printCount: activeCount,
       printPages: pages,
       printModel: modelMeta.label,
-      printOrientation: model === "blitz" ? "Paisagem" : "Retrato",
-      printMargins: model === "blitz" || model === "pais6" ? "Nenhuma" : "Padrão",
+      printOrientation: model === "blitz" || model === "blitzpreco" ? "Paisagem" : "Retrato",
+      printMargins: model === "blitz" || model === "blitzpreco" || model === "pais6" ? "Nenhuma" : "Padrão",
       isImportOpen: !!this.state.importOpen,
       closeImport: () => this.setState({ importOpen: false }),
       downloadModel: () => {
