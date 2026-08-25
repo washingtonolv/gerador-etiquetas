@@ -162,6 +162,12 @@ assert.match(html, /id="dd-print-page-blitz" media="not all">@page \{ size: 297m
 assert.match(html, /class="sheet blitz-sheet"/);
 assert.match(html, /id="dd-print-page-default" media="print"/);
 assert.match(html, /Orientação: <b>\{\{ printOrientation \}\}<\/b>/);
+assert.match(html, /async printBlitzDocument\(\)/);
+assert.match(html, /id="dd-blitz-isolated-print"/);
+assert.match(html, /@page \{ size: A4 landscape; margin: 0; \}/);
+assert.match(html, /<body class="blitz-page pp">/);
+assert.match(html, /if \(model === "blitz"\) \{\s+await this\.printBlitzDocument\(\);/);
+assert.match(html, /grid-template-columns:148mm 148mm !important/);
 assert.match(html, /width: 148mm/);
 assert.match(html, /aria-label="Mais opções"/);
 assert.doesNotMatch(html, /renderVals\(\)\.addCurrent/);
@@ -176,3 +182,4 @@ for (const name of placeholderRoots) {
 }
 
 console.log("Smoke tests passed for 9 models.");
+
