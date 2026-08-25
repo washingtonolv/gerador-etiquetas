@@ -52,7 +52,7 @@ vm.runInContext(`
 
 const Component = context.ComponentUnderTest;
 const component = new Component();
-const modelNames = ["placa", "pcr", "prec", "make", "make2", "make3", "pais", "pais6"];
+const modelNames = ["placa", "pcr", "prec", "make", "make2", "make3", "pais", "pais6", "blitz"];
 
 assert.equal(component.splitPrice("99,9").centavos, "90");
 assert.equal(component.fmtPrice("129990"), "1299,90");
@@ -75,6 +75,7 @@ for (const model of modelNames) {
   for (const handler of ["setBrand", "setName", "setDe", "setPor", "setQty", "dup", "remove", "removePreview"]) {
     assert.equal(typeof firstItem[handler], "function", `${handler} deve existir em ${model}`);
   }
+  if (model === "blitz") assert.equal(typeof firstItem.setDesc, "function", "A descrição do BLITZ deve ser editável");
 }
 
 for (const brand of component.paisArt) {
@@ -84,7 +85,14 @@ for (const brand of component.paisArt) {
 for (const brand of component.pais6Art) {
   assert.ok(existsSync(`${repoRoot}assets/pais6/${brand}.png`), `Arte de impressão ausente: pais6/${brand}`);
   assert.ok(existsSync(`${repoRoot}assets/pais6-preview/${brand}.webp`), `Prévia ausente: pais6/${brand}`);
+  assert.ok(existsSync(`${repoRoot}assets/blitz/${brand}.jpg`), `Arte ausente: blitz/${brand}`);
 }
+assert.ok(existsSync(`${repoRoot}uploads/BLITZ-A5-web.pptx`), "PowerPoint BLITZ corrigido deve estar disponível");
+const blitzPptx = readFileSync(`${repoRoot}uploads/BLITZ-A5-web.pptx`);
+const blitzParts = Array.from({ length: 21 }, (_, i) =>
+  readFileSync(`${repoRoot}uploads/blitz-a5-parts/part-${String(i + 1).padStart(2, "0")}.bin`),
+);
+assert.ok(Buffer.concat(blitzParts).equals(blitzPptx), "As partes publicadas devem recompor exatamente o PowerPoint corrigido");
 for (const { key } of component.placaBrands.filter(brand => brand.key !== "semmarca")) {
   assert.ok(existsSync(`${repoRoot}assets/placa/marcas/${key}.png`), `Logo de marca ausente: ${key}`);
 }
@@ -106,7 +114,7 @@ assert.equal(imported.porPrice, "1.299,90", "Preços com milhar devem ser import
 const sanitized = component.sanitizeList([{ brand: null, name: 123, dePrice: null, porPrice: 45, qty: 10000 }]);
 assert.deepEqual(
   JSON.parse(JSON.stringify(sanitized[0])),
-  { brand: "semmarca", name: "123", dePrice: "", porPrice: "45", qty: 999 },
+  { brand: "semmarca", name: "123", desc: "", dePrice: "", porPrice: "45", qty: 999 },
 );
 
 const restoreComponent = new Component();
@@ -115,6 +123,7 @@ const backupLists = Object.fromEntries(
 );
 restoreComponent.restoreBackup(JSON.stringify({ format: "dd-etiquetas", version: 2, etiquetas: backupLists }));
 assert.equal(restoreComponent.state.pss6[0].qty, 999, "Backups também devem limitar quantidades inválidas");
+assert.equal(restoreComponent.state.blitzs[0].qty, 999, "O BLITZ deve ser restaurado no backup");
 
 storageWrites = 0;
 const previousUiState = { ...component.state, zoom: 1 };
@@ -127,7 +136,9 @@ component.state = { ...component.state, pss6: [...component.state.pss6] };
 component.componentDidUpdate(null, previousDataState);
 assert.equal(storageWrites, 1, "Mudanças de dados devem ser persistidas");
 
-assert.equal((html.match(/type="number" min="1" max="999"/g) || []).length, 8);
+assert.equal((html.match(/type="number" min="1" max="999"/g) || []).length, 9);
+assert.match(html, /size: A4 landscape/);
+assert.match(html, /width: 148mm/);
 assert.match(html, /aria-label="Mais opções"/);
 assert.doesNotMatch(html, /renderVals\(\)\.addCurrent/);
 
@@ -135,8 +146,9 @@ const template = html.slice(html.indexOf("<x-dc>"), html.indexOf('<script type="
 const localAliases = new Set(["g", "pl", "b", "true", "false"]);
 const placeholderRoots = new Set([...template.matchAll(/\{\{\s*([A-Za-z_$][\w$]*)/g)].map(match => match[1]));
 const renderedValues = component.renderVals();
+assert.equal(typeof renderedValues.downloadBlitzPptx, "function", "O download recomposto do PowerPoint deve estar disponível");
 for (const name of placeholderRoots) {
   if (!localAliases.has(name)) assert.ok(name in renderedValues, `Valor de template ausente: ${name}`);
 }
 
-console.log("Smoke tests passed for 8 models.");
+console.log("Smoke tests passed for 9 models.");

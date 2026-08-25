@@ -2,10 +2,11 @@ repo: washingtonolv/gerador-etiquetas
 branch: main
 
 ## Last sync
-date: 2026-08-05
+date: 2026-08-24
 
 ### Updated in this project
-- Oito modelos no gerador e o PowerPoint editável BLITZ A5 para download
+- Nove modelos editáveis no gerador, incluindo o BLITZ A5 com 18 artes de marca
+- PowerPoint BLITZ corrigido para o tamanho A5 exato (14,8 × 21 cm)
 - Prévia otimizada e impressão A4 em dimensões reais
 - Painéis de edição e modelos recolhíveis
 - Testes de regressão para dados, quantidades, importação e modelos
