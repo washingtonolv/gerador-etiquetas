@@ -2850,6 +2850,92 @@ class Component extends DCLogic {
     const activeStyle = document.getElementById(activeId);
     if (activeStyle) document.head.appendChild(activeStyle);
   }
+  async printBlitzDocument() {
+    const source = document.querySelector(".blitz-sheets");
+    if (!source) return false;
+
+    const printable = source.cloneNode(true);
+    printable.querySelectorAll(".no-print, button").forEach((el) => el.remove());
+
+    const frame = document.createElement("iframe");
+    frame.title = "Impressão BLITZ A5";
+    frame.setAttribute("aria-hidden", "true");
+    frame.setAttribute("data-dd-blitz-print-frame", "");
+    frame.style.cssText = "position:fixed; left:-10000px; top:0; width:1px; height:1px; border:0; opacity:0; pointer-events:none;";
+    document.body.appendChild(frame);
+
+    const printDocument = frame.contentDocument;
+    if (!printDocument) {
+      frame.remove();
+      return false;
+    }
+
+    const assets = Array.from(document.querySelectorAll('link[rel="stylesheet"], style'))
+      .filter((el) => !el.id?.startsWith("dd-print-page-"))
+      .map((el) => el.outerHTML)
+      .join("\n");
+    const baseHref = String(document.baseURI || location.href).replace(/"/g, "&quot;");
+    printDocument.open();
+    printDocument.write(`<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<base href="${baseHref}">
+${assets}
+<style id="dd-blitz-isolated-print">
+  @page { size: A4 landscape; margin: 0; }
+  html, body { margin:0 !important; padding:0 !important; width:297mm !important; min-width:297mm !important; background:#fff !important; }
+  body.blitz-page { display:block !important; min-height:0 !important; }
+  body.blitz-page .preview-wrap { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
+  body.blitz-page .blitz-sheets { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
+  body.blitz-page .blitz-sheet { display:block !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
+  body.blitz-page .blitz-sheet:last-child { break-after:auto !important; page-break-after:auto !important; }
+  body.blitz-page .g-blitz { display:grid !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; grid-template-columns:148mm 148mm !important; grid-template-rows:210mm !important; grid-auto-rows:210mm !important; column-gap:1mm !important; row-gap:0 !important; align-content:start !important; justify-content:start !important; margin:0 !important; padding:0 !important; }
+  body.blitz-page .blitz-label { box-sizing:border-box !important; width:148mm !important; min-width:148mm !important; max-width:148mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:.3mm dashed #9aa6b1 !important; outline-offset:-.3mm !important; aspect-ratio:auto !important; background-image:var(--blitz-bg) !important; background-size:100% 100% !important; background-position:center !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
+  .no-print, button { display:none !important; }
+</style>
+</head>
+<body class="blitz-page pp"><div class="preview-wrap">${printable.outerHTML}</div></body>
+</html>`);
+    printDocument.close();
+
+    const images = Array.from(printDocument.images || []);
+    const imageReady = Promise.all(images.map((image) => image.complete ? Promise.resolve() : new Promise((resolve) => {
+      image.addEventListener("load", resolve, { once: true });
+      image.addEventListener("error", resolve, { once: true });
+    })));
+    const backgroundUrls = Array.from(printDocument.querySelectorAll(".blitz-label")).map((label) => {
+      const value = printDocument.defaultView?.getComputedStyle(label).backgroundImage || "";
+      const start = value.indexOf("(");
+      const end = value.lastIndexOf(")");
+      return start >= 0 && end > start ? value.slice(start + 1, end).replace(/^['"]|['"]$/g, "") : "";
+    }).filter(Boolean);
+    const backgroundReady = Promise.all(Array.from(new Set(backgroundUrls)).map((src) => new Promise((resolve) => {
+      const image = new Image();
+      image.onload = resolve;
+      image.onerror = resolve;
+      image.src = src;
+    })));
+    await Promise.race([Promise.all([imageReady, backgroundReady]), new Promise((resolve) => setTimeout(resolve, 4000))]);
+    if (printDocument.fonts?.ready) await Promise.race([printDocument.fonts.ready, new Promise((resolve) => setTimeout(resolve, 1500))]);
+
+    const printWindow = frame.contentWindow;
+    if (!printWindow) {
+      frame.remove();
+      return false;
+    }
+    let removed = false;
+    const cleanup = () => {
+      if (removed) return;
+      removed = true;
+      frame.remove();
+    };
+    printWindow.addEventListener("afterprint", () => setTimeout(cleanup, 1000), { once: true });
+    setTimeout(cleanup, 120000);
+    printWindow.focus();
+    printWindow.print();
+    return true;
+  }
   componentDidMount() {
     setTimeout(() => this.centerActiveTab(), 60);
     this._onKeyDown = e => {
@@ -3246,6 +3332,10 @@ class Component extends DCLogic {
         this.applyPrintPage(model);
         this.setState({ printOpen: false });
         setTimeout(async () => {
+          if (model === "blitz") {
+            await this.printBlitzDocument();
+            return;
+          }
           const values = Array.from(document.querySelectorAll(".pais-label, .pais6-label, .blitz-label")).flatMap((el) => {
             const styles = getComputedStyle(el);
             return [styles.getPropertyValue("--pais-print-bg").trim(), styles.getPropertyValue("--pais6-print-bg").trim(), styles.getPropertyValue("--blitz-bg").trim()];
@@ -3317,3 +3407,4 @@ class Component extends DCLogic {
 </script>
 </body>
 </html>
+
