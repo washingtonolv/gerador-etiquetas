@@ -111,6 +111,12 @@ const imported = component.state.pss6.at(-1);
 assert.equal(imported.brand, "lattafa", "Marcas exclusivas do A6 devem ser reconhecidas");
 assert.equal(imported.porPrice, "1.299,90", "Preços com milhar devem ser importados");
 
+component.state.model = "blitz";
+component.state.blitzs = [{ brand: "avon", name: "Teste", desc: "", dePrice: "", porPrice: "10,00", qty: 3 }];
+values = component.renderVals();
+assert.equal(values.blitzPages.length, 2, "Três etiquetas BLITZ devem ocupar duas folhas");
+assert.deepEqual(JSON.parse(JSON.stringify(values.blitzPages.map(page => page.items.length))), [2, 1], "Cada folha BLITZ deve receber no máximo dois A5");
+
 const sanitized = component.sanitizeList([{ brand: null, name: 123, dePrice: null, porPrice: 45, qty: 10000 }]);
 assert.deepEqual(
   JSON.parse(JSON.stringify(sanitized[0])),
@@ -137,13 +143,15 @@ component.componentDidUpdate(null, previousDataState);
 assert.equal(storageWrites, 1, "Mudanças de dados devem ser persistidas");
 
 assert.equal((html.match(/type="number" min="1" max="999"/g) || []).length, 9);
-assert.match(html, /size: A4 landscape/);
+assert.match(html, /@page blitzLandscape \{ size: 297mm 210mm; margin: 0; \}/);
+assert.match(html, /page:blitzLandscape/);
+assert.match(html, /class="sheet blitz-sheet"/);
 assert.match(html, /width: 148mm/);
 assert.match(html, /aria-label="Mais opções"/);
 assert.doesNotMatch(html, /renderVals\(\)\.addCurrent/);
 
 const template = html.slice(html.indexOf("<x-dc>"), html.indexOf('<script type="text/x-dc" data-dc-script>'));
-const localAliases = new Set(["g", "pl", "b", "true", "false"]);
+const localAliases = new Set(["g", "pl", "b", "bp", "true", "false"]);
 const placeholderRoots = new Set([...template.matchAll(/\{\{\s*([A-Za-z_$][\w$]*)/g)].map(match => match[1]));
 const renderedValues = component.renderVals();
 assert.equal(typeof renderedValues.downloadBlitzPptx, "function", "O download recomposto do PowerPoint deve estar disponível");

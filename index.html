@@ -62,6 +62,7 @@
     }
     a { color: var(--dd-primary-text); }
     a:hover { color: #005451; }
+    @page blitzLandscape { size: 297mm 210mm; margin: 0; }
     @media print {
       @page { size: A4 portrait; margin: 10mm; }
 
@@ -77,7 +78,12 @@
       .g-pais6 { grid-template-columns: repeat(2, 105mm) !important; grid-auto-rows: 148mm !important; gap: 0 !important; justify-content:center !important; }
       .g-blitz { grid-template-columns: repeat(2, 148mm) !important; grid-auto-rows: 210mm !important; gap: 0 1mm !important; justify-content:center !important; }
       .pais6-page .sheet { padding: 0 !important; }
-      .blitz-page .sheet { width:297mm !important; height:210mm !important; padding:0 !important; }
+      .blitz-page { page: blitzLandscape; display:block !important; width:297mm !important; min-height:0 !important; }
+      .blitz-page .workspace-layout { display:block !important; width:297mm !important; max-width:none !important; }
+      .blitz-page .preview-wrap { display:block !important; width:297mm !important; max-width:none !important; padding:0 !important; flex:none !important; }
+      .blitz-page .blitz-sheets { display:block !important; width:297mm !important; }
+      .blitz-page .blitz-sheet { page:blitzLandscape; box-sizing:border-box !important; width:297mm !important; height:210mm !important; padding:0 !important; overflow:hidden !important; break-inside:avoid-page !important; break-after:page !important; }
+      .blitz-page .blitz-sheet:last-child { break-after:auto !important; }
       .g-placa { grid-template-columns: repeat(3, 50mm) !important; grid-auto-rows: 60mm !important; gap: 6mm !important; justify-content:center !important; }
       .g-pcr { grid-template-columns: repeat(2, 48mm) !important; gap: 6mm !important; justify-content:center !important; }
       .g-prec > div, .g-make > div, .g-make2 > div, .g-make3 > div, .g-pais > div, .g-pais6 > div, .g-blitz > div, .g-placa > div, .g-pcr > div { break-inside: avoid; outline: 0.3mm dashed #9aa6b1 !important; outline-offset: 1mm; border: none !important; border-radius: 0 !important; }
@@ -178,6 +184,13 @@
       aspect-ratio: auto !important;
       overflow: visible;
     }
+    .blitz-page:not(.pp) .blitz-sheets {
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:18px;
+    }
     .blitz-page:not(.pp) .g-blitz {
       display: grid !important;
       grid-template-columns: repeat(auto-fit, minmax(280px, 360px)) !important;
@@ -202,6 +215,9 @@
       height: 210mm !important;
       padding: 0 !important;
     }
+    .pp.blitz-page .blitz-sheets { display:block !important; width:297mm !important; }
+    .pp.blitz-page .blitz-sheet { break-after:page !important; }
+    .pp.blitz-page .blitz-sheet:last-child { break-after:auto !important; }
     .pp.blitz-page .g-blitz {
       width: 297mm !important;
       height: 210mm !important;
@@ -213,6 +229,10 @@
     }
     .pp.blitz-page .blitz-label { background-image: var(--blitz-bg) !important; }
     @media print {
+      .blitz-page .blitz-sheets {
+        display:block !important;
+        width:297mm !important;
+      }
       .blitz-page .g-blitz {
         width: 297mm !important;
         height: 210mm !important;
@@ -2196,34 +2216,44 @@
           <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">+</button>
         </div>
       </div>
-      <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
-        <div class="g-blitz" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:10px;">
-          <sc-if value="{{ blitzEmpty }}" hint-placeholder-val="false">
+      <div class="blitz-sheets">
+        <sc-if value="{{ blitzEmpty }}" hint-placeholder-val="false">
+          <div class="sheet blitz-sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
+            <div class="g-blitz" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:10px;">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
               <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
               <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta BLITZ ainda</div>
               <button onClick="{{ addBlitz }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
             </div>
-          </sc-if>
-          <sc-for list="{{ blitzGrid }}" as="g" hint-placeholder-count="2">
-            <div class="label-preview blitz-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:148 / 210; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-color:#d000c4; background-repeat:no-repeat; background-position:center; background-size:100% 100%; background-image:{{ g.blitzBg }}; --blitz-bg:{{ g.blitzBg }};">
-              <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar esta etiqueta"></button>
-              <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
-              <div style="position:absolute; left:27.7%; top:26.6%; width:45.5%; max-height:5.8%; overflow:hidden; text-align:center; font-size:{{ g.blitzNameSize }}; font-weight:800; line-height:1.05; color:#fff; text-transform:uppercase; text-wrap:balance; overflow-wrap:break-word;">{{ g.name }}</div>
-              <div style="position:absolute; left:39.1%; top:32.7%; width:21.8%; max-height:4.8%; overflow:hidden; text-align:center; font-size:{{ g.blitzDescSize }}; font-weight:500; line-height:1.1; color:#fff; white-space:nowrap; text-overflow:ellipsis;">{{ g.desc }}</div>
-              <sc-if value="{{ g.hasDe }}" hint-placeholder-val="true">
-                <div style="position:absolute; left:42.4%; top:50.8%; display:flex; align-items:flex-start; color:#fff; white-space:nowrap;">
-                  <span style="font-size:8.3cqw; font-weight:500; line-height:1;">{{ g.deReais }}</span>
-                  <span style="font-size:6.2cqw; font-weight:500; line-height:1; margin-top:-1.5cqw;">,{{ g.deCentavos }}</span>
-                </div>
-              </sc-if>
-              <div style="position:absolute; left:22.5%; top:70.8%; width:62%; display:flex; align-items:flex-start; color:#000; white-space:nowrap;">
-                <span style="font-size:{{ g.blitzReaisSize }}; font-weight:900; line-height:.88; letter-spacing:-.7cqw;">{{ g.reais }}</span>
-                <span style="font-size:7.8cqw; font-weight:900; line-height:1; margin-top:-2.7cqw; margin-left:1.2cqw;">,{{ g.centavos }}</span>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ blitzHasItems }}" hint-placeholder-val="true">
+          <sc-for list="{{ blitzPages }}" as="bp" hint-placeholder-count="1">
+            <div class="sheet blitz-sheet" data-page="{{ bp.n }}" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
+              <div class="g-blitz" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:10px;">
+                <sc-for list="{{ bp.items }}" as="g" hint-placeholder-count="2">
+                  <div class="label-preview blitz-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:148 / 210; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-color:#d000c4; background-repeat:no-repeat; background-position:center; background-size:100% 100%; background-image:{{ g.blitzBg }}; --blitz-bg:{{ g.blitzBg }};">
+                    <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar esta etiqueta"></button>
+                    <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+                    <div style="position:absolute; left:27.7%; top:26.6%; width:45.5%; max-height:5.8%; overflow:hidden; text-align:center; font-size:{{ g.blitzNameSize }}; font-weight:800; line-height:1.05; color:#fff; text-transform:uppercase; text-wrap:balance; overflow-wrap:break-word;">{{ g.name }}</div>
+                    <div style="position:absolute; left:39.1%; top:32.7%; width:21.8%; max-height:4.8%; overflow:hidden; text-align:center; font-size:{{ g.blitzDescSize }}; font-weight:500; line-height:1.1; color:#fff; white-space:nowrap; text-overflow:ellipsis;">{{ g.desc }}</div>
+                    <sc-if value="{{ g.hasDe }}" hint-placeholder-val="true">
+                      <div style="position:absolute; left:42.4%; top:50.8%; display:flex; align-items:flex-start; color:#fff; white-space:nowrap;">
+                        <span style="font-size:8.3cqw; font-weight:500; line-height:1;">{{ g.deReais }}</span>
+                        <span style="font-size:6.2cqw; font-weight:500; line-height:1; margin-top:-1.5cqw;">,{{ g.deCentavos }}</span>
+                      </div>
+                    </sc-if>
+                    <div style="position:absolute; left:22.5%; top:70.8%; width:62%; display:flex; align-items:flex-start; color:#000; white-space:nowrap;">
+                      <span style="font-size:{{ g.blitzReaisSize }}; font-weight:900; line-height:.88; letter-spacing:-.7cqw;">{{ g.reais }}</span>
+                      <span style="font-size:7.8cqw; font-weight:900; line-height:1; margin-top:-2.7cqw; margin-left:1.2cqw;">,{{ g.centavos }}</span>
+                    </div>
+                  </div>
+                </sc-for>
               </div>
             </div>
           </sc-for>
-        </div>
+        </sc-if>
       </div>
     </div>
   </div>
@@ -3014,6 +3044,9 @@ class Component extends DCLogic {
 
     const expand = items => items.flatMap(item => Array(this.clampQty(item.qty)).fill(item));
     const renderedLists = { placas, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs };
+    const blitzGrid = expand(blitzs);
+    const blitzPages = [];
+    for (let i = 0; i < blitzGrid.length; i += 2) blitzPages.push({ n: blitzPages.length + 1, items: blitzGrid.slice(i, i + 2) });
     const modelMeta = this.getModelMeta(model);
     const activeCount = expand(renderedLists[modelMeta.key]).length;
     const pages = Math.max(1, Math.ceil(activeCount / modelMeta.perPage));
@@ -3030,7 +3063,7 @@ class Component extends DCLogic {
       pais6PageClass: model === "pais6" ? "pais6-page" : "",
       pais6PageCss: model === "pais6" ? "@media print { @page { size: A4 portrait; margin: 0; } }" : "",
       blitzPageClass: model === "blitz" ? "blitz-page" : "",
-      blitzPageCss: model === "blitz" ? "@media print { @page { size: A4 landscape; margin: 0; } }" : "",
+      blitzPageCss: "",
       pais6BrandOptions: this.pais6Brands,
       blitzBrandOptions: this.pais6Brands,
       modelRailStyle: "",
@@ -3056,8 +3089,8 @@ class Component extends DCLogic {
       tabPais6Pressed: model === "pais6" ? "true" : "false",
       tabBlitzPressed: model === "blitz" ? "true" : "false",
       placas, placaCount: placas.length,
-      placaEmpty: placas.length === 0, pcrEmpty: pcrs.length === 0, prEmpty: prs.length === 0, mkEmpty: mks.length === 0, mk2Empty: mks2.length === 0, mk3Empty: mks3.length === 0, ps6Empty: pss6.length === 0, psEmpty: pss.length === 0, blitzEmpty: blitzs.length === 0,
-      placasGrid: expand(placas), mksGrid: expand(mks), mks2Grid: expand(mks2), mks3Grid: expand(mks3), pssGrid: expand(pss), pss6Grid: expand(pss6), blitzGrid: expand(blitzs), prsGrid: expand(prs), pcrsGrid: expand(pcrs),
+      placaEmpty: placas.length === 0, pcrEmpty: pcrs.length === 0, prEmpty: prs.length === 0, mkEmpty: mks.length === 0, mk2Empty: mks2.length === 0, mk3Empty: mks3.length === 0, ps6Empty: pss6.length === 0, psEmpty: pss.length === 0, blitzEmpty: blitzs.length === 0, blitzHasItems: blitzs.length > 0,
+      placasGrid: expand(placas), mksGrid: expand(mks), mks2Grid: expand(mks2), mks3Grid: expand(mks3), pssGrid: expand(pss), pss6Grid: expand(pss6), blitzGrid, blitzPages, prsGrid: expand(prs), pcrsGrid: expand(pcrs),
       pageInfo,
       mks, mkCount: mks.length,
       mks2, mk2Count: mks2.length,
