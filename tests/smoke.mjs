@@ -9,6 +9,12 @@ const scriptMatch = html.match(/<script type="text\/x-dc" data-dc-script>([\s\S]
 assert.ok(scriptMatch, "O script principal deve existir no index.html");
 
 let storageWrites = 0;
+let appendedPrintStyle = null;
+const printStyles = {
+  "dd-print-page-default": { id: "dd-print-page-default", media: "print" },
+  "dd-print-page-pais6": { id: "dd-print-page-pais6", media: "not all" },
+  "dd-print-page-blitz": { id: "dd-print-page-blitz", media: "not all" },
+};
 const localStorage = {
   getItem: () => null,
   setItem: () => { storageWrites += 1; },
@@ -16,9 +22,11 @@ const localStorage = {
 const documentStub = {
   addEventListener() {},
   removeEventListener() {},
+  getElementById: id => printStyles[id] || null,
+  head: { appendChild(element) { appendedPrintStyle = element; } },
   querySelector: () => null,
   querySelectorAll: () => [],
-  createElement: () => ({ click() {} }),
+  createElement: () => ({ click() {}, id: "", media: "", textContent: "" }),
 };
 const context = {
   console,
@@ -60,6 +68,13 @@ assert.equal(component.normalizePriceField("R$ 56,9"), "56,90");
 assert.equal(component.clampQty(0), 1);
 assert.equal(component.clampQty(5000), 999);
 assert.equal(component.clampQty("invalido"), 1);
+component.applyPrintPage("blitz");
+assert.equal(printStyles["dd-print-page-blitz"].media, "print");
+assert.equal(printStyles["dd-print-page-default"].media, "not all");
+assert.equal(appendedPrintStyle.id, "dd-print-page-blitz");
+component.applyPrintPage("placa");
+assert.equal(printStyles["dd-print-page-default"].media, "print");
+assert.equal(printStyles["dd-print-page-blitz"].media, "not all");
 
 for (const model of modelNames) {
   const meta = component.getModelMeta(model);
@@ -143,9 +158,10 @@ component.componentDidUpdate(null, previousDataState);
 assert.equal(storageWrites, 1, "Mudanças de dados devem ser persistidas");
 
 assert.equal((html.match(/type="number" min="1" max="999"/g) || []).length, 9);
-assert.match(html, /@page blitzLandscape \{ size: 297mm 210mm; margin: 0; \}/);
-assert.match(html, /page:blitzLandscape/);
+assert.match(html, /id="dd-print-page-blitz" media="not all">@page \{ size: 297mm 210mm; margin: 0; \}<\/style>/);
 assert.match(html, /class="sheet blitz-sheet"/);
+assert.match(html, /id="dd-print-page-default" media="print"/);
+assert.match(html, /Orientação: <b>\{\{ printOrientation \}\}<\/b>/);
 assert.match(html, /width: 148mm/);
 assert.match(html, /aria-label="Mais opções"/);
 assert.doesNotMatch(html, /renderVals\(\)\.addCurrent/);

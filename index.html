@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Crie, visualize e imprima etiquetas e placas promocionais D&amp;D.">
 <title>Gerador de Etiquetas D&amp;D</title>
+<style id="dd-print-page-default" media="print">@page { size: A4 portrait; margin: 10mm; }</style>
+<style id="dd-print-page-pais6" media="not all">@page { size: A4 portrait; margin: 0; }</style>
+<style id="dd-print-page-blitz" media="not all">@page { size: 297mm 210mm; margin: 0; }</style>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -62,10 +65,7 @@
     }
     a { color: var(--dd-primary-text); }
     a:hover { color: #005451; }
-    @page blitzLandscape { size: 297mm 210mm; margin: 0; }
     @media print {
-      @page { size: A4 portrait; margin: 10mm; }
-
       .no-print { display: none !important; }
       body { background: #fff !important; }
       .app-bg { background: #fff !important; min-height: 0 !important; }
@@ -78,11 +78,11 @@
       .g-pais6 { grid-template-columns: repeat(2, 105mm) !important; grid-auto-rows: 148mm !important; gap: 0 !important; justify-content:center !important; }
       .g-blitz { grid-template-columns: repeat(2, 148mm) !important; grid-auto-rows: 210mm !important; gap: 0 1mm !important; justify-content:center !important; }
       .pais6-page .sheet { padding: 0 !important; }
-      .blitz-page { page: blitzLandscape; display:block !important; width:297mm !important; min-height:0 !important; }
+      .blitz-page { display:block !important; width:297mm !important; min-height:0 !important; }
       .blitz-page .workspace-layout { display:block !important; width:297mm !important; max-width:none !important; }
       .blitz-page .preview-wrap { display:block !important; width:297mm !important; max-width:none !important; padding:0 !important; flex:none !important; }
       .blitz-page .blitz-sheets { display:block !important; width:297mm !important; }
-      .blitz-page .blitz-sheet { page:blitzLandscape; box-sizing:border-box !important; width:297mm !important; height:210mm !important; padding:0 !important; overflow:hidden !important; break-inside:avoid-page !important; break-after:page !important; }
+      .blitz-page .blitz-sheet { box-sizing:border-box !important; width:297mm !important; height:210mm !important; padding:0 !important; overflow:hidden !important; break-inside:avoid-page !important; break-after:page !important; }
       .blitz-page .blitz-sheet:last-child { break-after:auto !important; }
       .g-placa { grid-template-columns: repeat(3, 50mm) !important; grid-auto-rows: 60mm !important; gap: 6mm !important; justify-content:center !important; }
       .g-pcr { grid-template-columns: repeat(2, 48mm) !important; gap: 6mm !important; justify-content:center !important; }
@@ -1491,7 +1491,7 @@
       <div class="import-panel" role="dialog" aria-modal="true" aria-labelledby="print-dialog-title" tabindex="-1" style="background:#fff; border-radius:18px; padding:26px; width:100%; max-width:500px; max-height:90vh; overflow:auto; display:flex; flex-direction:column; gap:18px; box-shadow:0 18px 60px rgba(0,0,0,.3);">
         <div style="display:flex; align-items:center; gap:10px;"><div style="width:42px; height:42px; display:grid; place-items:center; border-radius:12px; background:#FCECEF; color:#A72F50; font-size:21px;">🖨</div><div><div id="print-dialog-title" style="font-size:19px; font-weight:600; color:#263737;">Tudo pronto para imprimir?</div><div style="font-size:12px; color:#657575; margin-top:3px;">{{ printModel }}</div></div><div style="flex:1;"></div><button onClick="{{ closePrint }}" aria-label="Fechar confirmação de impressão" style="background:none; border:none; color:#657575; font-size:20px; cursor:pointer;">✕</button></div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;"><div style="padding:14px; border-radius:12px; background:#F7FAFA; border:1px solid #DCE9E8;"><div style="font-size:24px; font-weight:800; color:#006B67;">{{ printCount }}</div><div style="font-size:12px; color:#657575;">etiquetas</div></div><div style="padding:14px; border-radius:12px; background:#F7FAFA; border:1px solid #DCE9E8;"><div style="font-size:24px; font-weight:800; color:#006B67;">{{ printPages }}</div><div style="font-size:12px; color:#657575;">folhas A4</div></div></div>
-        <div style="display:flex; flex-direction:column; gap:9px; padding:14px; border-radius:12px; background:#FFF8F9; border:1px solid #F0CAD3; font-size:13px; color:#4E5555;"><div>✓ Papel: <b>A4</b></div><div>✓ Escala: <b>100% ou tamanho real</b></div><div>✓ Desative <b>cabeçalhos e rodapés</b></div><div>✓ Não use “Ajustar à página”</div></div>
+        <div style="display:flex; flex-direction:column; gap:9px; padding:14px; border-radius:12px; background:#FFF8F9; border:1px solid #F0CAD3; font-size:13px; color:#4E5555;"><div>✓ Papel: <b>A4</b></div><div>✓ Orientação: <b>{{ printOrientation }}</b></div><div>✓ Margens: <b>{{ printMargins }}</b></div><div>✓ Escala: <b>100% ou tamanho real</b></div><div>✓ Desative <b>cabeçalhos e rodapés</b></div><div>✓ Não use “Ajustar à página”</div></div>
         <div style="display:flex; gap:10px;"><button onClick="{{ closePrint }}" style="flex:1; background:#fff; color:#657575; border:1px solid #DCE9E8; border-radius:10px; padding:12px; font-size:13px; font-weight:700; cursor:pointer;">Voltar</button><button onClick="{{ confirmPrint }}" style="flex:1.4; background:#A72F50; color:#fff; border:none; border-radius:10px; padding:12px; font-size:13px; font-weight:800; cursor:pointer;">Imprimir agora</button></div>
       </div>
     </div>
@@ -2840,6 +2840,16 @@ class Component extends DCLogic {
     if (!act) return;
     bar.scrollLeft = Math.max(0, act.offsetLeft - (bar.clientWidth - act.offsetWidth) / 2);
   }
+  applyPrintPage(model = this.state.model) {
+    const activeId = model === "blitz" ? "dd-print-page-blitz" : model === "pais6" ? "dd-print-page-pais6" : "dd-print-page-default";
+    const ids = ["dd-print-page-default", "dd-print-page-pais6", "dd-print-page-blitz"];
+    for (const id of ids) {
+      const style = document.getElementById(id);
+      if (style) style.media = id === activeId ? "print" : "not all";
+    }
+    const activeStyle = document.getElementById(activeId);
+    if (activeStyle) document.head.appendChild(activeStyle);
+  }
   componentDidMount() {
     setTimeout(() => this.centerActiveTab(), 60);
     this._onKeyDown = e => {
@@ -2872,6 +2882,8 @@ class Component extends DCLogic {
       if (this.state.menuOpen && !e.target.closest?.(".hdr-menu")) this.setState({ menuOpen: false });
     };
     document.addEventListener("pointerdown", this._onPointerDown);
+    this._onBeforePrint = () => this.applyPrintPage();
+    window.addEventListener?.("beforeprint", this._onBeforePrint);
     try {
       const raw = localStorage.getItem("dd-etiquetas-v2") || localStorage.getItem("dd-etiquetas-v1");
       const saved = raw ? JSON.parse(raw) : null;
@@ -2892,6 +2904,7 @@ class Component extends DCLogic {
   componentWillUnmount() {
     if (this._onKeyDown) document.removeEventListener("keydown", this._onKeyDown);
     if (this._onPointerDown) document.removeEventListener("pointerdown", this._onPointerDown);
+    if (this._onBeforePrint) window.removeEventListener?.("beforeprint", this._onBeforePrint);
     if (this._undoTimer) clearTimeout(this._undoTimer);
   }
   componentDidUpdate(prevProps, prevState) {
@@ -3061,7 +3074,7 @@ class Component extends DCLogic {
       isPais6: model === "pais6",
       isBlitz: model === "blitz",
       pais6PageClass: model === "pais6" ? "pais6-page" : "",
-      pais6PageCss: model === "pais6" ? "@media print { @page { size: A4 portrait; margin: 0; } }" : "",
+      pais6PageCss: "",
       blitzPageClass: model === "blitz" ? "blitz-page" : "",
       blitzPageCss: "",
       pais6BrandOptions: this.pais6Brands,
@@ -3111,7 +3124,11 @@ class Component extends DCLogic {
       addBlitz: () => this.addItem("blitzs", this.modelMeta.blitz.create()),
       addPlaca: () => this.addItem("placas", this.modelMeta.placa.create()),
       addCurrent: () => this.addCurrentItem(),
-      doPrint: () => activeCount ? this.setState({ printOpen: true }) : window.alert("Adicione pelo menos uma etiqueta antes de imprimir."),
+      doPrint: () => {
+        if (!activeCount) return window.alert("Adicione pelo menos uma etiqueta antes de imprimir.");
+        this.applyPrintPage(model);
+        this.setState({ printOpen: true });
+      },
       scrollTop: () => window.scrollTo({ top: 0, behavior: "smooth" }),
       isMenuOpen: !!this.state.menuOpen,
       menuExpanded: this.state.menuOpen ? "true" : "false",
@@ -3225,10 +3242,36 @@ class Component extends DCLogic {
       exportLabels: () => this.exportLabels(),
       isPrintOpen: !!this.state.printOpen,
       closePrint: () => this.setState({ printOpen: false }),
-      confirmPrint: () => { this.setState({ printOpen: false }); setTimeout(async () => { const values = Array.from(document.querySelectorAll(".pais-label, .pais6-label, .blitz-label")).flatMap((el) => { const styles = getComputedStyle(el); return [styles.getPropertyValue("--pais-print-bg").trim(), styles.getPropertyValue("--pais6-print-bg").trim(), styles.getPropertyValue("--blitz-bg").trim()]; }).filter(Boolean); const urls = values.map((value) => { const start = value.indexOf("("); const end = value.lastIndexOf(")"); return start >= 0 && end > start ? value.slice(start + 1, end).replace(/^['"]|['"]$/g, "") : ""; }).filter(Boolean); const loadImages = Promise.all(Array.from(new Set(urls)).map((src) => new Promise((resolve) => { const image = new Image(); image.onload = resolve; image.onerror = resolve; image.src = src; }))); await Promise.race([loadImages, new Promise((resolve) => setTimeout(resolve, 4000))]); if (document.fonts && document.fonts.ready) await Promise.race([document.fonts.ready, new Promise((resolve) => setTimeout(resolve, 1500))]); window.print(); }, 120); },
+      confirmPrint: () => {
+        this.applyPrintPage(model);
+        this.setState({ printOpen: false });
+        setTimeout(async () => {
+          const values = Array.from(document.querySelectorAll(".pais-label, .pais6-label, .blitz-label")).flatMap((el) => {
+            const styles = getComputedStyle(el);
+            return [styles.getPropertyValue("--pais-print-bg").trim(), styles.getPropertyValue("--pais6-print-bg").trim(), styles.getPropertyValue("--blitz-bg").trim()];
+          }).filter(Boolean);
+          const urls = values.map((value) => {
+            const start = value.indexOf("(");
+            const end = value.lastIndexOf(")");
+            return start >= 0 && end > start ? value.slice(start + 1, end).replace(/^['"]|['"]$/g, "") : "";
+          }).filter(Boolean);
+          const loadImages = Promise.all(Array.from(new Set(urls)).map((src) => new Promise((resolve) => {
+            const image = new Image();
+            image.onload = resolve;
+            image.onerror = resolve;
+            image.src = src;
+          })));
+          await Promise.race([loadImages, new Promise((resolve) => setTimeout(resolve, 4000))]);
+          if (document.fonts && document.fonts.ready) await Promise.race([document.fonts.ready, new Promise((resolve) => setTimeout(resolve, 1500))]);
+          this.applyPrintPage(model);
+          window.print();
+        }, 120);
+      },
       printCount: activeCount,
       printPages: pages,
       printModel: modelMeta.label,
+      printOrientation: model === "blitz" ? "Paisagem" : "Retrato",
+      printMargins: model === "blitz" || model === "pais6" ? "Nenhuma" : "Padrão",
       isImportOpen: !!this.state.importOpen,
       closeImport: () => this.setState({ importOpen: false }),
       downloadModel: () => {
