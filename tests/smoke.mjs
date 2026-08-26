@@ -108,7 +108,7 @@ for (const brand of component.pais6Art) {
   assert.ok(existsSync(`${repoRoot}assets/blitz/${brand}.jpg`), `Arte ausente: blitz/${brand}`);
 }
 for (const brand of component.blitzPrecoArt) {
-  assert.ok(existsSync(`${repoRoot}assets/blitz-preco/${brand}.png`), `Arte ausente: blitz-preco/${brand}`);
+  assert.ok(existsSync(`${repoRoot}assets/blitz-preco/${brand}.webp`), `Arte ausente: blitz-preco/${brand}`);
 }
 assert.ok(existsSync(`${repoRoot}uploads/BLITZ-A5-web.pptx`), "PowerPoint BLITZ corrigido deve estar disponível");
 const blitzPptx = readFileSync(`${repoRoot}uploads/BLITZ-A5-web.pptx`);

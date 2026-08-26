@@ -1428,7 +1428,7 @@
       <button onClick="{{ pickPlaca }}" data-on="{{ tabPlacaOn }}" aria-pressed="{{ tabPlacaPressed }}" aria-label="Etiqueta Vitrine" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/placa/nuvem-rosa.png');"></span><span class="model-n">#7</span><span>Etiqueta Vitrine</span></button>
       <button onClick="{{ pickPcr }}" data-on="{{ tabPcrOn }}" aria-pressed="{{ tabPcrPressed }}" aria-label="Expositor Madeira" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precario/template.png');"></span><span class="model-n">#8</span><span>Expositor Madeira</span></button>
       <button onClick="{{ pickBlitz }}" data-on="{{ tabBlitzOn }}" aria-pressed="{{ tabBlitzPressed }}" aria-label="BLITZ A5" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/blitz/semmarca.jpg');"></span><span class="model-n">#9</span><span>BLITZ A5</span></button>
-      <button onClick="{{ pickBlitzPreco }}" data-on="{{ tabBlitzPrecoOn }}" aria-pressed="{{ tabBlitzPrecoPressed }}" aria-label="Preçário BLITZ" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/blitz-preco/semmarca.png');"></span><span class="model-n">#10</span><span>Preçário BLITZ</span></button>
+      <button onClick="{{ pickBlitzPreco }}" data-on="{{ tabBlitzPrecoOn }}" aria-pressed="{{ tabBlitzPrecoPressed }}" aria-label="Preçário BLITZ" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/blitz-preco/semmarca.webp');"></span><span class="model-n">#10</span><span>Preçário BLITZ</span></button>
   </nav>
 
   <sc-if value="{{ isPreview }}" hint-placeholder-val="{{ false }}">
@@ -3357,7 +3357,7 @@ ${assets}
       const brand = this.blitzPrecoArt.indexOf(g.brand) !== -1 ? g.brand : "semmarca";
       return {
         ...item,
-        blitzPrecoBg: "url('assets/blitz-preco/" + brand + ".png')",
+        blitzPrecoBg: "url('assets/blitz-preco/" + brand + ".webp')",
         blitzPrecoReaisSize: String(reais).length > 4 ? "13cqw" : String(reais).length > 3 ? "16.5cqw" : "21.5cqw",
         blitzPrecoNameSize: (g.name || "").length > 30 ? "4.2cqw" : (g.name || "").length > 18 ? "5.2cqw" : "6.7cqw",
       };
@@ -3653,4 +3653,3 @@ ${assets}
 </script>
 </body>
 </html>
-
