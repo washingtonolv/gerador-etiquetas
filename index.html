@@ -5,13 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Crie, visualize e imprima etiquetas e placas promocionais D&amp;D.">
 <title>Gerador de Etiquetas D&amp;D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style id="dd-print-page-default" media="print">@page { size: A4 portrait; margin: 10mm; }</style>
 <style id="dd-print-page-pais6" media="not all">@page { size: A4 portrait; margin: 0; }</style>
 <style id="dd-print-page-blitz" media="not all">@page { size: 297mm 210mm; margin: 0; }</style>
 <style id="dd-print-page-blitzpreco" media="not all">@page { size: A4 landscape; margin: 0; }</style>
-<script src="./support.js"></script>
+<style>x-dc { display: none !important; }</style>
+<script type="module" src="./modern-app.js"></script>
 </head>
 <body>
+<dd-app-shell>
 <x-dc>
 <helmet>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -2611,6 +2615,7 @@
 
 </div>
 </x-dc>
+</dd-app-shell>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   state = {
@@ -3611,6 +3616,10 @@ ${assets}
       isImportOpen: !!this.state.importOpen,
       closeImport: () => this.setState({ importOpen: false }),
       downloadModel: () => {
+        if (window.DDEtiquetas?.downloadCsvTemplate) {
+          window.DDEtiquetas.downloadCsvTemplate();
+          return;
+        }
         const csv = "Nome do produto;Preço POR;Preço DE (opcional);Marca (opcional)\r\nPó Bronzer;56,90;75,00;Avon\r\nCreme Renew Ultimate;99,90;174,90;Avon\r\nHid. Obsessão por Baunilha 400ml;39,90;;O Boticário\r\nBatom Matte;29,90;;\r\n";
         const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
         const a = document.createElement("a");
@@ -3620,8 +3629,12 @@ ${assets}
         setTimeout(() => URL.revokeObjectURL(a.href), 1000);
       },
       downloadBlitzPptx: async () => {
-        const partNames = Array.from({ length: 21 }, (_, i) => "uploads/blitz-a5-parts/part-" + String(i + 1).padStart(2, "0") + ".bin");
         try {
+          if (window.DDEtiquetas?.downloadBlitzPowerPoint) {
+            await window.DDEtiquetas.downloadBlitzPowerPoint();
+            return;
+          }
+          const partNames = Array.from({ length: 21 }, (_, i) => "uploads/blitz-a5-parts/part-" + String(i + 1).padStart(2, "0") + ".bin");
           const responses = await Promise.all(partNames.map(path => fetch(path)));
           if (responses.some(response => !response.ok)) throw new Error("Parte ausente");
           const parts = await Promise.all(responses.map(response => response.arrayBuffer()));

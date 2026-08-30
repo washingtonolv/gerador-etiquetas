@@ -1,0 +1,4 @@
+node_modules/
+dist-modern/
+.vite/
+npm-debug.log*
