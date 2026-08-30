@@ -145,8 +145,8 @@ component.state.blitzPrecos = [{ brand: "avon", name: "Teste", dePrice: "15,00",
 values = component.renderVals();
 assert.equal(values.blitzPrecoPages.length, 2, "Nove preçários BLITZ devem ocupar duas folhas");
 assert.deepEqual(JSON.parse(JSON.stringify(values.blitzPrecoPages.map(page => page.items.length))), [8, 1], "Cada folha deve receber no máximo oito preçários BLITZ");
-assert.equal(values.printOrientation, "Paisagem", "O Preçário BLITZ deve imprimir em A4 paisagem");
-assert.equal(values.printMargins, "Nenhuma", "O Preçário BLITZ deve imprimir sem margens do navegador");
+assert.equal(values.printOrientation, "Paisagem", "O Preçário Blitz Vitrine deve imprimir em A4 paisagem");
+assert.equal(values.printMargins, "Nenhuma", "O Preçário Blitz Vitrine deve imprimir sem margens do navegador");
 
 const sanitized = component.sanitizeList([{ brand: null, name: 123, dePrice: null, porPrice: 45, qty: 10000 }]);
 assert.deepEqual(
@@ -161,7 +161,7 @@ const backupLists = Object.fromEntries(
 restoreComponent.restoreBackup(JSON.stringify({ format: "dd-etiquetas", version: 2, etiquetas: backupLists }));
 assert.equal(restoreComponent.state.pss6[0].qty, 999, "Backups também devem limitar quantidades inválidas");
 assert.equal(restoreComponent.state.blitzs[0].qty, 999, "O BLITZ deve ser restaurado no backup");
-assert.equal(restoreComponent.state.blitzPrecos[0].qty, 999, "O Preçário BLITZ deve ser restaurado no backup");
+assert.equal(restoreComponent.state.blitzPrecos[0].qty, 999, "O Preçário Blitz Vitrine deve ser restaurado no backup");
 
 storageWrites = 0;
 const previousUiState = { ...component.state, zoom: 1 };
