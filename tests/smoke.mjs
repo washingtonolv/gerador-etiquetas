@@ -15,6 +15,7 @@ const printStyles = {
   "dd-print-page-pais6": { id: "dd-print-page-pais6", media: "not all" },
   "dd-print-page-blitz": { id: "dd-print-page-blitz", media: "not all" },
   "dd-print-page-blitzpreco": { id: "dd-print-page-blitzpreco", media: "not all" },
+  "dd-print-page-vendedoras": { id: "dd-print-page-vendedoras", media: "not all" },
 };
 const localStorage = {
   getItem: () => null,
@@ -61,7 +62,7 @@ vm.runInContext(`
 
 const Component = context.ComponentUnderTest;
 const component = new Component();
-const modelNames = ["placa", "pcr", "prec", "make", "make2", "make3", "pais", "pais6", "blitz", "blitzpreco"];
+const modelNames = ["placa", "pcr", "prec", "make", "make2", "make3", "pais", "pais6", "blitz", "blitzpreco", "vendedoras"];
 
 assert.equal(component.splitPrice("99,9").centavos, "90");
 assert.equal(component.fmtPrice("129990"), "1299,90");
@@ -73,6 +74,9 @@ component.applyPrintPage("blitz");
 assert.equal(printStyles["dd-print-page-blitz"].media, "print");
 assert.equal(printStyles["dd-print-page-default"].media, "not all");
 assert.equal(appendedPrintStyle.id, "dd-print-page-blitz");
+component.applyPrintPage("vendedoras");
+assert.equal(printStyles["dd-print-page-vendedoras"].media, "print");
+assert.equal(printStyles["dd-print-page-default"].media, "not all");
 component.applyPrintPage("placa");
 assert.equal(printStyles["dd-print-page-default"].media, "print");
 assert.equal(printStyles["dd-print-page-blitz"].media, "not all");
@@ -174,7 +178,9 @@ component.state = { ...component.state, pss6: [...component.state.pss6] };
 component.componentDidUpdate(null, previousDataState);
 assert.equal(storageWrites, 1, "Mudanças de dados devem ser persistidas");
 
-assert.equal((html.match(/type="number" min="1" max="999"/g) || []).length, 10);
+assert.equal((html.match(/type="number" min="1" max="999"/g) || []).length, 11);
+assert.match(html, /Cartões vendedoras/);
+assert.match(html, /grid-template-columns:repeat\(3, 90mm\)/);
 assert.match(html, /id="dd-print-page-blitz" media="not all">@page \{ size: 297mm 210mm; margin: 0; \}<\/style>/);
 assert.match(html, /id="dd-print-page-blitzpreco" media="not all">@page \{ size: A4 landscape; margin: 0; \}<\/style>/);
 assert.match(html, /class="sheet blitz-sheet"/);
@@ -205,4 +211,4 @@ for (const name of placeholderRoots) {
   if (!localAliases.has(name)) assert.ok(name in renderedValues, `Valor de template ausente: ${name}`);
 }
 
-console.log("Smoke tests passed for 10 models.");
+console.log("Smoke tests passed for 11 models.");
