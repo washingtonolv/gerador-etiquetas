@@ -286,16 +286,16 @@
     .vendedoras-sheets { width:100%; display:flex; flex-direction:column; align-items:center; gap:18px; }
     .vendedoras-sheet { width:min(100%, 980px) !important; max-width:980px !important; height:auto !important; padding:16px !important; }
     .g-vendedoras { display:grid !important; grid-template-columns:repeat(3, minmax(180px, 1fr)) !important; gap:12px !important; width:100% !important; }
-    .vendedora-card { width:100% !important; aspect-ratio:90 / 55 !important; }
+    .vendedora-card { width:100% !important; aspect-ratio:90 / 50 !important; }
     @media (max-width:760px) { .g-vendedoras { grid-template-columns:minmax(0, 320px) !important; justify-content:center !important; } }
     .pp.vendedoras-page .vendedoras-sheets { display:block !important; width:297mm !important; }
     .pp.vendedoras-page .vendedoras-sheet { width:297mm !important; height:210mm !important; padding:0 !important; break-after:page !important; }
     .pp.vendedoras-page .vendedoras-sheet:last-child { break-after:auto !important; }
-    .pp.vendedoras-page .g-vendedoras { width:297mm !important; height:210mm !important; grid-template-columns:repeat(3, 90mm) !important; grid-template-rows:repeat(3, 55mm) !important; gap:5mm !important; align-content:center !important; justify-content:center !important; }
-    .pp.vendedoras-page .vendedora-card { width:90mm !important; height:55mm !important; aspect-ratio:auto !important; }
+    .pp.vendedoras-page .g-vendedoras { width:297mm !important; height:210mm !important; grid-template-columns:repeat(3, 90mm) !important; grid-template-rows:repeat(3, 50mm) !important; gap:5mm !important; align-content:center !important; justify-content:center !important; }
+    .pp.vendedoras-page .vendedora-card { width:90mm !important; height:50mm !important; aspect-ratio:auto !important; }
     @media print {
-      .vendedoras-page .g-vendedoras { width:297mm !important; height:210mm !important; grid-template-columns:repeat(3, 90mm) !important; grid-template-rows:repeat(3, 55mm) !important; gap:5mm !important; align-content:center !important; justify-content:center !important; }
-      .vendedoras-page .vendedora-card { box-sizing:border-box !important; width:90mm !important; height:55mm !important; aspect-ratio:auto !important; }
+      .vendedoras-page .g-vendedoras { width:297mm !important; height:210mm !important; grid-template-columns:repeat(3, 90mm) !important; grid-template-rows:repeat(3, 50mm) !important; gap:5mm !important; align-content:center !important; justify-content:center !important; }
+      .vendedoras-page .vendedora-card { box-sizing:border-box !important; width:90mm !important; height:50mm !important; aspect-ratio:auto !important; }
     }
     .fold-label { aspect-ratio: 6.4 / 3.9; background:#fff; }
     .g-make2 .fold-label, .g-make3 .fold-label { aspect-ratio: 5.5 / 2.7; }
@@ -1447,7 +1447,7 @@
       <button onClick="{{ pickPcr }}" data-on="{{ tabPcrOn }}" aria-pressed="{{ tabPcrPressed }}" aria-label="Expositor Madeira" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precario/template.png');"></span><span class="model-n">#6</span><span>Expositor Madeira</span></button>
       <button onClick="{{ pickBlitz }}" data-on="{{ tabBlitzOn }}" aria-pressed="{{ tabBlitzPressed }}" aria-label="BLITZ A5" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/blitz/semmarca.jpg');"></span><span class="model-n">#7</span><span>BLITZ A5</span></button>
       <button onClick="{{ pickBlitzPreco }}" data-on="{{ tabBlitzPrecoOn }}" aria-pressed="{{ tabBlitzPrecoPressed }}" aria-label="Preçário Blitz Vitrine" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/blitz-preco/semmarca.webp');"></span><span class="model-n">#8</span><span>Preçário Blitz Vitrine</span></button>
-      <button onClick="{{ pickVendedoras }}" data-on="{{ tabVendedorasOn }}" aria-pressed="{{ tabVendedorasPressed }}" aria-label="Cartões vendedoras" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background:linear-gradient(135deg,#08756f 0 54%,#d84c79 54% 100%);"></span><span class="model-n">#9</span><span>Cartões vendedoras</span></button>
+      <button onClick="{{ pickVendedoras }}" data-on="{{ tabVendedorasOn }}" aria-pressed="{{ tabVendedorasPressed }}" aria-label="Cartões vendedoras" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/vendedoras/verde.svg');"></span><span class="model-n">#9</span><span>Cartões vendedoras</span></button>
   </nav>
 
   <sc-if value="{{ isPreview }}" hint-placeholder-val="{{ false }}">
@@ -2666,13 +2666,9 @@
           <div class="sheet vendedoras-sheet" data-page="{{ vp.n }}" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:16px; width:100%; max-width:980px; zoom:{{ zoomVal }};">
             <div class="g-vendedoras">
               <sc-for list="{{ vp.items }}" as="g" hint-placeholder-count="9">
-                <div class="label-preview vendedora-card" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; overflow:hidden; border:1px solid rgba(0,0,0,.12); border-radius:2px; container-type:inline-size; background:{{ g.cardBg }}; color:#fff;">
+                <div class="label-preview vendedora-card" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; overflow:hidden; border:1px solid rgba(0,0,0,.12); border-radius:2px; container-type:inline-size; background-image:{{ g.cardBg }}; background-size:100% 100%; background-position:center; background-repeat:no-repeat; color:#fff;">
                   <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar cartão de {{ g.name }}"></button><button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir cartão" aria-label="Excluir cartão">×</button>
-                  <div style="position:absolute; width:38%; height:86%; right:-10%; top:-26%; border-radius:50%; border:2.2cqw solid rgba(255,255,255,.13);"></div>
-                  <div style="position:absolute; width:25%; height:54%; left:-8%; bottom:-20%; border-radius:50%; background:rgba(255,255,255,.10); transform:rotate(-18deg);"></div>
-                  <img src="assets/placa/image4.png" alt="D&amp;D" style="position:absolute; left:6%; top:10%; width:24%; filter:brightness(0) invert(1);">
-                  <div style="position:absolute; left:8%; right:8%; top:37%; text-align:center; font-size:11cqw; font-weight:900; line-height:1; text-transform:uppercase; letter-spacing:.15cqw; overflow-wrap:anywhere;">{{ g.name }}</div>
-                  <div style="position:absolute; left:8%; right:8%; bottom:10%; text-align:center; font-size:3.5cqw; font-weight:600; letter-spacing:.2cqw;">@dedcosmeticos</div>
+                  <div style="position:absolute; left:8%; right:8%; top:50%; transform:translateY(-50%); text-align:center; font-size:13.2cqw; font-weight:400; line-height:1; letter-spacing:0; overflow-wrap:anywhere;">{{ g.name }}</div>
                 </div>
               </sc-for>
             </div>
@@ -3455,7 +3451,7 @@ ${assets}
       const fBtn = "flex:1; border-radius:6px; padding:8px; font-size:12px; font-weight:700; cursor:pointer;";
       return {
         ...item,
-        cardBg: g.fundo === "rosa" ? "linear-gradient(145deg,#b52e62,#dc507c)" : "linear-gradient(145deg,#006b67,#13958e)",
+        cardBg: g.fundo === "rosa" ? "url('assets/vendedoras/rosa.svg')" : "url('assets/vendedoras/verde.svg')",
         verdeBtnStyle: fBtn + (g.fundo !== "rosa" ? "background:#006B67;color:#fff;border:1px solid #006B67;" : "background:#fff;color:#657575;border:1px solid #d8dee4;"),
         rosaBtnStyle: fBtn + (g.fundo === "rosa" ? "background:#A72F50;color:#fff;border:1px solid #A72F50;" : "background:#fff;color:#657575;border:1px solid #d8dee4;"),
         setVerde: () => this.updateItem("vendedorCards", i, { fundo: "verde" }),
