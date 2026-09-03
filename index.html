@@ -2324,6 +2324,14 @@
                 <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
               </div>
               <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Nome do produto" aria-label="Nome do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:700;"></textarea>
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+                <span style="font-size:10px; font-weight:700; color:#475569; letter-spacing:.4px;">TAMANHO DO NOME</span>
+                <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden; background:#fff;">
+                  <button onClick="{{ g.fontMinus }}" title="Diminuir fonte" aria-label="Diminuir tamanho da fonte" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 10px; line-height:1;">−</button>
+                  <span style="min-width:48px; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 4px; font-size:12px; font-weight:700; text-align:center; color:#334155;">{{ g.fontScaleLabel }}</span>
+                  <button onClick="{{ g.fontPlus }}" title="Aumentar fonte" aria-label="Aumentar tamanho da fonte" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 10px; line-height:1;">+</button>
+                </div>
+              </div>
               <div style="display:flex; gap:8px;">
                 <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
                   <span style="font-size:10px; font-weight:700; color:#475569; letter-spacing:.4px;">DE (ANTES)</span>
@@ -2737,7 +2745,7 @@ class Component extends DCLogic {
       { brand: "avon", name: "PRODUTO", desc: "Descrição", dePrice: "350,99", porPrice: "259,99", qty: 1 },
     ],
     blitzPrecos: [
-      { brand: "avon", name: "Produto", dePrice: "350,99", porPrice: "259,99", qty: 1 },
+      { brand: "avon", name: "Produto", dePrice: "350,99", porPrice: "259,99", qty: 1, fontScale: 100 },
     ],
     vendedorCards: [
       { name: "Camilla", fundo: "verde", qty: 1 },
@@ -2795,7 +2803,7 @@ class Component extends DCLogic {
     pais: { key: "pss", activeKey: "activePs", label: "Etiqueta Especial Dia dos Pais", perPage: 20, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
     pais6: { key: "pss6", activeKey: "activePs6", label: "Pancarta A6 Dia dos Pais", perPage: 4, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
     blitz: { key: "blitzs", activeKey: "activeBlitz", label: "BLITZ A5", perPage: 2, create: () => ({ brand: "semmarca", name: "NOVO PRODUTO", desc: "Descrição", dePrice: "", porPrice: "0,00" }) },
-    blitzpreco: { key: "blitzPrecos", activeKey: "activeBlitzPreco", label: "Preçário Blitz Vitrine", perPage: 8, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }) },
+    blitzpreco: { key: "blitzPrecos", activeKey: "activeBlitzPreco", label: "Preçário Blitz Vitrine", perPage: 8, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", fontScale: 100 }) },
     vendedoras: { key: "vendedorCards", activeKey: "activeVendedoras", label: "Cartões vendedoras", perPage: 9, create: () => ({ name: "Nome da vendedora", fundo: "verde", qty: 1 }) },
   };
   getModelMeta(model = this.state.model) {
@@ -2814,6 +2822,10 @@ class Component extends DCLogic {
   clampQty(value) {
     const parsed = parseInt(value, 10);
     return Number.isFinite(parsed) ? Math.min(999, Math.max(1, parsed)) : 1;
+  }
+  clampFontScale(value) {
+    const parsed = parseInt(value, 10);
+    return Number.isFinite(parsed) ? Math.min(130, Math.max(70, parsed)) : 100;
   }
   sanitizeList(items) {
     return items
@@ -3438,11 +3450,16 @@ ${assets}
       const { reais } = this.splitPrice(g.porPrice);
       const item = this.buildItem("blitzPrecos", g, i);
       const brand = this.blitzPrecoArt.indexOf(g.brand) !== -1 ? g.brand : "semmarca";
+      const fontScale = this.clampFontScale(g.fontScale);
+      const autoNameSize = (g.name || "").length > 30 ? 4.2 : (g.name || "").length > 18 ? 5.2 : 6.7;
       return {
         ...item,
         blitzPrecoBg: "url('assets/blitz-preco/" + brand + ".webp')",
         blitzPrecoReaisSize: String(reais).length > 4 ? "13cqw" : String(reais).length > 3 ? "16.5cqw" : "21.5cqw",
-        blitzPrecoNameSize: (g.name || "").length > 30 ? "4.2cqw" : (g.name || "").length > 18 ? "5.2cqw" : "6.7cqw",
+        blitzPrecoNameSize: (autoNameSize * fontScale / 100).toFixed(2) + "cqw",
+        fontScaleLabel: fontScale + "%",
+        fontMinus: () => this.updateItem("blitzPrecos", i, { fontScale: Math.max(70, fontScale - 5) }),
+        fontPlus: () => this.updateItem("blitzPrecos", i, { fontScale: Math.min(130, fontScale + 5) }),
       };
     });
 
