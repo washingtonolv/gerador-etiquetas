@@ -2235,7 +2235,11 @@
                   <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onFocus="{{ g.selectPrice }}" onBlur="{{ g.formatPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" aria-label="Preço atual" style="width:100%; border:1px solid #B9DEDC; border-radius:6px; padding:7px; font-size:13px;">
                 </div>
               </div>
-              <div style="display:flex; align-items:center; justify-content:flex-end; gap:6px;">
+              <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                <label style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#5a6873; cursor:pointer;">
+                  <input type="checkbox" checked="{{ g.cada }}" onChange="{{ g.setCada }}"> Mostrar "cada"
+                </label>
+                <div style="flex:1;"></div>
                 <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
                   <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
                   <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
@@ -2289,7 +2293,7 @@
                     </sc-if>
                     <div style="position:absolute; left:22.5%; top:70.8%; width:62%; display:flex; align-items:flex-start; color:#000; white-space:nowrap;">
                       <span style="font-size:{{ g.blitzReaisSize }}; font-weight:900; line-height:.88; letter-spacing:-.7cqw;">{{ g.reais }}</span>
-                      <span style="font-size:7.8cqw; font-weight:900; line-height:1; margin-top:-2.7cqw; margin-left:1.2cqw;">,{{ g.centavos }}</span>
+                      <span style="font-size:7.8cqw; font-weight:900; line-height:1; margin-top:-2.7cqw; margin-left:1.2cqw;">,{{ g.centavos }}<sc-if value="{{ g.showCada }}" hint-placeholder-val="{{ true }}"><span style="display:block; font-size:4.4cqw; font-weight:700; line-height:1.1; text-align:center;">cada</span></sc-if></span>
                     </div>
                   </div>
                 </sc-for>
