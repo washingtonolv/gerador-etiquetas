@@ -58,12 +58,10 @@
       .ddwa-field{display:block;margin-top:8px}.ddwa-field span{display:block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#657575;margin-bottom:4px}.ddwa-field input{width:100%;border:1px solid #cbd5d9;border-radius:10px;padding:9px 10px;font:13px Axiforma,Inter,Arial,sans-serif;color:#1a1d21;background:#fff}.ddwa-field input:focus{outline:3px solid rgba(15,133,128,.15);border-color:#0f8580}
       .ddwa-help{margin:14px 0 0;padding:11px 12px;background:#e7f6f5;border-radius:12px;color:#375f5d;font-size:11px;line-height:1.45}
       .ddwa-preview{padding:24px;overflow:auto}.ddwa-pages{display:flex;flex-direction:column;align-items:center;gap:24px}.ddwa-sheet{box-sizing:border-box;width:min(100%,794px);aspect-ratio:210/297;background:#fff;box-shadow:0 10px 28px rgba(0,0,0,.12);padding:2.515% 2.137% 2.916% 2.249%;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;column-gap:2.455%;row-gap:1.796%;overflow:hidden}
-      .ddwa-card{position:relative;overflow:hidden;background-color:#159d98;background-image:radial-gradient(circle at 18% 15%,rgba(0,98,91,.16) 0 9%,transparent 9.6%),radial-gradient(circle at 86% 37%,rgba(0,98,91,.15) 0 10%,transparent 10.6%),radial-gradient(circle at 25% 78%,rgba(0,98,91,.13) 0 8%,transparent 8.6%),radial-gradient(circle at 78% 86%,rgba(0,98,91,.13) 0 8%,transparent 8.6%);font-family:Axiforma,Inter,Arial,sans-serif}
-      .ddwa-card::before,.ddwa-card::after{content:"✿";position:absolute;color:rgba(0,102,95,.12);font-family:Georgia,serif;font-size:110px;line-height:1}.ddwa-card::before{left:-28px;top:210px;transform:rotate(-15deg)}.ddwa-card::after{right:-24px;bottom:80px;transform:rotate(18deg)}
-      .ddwa-logo{position:absolute;top:5.6%;left:50%;transform:translateX(-50%);width:34%;height:auto;filter:brightness(0) invert(1);object-fit:contain}.ddwa-logo-fallback{position:absolute;top:6.6%;left:0;right:0;text-align:center;color:white;font-family:Georgia,serif;font-size:clamp(18px,3vw,32px);font-weight:700;letter-spacing:-.03em}
-      .ddwa-title{position:absolute;top:18.5%;left:7%;right:7%;text-align:center;color:#fff;font-family:Bochan,Georgia,serif;font-weight:500;font-size:clamp(17px,2.2vw,28px);line-height:1.02;text-shadow:0 1px 1px rgba(0,0,0,.03)}.ddwa-title-line{display:block;white-space:nowrap}
-      .ddwa-bar{position:absolute;left:11.5%;width:76.4%;height:7.7%;border-radius:999px;background:#fff;display:flex;align-items:center;justify-content:center;padding:0 7%;box-shadow:0 2px 3px rgba(0,0,0,.06);z-index:2}.ddwa-store{top:41.0%}.ddwa-phone{top:59.6%;overflow:visible}.ddwa-dynamic{width:100%;text-align:center;color:#d73d65;font-weight:800;font-size:clamp(10px,1.15vw,17px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ddwa-wa-tab{position:absolute;left:-9.5%;top:0;width:22%;height:100%;border-radius:999px 0 0 999px;background:#d83d64;display:flex;align-items:center;justify-content:flex-start;padding-left:10%;z-index:-1}.ddwa-wa-icon{width:42%;aspect-ratio:1;border:2px solid white;border-radius:50%;position:relative}.ddwa-wa-icon::after{content:"";position:absolute;left:0;bottom:-18%;border-width:4px 4px 0 0;border-style:solid;border-color:#fff transparent transparent transparent;transform:rotate(12deg)}
-      .ddwa-social-copy{position:absolute;left:8%;right:8%;top:72.5%;text-align:center;color:#fff;font-size:clamp(8px,.95vw,13px);font-weight:700;line-height:1.25}.ddwa-social{position:absolute;left:8%;right:8%;top:78.3%;text-align:center;color:#fff;font-size:clamp(9px,1.15vw,15px);font-weight:800}.ddwa-social-icons{letter-spacing:.18em;margin-right:.4em}.ddwa-site{position:absolute;left:5%;right:5%;bottom:5.2%;text-align:center;color:#fff;font-size:clamp(7px,.85vw,12px);font-weight:700}
+      .ddwa-card{position:relative;overflow:hidden;background:#159d98 url("assets/cartao-agradecimento.png") center/100% 100% no-repeat;font-family:Axiforma,Inter,Arial,sans-serif}
+      .ddwa-store,.ddwa-phone{position:absolute;left:11.48%;width:75.35%;height:7.72%;display:flex;align-items:center;justify-content:center}
+      .ddwa-store{top:41.05%}.ddwa-phone{top:59.59%}
+      .ddwa-dynamic{display:block;width:100%;padding:0 3%;box-sizing:border-box;text-align:center;color:#cd4964;font-family:Axiforma,Inter,Arial,sans-serif;font-weight:400;font-size:clamp(12px,1.67vw,21.33px);line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
       .ddwa-empty{padding:30px;text-align:center;color:#657575}.ddwa-model-thumb{background:linear-gradient(145deg,#159d98 0 68%,#d83d64 68% 100%)!important}
       @media(max-width:860px){.ddwa-layout{grid-template-columns:1fr}.ddwa-editor{border-right:0;border-bottom:1px solid #d4dfdf}.ddwa-preview{padding:14px}.ddwa-sheet{width:min(100%,650px)}.ddwa-toolbar{flex-wrap:wrap}}
       @media print{
@@ -77,7 +75,7 @@
         body.dd-whatsapp-print .ddwa-sheet{box-shadow:none!important;width:210mm!important;height:297mm!important;aspect-ratio:auto!important;padding:7.4676mm 4.4886mm 8.6592mm 4.7244mm!important;grid-template-columns:97.8154mm 97.8154mm!important;grid-template-rows:137.7696mm 137.7696mm!important;column-gap:5.1562mm!important;row-gap:5.334mm!important;break-after:page!important;page-break-after:always!important}
         body.dd-whatsapp-print .ddwa-sheet:last-child{break-after:auto!important;page-break-after:auto!important}
         body.dd-whatsapp-print .ddwa-card{width:97.8154mm!important;height:137.7696mm!important;break-inside:avoid!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-        body.dd-whatsapp-print .ddwa-title{font-size:7.4mm!important}.ddwa-dynamic{font-size:4.1mm!important}.ddwa-social-copy{font-size:3.25mm!important}.ddwa-social{font-size:3.7mm!important}.ddwa-site{font-size:2.85mm!important}
+        body.dd-whatsapp-print .ddwa-dynamic{font-size:16pt!important}
       }
     `;
     document.head.appendChild(style);
@@ -86,14 +84,8 @@
   function renderCard(card) {
     return `
       <article class="ddwa-card">
-        <img class="ddwa-logo" src="assets/precificador/logo.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-        <div class="ddwa-logo-fallback" style="display:none">D&amp;D<small style="display:block;font:600 .31em Arial,sans-serif;letter-spacing:.04em">cosméticos</small></div>
-        <div class="ddwa-title"><span class="ddwa-title-line">Obrigada por</span><span class="ddwa-title-line">comprar na</span><span class="ddwa-title-line">D&amp;D Cosméticos!</span></div>
-        <div class="ddwa-bar ddwa-store"><span class="ddwa-dynamic">${escapeHtml(card.store)}</span></div>
-        <div class="ddwa-bar ddwa-phone"><span class="ddwa-wa-tab"><span class="ddwa-wa-icon"></span></span><span class="ddwa-dynamic">${escapeHtml(card.phone)}</span></div>
-        <div class="ddwa-social-copy">Poste seus recebidos<br>e marque a gente!</div>
-        <div class="ddwa-social"><span class="ddwa-social-icons">◎ ◉ ♪</span>@dedcosmeticosonline</div>
-        <div class="ddwa-site">www.dedcosmeticosonline.com.br</div>
+        <div class="ddwa-store"><span class="ddwa-dynamic">${escapeHtml(card.store)}</span></div>
+        <div class="ddwa-phone"><span class="ddwa-dynamic">${escapeHtml(card.phone)}</span></div>
       </article>`;
   }
 
