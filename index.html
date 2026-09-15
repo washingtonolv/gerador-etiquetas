@@ -5,23 +5,34 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Crie, visualize e imprima etiquetas e materiais D&D.">
   <title>Gerador de Etiquetas D&D</title>
+  <style>
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #f7fafa; }
+    #app-frame { width: 100%; height: 100%; border: 0; display: block; background: #fff; }
+    #loading { position: fixed; inset: 0; display: grid; place-items: center; font: 600 15px Arial, sans-serif; color: #375f5d; background: #f7fafa; z-index: 2; }
+  </style>
 </head>
 <body>
+  <div id="loading">Carregando o Gerador de Etiquetas D&amp;D...</div>
+  <iframe id="app-frame" src="./legacy.html" title="Gerador de Etiquetas D&D"></iframe>
   <noscript>Ative o JavaScript para usar o Gerador de Etiquetas D&amp;D.</noscript>
   <script>
-    (async () => {
-      try {
-        const response = await fetch("./legacy.html", { cache: "no-cache" });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        let html = await response.text();
-        html = html.replace("</body>", '<script src="./cartao-agradecimento.js"><\/script></body>');
-        document.open();
-        document.write(html);
-        document.close();
-      } catch (error) {
-        document.body.innerHTML = '<main style="font:16px Arial,sans-serif;padding:32px"><h1>Gerador de Etiquetas D&amp;D</h1><p>Não foi possível carregar o aplicativo.</p><button onclick="location.reload()">Tentar novamente</button></main>';
-        console.error("[gerador-etiquetas] Falha ao carregar legacy.html", error);
-      }
+    (() => {
+      const frame = document.getElementById('app-frame');
+      const loading = document.getElementById('loading');
+      frame.addEventListener('load', () => {
+        loading?.remove();
+        try {
+          const doc = frame.contentDocument;
+          if (!doc || doc.getElementById('dd-whatsapp-loader')) return;
+          const script = doc.createElement('script');
+          script.id = 'dd-whatsapp-loader';
+          script.src = './cartao-agradecimento.js';
+          script.defer = true;
+          doc.body.appendChild(script);
+        } catch (error) {
+          console.error('[gerador-etiquetas] Falha ao carregar modelo #12', error);
+        }
+      });
     })();
   </script>
 </body>
