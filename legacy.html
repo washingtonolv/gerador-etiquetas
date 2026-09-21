@@ -10,6 +10,7 @@
 <style id="dd-print-page-default" media="print">@page { size: A4 portrait; margin: 10mm; }</style>
 <style id="dd-print-page-pais6" media="not all">@page { size: A4 portrait; margin: 0; }</style>
 <style id="dd-print-page-blitz" media="not all">@page { size: 297mm 210mm; margin: 0; }</style>
+<style id="dd-print-page-blitzA6" media="not all">@page { size: A4 portrait; margin: 0; }</style>
 <style id="dd-print-page-blitzpreco" media="not all">@page { size: A4 landscape; margin: 0; }</style>
 <style id="dd-print-page-vendedoras" media="not all">@page { size: A4 landscape; margin: 0; }</style>
 <style>x-dc { display: none !important; }</style>
@@ -1447,6 +1448,7 @@
       <button onClick="{{ pickPcr }}" data-on="{{ tabPcrOn }}" aria-pressed="{{ tabPcrPressed }}" aria-label="Expositor Madeira" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precario/template.png');"></span><span class="model-n">#6</span><span>Expositor Madeira</span></button>
       <button onClick="{{ pickBlitz }}" data-on="{{ tabBlitzOn }}" aria-pressed="{{ tabBlitzPressed }}" aria-label="BLITZ A5" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/blitz/semmarca.jpg');"></span><span class="model-n">#7</span><span>BLITZ A5</span></button>
       <button onClick="{{ pickBlitzPreco }}" data-on="{{ tabBlitzPrecoOn }}" aria-pressed="{{ tabBlitzPrecoPressed }}" aria-label="Preçário Blitz Vitrine" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/blitz-preco/semmarca.webp');"></span><span class="model-n">#8</span><span>Preçário Blitz Vitrine</span></button>
+      <button onClick="{{ pickBlitzA6 }}" data-on="{{ tabBlitzA6On }}" aria-pressed="{{ tabBlitzA6Pressed }}" aria-label="BLITZ A6" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/blitz/semmarca.jpg');"></span><span class="model-n">#13</span><span>BLITZ A6</span></button>
       <button onClick="{{ pickVendedoras }}" data-on="{{ tabVendedorasOn }}" aria-pressed="{{ tabVendedorasPressed }}" aria-label="Cartões vendedoras" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/vendedoras/verde.svg');"></span><span class="model-n">#9</span><span>Cartões vendedoras</span></button>
   </nav>
 
@@ -2306,6 +2308,112 @@
   </div>
   </sc-if>
 
+  <sc-if value="{{ isBlitzA6 }}" hint-placeholder-val="true">
+  <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
+    <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
+      <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
+      <div class="editor-panel-content">
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+          <h2 style="flex:1; font-size:11px; font-weight:600; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">BLITZ A6 ({{ blitzA6Count }})</h2>
+        </div>
+        <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
+        <sc-for list="{{ blitzA6s }}" as="g" hint-placeholder-count="2">
+          <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+            <button type="button" class="card-summary" onClick="{{ g.activate }}" aria-expanded="{{ g.activeExpanded }}"><span class="card-summary-index">#{{ g.n }}</span><span class="card-summary-name">{{ g.summaryName }}</span><span class="card-summary-price">R$ {{ g.porShow }}</span><span class="card-summary-arrow">›</span></button>
+            <div class="card-content"><div class="card-content-inner">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
+                <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" aria-label="Marca da etiqueta BLITZ A6" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
+                  <sc-for list="{{ blitzBrandOptions }}" as="b" hint-placeholder-count="18"><option value="{{ b.key }}">{{ b.label }}</option></sc-for>
+                </select>
+                <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
+                <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
+                <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
+                <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+              </div>
+              <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Nome do produto" aria-label="Nome do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:700;"></textarea>
+              <input value="{{ g.desc }}" onChange="{{ g.setDesc }}" placeholder="Detalhes do produto" aria-label="Detalhes do produto" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px;">
+              <div style="display:flex; gap:8px;">
+                <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+                  <span style="font-size:10px; font-weight:700; color:#475569; letter-spacing:.4px;">DE (ANTES)</span>
+                  <input value="{{ g.dePrice }}" onChange="{{ g.setDe }}" onFocus="{{ g.selectPrice }}" onBlur="{{ g.formatDe }}" inputMode="decimal" placeholder="opcional" aria-label="Preço anterior" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
+                </div>
+                <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+                  <span style="font-size:10px; font-weight:700; color:#A72F50; letter-spacing:.4px;">POR R$</span>
+                  <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onFocus="{{ g.selectPrice }}" onBlur="{{ g.formatPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" aria-label="Preço atual" style="width:100%; border:1px solid #B9DEDC; border-radius:6px; padding:7px; font-size:13px;">
+                </div>
+              </div>
+              <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                <label style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#5a6873; cursor:pointer;">
+                  <input type="checkbox" checked="{{ g.cada }}" onChange="{{ g.setCada }}"> Mostrar "cada"
+                </label>
+                <div style="flex:1;"></div>
+                <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
+                  <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                  <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
+                  <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+                </div>
+                <span style="font-size:12px; font-weight:600; color:#475569;">cópias</span>
+              </div>
+            </div></div>
+          </div>
+        </sc-for>
+        <button onClick="{{ addBlitzA6 }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;">+ Adicionar etiqueta</button>
+      </div>
+    </div>
+
+    <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
+      <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
+        <span style="font-size:12px; font-weight:700; color:#475569;">{{ pageInfo }}</span><div style="flex:1;"></div>
+        <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">−</button>
+          <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">+</button>
+        </div>
+      </div>
+      <div class="blitzA6-sheets">
+        <sc-if value="{{ blitzA6Empty }}" hint-placeholder-val="false">
+          <div class="sheet blitzA6-sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
+            <div class="g-blitzA6" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:10px;">
+            <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
+              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta BLITZ A6 ainda</div>
+              <button onClick="{{ addBlitzA6 }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
+            </div>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ blitzA6HasItems }}" hint-placeholder-val="true">
+          <sc-for list="{{ blitzA6Pages }}" as="bp" hint-placeholder-count="1">
+            <div class="sheet blitzA6-sheet" data-page="{{ bp.n }}" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
+              <div class="g-blitzA6" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:10px;">
+                <sc-for list="{{ bp.items }}" as="g" hint-placeholder-count="4">
+                  <div class="label-preview blitzA6-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:105 / 148; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-color:#d000c4; background-repeat:no-repeat; background-position:center; background-size:100% 100%; background-image:{{ g.blitzBg }}; --blitz-bg:{{ g.blitzBg }};">
+                    <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar esta etiqueta"></button>
+                    <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+                    <div style="position:absolute; left:27.7%; top:26.6%; width:45.5%; max-height:5.8%; overflow:hidden; text-align:center; font-size:{{ g.blitzNameSize }}; font-weight:800; line-height:1.05; color:#fff; text-transform:uppercase; text-wrap:balance; overflow-wrap:break-word;">{{ g.name }}</div>
+                    <div style="position:absolute; left:39.1%; top:32.7%; width:21.8%; max-height:4.8%; overflow:hidden; text-align:center; font-size:{{ g.blitzDescSize }}; font-weight:500; line-height:1.1; color:#fff; white-space:nowrap; text-overflow:ellipsis;">{{ g.desc }}</div>
+                    <sc-if value="{{ g.hasDe }}" hint-placeholder-val="true">
+                      <div style="position:absolute; left:42.4%; top:50.8%; display:flex; align-items:flex-start; color:#fff; white-space:nowrap;">
+                        <span style="font-size:8.3cqw; font-weight:500; line-height:1;">{{ g.deReais }}</span>
+                        <span style="font-size:6.2cqw; font-weight:500; line-height:1; margin-top:-1.5cqw;">,{{ g.deCentavos }}</span>
+                      </div>
+                    </sc-if>
+                    <div style="position:absolute; left:22.5%; top:70.8%; width:62%; display:flex; align-items:flex-start; color:#000; white-space:nowrap;">
+                      <span style="font-size:{{ g.blitzReaisSize }}; font-weight:900; line-height:.88; letter-spacing:-.7cqw;">{{ g.reais }}</span>
+                      <span style="font-size:7.8cqw; font-weight:900; line-height:1; margin-top:-2.7cqw; margin-left:1.2cqw;">,{{ g.centavos }}<sc-if value="{{ g.showCada }}" hint-placeholder-val="{{ true }}"><span style="display:block; font-size:4.4cqw; font-weight:700; line-height:1.1; text-align:center;">cada</span></sc-if></span>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
   <sc-if value="{{ isBlitzPreco }}" hint-placeholder-val="true">
   <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
@@ -2724,6 +2832,7 @@ class Component extends DCLogic {
     activePs: 0,
     activePs6: 0,
     activeBlitz: 0,
+    activeBlitzA6: 0,
     activeBlitzPreco: 0,
     activeVendedoras: 0,
     activePlaca: 0,
@@ -2749,6 +2858,9 @@ class Component extends DCLogic {
       { brand: "boticario", name: "Malbec Desodorante Colônia", dePrice: "350,00", porPrice: "259,99", cada: false },
     ],
     blitzs: [
+      { brand: "avon", name: "PRODUTO", desc: "Descrição", dePrice: "350,99", porPrice: "259,99", qty: 1 },
+    ],
+    blitzA6s: [
       { brand: "avon", name: "PRODUTO", desc: "Descrição", dePrice: "350,99", porPrice: "259,99", qty: 1 },
     ],
     blitzPrecos: [
@@ -2810,6 +2922,7 @@ class Component extends DCLogic {
     pais: { key: "pss", activeKey: "activePs", label: "Etiqueta Especial Dia dos Pais", perPage: 20, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
     pais6: { key: "pss6", activeKey: "activePs6", label: "Pancarta A6 Dia dos Pais", perPage: 4, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
     blitz: { key: "blitzs", activeKey: "activeBlitz", label: "BLITZ A5", perPage: 2, create: () => ({ brand: "semmarca", name: "NOVO PRODUTO", desc: "Descrição", dePrice: "", porPrice: "0,00" }) },
+    blitzA6: { key: "blitzA6s", activeKey: "activeBlitzA6", label: "BLITZ A6", perPage: 4, create: () => ({ brand: "semmarca", name: "NOVO PRODUTO", desc: "Descrição", dePrice: "", porPrice: "0,00" }) },
     blitzpreco: { key: "blitzPrecos", activeKey: "activeBlitzPreco", label: "Preçário Blitz Vitrine", perPage: 8, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", fontScale: 100 }) },
     vendedoras: { key: "vendedorCards", activeKey: "activeVendedoras", label: "Cartões vendedoras", perPage: 9, create: () => ({ name: "Nome da vendedora", fundo: "verde", qty: 1 }) },
   };
@@ -3079,8 +3192,8 @@ class Component extends DCLogic {
     bar.scrollLeft = Math.max(0, act.offsetLeft - (bar.clientWidth - act.offsetWidth) / 2);
   }
   applyPrintPage(model = this.state.model) {
-    const activeId = model === "blitz" ? "dd-print-page-blitz" : model === "blitzpreco" ? "dd-print-page-blitzpreco" : model === "vendedoras" ? "dd-print-page-vendedoras" : model === "pais6" ? "dd-print-page-pais6" : "dd-print-page-default";
-    const ids = ["dd-print-page-default", "dd-print-page-pais6", "dd-print-page-blitz", "dd-print-page-blitzpreco", "dd-print-page-vendedoras"];
+    const activeId = model === "blitz" ? "dd-print-page-blitz" : model === "blitzA6" ? "dd-print-page-blitzA6" : model === "blitzpreco" ? "dd-print-page-blitzpreco" : model === "vendedoras" ? "dd-print-page-vendedoras" : model === "pais6" ? "dd-print-page-pais6" : "dd-print-page-default";
+    const ids = ["dd-print-page-default", "dd-print-page-pais6", "dd-print-page-blitz", "dd-print-page-blitzA6", "dd-print-page-blitzpreco", "dd-print-page-vendedoras"];
     for (const id of ids) {
       const style = document.getElementById(id);
       if (style) style.media = id === activeId ? "print" : "not all";
@@ -3453,6 +3566,22 @@ ${assets}
       };
     });
 
+    const blitzA6s = this.state.blitzA6s.map((g, i) => {
+      const { reais } = this.splitPrice(g.porPrice);
+      const item = this.buildItem("blitzA6s", g, i);
+      const brand = this.pais6Art.indexOf(g.brand) !== -1 ? g.brand : "semmarca";
+      return {
+        ...item,
+        blitzBg: "url('assets/blitz/" + brand + ".jpg')",
+        setDesc: e => this.updateItem("blitzA6s", i, { desc: e.target.value }),
+        deReais: this.splitPrice(g.dePrice).reais,
+        deCentavos: this.splitPrice(g.dePrice).centavos,
+        blitzReaisSize: String(reais).length > 4 ? "9.2cqw" : String(reais).length > 3 ? "11.7cqw" : "14.9cqw",
+        blitzNameSize: (g.name || "").length > 28 ? "2.5cqw" : (g.name || "").length > 18 ? "3cqw" : "3.7cqw",
+        blitzDescSize: (g.desc || "").length > 18 ? "1.6cqw" : "2.1cqw",
+      };
+    });
+
     const blitzPrecos = this.state.blitzPrecos.map((g, i) => {
       const { reais } = this.splitPrice(g.porPrice);
       const item = this.buildItem("blitzPrecos", g, i);
@@ -3496,6 +3625,9 @@ ${assets}
     const blitzGrid = expand(blitzs);
     const blitzPages = [];
     for (let i = 0; i < blitzGrid.length; i += 2) blitzPages.push({ n: blitzPages.length + 1, items: blitzGrid.slice(i, i + 2) });
+    const blitzA6Grid = expand(blitzA6s);
+    const blitzA6Pages = [];
+    for (let i = 0; i < blitzA6Grid.length; i += 4) blitzA6Pages.push({ n: blitzA6Pages.length + 1, items: blitzA6Grid.slice(i, i + 4) });
     const blitzPrecoGrid = expand(blitzPrecos);
     const blitzPrecoPages = [];
     for (let i = 0; i < blitzPrecoGrid.length; i += 8) blitzPrecoPages.push({ n: blitzPrecoPages.length + 1, items: blitzPrecoGrid.slice(i, i + 8) });
@@ -3515,12 +3647,15 @@ ${assets}
       isPais: model === "pais",
       isPais6: model === "pais6",
       isBlitz: model === "blitz",
+      isBlitzA6: model === "blitzA6",
       isBlitzPreco: model === "blitzpreco",
       isVendedoras: model === "vendedoras",
       pais6PageClass: model === "pais6" ? "pais6-page" : "",
       pais6PageCss: "",
       blitzPageClass: model === "blitz" ? "blitz-page" : "",
       blitzPageCss: "",
+      blitzA6PageClass: model === "blitzA6" ? "blitzA6-page" : "",
+      blitzA6PageCss: "",
       blitzPrecoPageClass: model === "blitzpreco" ? "blitz-preco-page" : "",
       blitzPrecoPageCss: "",
       vendedorasPageClass: model === "vendedoras" ? "vendedoras-page" : "",
@@ -3530,6 +3665,7 @@ ${assets}
       modelRailStyle: "",
       tabPais6On: model === "pais6" ? "1" : "0",
       tabBlitzOn: model === "blitz" ? "1" : "0",
+      tabBlitzA6On: model === "blitzA6" ? "1" : "0",
       tabBlitzPrecoOn: model === "blitzpreco" ? "1" : "0",
       tabVendedorasOn: model === "vendedoras" ? "1" : "0",
       paisBrandOptions: this.placaBrands.filter(b => this.paisArt.indexOf(b.key) !== -1),
@@ -3551,12 +3687,13 @@ ${assets}
       tabPaisPressed: model === "pais" ? "true" : "false",
       tabPais6Pressed: model === "pais6" ? "true" : "false",
       tabBlitzPressed: model === "blitz" ? "true" : "false",
+      tabBlitzA6Pressed: model === "blitzA6" ? "true" : "false",
       tabBlitzPrecoPressed: model === "blitzpreco" ? "true" : "false",
       tabVendedorasPressed: model === "vendedoras" ? "true" : "false",
       vendedorCards, vendedorasCount: vendedorCards.length, vendedorasPages,
       placas, placaCount: placas.length,
-      placaEmpty: placas.length === 0, pcrEmpty: pcrs.length === 0, prEmpty: prs.length === 0, mkEmpty: mks.length === 0, mk2Empty: mks2.length === 0, mk3Empty: mks3.length === 0, ps6Empty: pss6.length === 0, psEmpty: pss.length === 0, blitzEmpty: blitzs.length === 0, blitzHasItems: blitzs.length > 0, blitzPrecoEmpty: blitzPrecos.length === 0, blitzPrecoHasItems: blitzPrecos.length > 0,
-      placasGrid: expand(placas), mksGrid: expand(mks), mks2Grid: expand(mks2), mks3Grid: expand(mks3), pssGrid: expand(pss), pss6Grid: expand(pss6), blitzGrid, blitzPages, blitzPrecoGrid, blitzPrecoPages, prsGrid: expand(prs), pcrsGrid: expand(pcrs),
+      placaEmpty: placas.length === 0, pcrEmpty: pcrs.length === 0, prEmpty: prs.length === 0, mkEmpty: mks.length === 0, mk2Empty: mks2.length === 0, mk3Empty: mks3.length === 0, ps6Empty: pss6.length === 0, psEmpty: pss.length === 0, blitzEmpty: blitzs.length === 0, blitzHasItems: blitzs.length > 0, blitzA6Empty: blitzA6s.length === 0, blitzA6HasItems: blitzA6s.length > 0, blitzPrecoEmpty: blitzPrecos.length === 0, blitzPrecoHasItems: blitzPrecos.length > 0,
+      placasGrid: expand(placas), mksGrid: expand(mks), mks2Grid: expand(mks2), mks3Grid: expand(mks3), pssGrid: expand(pss), pss6Grid: expand(pss6), blitzGrid, blitzPages, blitzA6Grid, blitzA6Pages, blitzPrecoGrid, blitzPrecoPages, prsGrid: expand(prs), pcrsGrid: expand(pcrs),
       pageInfo,
       mks, mkCount: mks.length,
       mks2, mk2Count: mks2.length,
@@ -3564,6 +3701,7 @@ ${assets}
       pss, psCount: pss.length,
       pss6, ps6Count: pss6.length,
       blitzs, blitzCount: blitzs.length,
+      blitzA6s, blitzA6Count: blitzA6s.length,
       blitzPrecos, blitzPrecoCount: blitzPrecos.length,
       prs, prCount: prs.length,
       pcrs, pcrCount: pcrs.length,
@@ -3576,6 +3714,7 @@ ${assets}
       addPs: () => this.addItem("pss", this.modelMeta.pais.create()),
       addPs6: () => this.addItem("pss6", this.modelMeta.pais6.create()),
       addBlitz: () => this.addItem("blitzs", this.modelMeta.blitz.create()),
+      addBlitzA6: () => this.addItem("blitzA6s", this.modelMeta.blitzA6.create()),
       addBlitzPreco: () => this.addItem("blitzPrecos", this.modelMeta.blitzpreco.create()),
       addVendedora: () => this.addItem("vendedorCards", this.modelMeta.vendedoras.create()),
       addPlaca: () => this.addItem("placas", this.modelMeta.placa.create()),
@@ -3606,6 +3745,7 @@ ${assets}
       pickPais: () => this.selectModel("pais"),
       pickPais6: () => this.selectModel("pais6"),
       pickBlitz: () => this.selectModel("blitz"),
+      pickBlitzA6: () => this.selectModel("blitzA6"),
       pickBlitzPreco: () => this.selectModel("blitzpreco"),
       pickVendedoras: () => this.selectModel("vendedoras"),
       pickPrec: () => this.selectModel("prec"),
