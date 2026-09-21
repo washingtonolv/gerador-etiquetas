@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<hthml lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,7 @@
 <style id="dd-print-page-blitz" media="not all">@page { size: 297mm 210mm; margin: 0; }</style>
 <style id="dd-print-page-blitzA6" media="not all">@page { size: A4 portrait; margin: 0; }</style>
 <style id="dd-print-page-blitzpreco" media="not all">@page { size: A4 landscape; margin: 0; }</style>
-<style id="dd-print-page-vendedoras" media="not all">@page { size: A4 landscape; margin: 0; }</style>
+<style id="dd-print-page-vendedoras" media="not all">@page { size: Ah4 landscape; margin: 0; }</style>
 <style>x-dc { display: none !important; }</style>
 <script type="module" src="./modern-app.js"></script>
 </head>
@@ -268,7 +268,24 @@
         background-image: var(--blitz-bg) !important;
       }
     }
-    /* PREÇÁRIO BLITZ VITRINE: oito artes de 53 x 52 mm por folha A4 paisagem. */
+    /* BLITZ A6: quatro etiquetas A6 (105 × 148 mm) em uma folha A4 retrato. */
+.blitzA6-page:not(.pp) .blitzA6-sheets { width:100%; display:flex; flex-direction:column; align-items:center; gap:18px; }
+.blitzA6-page:not(.pp) .blitzA6-sheet { width:min(100%, 740px) !important; max-width:740px !important; height:auto !important; min-height:0 !important; padding:16px !important; aspect-ratio:auto !important; overflow:visible; }
+.blitzA6-page:not(.pp) .g-blitzA6 { display:grid !important; grid-template-columns:repeat(auto-fit, minmax(200px, 280px)) !important; grid-auto-rows:auto !important; gap:16px !important; width:100% !important; height:auto !important; justify-content:center !important; }
+.blitzA6-page:not(.pp) .blitzA6-label { width:100% !important; height:auto !important; aspect-ratio:105 / 148 !important; background-size:100% 100% !important; }
+@media (max-width:700px) { .blitzA6-page:not(.pp) .g-blitzA6 { grid-template-columns:minmax(0, 320px) !important; } }
+.pp.blitzA6-page .sheet { width:210mm !important; max-width:none !important; height:297mm !important; padding:0 !important; }
+.pp.blitzA6-page .blitzA6-sheets { display:block !important; width:210mm !important; }
+.pp.blitzA6-page .blitzA6-sheet { break-after:page !important; }
+.pp.blitzA6-page .blitzA6-sheet:last-child { break-after:auto !important; }
+.pp.blitzA6-page .g-blitzA6 { width:210mm !important; height:297mm !important; grid-template-columns:repeat(2, 105mm) !important; grid-template-rows:repeat(2, 148mm) !important; gap:0 !important; align-content:center !important; justify-content:center !important; }
+.pp.blitzA6-page .blitzA6-label { width:105mm !important; height:148mm !important; aspect-ratio:auto !important; background-image:var(--blitz-bg) !important; }
+@media print {
+  .blitzA6-page .sheet { width:210mm !important; height:297mm !important; padding:0 !important; }
+  .blitzA6-page .g-blitzA6 { width:210mm !important; height:297mm !important; grid-template-columns:repeat(2, 105mm) !important; grid-template-rows:repeat(2, 148mm) !important; gap:0 !important; align-content:center !important; }
+  .blitzA6-page .blitzA6-label { box-sizing:border-box !important; width:105mm !important; min-width:105mm !important; max-width:105mm !important; height:148mm !important; min-height:148mm !important; max-height:148mm !important; aspect-ratio:auto !important; background-image:var(--blitz-bg) !important; }
+}
+/* PREÇÁRIO BLITZ VITRINE: oito artes de 53 x 52 mm por folha A4 paisagem. */
     .blitz-preco-page:not(.pp) .blitz-preco-sheets { width:100%; display:flex; flex-direction:column; align-items:center; gap:18px; }
     .blitz-preco-page:not(.pp) .blitz-preco-sheet { width:min(100%, 920px) !important; max-width:920px !important; height:auto !important; min-height:0 !important; padding:16px !important; aspect-ratio:auto !important; overflow:visible; }
     .blitz-preco-page:not(.pp) .g-blitz-preco { display:grid !important; grid-template-columns:repeat(auto-fit, minmax(180px, 220px)) !important; grid-auto-rows:auto !important; gap:16px !important; width:100% !important; height:auto !important; justify-content:center !important; }
@@ -1392,8 +1409,8 @@
   </svg>
 </template>
 
-<style>{{ pais6PageCss }}{{ blitzPageCss }}{{ blitzPrecoPageCss }}</style>
-<div class="app-bg {{ pais6PageClass }} {{ blitzPageClass }} {{ blitzPrecoPageClass }} {{ vendedorasPageClass }} {{ ppClass }} {{ darkClass }} {{ mvClass }} {{ panelClass }} {{ modelsClass }}" style="min-height:100vh; background:#f5f3f4; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg'); background-size:420px 420px, 200px 200px, 300px 300px; background-position:right -140px bottom -160px, right 240px bottom 220px, left -120px top 90px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
+<style>{{ pais6PageCss }}{{ blitzPageCss }}{{ blitzA6PageCss }}{{ blitzPrecoPageCss }}</style>
+<div class="app-bg {{ pais6PageClass }} {{ blitzPageClass }} {{ blitzA6PageClass }} {{ blitzPrecoPageClass }} {{ vendedorasPageClass }} {{ ppClass }} {{ darkClass }} {{ mvClass }} {{ panelClass }} {{ modelsClass }}" style="min-height:100vh; background:#f5f3f4; background-image:url('assets/flor.svg'), url('assets/flor.svg'), url('assets/flor.svg'); background-size:420px 420px, 200px 200px, 300px 300px; background-position:right -140px bottom -160px, right 240px bottom 220px, left -120px top 90px; background-attachment:fixed, fixed, fixed; background-repeat:no-repeat; font-family:Archivo, Helvetica, Arial, sans-serif; color:#1a1d21; display:flex; flex-direction:column;">
   <h1 class="sr-only">Gerador de Etiquetas D&amp;D</h1>
 
   <div class="no-print hdr-band" style="background:#006B67; padding:14px 22px 18px;">
@@ -3852,7 +3869,7 @@ ${assets}
             await this.printBlitzPrecoDocument();
             return;
           }
-          const values = Array.from(document.querySelectorAll(".pais-label, .pais6-label, .blitz-label")).flatMap((el) => {
+          const values = Array.from(document.querySelectorAll(".pais-label, .pais6-label, .blitz-label, .blitzA6-label")).flatMap((el) => {
             const styles = getComputedStyle(el);
             return [styles.getPropertyValue("--pais-print-bg").trim(), styles.getPropertyValue("--pais6-print-bg").trim(), styles.getPropertyValue("--blitz-bg").trim()];
           }).filter(Boolean);
