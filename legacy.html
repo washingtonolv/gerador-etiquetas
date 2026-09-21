@@ -3621,7 +3621,7 @@ ${assets}
     });
 
     const expand = items => items.flatMap(item => Array(this.clampQty(item.qty)).fill(item));
-    const renderedLists = { placas, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, blitzPrecos, vendedorCards };
+    const renderedLists = { placas, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, blitzA6s, blitzPrecos, vendedorCards };
     const blitzGrid = expand(blitzs);
     const blitzPages = [];
     for (let i = 0; i < blitzGrid.length; i += 2) blitzPages.push({ n: blitzPages.length + 1, items: blitzGrid.slice(i, i + 2) });
