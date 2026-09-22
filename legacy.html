@@ -3304,6 +3304,78 @@ ${assets}
     printWindow.print();
     return true;
   }
+  async printBlitzA6Document() {
+    const source = document.querySelector(".blitzA6-sheets");
+    if (!source) return false;
+
+    const printable = source.cloneNode(true);
+    printable.querySelectorAll(".no-print, button").forEach((el) => el.remove());
+    const frame = document.createElement("iframe");
+    frame.title = "Impressão BLITZ A6";
+    frame.setAttribute("aria-hidden", "true");
+    frame.style.cssText = "position:fixed; left:-10000px; top:0; width:1px; height:1px; border:0; opacity:0; pointer-events:none;";
+    document.body.appendChild(frame);
+    const printDocument = frame.contentDocument;
+    if (!printDocument) {
+      frame.remove();
+      return false;
+    }
+
+    const assets = Array.from(document.querySelectorAll('link[rel="stylesheet"], style'))
+      .filter((el) => !el.id?.startsWith("dd-print-page-"))
+      .map((el) => el.outerHTML)
+      .join("\n");
+    const baseHref = String(document.baseURI || location.href).replace(/"/g, "&quot;");
+    printDocument.open();
+    printDocument.write(`<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><base href="${baseHref}">
+${assets}
+<style id="dd-blitzA6-isolated-print">
+  @page { size: A4 portrait; margin: 0; }
+  html, body { margin:0 !important; padding:0 !important; width:210mm !important; background:#fff !important; }
+  body.blitzA6-page .preview-wrap, body.blitzA6-page .blitzA6-sheets { display:block !important; box-sizing:border-box !important; width:210mm !important; margin:0 !important; padding:0 !important; }
+  body.blitzA6-page .blitzA6-sheet { display:block !important; box-sizing:border-box !important; width:210mm !important; min-width:210mm !important; max-width:210mm !important; height:297mm !important; min-height:297mm !important; max-height:297mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; break-after:page !important; page-break-after:always !important; }
+  body.blitzA6-page .blitzA6-sheet:last-child { break-after:auto !important; page-break-after:auto !important; }
+  body.blitzA6-page .g-blitzA6 { display:grid !important; box-sizing:border-box !important; width:210mm !important; height:297mm !important; grid-template-columns:105mm 105mm !important; grid-template-rows:148mm 148mm !important; grid-auto-rows:148mm !important; gap:0 !important; align-content:start !important; justify-content:start !important; margin:0 !important; padding:0 !important; }
+  body.blitzA6-page .blitzA6-label { box-sizing:border-box !important; width:105mm !important; min-width:105mm !important; max-width:105mm !important; height:148mm !important; min-height:148mm !important; max-height:148mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:0 !important; aspect-ratio:auto !important; background-image:var(--blitz-bg) !important; background-size:100% 100% !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
+  .no-print, button { display:none !important; }
+</style></head><body class="blitzA6-page pp"><div class="preview-wrap">${printable.outerHTML}</div></body></html>`);
+    printDocument.close();
+
+    const backgroundUrls = Array.from(printDocument.querySelectorAll(".blitzA6-label")).map((label) => {
+      const value = printDocument.defaultView?.getComputedStyle(label).backgroundImage || "";
+      const start = value.indexOf("(");
+      const end = value.lastIndexOf(")");
+      return start >= 0 && end > start ? value.slice(start + 1, end).replace(/^['"]|['"]$/g, "") : "";
+    }).filter(Boolean);
+    await Promise.race([
+      Promise.all(Array.from(new Set(backgroundUrls)).map((src) => new Promise((resolve) => {
+        const image = new Image();
+        image.onload = resolve;
+        image.onerror = resolve;
+        image.src = src;
+      }))),
+      new Promise((resolve) => setTimeout(resolve, 4000)),
+    ]);
+    if (printDocument.fonts?.ready) await Promise.race([printDocument.fonts.ready, new Promise((resolve) => setTimeout(resolve, 1500))]);
+
+    const printWindow = frame.contentWindow;
+    if (!printWindow) {
+      frame.remove();
+      return false;
+    }
+    let removed = false;
+    const cleanup = () => {
+      if (removed) return;
+      removed = true;
+      frame.remove();
+    };
+    printWindow.addEventListener("afterprint", () => setTimeout(cleanup, 1000), { once: true });
+    setTimeout(cleanup, 120000);
+    printWindow.focus();
+    printWindow.print();
+    return true;
+  }
   async printBlitzPrecoDocument() {
     const source = document.querySelector(".blitz-preco-sheets");
     if (!source) return false;
@@ -3865,6 +3937,10 @@ ${assets}
             await this.printBlitzDocument();
             return;
           }
+          if (model === "blitzA6") {
+            await this.printBlitzA6Document();
+            return;
+          }
           if (model === "blitzpreco") {
             await this.printBlitzPrecoDocument();
             return;
@@ -3894,7 +3970,7 @@ ${assets}
       printPages: pages,
       printModel: modelMeta.label,
       printOrientation: model === "blitz" || model === "blitzpreco" || model === "vendedoras" ? "Paisagem" : "Retrato",
-      printMargins: model === "blitz" || model === "blitzpreco" || model === "vendedoras" || model === "pais6" ? "Nenhuma" : "Padrão",
+      printMargins: model === "blitz" || model === "blitzA6" || model === "blitzpreco" || model === "vendedoras" || model === "pais6" ? "Nenhuma" : "Padrão",
       isImportOpen: !!this.state.importOpen,
       closeImport: () => this.setState({ importOpen: false }),
       downloadModel: () => {
