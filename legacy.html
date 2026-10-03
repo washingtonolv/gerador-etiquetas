@@ -1193,7 +1193,6 @@
       transition: background-color .16s ease, border-color .16s ease;
     }
     .model-rail .model-item:hover { background: #F7FAFA; border-color: var(--dd-border); }
-    .model-rail .model-item:disabled { opacity:.45 !important; cursor:not-allowed !important; filter:grayscale(.4); }
     .model-rail .model-item[data-on="1"] { background: var(--dd-primary-100); border-color: color-mix(in srgb, var(--dd-primary-500) 40%, transparent); color: var(--dd-primary-700); }
     .model-n { font-size: 11px; font-weight: 800; color: var(--dd-primary-700); flex: none; }
     .dark .model-rail { background: var(--dd-surface); border-color: var(--dd-border); }
@@ -1464,9 +1463,6 @@
       <button onClick="{{ pickMake3 }}" data-on="{{ tabMake3On }}" aria-pressed="{{ tabMake3Pressed }}" aria-label="Régua de Preço Promoção" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-rosa.png');"></span><span class="model-n">#4</span><span>Régua de Preço Promoção</span></button>
       <button onClick="{{ pickPlaca }}" data-on="{{ tabPlacaOn }}" aria-pressed="{{ tabPlacaPressed }}" aria-label="Etiqueta Vitrine" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/placa/nuvem-rosa.png');"></span><span class="model-n">#5</span><span>Etiqueta Vitrine</span></button>
       <button onClick="{{ pickPcr }}" data-on="{{ tabPcrOn }}" aria-pressed="{{ tabPcrPressed }}" aria-label="Expositor Madeira" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precario/template.png');"></span><span class="model-n">#6</span><span>Expositor Madeira</span></button>
-      <button onClick="{{ pickBlitz }}" data-on="{{ tabBlitzOn }}" aria-pressed="{{ tabBlitzPressed }}" aria-label="BLITZ A5" disabled aria-disabled="true" title="Modelo desativado" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/blitz/semmarca.jpg');"></span><span class="model-n">#7</span><span>BLITZ A5</span></button>
-      <button onClick="{{ pickBlitzPreco }}" data-on="{{ tabBlitzPrecoOn }}" aria-pressed="{{ tabBlitzPrecoPressed }}" aria-label="Preçário Blitz Vitrine" disabled aria-disabled="true" title="Modelo desativado" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/blitz-preco/semmarca.webp');"></span><span class="model-n">#8</span><span>Preçário Blitz Vitrine</span></button>
-      <button onClick="{{ pickBlitzA6 }}" data-on="{{ tabBlitzA6On }}" aria-pressed="{{ tabBlitzA6Pressed }}" aria-label="BLITZ A6" disabled aria-disabled="true" title="Modelo desativado" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/blitz/semmarca.jpg');"></span><span class="model-n">#13</span><span>BLITZ A6</span></button>
       <button onClick="{{ pickVendedoras }}" data-on="{{ tabVendedorasOn }}" aria-pressed="{{ tabVendedorasPressed }}" aria-label="Cartões vendedoras" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/vendedoras/verde.svg');"></span><span class="model-n">#9</span><span>Cartões vendedoras</span></button>
   </nav>
 
