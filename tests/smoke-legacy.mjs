@@ -178,7 +178,7 @@ component.state = { ...component.state, pss6: [...component.state.pss6] };
 component.componentDidUpdate(null, previousDataState);
 assert.equal(storageWrites, 1, "Mudanças de dados devem ser persistidas");
 
-assert.equal((html.match(/type="number" min="1" max="999"/g) || []).length, 11);
+assert.equal((html.match(/type="number" min="1" max="999"/g) || []).length, 12);
 assert.match(html, /Cartões vendedoras/);
 assert.match(html, /grid-template-columns:repeat\(3, 90mm\)/);
 assert.match(html, /id="dd-print-page-blitz" media="not all">@page \{ size: 297mm 210mm; margin: 0; \}<\/style>/);
@@ -203,7 +203,7 @@ assert.match(html, /aria-label="Mais opções"/);
 assert.doesNotMatch(html, /renderVals\(\)\.addCurrent/);
 
 const template = html.slice(html.indexOf("<x-dc>"), html.indexOf('<script type="text/x-dc" data-dc-script>'));
-const localAliases = new Set(["g", "pl", "b", "bp", "true", "false"]);
+const localAliases = new Set(["g", "pl", "b", "bp", "vp", "true", "false"]);
 const placeholderRoots = new Set([...template.matchAll(/\{\{\s*([A-Za-z_$][\w$]*)/g)].map(match => match[1]));
 const renderedValues = component.renderVals();
 assert.equal(typeof renderedValues.downloadBlitzPptx, "function", "O download recomposto do PowerPoint deve estar disponível");
