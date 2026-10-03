@@ -5,7 +5,7 @@ const root = new URL("../", import.meta.url);
 const bootstrap = readFileSync(new URL("index.html", root), "utf8");
 const whatsappModel = readFileSync(new URL("cartao-agradecimento.js", root), "utf8");
 
-assert.match(bootstrap, /fetch\("\.\/legacy\.html"/);
+assert.match(bootstrap, /<iframe[^>]+src="\.\/legacy\.html"/);
 assert.match(bootstrap, /cartao-agradecimento\.js/);
 assert.match(whatsappModel, /Cartão Agradecimento WhatsApp/);
 assert.match(whatsappModel, /#12/);
