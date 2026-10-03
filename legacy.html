@@ -1477,6 +1477,7 @@
       <button onClick="{{ pickVendedoras }}" data-on="{{ tabVendedorasOn }}" aria-pressed="{{ tabVendedorasPressed }}" aria-label="Cartões vendedoras" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/vendedoras/verde.svg');"></span><span class="model-n">#9</span><span>Cartões vendedoras</span></button>
       <button onClick="{{ pickBlitzPreco }}" data-on="{{ tabBlitzPrecoOn }}" aria-pressed="{{ tabBlitzPrecoPressed }}" aria-label="PREÇARIO ANIVERSARIO VITRINE" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precos-vitrine-editavel/avon.png');"></span><span class="model-n">#14</span><span>PREÇARIO ANIVERSARIO VITRINE</span></button>
       <button onClick="{{ pickAniversarioA6 }}" data-on="{{ tabAniversarioA6On }}" aria-pressed="{{ tabAniversarioA6Pressed }}" aria-label="A6 ANIVERSARIO" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/aniversario-a6/avon.png');"></span><span class="model-n">#15</span><span>A6 ANIVERSARIO</span></button>
+      <button onClick="{{ pickAniversarioA5 }}" data-on="{{ tabAniversarioA5On }}" aria-pressed="{{ tabAniversarioA5Pressed }}" aria-label="A5 ANIVERSARIO" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/aniversario-a5/avon.png');"></span><span class="model-n">#16</span><span>A5 ANIVERSARIO</span></button>
   </nav>
 
   <sc-if value="{{ isPreview }}" hint-placeholder-val="{{ false }}">
@@ -2616,6 +2617,129 @@
   </div>
   </sc-if>
 
+  <sc-if value="{{ isAniversarioA5 }}" hint-placeholder-val="true">
+  <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
+    <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
+      <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
+      <div class="editor-panel-content">
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+          <h2 style="flex:1; font-size:11px; font-weight:600; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">A5 ANIVERSARIO ({{ aniversarioA5Count }})</h2>
+        </div>
+        <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
+        <sc-for list="{{ aniversarioA5s }}" as="g" hint-placeholder-count="2">
+          <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
+            <button type="button" class="card-summary" onClick="{{ g.activate }}" aria-expanded="{{ g.activeExpanded }}"><span class="card-summary-index">#{{ g.n }}</span><span class="card-summary-name">{{ g.summaryName }}</span><span class="card-summary-price">R$ {{ g.porShow }}</span><span class="card-summary-arrow">›</span></button>
+            <div class="card-content"><div class="card-content-inner">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
+                <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" aria-label="Marca da etiqueta A5 ANIVERSARIO" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
+                  <sc-for list="{{ blitzBrandOptions }}" as="b" hint-placeholder-count="18"><option value="{{ b.key }}">{{ b.label }}</option></sc-for>
+                </select>
+                <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
+                <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
+                <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
+                <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+              </div>
+              <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Nome do produto" aria-label="Nome do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:700;"></textarea>
+              <input value="{{ g.desc }}" onChange="{{ g.setDesc }}" placeholder="Detalhes do produto" aria-label="Detalhes do produto" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px;">
+              <div class="name-format-toolbar" style="display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap;">
+                <div role="group" aria-label="Alinhamento do produto e descrição" style="display:flex; gap:2px;">
+                  <button type="button" onClick="{{ g.alignLeft }}" aria-label="Alinhar à esquerda" title="Alinhar à esquerda" aria-pressed="{{ g.isLeft }}" style="{{ g.alignLeftStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M3 9.5h12"/><path d="M3 14.0h16"/><path d="M3 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignCenter }}" aria-label="Centralizar" title="Centralizar" aria-pressed="{{ g.isCenter }}" style="{{ g.alignCenterStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.0 5.0h18"/><path d="M6.0 9.5h12"/><path d="M4.0 14.0h16"/><path d="M7.0 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignRight }}" aria-label="Alinhar à direita" title="Alinhar à direita" aria-pressed="{{ g.isRight }}" style="{{ g.alignRightStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M9 9.5h12"/><path d="M5 14.0h16"/><path d="M11 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignJustify }}" aria-label="Justificar" title="Justificar" aria-pressed="{{ g.isJustify }}" style="{{ g.alignJustifyStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M3 9.5h18"/><path d="M3 14.0h18"/><path d="M3 18.5h18"/></svg></button>
+                </div>
+                <button type="button" onClick="{{ g.toggleBold }}" aria-label="Negrito" title="Negrito" aria-pressed="{{ g.boldPressed }}" style="{{ g.boldStyle }}">B</button>
+                <label style="display:flex; align-items:center; gap:5px; font-size:12px;">
+                  <button type="button" onClick="{{ g.openFontSizePicker }}" aria-label="Tamanho da fonte em pontos" aria-haspopup="listbox" aria-expanded="false" style="display:flex; align-items:center; justify-content:space-between; gap:10px; width:68px; padding:7px; border:1px solid #d8dee4; border-radius:6px; background:#fff; color:#334155; cursor:pointer;"><span>{{ g.fontSizePt }}</span><span aria-hidden="true">⌄</span></button> pt
+                </label>
+              </div>
+              <div style="display:flex; gap:8px;">
+                <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+                  <span style="font-size:10px; font-weight:700; color:#475569; letter-spacing:.4px;">DE (ANTES)</span>
+                  <input value="{{ g.dePrice }}" onChange="{{ g.setDe }}" onFocus="{{ g.selectPrice }}" onBlur="{{ g.formatDe }}" inputMode="decimal" placeholder="opcional" aria-label="Preço anterior" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:7px; font-size:13px;">
+                </div>
+                <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+                  <span style="font-size:10px; font-weight:700; color:#A72F50; letter-spacing:.4px;">POR R$</span>
+                  <input value="{{ g.porPrice }}" onChange="{{ g.setPor }}" onFocus="{{ g.selectPrice }}" onBlur="{{ g.formatPor }}" onKeyDown="{{ addOnEnter }}" inputMode="decimal" aria-label="Preço atual" style="width:100%; border:1px solid #B9DEDC; border-radius:6px; padding:7px; font-size:13px;">
+                </div>
+              </div>
+              <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                <label style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#5a6873; cursor:pointer;">
+                  <input type="checkbox" checked="{{ g.cada }}" onChange="{{ g.setCada }}"> Mostrar "cada"
+                </label>
+                <div style="flex:1;"></div>
+                <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
+                  <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                  <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
+                  <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+                </div>
+                <span style="font-size:12px; font-weight:600; color:#475569;">cópias</span>
+              </div>
+            </div></div>
+          </div>
+        </sc-for>
+        <button onClick="{{ addAniversarioA5 }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;">+ Adicionar etiqueta</button>
+      </div>
+    </div>
+
+    <div class="preview-wrap" style="flex:9999 1 460px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
+      <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
+        <span style="font-size:12px; font-weight:700; color:#475569;">{{ pageInfo }}</span><div style="flex:1;"></div>
+        <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">−</button>
+          <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">+</button>
+        </div>
+      </div>
+      <div class="blitz-sheets">
+        <sc-if value="{{ aniversarioA5Empty }}" hint-placeholder-val="false">
+          <div class="sheet blitz-sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
+            <div class="g-blitz" style="display:grid; grid-template-columns:repeat(2, 1fr); gap:10px;">
+            <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
+              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta A5 ANIVERSARIO ainda</div>
+              <button onClick="{{ addAniversarioA5 }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
+            </div>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ aniversarioA5HasItems }}" hint-placeholder-val="true">
+          <sc-for list="{{ aniversarioA5Pages }}" as="bp" hint-placeholder-count="1">
+            <div class="sheet blitz-sheet" data-page="{{ bp.n }}" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
+              <div class="g-blitz" style="display:grid; grid-template-columns:repeat(2, 1fr); gap:10px;">
+                <sc-for list="{{ bp.items }}" as="g" hint-placeholder-count="4">
+                  <div class="label-preview blitz-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:148 / 210; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-color:#d000c4; background-repeat:no-repeat; background-position:center; background-size:100% 100%; background-image:{{ g.blitzBg }}; --blitz-bg:{{ g.blitzBg }};">
+                    <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar esta etiqueta"></button>
+                    <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+                    <!-- Masks cover only the baked sample text; original brand artwork stays untouched. -->
+                    <div aria-hidden="true" style="position:absolute; left:10%; top:27.2%; width:80%; height:30.8%; background:#fff0df;"></div>
+                    <div class="aniversario-a5-copy" style="position:absolute; left:10%; top:27.7%; width:80%; height:20%; overflow:hidden; text-align:{{ g.textAlign }};">
+                      <div style="font-size:{{ g.formattedNameSize }}; font-weight:{{ g.nameWeight }}; line-height:1.12; color:#000; white-space:pre-wrap; overflow-wrap:anywhere; text-wrap:{{ g.nameWrap }};">{{ g.name }}</div>
+                      <div style="margin-top:1cqw; font-size:{{ g.descSize }}; font-weight:{{ g.detailsWeight }}; line-height:1.15; color:#000; white-space:pre-wrap; overflow-wrap:anywhere;">{{ g.desc }}</div>
+                    </div>
+                    <sc-if value="{{ g.hasDe }}" hint-placeholder-val="true">
+                      <div class="aniversario-a5-before" style="position:absolute; left:10%; top:50%; width:80%; display:flex; justify-content:center; align-items:flex-start; white-space:nowrap;">
+                        <span style="font-size:{{ g.deSize }}; font-weight:400; line-height:1; color:#000;">DE: {{ g.deReais }}</span><span style="font-size:5.7cqw; font-weight:400; line-height:1; color:#000;">,{{ g.deCentavos }}</span>
+                      </div>
+                    </sc-if>
+                    <div aria-hidden="true" style="position:absolute; left:8%; top:65%; width:84%; height:22%; background:#ff4e4d;"></div>
+                    <div class="aniversario-a5-price" style="position:absolute; left:10%; top:70.5%; width:80%; display:flex; justify-content:center; align-items:center; gap:1.4cqw; white-space:nowrap;">
+                      <span style="font-size:4.8cqw; font-weight:400; line-height:1.05; color:#fff;">POR:<br>R$</span>
+                      <span style="font-size:{{ g.priceSize }}; font-weight:900; line-height:1; letter-spacing:-.7cqw; color:#fff;">{{ g.reais }}</span>
+                      <span style="align-self:flex-start; font-size:8.8cqw; font-weight:900; line-height:1.05; color:#fff;">,{{ g.centavos }}<sc-if value="{{ g.showCada }}" hint-placeholder-val="true"><span style="display:block; margin-top:3.5cqw; font-size:5.5cqw; font-weight:700; color:#fff;">cada</span></sc-if></span>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
   <sc-if value="{{ isBlitzPreco }}" hint-placeholder-val="true">
   <div class="workspace-layout" style="display:flex; flex:1; align-items:flex-start; flex-wrap:wrap;">
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
@@ -3077,6 +3201,7 @@ class Component extends DCLogic {
     activeBlitzA6: 0,
     activeBlitzPreco: 0,
     activeAniversarioA6: 0,
+    activeAniversarioA5: 0,
     activeVendedoras: 0,
     activePlaca: 0,
    pcrs: [
@@ -3107,6 +3232,7 @@ class Component extends DCLogic {
       { brand: "avon", name: "PRODUTO", desc: "Descrição", dePrice: "350,99", porPrice: "259,99", qty: 1 },
     ],
     aniversarioA6s: [{ brand: "avon", name: "PRODUTO", desc: "Descrição", dePrice: "350,99", porPrice: "259,99", cada: true, qty: 1, fontSizePt: 22, textAlign: "center", bold: false }],
+    aniversarioA5s: [{ brand: "avon", name: "PRODUTO", desc: "Descrição", dePrice: "350,99", porPrice: "259,99", cada: true, qty: 1, fontSizePt: 28, textAlign: "center", bold: false }],
     blitzPrecos: [
       { brand: "avon", name: "Produto", dePrice: "350,99", porPrice: "259,99", qty: 1, fontSizePt: 10, textAlign: "left" },
     ],
@@ -3168,6 +3294,7 @@ class Component extends DCLogic {
     blitz: { key: "blitzs", activeKey: "activeBlitz", label: "BLITZ A5", perPage: 2, create: () => ({ brand: "semmarca", name: "NOVO PRODUTO", desc: "Descrição", dePrice: "", porPrice: "0,00" }) },
     blitzA6: { key: "blitzA6s", activeKey: "activeBlitzA6", label: "BLITZ A6", perPage: 4, create: () => ({ brand: "semmarca", name: "NOVO PRODUTO", desc: "Descrição", dePrice: "", porPrice: "0,00" }) },
     aniversarioA6: { key: "aniversarioA6s", activeKey: "activeAniversarioA6", label: "A6 ANIVERSARIO", perPage: 4, create: () => ({ brand: "semmarca", name: "PRODUTO", desc: "Descrição", dePrice: "", porPrice: "0,00", cada: true, fontSizePt: 22, textAlign: "center", bold: false }) },
+    aniversarioA5: { key: "aniversarioA5s", activeKey: "activeAniversarioA5", label: "A5 ANIVERSARIO", perPage: 2, create: () => ({ brand: "semmarca", name: "PRODUTO", desc: "Descrição", dePrice: "", porPrice: "0,00", cada: true, fontSizePt: 28, textAlign: "center", bold: false }) },
     blitzpreco: { key: "blitzPrecos", activeKey: "activeBlitzPreco", label: "PREÇARIO ANIVERSARIO VITRINE", perPage: 8, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", fontSizePt: 10, textAlign: "left" }) },
     vendedoras: { key: "vendedorCards", activeKey: "activeVendedoras", label: "Cartões vendedoras", perPage: 9, create: () => ({ name: "Nome da vendedora", fundo: "verde", qty: 1 }) },
   };
@@ -3330,15 +3457,15 @@ class Component extends DCLogic {
   }
   buildTextFormatting(key, item, i) {
     // Physical widths match each model's print grid in millimetres.
-    const specs = { pcrs: [48, 5.3, 700], prs: [65, 3.3, 800], mks: [64, 3.25, 800], mks2: [55, 3.25, 800], mks3: [55, 3.25, 800], placas: [50, 3.56, 700], aniversarioA6s: [105, 7.4, 700] };
+    const specs = { pcrs: [48, 5.3, 700], prs: [65, 3.3, 800], mks: [64, 3.25, 800], mks2: [55, 3.25, 800], mks3: [55, 3.25, 800], placas: [50, 3.56, 700], aniversarioA6s: [105, 7.4, 700], aniversarioA5s: [148, 6.67, 700] };
     const spec = specs[key];
     if (!spec) return {};
     const [widthMm, defaultCqw, defaultWeight] = spec;
     const savedSize = Number(item.fontSizePt);
     const hasSize = Number.isFinite(savedSize) && savedSize >= 6;
     const fontSizePt = hasSize ? Math.min(32, Math.round(savedSize)) : Math.max(6, Math.round(defaultCqw * widthMm * 72 / 2540));
-    const textAlign = ["left", "center", "right", "justify"].includes(item.textAlign) ? item.textAlign : key === "aniversarioA6s" ? "center" : "left";
-    const bold = typeof item.bold === "boolean" ? item.bold : key !== "aniversarioA6s";
+    const textAlign = ["left", "center", "right", "justify"].includes(item.textAlign) ? item.textAlign : ["aniversarioA6s", "aniversarioA5s"].includes(key) ? "center" : "left";
+    const bold = typeof item.bold === "boolean" ? item.bold : !["aniversarioA6s", "aniversarioA5s"].includes(key);
     const update = patch => this.updateItem(key, i, patch);
     const buttonStyle = active => "flex:none; display:flex; align-items:center; justify-content:center; width:28px; height:34px; border-radius:6px; font-size:16px; font-weight:800; cursor:pointer; border:1px solid " + (active ? "#006B67; background:#E7F6F5; color:#006B67;" : "#d8dee4; background:#fff; color:#475569;");
     const formatting = {
@@ -3484,6 +3611,7 @@ class Component extends DCLogic {
         blitzs: this.state.blitzs,
         blitzPrecos: this.state.blitzPrecos,
         aniversarioA6s: this.state.aniversarioA6s,
+        aniversarioA5s: this.state.aniversarioA5s,
         placas: this.state.placas,
       },
     };
@@ -3512,6 +3640,7 @@ class Component extends DCLogic {
         blitzs: this.sanitizeList(data.blitzs || this.state.blitzs),
         blitzPrecos: this.sanitizeList(data.blitzPrecos || this.state.blitzPrecos),
         aniversarioA6s: this.sanitizeList(data.aniversarioA6s || this.state.aniversarioA6s),
+        aniversarioA5s: this.sanitizeList(data.aniversarioA5s || this.state.aniversarioA5s),
         placas: this.sanitizeList(data.placas),
         activePcr: 0,
         activePr: 0,
@@ -3522,6 +3651,7 @@ class Component extends DCLogic {
         activePs6: 0,
         activeBlitzPreco: 0,
         activeAniversarioA6: 0,
+        activeAniversarioA5: 0,
         activeVendedoras: 0,
         activeBlitz: 0,
         activePlaca: 0,
@@ -3541,7 +3671,7 @@ class Component extends DCLogic {
     bar.scrollLeft = Math.max(0, act.offsetLeft - (bar.clientWidth - act.offsetWidth) / 2);
   }
   applyPrintPage(model = this.state.model) {
-    const activeId = model === "blitz" ? "dd-print-page-blitz" : ["blitzA6", "aniversarioA6"].includes(model) ? "dd-print-page-blitzA6" : model === "blitzpreco" ? "dd-print-page-blitzpreco" : model === "vendedoras" ? "dd-print-page-vendedoras" : model === "pais6" ? "dd-print-page-pais6" : "dd-print-page-default";
+    const activeId = ["blitz", "aniversarioA5"].includes(model) ? "dd-print-page-blitz" : ["blitzA6", "aniversarioA6"].includes(model) ? "dd-print-page-blitzA6" : model === "blitzpreco" ? "dd-print-page-blitzpreco" : model === "vendedoras" ? "dd-print-page-vendedoras" : model === "pais6" ? "dd-print-page-pais6" : "dd-print-page-default";
     const ids = ["dd-print-page-default", "dd-print-page-pais6", "dd-print-page-blitz", "dd-print-page-blitzA6", "dd-print-page-blitzpreco", "dd-print-page-vendedoras"];
     for (const id of ids) {
       const style = document.getElementById(id);
@@ -3558,7 +3688,7 @@ class Component extends DCLogic {
     printable.querySelectorAll(".no-print, button").forEach((el) => el.remove());
 
     const frame = document.createElement("iframe");
-    frame.title = "Impressão BLITZ A5";
+    frame.title = "Impressão " + this.getModelMeta().label;
     frame.setAttribute("aria-hidden", "true");
     frame.setAttribute("data-dd-blitz-print-frame", "");
     frame.style.cssText = "position:fixed; left:-10000px; top:0; width:1px; height:1px; border:0; opacity:0; pointer-events:none;";
@@ -3827,11 +3957,11 @@ ${assets}
       const raw = localStorage.getItem("dd-etiquetas-v2") || localStorage.getItem("dd-etiquetas-v1");
       const saved = raw ? JSON.parse(raw) : null;
       const restored = {};
-      const listKeys = ["pcrs", "prs", "mks", "mks2", "mks3", "pss", "pss6", "blitzs", "blitzPrecos", "aniversarioA6s", "placas"];
+      const listKeys = ["pcrs", "prs", "mks", "mks2", "mks3", "pss", "pss6", "blitzs", "blitzPrecos", "aniversarioA6s", "aniversarioA5s", "placas"];
       for (const key of listKeys) {
         if (saved && Array.isArray(saved[key])) restored[key] = this.sanitizeList(saved[key]);
       }
-      const validModels = ["placa", "pcr", "prec", "make", "make2", "make3", "pais", "pais6", "blitzpreco", "aniversarioA6"];
+      const validModels = ["placa", "pcr", "prec", "make", "make2", "make3", "pais", "pais6", "blitzpreco", "aniversarioA6", "aniversarioA5"];
       if (saved && validModels.includes(saved.model)) restored.model = saved.model;
       restored.dark = localStorage.getItem("dd-dark") === "1";
       restored.onboardingOpen = false;
@@ -3863,11 +3993,11 @@ ${assets}
       requestAnimationFrame(() => this._focusBeforeDialog.focus());
     }
 
-    const listKeys = ["pcrs", "prs", "mks", "mks2", "mks3", "pss", "pss6", "blitzs", "blitzPrecos", "aniversarioA6s", "placas"];
+    const listKeys = ["pcrs", "prs", "mks", "mks2", "mks3", "pss", "pss6", "blitzs", "blitzPrecos", "aniversarioA6s", "aniversarioA5s", "placas"];
     const shouldPersist = !prevState || prevState.model !== this.state.model || listKeys.some(key => prevState[key] !== this.state[key]);
     if (shouldPersist) {
-      const { model, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, blitzPrecos, aniversarioA6s, placas } = this.state;
-      const data = JSON.stringify({ version: 2, model, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, blitzPrecos, aniversarioA6s, placas });
+      const { model, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, blitzPrecos, aniversarioA6s, aniversarioA5s, placas } = this.state;
+      const data = JSON.stringify({ version: 2, model, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, blitzPrecos, aniversarioA6s, aniversarioA5s, placas });
       this._last = data;
       const status = document.querySelector(".app-status");
       try {
@@ -3911,7 +4041,7 @@ ${assets}
     const shaped = items.map(it =>
       key === "placas" ? { brand: it.brand, name: it.name, desc: "", dePrice: it.dePrice, porPrice: it.porPrice } :
       key === "prs" ? { brand: it.brand, fundo: "rosa", name: it.name, dePrice: it.dePrice, porPrice: it.porPrice } :
-      (key === "blitzs" || key === "aniversarioA6s") ? { brand: it.brand, name: it.name, desc: "", dePrice: it.dePrice, porPrice: it.porPrice } :
+      (key === "blitzs" || key === "aniversarioA6s" || key === "aniversarioA5s") ? { brand: it.brand, name: it.name, desc: "", dePrice: it.dePrice, porPrice: it.porPrice } :
       key === "blitzPrecos" ? { brand: it.brand, name: it.name, dePrice: it.dePrice, porPrice: it.porPrice } :
       (key === "mks" || key === "mks2" || key === "mks3" || key === "pss" || key === "pss6") ? { brand: it.brand, name: it.name, dePrice: it.dePrice, porPrice: it.porPrice, cada: false } :
       { brand: it.brand, name: it.name, dePrice: it.dePrice, porPrice: it.porPrice });
@@ -4019,6 +4149,21 @@ ${assets}
       };
     });
 
+    const aniversarioA5s = this.state.aniversarioA5s.map((g, i) => {
+      const item = this.buildItem("aniversarioA5s", g, i);
+      const brand = this.pais6Art.includes(g.brand) ? g.brand : "semmarca";
+      const de = this.splitPrice(g.dePrice);
+      return {
+        ...item,
+        blitzBg: "url('assets/aniversario-a5/" + brand + ".png')",
+        setDesc: e => this.updateItem("aniversarioA5s", i, { desc: e.target.value }),
+        descSize: (item.fontSizePt * 0.55 * 2540 / (148 * 72)).toFixed(4) + "cqw",
+        deReais: de.reais, deCentavos: de.centavos,
+        deSize: de.reais.length > 5 ? "6cqw" : "8.3cqw",
+        priceSize: item.reais.length > 7 ? "10cqw" : item.reais.length > 5 ? "13cqw" : item.reais.length > 3 ? "18cqw" : "24cqw",
+      };
+    });
+
     const blitzPrecos = this.state.blitzPrecos.map((g, i) => {
       const { reais } = this.splitPrice(g.porPrice);
       const item = this.buildItem("blitzPrecos", g, i);
@@ -4074,7 +4219,7 @@ ${assets}
     });
 
     const expand = items => items.flatMap(item => Array(this.clampQty(item.qty)).fill(item));
-    const renderedLists = { placas, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, blitzA6s, blitzPrecos, aniversarioA6s, vendedorCards };
+    const renderedLists = { placas, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, blitzA6s, blitzPrecos, aniversarioA6s, aniversarioA5s, vendedorCards };
     const blitzGrid = expand(blitzs);
     const blitzPages = [];
     for (let i = 0; i < blitzGrid.length; i += 2) blitzPages.push({ n: blitzPages.length + 1, items: blitzGrid.slice(i, i + 2) });
@@ -4084,6 +4229,9 @@ ${assets}
     const aniversarioA6Grid = expand(aniversarioA6s);
     const aniversarioA6Pages = [];
     for (let i = 0; i < aniversarioA6Grid.length; i += 4) aniversarioA6Pages.push({ n: aniversarioA6Pages.length + 1, items: aniversarioA6Grid.slice(i, i + 4) });
+    const aniversarioA5Grid = expand(aniversarioA5s);
+    const aniversarioA5Pages = [];
+    for (let i = 0; i < aniversarioA5Grid.length; i += 2) aniversarioA5Pages.push({ n: aniversarioA5Pages.length + 1, items: aniversarioA5Grid.slice(i, i + 2) });
     const blitzPrecoGrid = expand(blitzPrecos);
     const blitzPrecoPages = [];
     for (let i = 0; i < blitzPrecoGrid.length; i += 8) blitzPrecoPages.push({ n: blitzPrecoPages.length + 1, items: blitzPrecoGrid.slice(i, i + 8) });
@@ -4110,12 +4258,19 @@ ${assets}
       tabAniversarioA6Pressed: model === "aniversarioA6" ? "true" : "false",
       addAniversarioA6: () => this.addItem("aniversarioA6s", this.modelMeta.aniversarioA6.create()),
       pickAniversarioA6: () => this.selectModel("aniversarioA6"),
+      isAniversarioA5: model === "aniversarioA5",
+      aniversarioA5s, aniversarioA5Pages, aniversarioA5Count: aniversarioA5s.length,
+      aniversarioA5Empty: aniversarioA5s.length === 0, aniversarioA5HasItems: aniversarioA5s.length > 0,
+      tabAniversarioA5On: model === "aniversarioA5" ? "1" : "0",
+      tabAniversarioA5Pressed: model === "aniversarioA5" ? "true" : "false",
+      addAniversarioA5: () => this.addItem("aniversarioA5s", this.modelMeta.aniversarioA5.create()),
+      pickAniversarioA5: () => this.selectModel("aniversarioA5"),
       isBlitzA6: model === "blitzA6",
       isBlitzPreco: model === "blitzpreco",
       isVendedoras: model === "vendedoras",
       pais6PageClass: model === "pais6" ? "pais6-page" : "",
       pais6PageCss: "",
-      blitzPageClass: model === "blitz" ? "blitz-page" : "",
+      blitzPageClass: ["blitz", "aniversarioA5"].includes(model) ? "blitz-page" : "",
       blitzPageCss: "",
       blitzA6PageClass: ["blitzA6", "aniversarioA6"].includes(model) ? "blitzA6-page" : "",
       blitzA6PageCss: "",
@@ -4307,7 +4462,7 @@ ${assets}
         this.applyPrintPage(model);
         this.setState({ printOpen: false });
         setTimeout(async () => {
-          if (model === "blitz") {
+          if (model === "blitz" || model === "aniversarioA5") {
             await this.printBlitzDocument();
             return;
           }
@@ -4343,8 +4498,8 @@ ${assets}
       printCount: activeCount,
       printPages: pages,
       printModel: modelMeta.label,
-      printOrientation: model === "blitz" || model === "blitzpreco" || model === "vendedoras" ? "Paisagem" : "Retrato",
-      printMargins: model === "aniversarioA6" || model === "blitz" || model === "blitzA6" || model === "blitzpreco" || model === "vendedoras" || model === "pais6" ? "Nenhuma" : "Padrão",
+      printOrientation: model === "aniversarioA5" || model === "blitz" || model === "blitzpreco" || model === "vendedoras" ? "Paisagem" : "Retrato",
+      printMargins: model === "aniversarioA5" || model === "aniversarioA6" || model === "blitz" || model === "blitzA6" || model === "blitzpreco" || model === "vendedoras" || model === "pais6" ? "Nenhuma" : "Padrão",
       isImportOpen: !!this.state.importOpen,
       closeImport: () => this.setState({ importOpen: false }),
       downloadModel: () => {
