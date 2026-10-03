@@ -2531,7 +2531,7 @@
                     <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar este preçário"></button>
                     <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir preçário" aria-label="Excluir preçário">×</button>
                     <div class="blitz-preco-name" data-font-cqw="{{ g.blitzPrecoNameCqw }}" style="position:absolute; left:8%; top:23.8%; bottom:52%; width:84%; overflow:hidden; font-size:{{ g.blitzPrecoNameSize }}; font-weight:500; line-height:1.12; color:#000; text-wrap:balance; overflow-wrap:break-word;">{{ g.name }}</div>
-                    <div class="blitz-preco-prices" style="position:absolute; left:11%; top:54%; width:78%; height:33%; background:#ff4e4d; display:flex; flex-direction:column; justify-content:center; gap:2cqw; color:#000;">
+                    <div class="blitz-preco-prices" style="position:absolute; left:11%; top:54%; width:78%; height:33%; background:#ff4e4d; display:flex; flex-direction:column; justify-content:center; gap:2cqw; color:#fff;">
                       <sc-if value="{{ g.hasDe }}" hint-placeholder-val="true">
                         <div class="blitz-preco-de" style="display:flex; align-items:baseline; gap:2.5cqw; font-size:6.5cqw; line-height:1; white-space:nowrap;"><span style="color:#fff; font-weight:500;">DE:</span><span style="font-weight:700; text-decoration:line-through;">{{ g.deShow }}</span></div>
                       </sc-if>
