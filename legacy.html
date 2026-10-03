@@ -1596,6 +1596,47 @@
             <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
           </div>
           <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Descrição do produto" aria-label="Descrição do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:600;"></textarea>
+              <div class="name-format-toolbar" style="display:flex; align-items:center; justify-content:space-between; gap:4px; flex-wrap:wrap;">
+                <div role="group" aria-label="Alinhamento da descrição" style="display:flex; gap:2px;">
+                  <button type="button" onClick="{{ g.alignLeft }}" aria-label="Alinhar à esquerda" title="Alinhar à esquerda" aria-pressed="{{ g.isLeft }}" style="{{ g.alignLeftStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M3 9.5h12"/><path d="M3 14.0h16"/><path d="M3 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignCenter }}" aria-label="Centralizar" title="Centralizar" aria-pressed="{{ g.isCenter }}" style="{{ g.alignCenterStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.0 5.0h18"/><path d="M6.0 9.5h12"/><path d="M4.0 14.0h16"/><path d="M7.0 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignRight }}" aria-label="Alinhar à direita" title="Alinhar à direita" aria-pressed="{{ g.isRight }}" style="{{ g.alignRightStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M9 9.5h12"/><path d="M5 14.0h16"/><path d="M11 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignJustify }}" aria-label="Justificar" title="Justificar" aria-pressed="{{ g.isJustify }}" style="{{ g.alignJustifyStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M3 9.5h18"/><path d="M3 14.0h18"/><path d="M3 18.5h18"/></svg></button>
+                </div>
+                <button type="button" onClick="{{ g.toggleBold }}" aria-label="Negrito" title="Negrito" aria-pressed="{{ g.boldPressed }}" style="{{ g.boldStyle }}">B</button>
+                <label style="display:flex; align-items:center; gap:5px; font-size:12px;">
+                  <select value="{{ g.fontSizePt }}" onChange="{{ g.setFontSizePt }}" aria-label="Tamanho da fonte em pontos" style="width:68px; padding:7px; border:1px solid #d8dee4; border-radius:6px; background:#fff; color:#334155;">
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                    <option value="32">32</option>
+                  </select> pt
+                </label>
+              </div>
+
           <div style="display:flex; gap:8px;">
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
               <span style="font-size:10px; font-weight:700; color:#475569; letter-spacing:.4px;">DE (ANTES)</span>
@@ -1658,7 +1699,7 @@
               <div style="position:absolute; left:0; top:58.7%; width:100%; height:41.3%; background-image:url('assets/placa/nuvem-rosa.png'); background-size:cover; background-position:center bottom; background-repeat:no-repeat;"></div>
               <div style="position:absolute; left:40%; top:38.7%; width:56.7%; aspect-ratio:1 / 1; background-image:url('assets/placa/flor-verde.png'); background-size:contain; background-repeat:no-repeat;"></div>
               <img src="assets/placa/image4.png" alt="D&amp;D" style="position:absolute; left:61%; top:6.5%; width:34%;">
-              <div style="position:absolute; left:5%; top:26%; width:52%; font-size:5.3cqw; font-weight:700; line-height:1.25; color:#1a1d21; text-transform:uppercase;">{{ g.name }}</div>
+              <div class="formatted-product-name" style="position:absolute; left:5%; top:26%; width:52%; font-size:{{ g.formattedNameSize }}; font-weight:{{ g.nameWeight }}; line-height:1.25; color:#1a1d21; text-transform:uppercase; text-align:{{ g.textAlign }}; text-wrap:{{ g.nameWrap }}; overflow-wrap:break-word;">{{ g.name }}</div>
               <div style="position:absolute; left:13.7%; top:44.1%; width:33.6%; height:25%; background-image:url('assets/placa/flor-branca.png'); background-size:contain; background-position:center; background-repeat:no-repeat;">
                 <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}">
                   <div style="position:absolute; inset:30% 16%; background-image:{{ g.brandBg }}; background-size:contain; background-position:center; background-repeat:no-repeat;"></div>
@@ -1716,6 +1757,47 @@
             <button onClick="{{ g.setVerde }}" style="{{ g.verdeBtnStyle }}">Fundo verde</button>
           </div>
           <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Descrição do produto" aria-label="Descrição do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:600;"></textarea>
+              <div class="name-format-toolbar" style="display:flex; align-items:center; justify-content:space-between; gap:4px; flex-wrap:wrap;">
+                <div role="group" aria-label="Alinhamento da descrição" style="display:flex; gap:2px;">
+                  <button type="button" onClick="{{ g.alignLeft }}" aria-label="Alinhar à esquerda" title="Alinhar à esquerda" aria-pressed="{{ g.isLeft }}" style="{{ g.alignLeftStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M3 9.5h12"/><path d="M3 14.0h16"/><path d="M3 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignCenter }}" aria-label="Centralizar" title="Centralizar" aria-pressed="{{ g.isCenter }}" style="{{ g.alignCenterStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.0 5.0h18"/><path d="M6.0 9.5h12"/><path d="M4.0 14.0h16"/><path d="M7.0 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignRight }}" aria-label="Alinhar à direita" title="Alinhar à direita" aria-pressed="{{ g.isRight }}" style="{{ g.alignRightStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M9 9.5h12"/><path d="M5 14.0h16"/><path d="M11 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignJustify }}" aria-label="Justificar" title="Justificar" aria-pressed="{{ g.isJustify }}" style="{{ g.alignJustifyStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M3 9.5h18"/><path d="M3 14.0h18"/><path d="M3 18.5h18"/></svg></button>
+                </div>
+                <button type="button" onClick="{{ g.toggleBold }}" aria-label="Negrito" title="Negrito" aria-pressed="{{ g.boldPressed }}" style="{{ g.boldStyle }}">B</button>
+                <label style="display:flex; align-items:center; gap:5px; font-size:12px;">
+                  <select value="{{ g.fontSizePt }}" onChange="{{ g.setFontSizePt }}" aria-label="Tamanho da fonte em pontos" style="width:68px; padding:7px; border:1px solid #d8dee4; border-radius:6px; background:#fff; color:#334155;">
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                    <option value="32">32</option>
+                  </select> pt
+                </label>
+              </div>
+
           <div style="display:flex; gap:8px;">
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
               <span style="font-size:10px; font-weight:700; color:#475569; letter-spacing:.4px;">DE (ANTES)</span>
@@ -1780,7 +1862,7 @@
               <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}">
                 <div style="position:absolute; left:5.4%; top:44%; width:19%; height:12%; background-image:{{ g.brandBg }}; background-size:contain; background-position:left center; background-repeat:no-repeat;"></div>
               </sc-if>
-              <div style="position:absolute; left:5.6%; top:62%; width:32%; font-size:3.3cqw; font-weight:800; line-height:1.15; color:#171717; text-transform:uppercase; text-wrap:balance;">{{ g.name }}</div>
+              <div class="formatted-product-name" style="position:absolute; left:5.6%; top:62%; width:32%; font-size:{{ g.formattedNameSize }}; font-weight:{{ g.nameWeight }}; line-height:1.15; color:#171717; text-transform:uppercase;  text-align:{{ g.textAlign }}; text-wrap:{{ g.nameWrap }}; overflow-wrap:break-word;">{{ g.name }}</div>
               <sc-if value="{{ g.hasDe }}" hint-placeholder-val="{{ true }}">
                 <div style="position:absolute; left:69%; top:22%; font-size:3.4cqw; font-weight:700; color:#fff;">DE: R$ {{ g.deShow }}</div>
               </sc-if>
@@ -1826,6 +1908,47 @@
             <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
           </div>
           <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Descrição do produto" aria-label="Descrição do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:600;"></textarea>
+              <div class="name-format-toolbar" style="display:flex; align-items:center; justify-content:space-between; gap:4px; flex-wrap:wrap;">
+                <div role="group" aria-label="Alinhamento da descrição" style="display:flex; gap:2px;">
+                  <button type="button" onClick="{{ g.alignLeft }}" aria-label="Alinhar à esquerda" title="Alinhar à esquerda" aria-pressed="{{ g.isLeft }}" style="{{ g.alignLeftStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M3 9.5h12"/><path d="M3 14.0h16"/><path d="M3 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignCenter }}" aria-label="Centralizar" title="Centralizar" aria-pressed="{{ g.isCenter }}" style="{{ g.alignCenterStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.0 5.0h18"/><path d="M6.0 9.5h12"/><path d="M4.0 14.0h16"/><path d="M7.0 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignRight }}" aria-label="Alinhar à direita" title="Alinhar à direita" aria-pressed="{{ g.isRight }}" style="{{ g.alignRightStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M9 9.5h12"/><path d="M5 14.0h16"/><path d="M11 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignJustify }}" aria-label="Justificar" title="Justificar" aria-pressed="{{ g.isJustify }}" style="{{ g.alignJustifyStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M3 9.5h18"/><path d="M3 14.0h18"/><path d="M3 18.5h18"/></svg></button>
+                </div>
+                <button type="button" onClick="{{ g.toggleBold }}" aria-label="Negrito" title="Negrito" aria-pressed="{{ g.boldPressed }}" style="{{ g.boldStyle }}">B</button>
+                <label style="display:flex; align-items:center; gap:5px; font-size:12px;">
+                  <select value="{{ g.fontSizePt }}" onChange="{{ g.setFontSizePt }}" aria-label="Tamanho da fonte em pontos" style="width:68px; padding:7px; border:1px solid #d8dee4; border-radius:6px; background:#fff; color:#334155;">
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                    <option value="32">32</option>
+                  </select> pt
+                </label>
+              </div>
+
           <div style="display:flex; gap:8px;">
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
               <span style="font-size:10px; font-weight:700; color:#475569; letter-spacing:.4px;">DE (ANTES)</span>
@@ -1887,7 +2010,7 @@
               <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
               <div class="fold-label-face" style="background-image:url('assets/precificador/fundo-verde.png');">
               <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:1%; top:5%; width:48%;">
-              <div style="position:absolute; left:2%; top:57%; width:38%; font-size:3.25cqw; font-weight:800; line-height:1.15; color:#171717; text-transform:uppercase; text-wrap:balance;">{{ g.name }}</div>
+              <div class="formatted-product-name" style="position:absolute; left:2%; top:57%; width:38%; font-size:{{ g.formattedNameSize }}; font-weight:{{ g.nameWeight }}; line-height:1.15; color:#171717; text-transform:uppercase;  text-align:{{ g.textAlign }}; text-wrap:{{ g.nameWrap }}; overflow-wrap:break-word;">{{ g.name }}</div>
               <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}">
                 <div style="position:absolute; left:2%; top:79%; width:20%; height:16%; background-image:{{ g.brandBg }}; background-size:contain; background-position:left center; background-repeat:no-repeat;"></div>
               </sc-if>
@@ -1935,6 +2058,47 @@
             <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
           </div>
           <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Descrição do produto" aria-label="Descrição do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:600;"></textarea>
+              <div class="name-format-toolbar" style="display:flex; align-items:center; justify-content:space-between; gap:4px; flex-wrap:wrap;">
+                <div role="group" aria-label="Alinhamento da descrição" style="display:flex; gap:2px;">
+                  <button type="button" onClick="{{ g.alignLeft }}" aria-label="Alinhar à esquerda" title="Alinhar à esquerda" aria-pressed="{{ g.isLeft }}" style="{{ g.alignLeftStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M3 9.5h12"/><path d="M3 14.0h16"/><path d="M3 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignCenter }}" aria-label="Centralizar" title="Centralizar" aria-pressed="{{ g.isCenter }}" style="{{ g.alignCenterStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.0 5.0h18"/><path d="M6.0 9.5h12"/><path d="M4.0 14.0h16"/><path d="M7.0 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignRight }}" aria-label="Alinhar à direita" title="Alinhar à direita" aria-pressed="{{ g.isRight }}" style="{{ g.alignRightStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M9 9.5h12"/><path d="M5 14.0h16"/><path d="M11 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignJustify }}" aria-label="Justificar" title="Justificar" aria-pressed="{{ g.isJustify }}" style="{{ g.alignJustifyStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M3 9.5h18"/><path d="M3 14.0h18"/><path d="M3 18.5h18"/></svg></button>
+                </div>
+                <button type="button" onClick="{{ g.toggleBold }}" aria-label="Negrito" title="Negrito" aria-pressed="{{ g.boldPressed }}" style="{{ g.boldStyle }}">B</button>
+                <label style="display:flex; align-items:center; gap:5px; font-size:12px;">
+                  <select value="{{ g.fontSizePt }}" onChange="{{ g.setFontSizePt }}" aria-label="Tamanho da fonte em pontos" style="width:68px; padding:7px; border:1px solid #d8dee4; border-radius:6px; background:#fff; color:#334155;">
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                    <option value="32">32</option>
+                  </select> pt
+                </label>
+              </div>
+
           <div style="display:flex; gap:8px;">
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
               <span style="font-size:10px; font-weight:700; color:#475569; letter-spacing:.4px;">DE (ANTES)</span>
@@ -1996,7 +2160,7 @@
               <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
               <div class="fold-label-face" style="background-image:url('assets/precificador/fundo-verde.png');">
               <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:1.5%; top:6%; width:30%;">
-              <div style="position:absolute; left:2%; top:54%; width:40%; font-size:3.25cqw; font-weight:800; line-height:1.15; color:#171717; text-transform:uppercase; text-wrap:balance;">{{ g.name }}</div>
+              <div class="formatted-product-name" style="position:absolute; left:2%; top:54%; width:40%; font-size:{{ g.formattedNameSize }}; font-weight:{{ g.nameWeight }}; line-height:1.15; color:#171717; text-transform:uppercase;  text-align:{{ g.textAlign }}; text-wrap:{{ g.nameWrap }}; overflow-wrap:break-word;">{{ g.name }}</div>
               <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}">
                 <div style="position:absolute; left:2%; top:79%; width:20%; height:16%; background-image:{{ g.brandBg }}; background-size:contain; background-position:left center; background-repeat:no-repeat;"></div>
               </sc-if>
@@ -2612,6 +2776,47 @@
             <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
           </div>
           <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Descrição do produto" aria-label="Descrição do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:600;"></textarea>
+              <div class="name-format-toolbar" style="display:flex; align-items:center; justify-content:space-between; gap:4px; flex-wrap:wrap;">
+                <div role="group" aria-label="Alinhamento da descrição" style="display:flex; gap:2px;">
+                  <button type="button" onClick="{{ g.alignLeft }}" aria-label="Alinhar à esquerda" title="Alinhar à esquerda" aria-pressed="{{ g.isLeft }}" style="{{ g.alignLeftStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M3 9.5h12"/><path d="M3 14.0h16"/><path d="M3 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignCenter }}" aria-label="Centralizar" title="Centralizar" aria-pressed="{{ g.isCenter }}" style="{{ g.alignCenterStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.0 5.0h18"/><path d="M6.0 9.5h12"/><path d="M4.0 14.0h16"/><path d="M7.0 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignRight }}" aria-label="Alinhar à direita" title="Alinhar à direita" aria-pressed="{{ g.isRight }}" style="{{ g.alignRightStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M9 9.5h12"/><path d="M5 14.0h16"/><path d="M11 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignJustify }}" aria-label="Justificar" title="Justificar" aria-pressed="{{ g.isJustify }}" style="{{ g.alignJustifyStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M3 9.5h18"/><path d="M3 14.0h18"/><path d="M3 18.5h18"/></svg></button>
+                </div>
+                <button type="button" onClick="{{ g.toggleBold }}" aria-label="Negrito" title="Negrito" aria-pressed="{{ g.boldPressed }}" style="{{ g.boldStyle }}">B</button>
+                <label style="display:flex; align-items:center; gap:5px; font-size:12px;">
+                  <select value="{{ g.fontSizePt }}" onChange="{{ g.setFontSizePt }}" aria-label="Tamanho da fonte em pontos" style="width:68px; padding:7px; border:1px solid #d8dee4; border-radius:6px; background:#fff; color:#334155;">
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                    <option value="32">32</option>
+                  </select> pt
+                </label>
+              </div>
+
           <div style="display:flex; gap:8px;">
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
               <span style="font-size:10px; font-weight:700; color:#475569; letter-spacing:.4px;">DE (ANTES)</span>
@@ -2673,7 +2878,7 @@
               <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
               <div class="fold-label-face" style="background-image:url('assets/precificador/fundo-rosa.png');">
               <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:1.5%; top:6%; width:30%;">
-              <div style="position:absolute; left:2%; top:54%; width:40%; font-size:3.25cqw; font-weight:800; line-height:1.15; color:#171717; text-transform:uppercase; text-wrap:balance;">{{ g.name }}</div>
+              <div class="formatted-product-name" style="position:absolute; left:2%; top:54%; width:40%; font-size:{{ g.formattedNameSize }}; font-weight:{{ g.nameWeight }}; line-height:1.15; color:#171717; text-transform:uppercase;  text-align:{{ g.textAlign }}; text-wrap:{{ g.nameWrap }}; overflow-wrap:break-word;">{{ g.name }}</div>
               <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}">
                 <div style="position:absolute; left:2%; top:79%; width:20%; height:16%; background-image:{{ g.brandBg }}; background-size:contain; background-position:left center; background-repeat:no-repeat;"></div>
               </sc-if>
@@ -2729,6 +2934,47 @@
             <span style="font-size:10px; font-weight:700; color:#475569; letter-spacing:.4px;">DESCRIÇÃO</span>
             <textarea value="{{ pl.desc }}" onChange="{{ pl.setDesc }}" rows="2" placeholder="Detalhes (opcional)" aria-label="Detalhes do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px;"></textarea>
           </div>
+              <div class="name-format-toolbar" style="display:flex; align-items:center; justify-content:space-between; gap:4px; flex-wrap:wrap;">
+                <div role="group" aria-label="Alinhamento da descrição" style="display:flex; gap:2px;">
+                  <button type="button" onClick="{{ pl.alignLeft }}" aria-label="Alinhar à esquerda" title="Alinhar à esquerda" aria-pressed="{{ pl.isLeft }}" style="{{ pl.alignLeftStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M3 9.5h12"/><path d="M3 14.0h16"/><path d="M3 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ pl.alignCenter }}" aria-label="Centralizar" title="Centralizar" aria-pressed="{{ pl.isCenter }}" style="{{ pl.alignCenterStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.0 5.0h18"/><path d="M6.0 9.5h12"/><path d="M4.0 14.0h16"/><path d="M7.0 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ pl.alignRight }}" aria-label="Alinhar à direita" title="Alinhar à direita" aria-pressed="{{ pl.isRight }}" style="{{ pl.alignRightStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M9 9.5h12"/><path d="M5 14.0h16"/><path d="M11 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ pl.alignJustify }}" aria-label="Justificar" title="Justificar" aria-pressed="{{ pl.isJustify }}" style="{{ pl.alignJustifyStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M3 9.5h18"/><path d="M3 14.0h18"/><path d="M3 18.5h18"/></svg></button>
+                </div>
+                <button type="button" onClick="{{ pl.toggleBold }}" aria-label="Negrito" title="Negrito" aria-pressed="{{ pl.boldPressed }}" style="{{ pl.boldStyle }}">B</button>
+                <label style="display:flex; align-items:center; gap:5px; font-size:12px;">
+                  <select value="{{ pl.fontSizePt }}" onChange="{{ pl.setFontSizePt }}" aria-label="Tamanho da fonte em pontos" style="width:68px; padding:7px; border:1px solid #d8dee4; border-radius:6px; background:#fff; color:#334155;">
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                    <option value="32">32</option>
+                  </select> pt
+                </label>
+              </div>
+
           <div style="display:flex; gap:8px;">
             <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
               <span style="font-size:10px; font-weight:700; color:#475569; letter-spacing:.4px;">DE (ANTES)</span>
@@ -2796,8 +3042,8 @@
                 <div style="position:absolute; left:15.1%; top:33.5%; width:22.5%; height:12%; background-image:{{ pl.brandBg }}; background-size:contain; background-position:center; background-repeat:no-repeat;"></div>
               </sc-if>
               <div style="position:absolute; left:8.3%; top:3.4%; width:64.2%; color:#1a1d21;">
-                <div style="font-size:3.56cqw; font-weight:700; line-height:1.25;">{{ pl.name }}</div>
-                <div style="font-size:3.56cqw; font-weight:400; line-height:1.25; white-space:pre-line;">{{ pl.desc }}</div>
+                <div class="formatted-product-name" style="font-size:{{ pl.formattedNameSize }}; font-weight:{{ pl.nameWeight }}; line-height:1.25; white-space:pre-line; text-align:{{ pl.textAlign }}; text-wrap:{{ pl.nameWrap }}; overflow-wrap:break-word;">{{ pl.name }}</div>
+                <div class="formatted-product-details" style="font-size:{{ pl.formattedNameSize }}; font-weight:{{ pl.detailsWeight }}; line-height:1.25; white-space:pre-line; text-align:{{ pl.textAlign }}; text-wrap:{{ pl.nameWrap }}; overflow-wrap:break-word;">{{ pl.desc }}</div>
               </div>
               <sc-if value="{{ pl.hasDe }}" hint-placeholder-val="{{ true }}">
                 <div style="position:absolute; left:46.9%; top:37.5%; font-size:3.2cqw; font-weight:400; color:#fff;">DE: R$ {{ pl.deShow }}</div>
@@ -3085,6 +3331,39 @@ class Component extends DCLogic {
       };
     });
   }
+  buildTextFormatting(key, item, i) {
+    // Physical widths match each model's print grid in millimetres.
+    const specs = { pcrs: [48, 5.3, 700], prs: [65, 3.3, 800], mks: [64, 3.25, 800], mks2: [55, 3.25, 800], mks3: [55, 3.25, 800], placas: [50, 3.56, 700] };
+    const spec = specs[key];
+    if (!spec) return {};
+    const [widthMm, defaultCqw, defaultWeight] = spec;
+    const savedSize = Number(item.fontSizePt);
+    const hasSize = Number.isFinite(savedSize) && savedSize >= 6;
+    const fontSizePt = hasSize ? Math.min(32, Math.round(savedSize)) : Math.max(6, Math.round(defaultCqw * widthMm * 72 / 2540));
+    const textAlign = ["left", "center", "right", "justify"].includes(item.textAlign) ? item.textAlign : "left";
+    const bold = typeof item.bold === "boolean" ? item.bold : true;
+    const update = patch => this.updateItem(key, i, patch);
+    const buttonStyle = active => "flex:none; display:flex; align-items:center; justify-content:center; width:28px; height:34px; border-radius:6px; font-size:16px; font-weight:800; cursor:pointer; border:1px solid " + (active ? "#006B67; background:#E7F6F5; color:#006B67;" : "#d8dee4; background:#fff; color:#475569;");
+    const formatting = {
+      fontSizePt,
+      formattedNameSize: (fontSizePt * 2540 / (widthMm * 72)).toFixed(4) + "cqw",
+      nameWeight: bold ? defaultWeight : 400,
+      detailsWeight: item.bold === true ? 700 : 400,
+      textAlign,
+      nameWrap: textAlign === "justify" ? "wrap" : "balance",
+      boldPressed: bold ? "true" : "false",
+      boldStyle: buttonStyle(bold),
+      toggleBold: () => update({ bold: !bold }),
+      setFontSizePt: e => update({ fontSizePt: Math.min(32, Math.max(6, parseInt(e.target.value, 10) || 6)) }),
+    };
+    for (const value of ["left", "center", "right", "justify"]) {
+      const suffix = value[0].toUpperCase() + value.slice(1);
+      formatting["align" + suffix] = () => update({ textAlign: value });
+      formatting["is" + suffix] = textAlign === value ? "true" : "false";
+      formatting["align" + suffix + "Style"] = buttonStyle(textAlign === value);
+    }
+    return formatting;
+  }
   buildItem(key, item, i) {
     const activeKey = this.activeKeyFor(key);
     const { reais, centavos } = this.splitPrice(item.porPrice);
@@ -3092,6 +3371,7 @@ class Component extends DCLogic {
     const current = () => (this.state[key] && this.state[key][i]) || item;
     return {
       ...item,
+      ...this.buildTextFormatting(key, item, i),
       n: i + 1,
       reais,
       centavos,
