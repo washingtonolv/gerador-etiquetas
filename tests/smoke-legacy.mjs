@@ -203,7 +203,7 @@ assert.match(html, /aria-label="Mais opções"/);
 assert.doesNotMatch(html, /renderVals\(\)\.addCurrent/);
 
 const template = html.slice(html.indexOf("<x-dc>"), html.indexOf('<script type="text/x-dc" data-dc-script>'));
-const localAliases = new Set(["g", "pl", "b", "bp", "true", "false"]);
+const localAliases = new Set(["g", "pl", "b", "bp", "vp", "true", "false"]);
 const placeholderRoots = new Set([...template.matchAll(/\{\{\s*([A-Za-z_$][\w$]*)/g)].map(match => match[1]));
 const renderedValues = component.renderVals();
 assert.equal(typeof renderedValues.downloadBlitzPptx, "function", "O download recomposto do PowerPoint deve estar disponível");
