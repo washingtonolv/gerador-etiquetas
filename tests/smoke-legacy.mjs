@@ -70,6 +70,8 @@ assert.equal(component.normalizePriceField("R$ 56,9"), "56,90");
 assert.equal(component.clampQty(0), 1);
 assert.equal(component.clampQty(5000), 999);
 assert.equal(component.clampQty("invalido"), 1);
+component.selectModel("blitzpreco");
+assert.equal(component.state.model, "blitzpreco", "O modelo #14 deve poder ser selecionado");
 component.applyPrintPage("blitz");
 assert.equal(printStyles["dd-print-page-blitz"].media, "print");
 assert.equal(printStyles["dd-print-page-default"].media, "not all");
@@ -112,8 +114,9 @@ for (const brand of component.pais6Art) {
   assert.ok(existsSync(`${repoRoot}assets/blitz/${brand}.jpg`), `Arte ausente: blitz/${brand}`);
 }
 for (const brand of component.blitzPrecoArt) {
-  assert.ok(existsSync(`${repoRoot}assets/blitz-preco/${brand}.webp`), `Arte ausente: blitz-preco/${brand}`);
+  assert.ok(existsSync(`${repoRoot}assets/precos-vitrine-editavel/${brand}.png`), `Arte ausente: precos-vitrine-editavel/${brand}`);
 }
+assert.ok(existsSync(`${repoRoot}assets/precos-vitrine-editavel/editavel-precos-vitrine.pptx`), "PowerPoint editável do Preçário Vitrine deve estar disponível");
 assert.ok(existsSync(`${repoRoot}uploads/BLITZ-A5-web.pptx`), "PowerPoint BLITZ corrigido deve estar disponível");
 const blitzPptx = readFileSync(`${repoRoot}uploads/BLITZ-A5-web.pptx`);
 const blitzParts = Array.from({ length: 21 }, (_, i) =>
@@ -180,6 +183,8 @@ assert.equal(storageWrites, 1, "Mudanças de dados devem ser persistidas");
 
 assert.equal((html.match(/type="number" min="1" max="999"/g) || []).length, 12);
 assert.match(html, /Cartões vendedoras/);
+assert.match(html, /class="model-n">#14<\/span><span>Preçário Editável Vitrine<\/span>/);
+assert.match(html, /Baixar PowerPoint editável/);
 assert.match(html, /grid-template-columns:repeat\(3, 90mm\)/);
 assert.match(html, /id="dd-print-page-blitz" media="not all">@page \{ size: 297mm 210mm; margin: 0; \}<\/style>/);
 assert.match(html, /id="dd-print-page-blitzpreco" media="not all">@page \{ size: A4 landscape; margin: 0; \}<\/style>/);
@@ -211,4 +216,4 @@ for (const name of placeholderRoots) {
   if (!localAliases.has(name)) assert.ok(name in renderedValues, `Valor de template ausente: ${name}`);
 }
 
-console.log("Smoke tests passed for 11 models.");
+console.log("Smoke tests passed for 11 model structures.");
