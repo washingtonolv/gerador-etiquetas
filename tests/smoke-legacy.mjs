@@ -183,7 +183,7 @@ assert.equal(storageWrites, 1, "Mudanças de dados devem ser persistidas");
 
 assert.equal((html.match(/type="number" min="1" max="999"/g) || []).length, 12);
 assert.match(html, /Cartões vendedoras/);
-assert.match(html, /class="model-n">#14<\/span><span>Preçário Editável Vitrine<\/span>/);
+assert.match(html, /class="model-n">#14<\/span><span>PREÇARIO ANIVERSARIO VITRINE<\/span>/);
 assert.match(html, /Baixar PowerPoint editável/);
 assert.match(html, /grid-template-columns:repeat\(3, 90mm\)/);
 assert.match(html, /id="dd-print-page-blitz" media="not all">@page \{ size: 297mm 210mm; margin: 0; \}<\/style>/);
