@@ -178,7 +178,7 @@ component.state = { ...component.state, pss6: [...component.state.pss6] };
 component.componentDidUpdate(null, previousDataState);
 assert.equal(storageWrites, 1, "Mudanças de dados devem ser persistidas");
 
-assert.equal((html.match(/type="number" min="1" max="999"/g) || []).length, 11);
+assert.equal((html.match(/type="number" min="1" max="999"/g) || []).length, 12);
 assert.match(html, /Cartões vendedoras/);
 assert.match(html, /grid-template-columns:repeat\(3, 90mm\)/);
 assert.match(html, /id="dd-print-page-blitz" media="not all">@page \{ size: 297mm 210mm; margin: 0; \}<\/style>/);
