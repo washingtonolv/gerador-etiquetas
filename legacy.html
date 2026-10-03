@@ -1464,6 +1464,7 @@
       <button onClick="{{ pickPlaca }}" data-on="{{ tabPlacaOn }}" aria-pressed="{{ tabPlacaPressed }}" aria-label="Etiqueta Vitrine" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/placa/nuvem-rosa.png');"></span><span class="model-n">#5</span><span>Etiqueta Vitrine</span></button>
       <button onClick="{{ pickPcr }}" data-on="{{ tabPcrOn }}" aria-pressed="{{ tabPcrPressed }}" aria-label="Expositor Madeira" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precario/template.png');"></span><span class="model-n">#6</span><span>Expositor Madeira</span></button>
       <button onClick="{{ pickVendedoras }}" data-on="{{ tabVendedorasOn }}" aria-pressed="{{ tabVendedorasPressed }}" aria-label="Cartões vendedoras" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/vendedoras/verde.svg');"></span><span class="model-n">#9</span><span>Cartões vendedoras</span></button>
+      <button onClick="{{ pickBlitzPreco }}" data-on="{{ tabBlitzPrecoOn }}" aria-pressed="{{ tabBlitzPrecoPressed }}" aria-label="Preçário Editável Vitrine" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precos-vitrine-editavel/avon.png');"></span><span class="model-n">#14</span><span>Preçário Editável Vitrine</span></button>
   </nav>
 
   <sc-if value="{{ isPreview }}" hint-placeholder-val="{{ false }}">
@@ -2433,7 +2434,10 @@
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
       <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
       <div class="editor-panel-content">
-        <h2 style="font-size:11px; font-weight:600; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Preçário Blitz Vitrine ({{ blitzPrecoCount }})</h2>
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+          <h2 style="font-size:11px; font-weight:600; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Preçário Editável Vitrine ({{ blitzPrecoCount }})</h2>
+          <a href="assets/precos-vitrine-editavel/editavel-precos-vitrine.pptx" download="editavel-precos-vitrine.pptx" style="font-size:11px; font-weight:800; color:#006B67; text-decoration:none;">Baixar PowerPoint editável</a>
+        </div>
         <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir o próximo preçário.</span></div>
         <sc-for list="{{ blitzPrecos }}" as="g" hint-placeholder-count="2">
           <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
@@ -2441,7 +2445,7 @@
             <div class="card-content"><div class="card-content-inner">
               <div style="display:flex; align-items:center; gap:8px;">
                 <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
-                <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" aria-label="Marca do Preçário Blitz Vitrine" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
+                <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" aria-label="Marca do Preçário Editável Vitrine" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
                   <sc-for list="{{ blitzPrecoBrandOptions }}" as="b" hint-placeholder-count="15"><option value="{{ b.key }}">{{ b.label }}</option></sc-for>
                 </select>
                 <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
@@ -2501,7 +2505,7 @@
             <div class="g-blitz-preco" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:10px;">
               <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
                 <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
-                <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhum Preçário Blitz Vitrine ainda</div>
+                <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhum Preçário Editável Vitrine ainda</div>
                 <button onClick="{{ addBlitzPreco }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar preçário</button>
               </div>
             </div>
@@ -2937,7 +2941,7 @@ class Component extends DCLogic {
     pais6: { key: "pss6", activeKey: "activePs6", label: "Pancarta A6 Dia dos Pais", perPage: 4, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
     blitz: { key: "blitzs", activeKey: "activeBlitz", label: "BLITZ A5", perPage: 2, create: () => ({ brand: "semmarca", name: "NOVO PRODUTO", desc: "Descrição", dePrice: "", porPrice: "0,00" }) },
     blitzA6: { key: "blitzA6s", activeKey: "activeBlitzA6", label: "BLITZ A6", perPage: 4, create: () => ({ brand: "semmarca", name: "NOVO PRODUTO", desc: "Descrição", dePrice: "", porPrice: "0,00" }) },
-    blitzpreco: { key: "blitzPrecos", activeKey: "activeBlitzPreco", label: "Preçário Blitz Vitrine", perPage: 8, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", fontScale: 100 }) },
+    blitzpreco: { key: "blitzPrecos", activeKey: "activeBlitzPreco", label: "Preçário Editável Vitrine", perPage: 8, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", fontScale: 100 }) },
     vendedoras: { key: "vendedorCards", activeKey: "activeVendedoras", label: "Cartões vendedoras", perPage: 9, create: () => ({ name: "Nome da vendedora", fundo: "verde", qty: 1 }) },
   };
   getModelMeta(model = this.state.model) {
@@ -2979,7 +2983,7 @@ class Component extends DCLogic {
     this.addItem(meta.key, meta.create());
   }
   selectModel(model) {
-    if (!this.modelMeta[model] || ["blitz", "blitzpreco", "blitzA6"].includes(model)) return;
+    if (!this.modelMeta[model] || ["blitz", "blitzA6"].includes(model)) return;
     this.setState({ model });
   }
   toggleItem(key, i) {
@@ -3381,7 +3385,7 @@ ${assets}
     printable.querySelectorAll(".no-print, button").forEach((el) => el.remove());
 
     const frame = document.createElement("iframe");
-    frame.title = "Impressão Preçário Blitz Vitrine";
+    frame.title = "Impressão Preçário Editável Vitrine";
     frame.setAttribute("aria-hidden", "true");
     frame.setAttribute("data-dd-blitz-preco-print-frame", "");
     frame.style.cssText = "position:fixed; left:-10000px; top:0; width:1px; height:1px; border:0; opacity:0; pointer-events:none;";
@@ -3496,7 +3500,7 @@ ${assets}
       for (const key of listKeys) {
         if (saved && Array.isArray(saved[key])) restored[key] = this.sanitizeList(saved[key]);
       }
-      const validModels = ["placa", "pcr", "prec", "make", "make2", "make3", "pais", "pais6"];
+      const validModels = ["placa", "pcr", "prec", "make", "make2", "make3", "pais", "pais6", "blitzpreco"];
       if (saved && validModels.includes(saved.model)) restored.model = saved.model;
       restored.dark = localStorage.getItem("dd-dark") === "1";
       restored.onboardingOpen = false;
@@ -3676,7 +3680,7 @@ ${assets}
       const autoNameSize = (g.name || "").length > 30 ? 4.2 : (g.name || "").length > 18 ? 5.2 : 6.7;
       return {
         ...item,
-        blitzPrecoBg: "url('assets/blitz-preco/" + brand + ".webp')",
+        blitzPrecoBg: "url('assets/precos-vitrine-editavel/" + brand + ".png')",
         blitzPrecoReaisSize: String(reais).length > 4 ? "13cqw" : String(reais).length > 3 ? "16.5cqw" : "21.5cqw",
         blitzPrecoNameSize: (autoNameSize * fontScale / 100).toFixed(2) + "cqw",
         fontScaleLabel: fontScale + "%",
