@@ -370,7 +370,12 @@
       .totop { display: flex !important; }
       .hdr-band { padding: 10px 12px 12px !important; }
       .hdr-pill { border-radius: 18px !important; padding: 10px 12px !important; }
-      .bottombar { display: flex !important; padding-bottom: calc(8px + env(safe-area-inset-bottom)) !important; }
+      .bottombar { display:grid !important; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,.85fr); gap:6px !important; padding-bottom:calc(8px + env(safe-area-inset-bottom)) !important; }
+      .bottombar > div:first-child { display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)); min-width:0; }
+      .bottombar > div:nth-child(2) { display:none; }
+      .bottombar button { min-width:0; white-space:nowrap; font-size:12px !important; padding:12px 4px !important; }
+      .bottombar > div:first-child button { padding:10px 2px !important; }
+      @media (max-width:360px) { .bottombar button { font-size:11px !important; } }
       .app-bg { padding-bottom: 82px !important; }
       .mv-edit .preview-wrap { display: none !important; }
       .mv-sheet .editor-col { display: none !important; }
@@ -1052,6 +1057,12 @@
     }
     @media (max-width: 700px) {
       .hdr-band { border-bottom-width: 3px; }
+      .hdr-pill { gap:6px !important; }
+      .hdr-pill > div:nth-child(2) { min-width:0; }
+      .hdr-pill > div:first-child img { width:80px !important; }
+      .hdr-actions { min-width:0; }
+      .hdr-actions .print-btn { padding:12px 10px !important; font-size:12px !important; }
+      .hdr-actions button[title="Mais opções"] { padding:7px 6px !important; }
       .hdr-pill { padding: 9px 10px !important; }
       .workspace-layout .editor-col { padding: 16px 12px 28px !important; }
       .workspace-layout .preview-wrap { padding: 14px 10px 24px !important; }
@@ -2519,11 +2530,18 @@
                   <div class="label-preview blitz-preco-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:53 / 52; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-color:#d000c4; background-repeat:no-repeat; background-position:center; background-size:100% 100%; background-image:{{ g.blitzPrecoBg }}; --blitz-preco-bg:{{ g.blitzPrecoBg }};">
                     <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar este preçário"></button>
                     <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir preçário" aria-label="Excluir preçário">×</button>
-                    <div class="blitz-preco-name" style="position:absolute; left:6.9%; top:23.8%; bottom:52%; width:46%; overflow:hidden; font-size:{{ g.blitzPrecoNameSize }}; font-weight:500; line-height:1.12; color:#000; text-wrap:balance; overflow-wrap:break-word;">{{ g.name }}</div>
-                    <sc-if value="{{ g.hasDe }}" hint-placeholder-val="true"><div style="position:absolute; left:22.6%; top:51.8%; width:38%; overflow:hidden; font-size:6.1cqw; font-weight:700; line-height:1; color:#000; white-space:nowrap;">{{ g.deShow }}</div></sc-if>
-                    <div style="position:absolute; left:23.5%; top:60.4%; width:58%; display:flex; align-items:flex-start; color:#000; white-space:nowrap;">
-                      <span style="font-size:{{ g.blitzPrecoReaisSize }}; font-weight:900; line-height:.9; letter-spacing:-.5cqw;">{{ g.reais }}</span>
-                      <span style="font-size:9.6cqw; font-weight:800; line-height:1; margin-top:7.2cqw; margin-left:2.2cqw;">,{{ g.centavos }}<sc-if value="{{ g.showCada }}" hint-placeholder-val="{{ true }}"><span style="display:block; font-size:4.4cqw; font-weight:700; line-height:1.1; text-align:center;">cada</span></sc-if></span>
+                    <div class="blitz-preco-name" data-font-cqw="{{ g.blitzPrecoNameCqw }}" style="position:absolute; left:8%; top:23.8%; bottom:52%; width:84%; overflow:hidden; font-size:{{ g.blitzPrecoNameSize }}; font-weight:500; line-height:1.12; color:#000; text-wrap:balance; overflow-wrap:break-word;">{{ g.name }}</div>
+                    <div class="blitz-preco-prices" style="position:absolute; left:11%; top:54%; width:78%; height:33%; background:#ff4e4d; display:flex; flex-direction:column; justify-content:center; gap:2cqw; color:#000;">
+                      <sc-if value="{{ g.hasDe }}" hint-placeholder-val="true">
+                        <div class="blitz-preco-de" style="display:flex; align-items:baseline; gap:2.5cqw; font-size:6.5cqw; line-height:1; white-space:nowrap;"><span style="color:#fff; font-weight:500;">DE:</span><span style="font-weight:700; text-decoration:line-through;">{{ g.deShow }}</span></div>
+                      </sc-if>
+                      <div class="blitz-preco-por" style="display:flex; align-items:center; gap:2cqw; white-space:nowrap;">
+                        <span style="flex:none; font-size:5.2cqw; font-weight:500; line-height:1.05; color:#fff;">POR:<br>R$</span>
+                        <div style="display:flex; align-items:baseline; gap:.8cqw; line-height:1;">
+                          <span style="font-size:{{ g.blitzPrecoReaisSize }}; font-weight:900; letter-spacing:-.5cqw;">{{ g.reais }}</span>
+                          <span style="position:relative; font-size:9.5cqw; font-weight:800;">,{{ g.centavos }}<sc-if value="{{ g.showCada }}" hint-placeholder-val="{{ true }}"><span style="position:absolute; top:100%; left:0; right:0; font-size:4.4cqw; font-weight:700; line-height:1.1; text-align:center;">cada</span></sc-if></span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </sc-for>
@@ -3016,7 +3034,7 @@ class Component extends DCLogic {
     setTimeout(() => {
       const cards = document.querySelectorAll(".workspace-layout .card-box");
       const card = cards[cards.length - 1];
-      const field = card?.querySelector('input[placeholder="Nome do produto"], textarea[placeholder="Descrição do produto"]');
+      const field = card?.querySelector('[aria-label="Nome do produto"], [aria-label="Nome da vendedora"]');
       if (field) {
         field.scrollIntoView({ behavior: "smooth", block: "center" });
         field.focus();
@@ -3377,6 +3395,17 @@ ${assets}
     printWindow.print();
     return true;
   }
+  fitBlitzPrecoNames(root = document) {
+    for (const name of root.querySelectorAll(".blitz-preco-name")) {
+      if (!name.clientWidth || !name.clientHeight) continue;
+      let size = Number(name.getAttribute("data-font-cqw")) || 6.7;
+      name.style.fontSize = size + "cqw";
+      while ((name.scrollHeight > name.clientHeight || name.scrollWidth > name.clientWidth) && size > 2.2) {
+        size = Math.max(2.2, size - .2);
+        name.style.fontSize = size.toFixed(2) + "cqw";
+      }
+    }
+  }
   async printBlitzPrecoDocument() {
     const source = document.querySelector(".blitz-preco-sheets");
     if (!source) return false;
@@ -3440,6 +3469,7 @@ ${assets}
     })));
     await Promise.race([backgroundReady, new Promise((resolve) => setTimeout(resolve, 4000))]);
     if (printDocument.fonts?.ready) await Promise.race([printDocument.fonts.ready, new Promise((resolve) => setTimeout(resolve, 1500))]);
+    this.fitBlitzPrecoNames(printDocument);
 
     const printWindow = frame.contentWindow;
     if (!printWindow) {
@@ -3459,6 +3489,10 @@ ${assets}
     return true;
   }
   componentDidMount() {
+    this._onResize = () => requestAnimationFrame(() => this.fitBlitzPrecoNames());
+    window.addEventListener?.("resize", this._onResize);
+    this._onResize();
+    document.fonts?.ready?.then(this._onResize);
     setTimeout(() => this.centerActiveTab(), 60);
     this._onKeyDown = e => {
       const dialog = document.querySelector('[role="dialog"]');
@@ -3510,12 +3544,14 @@ ${assets}
     }
   }
   componentWillUnmount() {
+    if (this._onResize) window.removeEventListener?.("resize", this._onResize);
     if (this._onKeyDown) document.removeEventListener("keydown", this._onKeyDown);
     if (this._onPointerDown) document.removeEventListener("pointerdown", this._onPointerDown);
     if (this._onBeforePrint) window.removeEventListener?.("beforeprint", this._onBeforePrint);
     if (this._undoTimer) clearTimeout(this._undoTimer);
   }
   componentDidUpdate(prevProps, prevState) {
+    requestAnimationFrame(() => this.fitBlitzPrecoNames());
     if (prevState && prevState.model !== this.state.model) this.centerActiveTab();
 
     const wasDialogOpen = !!(prevState && (prevState.helpOpen || prevState.onboardingOpen || prevState.importOpen || prevState.printOpen));
@@ -3681,7 +3717,8 @@ ${assets}
       return {
         ...item,
         blitzPrecoBg: "url('assets/precos-vitrine-editavel/" + brand + ".png')",
-        blitzPrecoReaisSize: String(reais).length > 4 ? "13cqw" : String(reais).length > 3 ? "16.5cqw" : "21.5cqw",
+        blitzPrecoReaisSize: String(reais).length > 7 ? "9.5cqw" : String(reais).length > 5 ? "13cqw" : String(reais).length > 3 ? "16.5cqw" : "23cqw",
+        blitzPrecoNameCqw: (autoNameSize * fontScale / 100).toFixed(2),
         blitzPrecoNameSize: (autoNameSize * fontScale / 100).toFixed(2) + "cqw",
         fontScaleLabel: fontScale + "%",
         fontMinus: () => this.updateItem("blitzPrecos", i, { fontScale: Math.max(70, fontScale - 5) }),
@@ -3895,7 +3932,7 @@ ${assets}
           const cards = editor.querySelectorAll(".card-box");
           const nextCard = cards[cards.length - 1];
           if (!nextCard) return;
-          const field = nextCard.querySelector('input[placeholder="Nome do produto"], textarea[placeholder="Descrição do produto"]');
+          const field = nextCard.querySelector('[aria-label="Nome do produto"], [aria-label="Nome da vendedora"]');
           if (field) {
             field.scrollIntoView({ behavior: "smooth", block: "center" });
             field.focus();
