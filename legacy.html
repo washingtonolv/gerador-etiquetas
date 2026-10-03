@@ -2465,13 +2465,44 @@
                 <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
               </div>
               <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Nome do produto" aria-label="Nome do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:700;"></textarea>
-              <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
-                <span style="font-size:10px; font-weight:700; color:#475569; letter-spacing:.4px;">TAMANHO DO NOME</span>
-                <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden; background:#fff;">
-                  <button onClick="{{ g.fontMinus }}" title="Diminuir fonte" aria-label="Diminuir tamanho da fonte" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 10px; line-height:1;">−</button>
-                  <span style="min-width:48px; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 4px; font-size:12px; font-weight:700; text-align:center; color:#334155;">{{ g.fontScaleLabel }}</span>
-                  <button onClick="{{ g.fontPlus }}" title="Aumentar fonte" aria-label="Aumentar tamanho da fonte" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 10px; line-height:1;">+</button>
+              <div class="blitz-name-toolbar" style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+                <div role="group" aria-label="Alinhamento da descrição" style="display:flex; gap:2px;">
+                  <button type="button" onClick="{{ g.alignLeft }}" aria-label="Alinhar à esquerda" title="Alinhar à esquerda" aria-pressed="{{ g.isLeft }}" style="{{ g.alignLeftStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M3 9.5h12"/><path d="M3 14.0h16"/><path d="M3 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignCenter }}" aria-label="Centralizar" title="Centralizar" aria-pressed="{{ g.isCenter }}" style="{{ g.alignCenterStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.0 5.0h18"/><path d="M6.0 9.5h12"/><path d="M4.0 14.0h16"/><path d="M7.0 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignRight }}" aria-label="Alinhar à direita" title="Alinhar à direita" aria-pressed="{{ g.isRight }}" style="{{ g.alignRightStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M9 9.5h12"/><path d="M5 14.0h16"/><path d="M11 18.5h10"/></svg></button>
+                  <button type="button" onClick="{{ g.alignJustify }}" aria-label="Justificar" title="Justificar" aria-pressed="{{ g.isJustify }}" style="{{ g.alignJustifyStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M3 9.5h18"/><path d="M3 14.0h18"/><path d="M3 18.5h18"/></svg></button>
                 </div>
+                <label style="display:flex; align-items:center; gap:5px; font-size:12px;">
+                  <select value="{{ g.fontSizePt }}" onChange="{{ g.setFontSizePt }}" aria-label="Tamanho da fonte em pontos" style="width:68px; padding:7px; border:1px solid #d8dee4; border-radius:6px; background:#fff; color:#334155;">
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                    <option value="32">32</option>
+                  </select> pt
+                </label>
               </div>
               <div style="display:flex; gap:8px;">
                 <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
@@ -2530,7 +2561,7 @@
                   <div class="label-preview blitz-preco-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:53 / 52; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-color:#d000c4; background-repeat:no-repeat; background-position:center; background-size:100% 100%; background-image:{{ g.blitzPrecoBg }}; --blitz-preco-bg:{{ g.blitzPrecoBg }};">
                     <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar este preçário"></button>
                     <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir preçário" aria-label="Excluir preçário">×</button>
-                    <div class="blitz-preco-name" data-font-cqw="{{ g.blitzPrecoNameCqw }}" style="position:absolute; left:8%; top:23.8%; bottom:52%; width:84%; overflow:hidden; font-size:{{ g.blitzPrecoNameSize }}; font-weight:500; line-height:1.12; color:#000; text-wrap:balance; overflow-wrap:break-word;">{{ g.name }}</div>
+                    <div class="blitz-preco-name" style="position:absolute; left:8%; top:23.8%; bottom:49%; width:84%; overflow:hidden; font-size:{{ g.blitzPrecoNameSize }}; font-weight:500; line-height:1.05; color:#000; text-align:{{ g.textAlign }}; text-wrap:{{ g.nameWrap }}; overflow-wrap:break-word;">{{ g.name }}</div>
                     <div class="blitz-preco-prices" style="color:#fff; position:absolute; left:11%; top:54%; width:78%; height:33%; background:#ff4e4d; display:flex; flex-direction:column; justify-content:center; gap:2cqw; color:#fff;">
                       <sc-if value="{{ g.hasDe }}" hint-placeholder-val="true">
                         <div class="blitz-preco-de" style="color:#fff; display:flex; align-items:baseline; gap:2.5cqw; font-size:6.5cqw; line-height:1; white-space:nowrap;"><span style="color:#fff; color:#fff; font-weight:500;">DE:</span><span style="color:#fff; font-weight:700; text-decoration:line-through;">{{ g.deShow }}</span></div>
@@ -2900,7 +2931,7 @@ class Component extends DCLogic {
       { brand: "avon", name: "PRODUTO", desc: "Descrição", dePrice: "350,99", porPrice: "259,99", qty: 1 },
     ],
     blitzPrecos: [
-      { brand: "avon", name: "Produto", dePrice: "350,99", porPrice: "259,99", qty: 1, fontScale: 100 },
+      { brand: "avon", name: "Produto", dePrice: "350,99", porPrice: "259,99", qty: 1, fontSizePt: 10, textAlign: "left" },
     ],
     vendedorCards: [
       { name: "Camilla", fundo: "verde", qty: 1 },
@@ -2959,7 +2990,7 @@ class Component extends DCLogic {
     pais6: { key: "pss6", activeKey: "activePs6", label: "Pancarta A6 Dia dos Pais", perPage: 4, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
     blitz: { key: "blitzs", activeKey: "activeBlitz", label: "BLITZ A5", perPage: 2, create: () => ({ brand: "semmarca", name: "NOVO PRODUTO", desc: "Descrição", dePrice: "", porPrice: "0,00" }) },
     blitzA6: { key: "blitzA6s", activeKey: "activeBlitzA6", label: "BLITZ A6", perPage: 4, create: () => ({ brand: "semmarca", name: "NOVO PRODUTO", desc: "Descrição", dePrice: "", porPrice: "0,00" }) },
-    blitzpreco: { key: "blitzPrecos", activeKey: "activeBlitzPreco", label: "Preçário Editável Vitrine", perPage: 8, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", fontScale: 100 }) },
+    blitzpreco: { key: "blitzPrecos", activeKey: "activeBlitzPreco", label: "Preçário Editável Vitrine", perPage: 8, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", fontSizePt: 10, textAlign: "left" }) },
     vendedoras: { key: "vendedorCards", activeKey: "activeVendedoras", label: "Cartões vendedoras", perPage: 9, create: () => ({ name: "Nome da vendedora", fundo: "verde", qty: 1 }) },
   };
   getModelMeta(model = this.state.model) {
@@ -3395,17 +3426,6 @@ ${assets}
     printWindow.print();
     return true;
   }
-  fitBlitzPrecoNames(root = document) {
-    for (const name of root.querySelectorAll(".blitz-preco-name")) {
-      if (!name.clientWidth || !name.clientHeight) continue;
-      let size = Number(name.getAttribute("data-font-cqw")) || 6.7;
-      name.style.fontSize = size + "cqw";
-      while ((name.scrollHeight > name.clientHeight || name.scrollWidth > name.clientWidth) && size > 2.2) {
-        size = Math.max(2.2, size - .2);
-        name.style.fontSize = size.toFixed(2) + "cqw";
-      }
-    }
-  }
   async printBlitzPrecoDocument() {
     const source = document.querySelector(".blitz-preco-sheets");
     if (!source) return false;
@@ -3469,7 +3489,6 @@ ${assets}
     })));
     await Promise.race([backgroundReady, new Promise((resolve) => setTimeout(resolve, 4000))]);
     if (printDocument.fonts?.ready) await Promise.race([printDocument.fonts.ready, new Promise((resolve) => setTimeout(resolve, 1500))]);
-    this.fitBlitzPrecoNames(printDocument);
 
     const printWindow = frame.contentWindow;
     if (!printWindow) {
@@ -3489,10 +3508,6 @@ ${assets}
     return true;
   }
   componentDidMount() {
-    this._onResize = () => requestAnimationFrame(() => this.fitBlitzPrecoNames());
-    window.addEventListener?.("resize", this._onResize);
-    this._onResize();
-    document.fonts?.ready?.then(this._onResize);
     setTimeout(() => this.centerActiveTab(), 60);
     this._onKeyDown = e => {
       const dialog = document.querySelector('[role="dialog"]');
@@ -3544,14 +3559,12 @@ ${assets}
     }
   }
   componentWillUnmount() {
-    if (this._onResize) window.removeEventListener?.("resize", this._onResize);
     if (this._onKeyDown) document.removeEventListener("keydown", this._onKeyDown);
     if (this._onPointerDown) document.removeEventListener("pointerdown", this._onPointerDown);
     if (this._onBeforePrint) window.removeEventListener?.("beforeprint", this._onBeforePrint);
     if (this._undoTimer) clearTimeout(this._undoTimer);
   }
   componentDidUpdate(prevProps, prevState) {
-    requestAnimationFrame(() => this.fitBlitzPrecoNames());
     if (prevState && prevState.model !== this.state.model) this.centerActiveTab();
 
     const wasDialogOpen = !!(prevState && (prevState.helpOpen || prevState.onboardingOpen || prevState.importOpen || prevState.printOpen));
@@ -3712,17 +3725,27 @@ ${assets}
       const { reais } = this.splitPrice(g.porPrice);
       const item = this.buildItem("blitzPrecos", g, i);
       const brand = this.blitzPrecoArt.indexOf(g.brand) !== -1 ? g.brand : "semmarca";
-      const fontScale = this.clampFontScale(g.fontScale);
       const autoNameSize = (g.name || "").length > 30 ? 4.2 : (g.name || "").length > 18 ? 5.2 : 6.7;
+      const legacyPt = Math.round(autoNameSize * this.clampFontScale(g.fontScale) / 100 * 53 * 72 / 2540);
+      const fontSizePt = Math.min(32, Math.max(6, parseInt(g.fontSizePt, 10) || legacyPt));
+      const textAlign = ["left", "center", "right", "justify"].includes(g.textAlign) ? g.textAlign : "left";
+      const alignment = {};
+      for (const value of ["left", "center", "right", "justify"]) {
+        const suffix = value[0].toUpperCase() + value.slice(1);
+        alignment["align" + suffix] = () => this.updateItem("blitzPrecos", i, { textAlign: value });
+        alignment["is" + suffix] = textAlign === value ? "true" : "false";
+        alignment["align" + suffix + "Style"] = "display:flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:6px; cursor:pointer; border:1px solid " + (textAlign === value ? "#006B67; background:#E7F6F5; color:#006B67;" : "#d8dee4; background:#fff; color:#475569;");
+      }
       return {
         ...item,
+        ...alignment,
         blitzPrecoBg: "url('assets/precos-vitrine-editavel/" + brand + ".png')",
         blitzPrecoReaisSize: String(reais).length > 7 ? "9.5cqw" : String(reais).length > 5 ? "13cqw" : String(reais).length > 3 ? "16.5cqw" : "23cqw",
-        blitzPrecoNameCqw: (autoNameSize * fontScale / 100).toFixed(2),
-        blitzPrecoNameSize: (autoNameSize * fontScale / 100).toFixed(2) + "cqw",
-        fontScaleLabel: fontScale + "%",
-        fontMinus: () => this.updateItem("blitzPrecos", i, { fontScale: Math.max(70, fontScale - 5) }),
-        fontPlus: () => this.updateItem("blitzPrecos", i, { fontScale: Math.min(130, fontScale + 5) }),
+        blitzPrecoNameSize: (fontSizePt * 2540 / (53 * 72)).toFixed(4) + "cqw",
+        textAlign,
+        nameWrap: textAlign === "justify" ? "wrap" : "balance",
+        fontSizePt,
+        setFontSizePt: e => this.updateItem("blitzPrecos", i, { fontSizePt: Math.min(32, Math.max(6, parseInt(e.target.value, 10) || 10)) }),
       };
     });
 
