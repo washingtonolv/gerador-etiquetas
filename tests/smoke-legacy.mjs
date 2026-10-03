@@ -181,7 +181,7 @@ component.state = { ...component.state, pss6: [...component.state.pss6] };
 component.componentDidUpdate(null, previousDataState);
 assert.equal(storageWrites, 1, "Mudanças de dados devem ser persistidas");
 
-assert.equal((html.match(/type="number" min="1" max="999"/g) || []).length, 12);
+assert.equal((html.match(/type="number" min="1" max="999"/g) || []).length, 13);
 assert.match(html, /Cartões vendedoras/);
 assert.match(html, /class="model-n">#14<\/span><span>PREÇARIO ANIVERSARIO VITRINE<\/span>/);
 assert.match(html, /Baixar PowerPoint editável/);
@@ -217,3 +217,41 @@ for (const name of placeholderRoots) {
 }
 
 console.log("Smoke tests passed for 11 model structures.");
+
+// A6 anniversary: independent state, all supplied brands, formatting and page boundaries.
+const anniversary = new Component();
+anniversary.selectModel("aniversarioA6");
+assert.equal(anniversary.state.model, "aniversarioA6");
+assert.equal(anniversary.getModelMeta().perPage, 4);
+for (const brand of anniversary.pais6Art) {
+  assert.ok(existsSync(new URL(`../assets/aniversario-a6/${brand}.png`, import.meta.url)));
+  anniversary.updateItem("aniversarioA6s", 0, { brand });
+  assert.match(anniversary.renderVals().aniversarioA6s[0].blitzBg, new RegExp(`${brand}\\.png`));
+}
+let anniversaryItem = anniversary.renderVals().aniversarioA6s[0];
+anniversaryItem.setName({ target: { value: "Perfume aniversário" } });
+anniversaryItem.setDesc({ target: { value: "100 ml" } });
+anniversaryItem.alignRight();
+anniversaryItem.toggleBold();
+anniversaryItem.setFontSizePt({ target: { value: "32" } });
+anniversaryItem.setQty({ target: { value: "5" } });
+anniversaryItem.setDe({ target: { value: "" } });
+anniversaryItem.setCada({ target: { checked: false } });
+let anniversaryView = anniversary.renderVals();
+assert.deepEqual(Array.from(anniversaryView.aniversarioA6Pages, page => page.items.length), [4, 1]);
+assert.equal(anniversaryView.aniversarioA6s[0].textAlign, "right");
+assert.equal(anniversaryView.aniversarioA6s[0].fontSizePt, 32);
+assert.equal(anniversaryView.aniversarioA6s[0].boldPressed, "true");
+assert.equal(anniversaryView.aniversarioA6s[0].hasDe, false);
+assert.equal(anniversaryView.aniversarioA6s[0].showCada, false);
+anniversaryView.aniversarioA6s[0].dup();
+assert.equal(anniversary.state.aniversarioA6s[1].desc, "100 ml");
+const savedAnniversary = JSON.stringify({ model: "aniversarioA6", aniversarioA6s: anniversary.state.aniversarioA6s });
+localStorage.getItem = key => key === "dd-etiquetas-v2" ? savedAnniversary : null;
+const restoredAnniversary = new Component();
+restoredAnniversary.componentDidMount();
+assert.equal(restoredAnniversary.state.model, "aniversarioA6");
+assert.equal(restoredAnniversary.state.aniversarioA6s[0].fontSizePt, 32);
+assert.equal(restoredAnniversary.state.aniversarioA6s[0].name, "Perfume aniversário");
+restoredAnniversary.componentWillUnmount();
+console.log("A6 anniversary editing, assets, pagination and persistence passed.");
