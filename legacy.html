@@ -2472,6 +2472,7 @@
                   <button type="button" onClick="{{ g.alignRight }}" aria-label="Alinhar à direita" title="Alinhar à direita" aria-pressed="{{ g.isRight }}" style="{{ g.alignRightStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M9 9.5h12"/><path d="M5 14.0h16"/><path d="M11 18.5h10"/></svg></button>
                   <button type="button" onClick="{{ g.alignJustify }}" aria-label="Justificar" title="Justificar" aria-pressed="{{ g.isJustify }}" style="{{ g.alignJustifyStyle }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5.0h18"/><path d="M3 9.5h18"/><path d="M3 14.0h18"/><path d="M3 18.5h18"/></svg></button>
                 </div>
+                <button type="button" onClick="{{ g.toggleBold }}" aria-label="Negrito" title="Negrito" aria-pressed="{{ g.boldPressed }}" style="{{ g.boldStyle }}">B</button>
                 <label style="display:flex; align-items:center; gap:5px; font-size:12px;">
                   <select value="{{ g.fontSizePt }}" onChange="{{ g.setFontSizePt }}" aria-label="Tamanho da fonte em pontos" style="width:68px; padding:7px; border:1px solid #d8dee4; border-radius:6px; background:#fff; color:#334155;">
                     <option value="6">6</option>
@@ -2561,7 +2562,7 @@
                   <div class="label-preview blitz-preco-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:53 / 52; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-color:#d000c4; background-repeat:no-repeat; background-position:center; background-size:100% 100%; background-image:{{ g.blitzPrecoBg }}; --blitz-preco-bg:{{ g.blitzPrecoBg }};">
                     <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar este preçário"></button>
                     <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir preçário" aria-label="Excluir preçário">×</button>
-                    <div class="blitz-preco-name" style="position:absolute; left:8%; top:23.8%; bottom:49%; width:84%; overflow:hidden; font-size:{{ g.blitzPrecoNameSize }}; font-weight:500; line-height:1.05; color:#000; text-align:{{ g.textAlign }}; text-wrap:{{ g.nameWrap }}; overflow-wrap:break-word;">{{ g.name }}</div>
+                    <div class="blitz-preco-name" style="position:absolute; left:8%; top:23.8%; bottom:49%; width:84%; overflow:hidden; font-size:{{ g.blitzPrecoNameSize }}; font-weight:{{ g.nameWeight }}; line-height:1.05; color:#000; text-align:{{ g.textAlign }}; text-wrap:{{ g.nameWrap }}; overflow-wrap:break-word;">{{ g.name }}</div>
                     <div class="blitz-preco-prices" style="color:#fff; position:absolute; left:11%; top:54%; width:78%; height:33%; background:#ff4e4d; display:flex; flex-direction:column; justify-content:center; gap:2cqw; color:#fff;">
                       <sc-if value="{{ g.hasDe }}" hint-placeholder-val="true">
                         <div class="blitz-preco-de" style="color:#fff; display:flex; align-items:baseline; gap:2.5cqw; font-size:6.5cqw; line-height:1; white-space:nowrap;"><span style="color:#fff; color:#fff; font-weight:500;">DE:</span><span style="color:#fff; font-weight:700; text-decoration:line-through;">{{ g.deShow }}</span></div>
@@ -3734,11 +3735,15 @@ ${assets}
         const suffix = value[0].toUpperCase() + value.slice(1);
         alignment["align" + suffix] = () => this.updateItem("blitzPrecos", i, { textAlign: value });
         alignment["is" + suffix] = textAlign === value ? "true" : "false";
-        alignment["align" + suffix + "Style"] = "display:flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:6px; cursor:pointer; border:1px solid " + (textAlign === value ? "#006B67; background:#E7F6F5; color:#006B67;" : "#d8dee4; background:#fff; color:#475569;");
+        alignment["align" + suffix + "Style"] = "display:flex; align-items:center; justify-content:center; width:30px; height:34px; border-radius:6px; cursor:pointer; border:1px solid " + (textAlign === value ? "#006B67; background:#E7F6F5; color:#006B67;" : "#d8dee4; background:#fff; color:#475569;");
       }
       return {
         ...item,
         ...alignment,
+        nameWeight: g.bold === true ? 700 : 500,
+        boldPressed: g.bold === true ? "true" : "false",
+        toggleBold: () => this.updateItem("blitzPrecos", i, { bold: g.bold !== true }),
+        boldStyle: "flex:none; width:32px; height:34px; border-radius:6px; font-size:16px; font-weight:800; cursor:pointer; border:1px solid " + (g.bold === true ? "#006B67; background:#E7F6F5; color:#006B67;" : "#d8dee4; background:#fff; color:#475569;"),
         blitzPrecoBg: "url('assets/precos-vitrine-editavel/" + brand + ".png')",
         blitzPrecoReaisSize: String(reais).length > 7 ? "9.5cqw" : String(reais).length > 5 ? "13cqw" : String(reais).length > 3 ? "16.5cqw" : "23cqw",
         blitzPrecoNameSize: (fontSizePt * 2540 / (53 * 72)).toFixed(4) + "cqw",
