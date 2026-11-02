@@ -71,7 +71,8 @@ assert.equal(component.clampQty(0), 1);
 assert.equal(component.clampQty(5000), 999);
 assert.equal(component.clampQty("invalido"), 1);
 component.selectModel("blitzpreco");
-assert.equal(component.state.model, "blitzpreco", "O modelo #14 deve poder ser selecionado");
+assert.equal(component.state.model, "placa", "O modelo #14 deve ficar desabilitado");
+component.state.model = "blitzpreco";
 component.applyPrintPage("blitz");
 assert.equal(printStyles["dd-print-page-blitz"].media, "print");
 assert.equal(printStyles["dd-print-page-default"].media, "not all");
@@ -221,7 +222,8 @@ console.log("Smoke tests passed for 11 model structures.");
 // A6 anniversary: independent state, all supplied brands, formatting and page boundaries.
 const anniversary = new Component();
 anniversary.selectModel("aniversarioA6");
-assert.equal(anniversary.state.model, "aniversarioA6");
+assert.equal(anniversary.state.model, "placa");
+anniversary.state.model = "aniversarioA6";
 assert.equal(anniversary.getModelMeta().perPage, 4);
 for (const brand of anniversary.pais6Art) {
   assert.ok(existsSync(new URL(`../assets/aniversario-a6/${brand}.png`, import.meta.url)));
@@ -250,7 +252,7 @@ const savedAnniversary = JSON.stringify({ model: "aniversarioA6", aniversarioA6s
 localStorage.getItem = key => key === "dd-etiquetas-v2" ? savedAnniversary : null;
 const restoredAnniversary = new Component();
 restoredAnniversary.componentDidMount();
-assert.equal(restoredAnniversary.state.model, "aniversarioA6");
+assert.equal(restoredAnniversary.state.model, "placa");
 assert.equal(restoredAnniversary.state.aniversarioA6s[0].fontSizePt, 32);
 assert.equal(restoredAnniversary.state.aniversarioA6s[0].name, "Perfume aniversário");
 restoredAnniversary.componentWillUnmount();
@@ -259,7 +261,8 @@ console.log("A6 anniversary editing, assets, pagination and persistence passed."
 // A5 anniversaryA5: independent state, all supplied brands, formatting and page boundaries.
 const anniversaryA5 = new Component();
 anniversaryA5.selectModel("aniversarioA5");
-assert.equal(anniversaryA5.state.model, "aniversarioA5");
+assert.equal(anniversaryA5.state.model, "placa");
+anniversaryA5.state.model = "aniversarioA5";
 assert.equal(anniversaryA5.getModelMeta().perPage, 2);
 for (const brand of anniversaryA5.pais6Art) {
   assert.ok(existsSync(new URL(`../assets/aniversario-a5/${brand}.png`, import.meta.url)));
@@ -288,7 +291,7 @@ const savedAnniversaryA5 = JSON.stringify({ model: "aniversarioA5", aniversarioA
 localStorage.getItem = key => key === "dd-etiquetas-v2" ? savedAnniversaryA5 : null;
 const restoredAnniversaryA5 = new Component();
 restoredAnniversaryA5.componentDidMount();
-assert.equal(restoredAnniversaryA5.state.model, "aniversarioA5");
+assert.equal(restoredAnniversaryA5.state.model, "placa");
 assert.equal(restoredAnniversaryA5.state.aniversarioA5s[0].fontSizePt, 32);
 assert.equal(restoredAnniversaryA5.state.aniversarioA5s[0].name, "Perfume aniversário");
 restoredAnniversaryA5.componentWillUnmount();
