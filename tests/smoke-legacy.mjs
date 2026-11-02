@@ -14,7 +14,7 @@ const printStyles = {
   "dd-print-page-default": { id: "dd-print-page-default", media: "print" },
   "dd-print-page-pais6": { id: "dd-print-page-pais6", media: "not all" },
   "dd-print-page-blitz": { id: "dd-print-page-blitz", media: "not all" },
-  "dd-print-page-blitzpreco": { id: "dd-print-page-blitzpreco", media: "not all" },
+  "dd-print-page-blackfriday": { id: "dd-print-page-blackfriday", media: "not all" },
   "dd-print-page-vendedoras": { id: "dd-print-page-vendedoras", media: "not all" },
 };
 const localStorage = {
@@ -62,7 +62,7 @@ vm.runInContext(`
 
 const Component = context.ComponentUnderTest;
 const component = new Component();
-const modelNames = ["placa", "pcr", "prec", "make", "make2", "make3", "pais", "pais6", "blitz", "blitzpreco", "vendedoras"];
+const modelNames = ["placa", "pcr", "prec", "make", "make2", "make3", "pais", "pais6", "blitz", "blackfriday", "vendedoras"];
 
 assert.equal(component.splitPrice("99,9").centavos, "90");
 assert.equal(component.fmtPrice("129990"), "1299,90");
@@ -70,9 +70,19 @@ assert.equal(component.normalizePriceField("R$ 56,9"), "56,90");
 assert.equal(component.clampQty(0), 1);
 assert.equal(component.clampQty(5000), 999);
 assert.equal(component.clampQty("invalido"), 1);
-component.selectModel("blitzpreco");
-assert.equal(component.state.model, "placa", "O modelo #14 deve ficar desabilitado");
-component.state.model = "blitzpreco";
+component.selectModel("blackfriday");
+assert.equal(component.state.model, "blackfriday", "O novo modelo Black Friday deve poder ser selecionado");
+for (const disabledModel of ["blitzpreco", "aniversarioA6", "aniversarioA5"]) {
+  component.selectModel(disabledModel);
+  assert.equal(component.state.model, "blackfriday");
+}
+assert.equal(component.getModelMeta("blackfriday").perPage, 8);
+assert.equal(component.getModelMeta("blackfriday").create().cada, true);
+for (const brand of component.placaBrands.filter(b => b.key !== "semmarca")) {
+  const item = component.buildItem("blackFridayLabels", { brand: brand.key, porPrice: "259,99" }, 0);
+  assert.ok(item.brandBg.includes(component.newBrandLogos[brand.key] || `${brand.key}.png`));
+}
+component.state.model = "blackfriday";
 component.applyPrintPage("blitz");
 assert.equal(printStyles["dd-print-page-blitz"].media, "print");
 assert.equal(printStyles["dd-print-page-default"].media, "not all");
@@ -83,10 +93,10 @@ assert.equal(printStyles["dd-print-page-default"].media, "not all");
 component.applyPrintPage("placa");
 assert.equal(printStyles["dd-print-page-default"].media, "print");
 assert.equal(printStyles["dd-print-page-blitz"].media, "not all");
-component.applyPrintPage("blitzpreco");
-assert.equal(printStyles["dd-print-page-blitzpreco"].media, "print");
+component.applyPrintPage("blackfriday");
+assert.equal(printStyles["dd-print-page-blackfriday"].media, "print");
 assert.equal(printStyles["dd-print-page-default"].media, "not all");
-assert.equal(appendedPrintStyle.id, "dd-print-page-blitzpreco");
+assert.equal(appendedPrintStyle.id, "dd-print-page-blackfriday");
 
 for (const model of modelNames) {
   const meta = component.getModelMeta(model);
@@ -114,7 +124,7 @@ for (const brand of component.pais6Art) {
   assert.ok(existsSync(`${repoRoot}assets/pais6-preview/${brand}.webp`), `Prévia ausente: pais6/${brand}`);
   assert.ok(existsSync(`${repoRoot}assets/blitz/${brand}.jpg`), `Arte ausente: blitz/${brand}`);
 }
-for (const brand of component.blitzPrecoArt) {
+for (const brand of component.blackFridayArt) {
   assert.ok(existsSync(`${repoRoot}assets/precos-vitrine-editavel/${brand}.png`), `Arte ausente: precos-vitrine-editavel/${brand}`);
 }
 assert.ok(existsSync(`${repoRoot}assets/precos-vitrine-editavel/editavel-precos-vitrine.pptx`), "PowerPoint editável do Preçário Vitrine deve estar disponível");
@@ -148,11 +158,11 @@ values = component.renderVals();
 assert.equal(values.blitzPages.length, 2, "Três etiquetas BLITZ devem ocupar duas folhas");
 assert.deepEqual(JSON.parse(JSON.stringify(values.blitzPages.map(page => page.items.length))), [2, 1], "Cada folha BLITZ deve receber no máximo dois A5");
 
-component.state.model = "blitzpreco";
-component.state.blitzPrecos = [{ brand: "avon", name: "Teste", dePrice: "15,00", porPrice: "10,00", qty: 9 }];
+component.state.model = "blackfriday";
+component.state.blackFridayLabels = [{ brand: "avon", name: "Teste", dePrice: "15,00", porPrice: "10,00", qty: 9 }];
 values = component.renderVals();
-assert.equal(values.blitzPrecoPages.length, 2, "Nove preçários BLITZ devem ocupar duas folhas");
-assert.deepEqual(JSON.parse(JSON.stringify(values.blitzPrecoPages.map(page => page.items.length))), [8, 1], "Cada folha deve receber no máximo oito preçários BLITZ");
+assert.equal(values.blackFridayPages.length, 2, "Nove preçários BLITZ devem ocupar duas folhas");
+assert.deepEqual(JSON.parse(JSON.stringify(values.blackFridayPages.map(page => page.items.length))), [8, 1], "Cada folha deve receber no máximo oito preçários BLITZ");
 assert.equal(values.printOrientation, "Paisagem", "O Preçário Blitz Vitrine deve imprimir em A4 paisagem");
 assert.equal(values.printMargins, "Nenhuma", "O Preçário Blitz Vitrine deve imprimir sem margens do navegador");
 
@@ -169,7 +179,7 @@ const backupLists = Object.fromEntries(
 restoreComponent.restoreBackup(JSON.stringify({ format: "dd-etiquetas", version: 2, etiquetas: backupLists }));
 assert.equal(restoreComponent.state.pss6[0].qty, 999, "Backups também devem limitar quantidades inválidas");
 assert.equal(restoreComponent.state.blitzs[0].qty, 999, "O BLITZ deve ser restaurado no backup");
-assert.equal(restoreComponent.state.blitzPrecos[0].qty, 999, "O Preçário Blitz Vitrine deve ser restaurado no backup");
+assert.equal(restoreComponent.state.blackFridayLabels[0].qty, 999, "O Preçário Blitz Vitrine deve ser restaurado no backup");
 
 storageWrites = 0;
 const previousUiState = { ...component.state, zoom: 1 };
@@ -185,22 +195,22 @@ assert.equal(storageWrites, 1, "Mudanças de dados devem ser persistidas");
 assert.equal((html.match(/type="number" min="1" max="999"/g) || []).length, 14);
 assert.match(html, /Cartões vendedoras/);
 assert.doesNotMatch(html, /class="model-n">#(?:14|15|16)<\/span>/);
-assert.match(html, /Baixar PowerPoint editável/);
+assert.match(html, /Preçario Black Friday/);
 assert.match(html, /grid-template-columns:repeat\(3, 90mm\)/);
 assert.match(html, /id="dd-print-page-blitz" media="not all">@page \{ size: 297mm 210mm; margin: 0; \}<\/style>/);
-assert.match(html, /id="dd-print-page-blitzpreco" media="not all">@page \{ size: A4 landscape; margin: 0; \}<\/style>/);
+assert.match(html, /id="dd-print-page-blackfriday" media="not all">@page \{ size: A4 landscape; margin: 0; \}<\/style>/);
 assert.match(html, /class="sheet blitz-sheet"/);
-assert.match(html, /class="sheet blitz-preco-sheet"/);
+assert.match(html, /class="sheet black-friday-sheet"/);
 assert.match(html, /id="dd-print-page-default" media="print"/);
 assert.match(html, /Orientação: <b>\{\{ printOrientation \}\}<\/b>/);
 assert.match(html, /async printBlitzDocument\(\)/);
-assert.match(html, /async printBlitzPrecoDocument\(\)/);
+assert.match(html, /async printBlackFridayDocument\(\)/);
 assert.match(html, /id="dd-blitz-isolated-print"/);
-assert.match(html, /id="dd-blitz-preco-isolated-print"/);
+assert.match(html, /id="dd-black-friday-isolated-print"/);
 assert.match(html, /@page \{ size: A4 landscape; margin: 0; \}/);
 assert.match(html, /<body class="blitz-page pp">/);
 assert.match(html, /if \(model === "blitz" \|\| model === "aniversarioA5"\) \{\s+await this\.printBlitzDocument\(\);/);
-assert.match(html, /if \(model === "blitzpreco"\) \{\s+await this\.printBlitzPrecoDocument\(\);/);
+assert.match(html, /if \(model === "blackfriday"\) \{\s+await this\.printBlackFridayDocument\(\);/);
 assert.match(html, /grid-template-columns:148mm 148mm !important/);
 assert.match(html, /grid-template-columns:repeat\(4, 53mm\) !important/);
 assert.match(html, /grid-template-rows:repeat\(2, 52mm\) !important/);
@@ -296,3 +306,4 @@ assert.equal(restoredAnniversaryA5.state.aniversarioA5s[0].fontSizePt, 32);
 assert.equal(restoredAnniversaryA5.state.aniversarioA5s[0].name, "Perfume aniversário");
 restoredAnniversaryA5.componentWillUnmount();
 console.log("A5 anniversaryA5 editing, assets, pagination and persistence passed.");
+
