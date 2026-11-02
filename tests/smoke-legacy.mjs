@@ -184,7 +184,7 @@ assert.equal(storageWrites, 1, "Mudanças de dados devem ser persistidas");
 
 assert.equal((html.match(/type="number" min="1" max="999"/g) || []).length, 14);
 assert.match(html, /Cartões vendedoras/);
-assert.match(html, /class="model-n">#14<\/span><span>PREÇARIO ANIVERSARIO VITRINE<\/span>/);
+assert.doesNotMatch(html, /class="model-n">#(?:14|15|16)<\/span>/);
 assert.match(html, /Baixar PowerPoint editável/);
 assert.match(html, /grid-template-columns:repeat\(3, 90mm\)/);
 assert.match(html, /id="dd-print-page-blitz" media="not all">@page \{ size: 297mm 210mm; margin: 0; \}<\/style>/);
