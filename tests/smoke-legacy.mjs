@@ -125,7 +125,7 @@ const blitzParts = Array.from({ length: 21 }, (_, i) =>
 );
 assert.ok(Buffer.concat(blitzParts).equals(blitzPptx), "As partes publicadas devem recompor exatamente o PowerPoint corrigido");
 for (const { key } of component.placaBrands.filter(brand => brand.key !== "semmarca")) {
-  assert.ok(existsSync(`${repoRoot}assets/placa/marcas/${key}.png`), `Logo de marca ausente: ${key}`);
+  assert.ok(existsSync(`${repoRoot}${component.newBrandLogos[key] || `assets/placa/marcas/${key}.png`}`), `Logo de marca ausente: ${key}`);
 }
 
 component.state.model = "make";

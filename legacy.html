@@ -3268,7 +3268,19 @@ class Component extends DCLogic {
     { key: "rubykisses", label: "Ruby Kisses" }, { key: "vizzela", label: "Vizzela" },
     { key: "semmarca", label: "Sem marca" },
   ];
+  newBrandLogos = {"ammobeauty":"assets/placa/marcas/ammobeauty.jpg","cimed":"assets/placa/marcas/cimed.jpg","loudepre":"assets/placa/marcas/loudepre.jpg","carmed":"assets/placa/marcas/carmed.png","payot":"assets/placa/marcas/payot.png","barbours":"assets/placa/marcas/barbours.webp","fran":"assets/placa/marcas/fran.webp","lattafa":"assets/placa/marcas/lattafa.webp","nuance":"assets/placa/marcas/nuance.webp","phallebeauty":"assets/placa/marcas/phallebeauty.webp","zimaya":"assets/placa/marcas/zimaya.webp"};
   placaBrands = [
+    { key: "ammobeauty", label: "Ammô Beauty" },
+    { key: "cimed", label: "Cimed" },
+    { key: "loudepre", label: "Lou de Pré" },
+    { key: "carmed", label: "Carmed" },
+    { key: "payot", label: "Payot" },
+    { key: "barbours", label: "Barbour's Beauty" },
+    { key: "fran", label: "Fran by Franciny Ehlke" },
+    { key: "lattafa", label: "Lattafa" },
+    { key: "nuance", label: "Nuance" },
+    { key: "phallebeauty", label: "Phállebeauty" },
+    { key: "zimaya", label: "Zimaya" },
     { key: "avon", label: "Avon" }, { key: "boticario", label: "O Boticário" },
     { key: "ciclo", label: "Ciclo" }, { key: "eudora", label: "Eudora" },
     { key: "fhader", label: "Fhader" }, { key: "hinode", label: "Hinode" },
@@ -3509,7 +3521,7 @@ class Component extends DCLogic {
       hasDe: !!String(item.dePrice || "").trim(),
       showCada: !!item.cada,
       hasBrand: item.brand !== "semmarca",
-      brandBg: 'url("assets/placa/marcas/' + item.brand + '.png")',
+      brandBg: 'url("' + (this.newBrandLogos[item.brand] || 'assets/placa/marcas/' + item.brand + '.png') + '")',
       setBrand: e => update({ brand: e.target.value }),
       setName: e => update({ name: e.target.value }),
       setDe: e => update({ dePrice: e.target.value }),
