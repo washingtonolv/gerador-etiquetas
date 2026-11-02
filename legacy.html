@@ -84,7 +84,7 @@
       .g-pais { display:grid !important; grid-template-columns:repeat(4, 40mm) !important; grid-auto-rows:50mm !important; column-gap:4mm !important; row-gap:4mm !important; justify-content:center !important; align-content:start !important; width:172mm !important; max-width:172mm !important; }
       .g-pais6 { grid-template-columns: repeat(2, 105mm) !important; grid-auto-rows: 148mm !important; gap: 0 !important; justify-content:center !important; }
       .g-blitz { grid-template-columns: repeat(2, 148mm) !important; grid-auto-rows: 210mm !important; gap: 0 1mm !important; justify-content:center !important; }
-      .g-black-friday { grid-template-columns: repeat(4, 53mm) !important; grid-template-rows: repeat(2, 52mm) !important; gap: 13mm 7mm !important; justify-content:center !important; align-content:center !important; }
+      .g-black-friday { grid-template-columns: repeat(4, 50mm) !important; grid-template-rows: repeat(2, 60mm) !important; gap: 13mm 7mm !important; justify-content:center !important; align-content:center !important; }
       .pais6-page .sheet { padding: 0 !important; }
       .blitz-page { display:block !important; width:297mm !important; min-height:0 !important; }
       .blitz-page .workspace-layout { display:block !important; width:297mm !important; max-width:none !important; }
@@ -289,16 +289,16 @@
     .black-friday-page:not(.pp) .black-friday-sheets { width:100%; display:flex; flex-direction:column; align-items:center; gap:18px; }
     .black-friday-page:not(.pp) .black-friday-sheet { width:min(100%, 920px) !important; max-width:920px !important; height:auto !important; min-height:0 !important; padding:16px !important; aspect-ratio:auto !important; overflow:visible; }
     .black-friday-page:not(.pp) .g-black-friday { display:grid !important; grid-template-columns:repeat(auto-fit, minmax(180px, 220px)) !important; grid-auto-rows:auto !important; gap:16px !important; width:100% !important; height:auto !important; justify-content:center !important; }
-    .black-friday-page:not(.pp) .black-friday-label { width:100% !important; height:auto !important; aspect-ratio:53 / 52 !important; background-size:100% 100% !important; }
+    .black-friday-page:not(.pp) .black-friday-label { width:100% !important; height:auto !important; aspect-ratio:50 / 60 !important; background-size:100% 100% !important; }
     @media (max-width:760px) { .black-friday-page:not(.pp) .g-black-friday { grid-template-columns:minmax(0, 260px) !important; } }
     .pp.black-friday-page .black-friday-sheets { display:block !important; width:297mm !important; }
     .pp.black-friday-page .black-friday-sheet { width:297mm !important; height:210mm !important; padding:0 !important; break-after:page !important; }
     .pp.black-friday-page .black-friday-sheet:last-child { break-after:auto !important; }
-    .pp.black-friday-page .g-black-friday { width:297mm !important; height:210mm !important; grid-template-columns:repeat(4, 53mm) !important; grid-template-rows:repeat(2, 52mm) !important; column-gap:7mm !important; row-gap:13mm !important; align-content:center !important; justify-content:center !important; }
-    .pp.black-friday-page .black-friday-label { width:53mm !important; height:52mm !important; aspect-ratio:auto !important; background-image:var(--black-friday-bg) !important; }
+    .pp.black-friday-page .g-black-friday { width:297mm !important; height:210mm !important; grid-template-columns:repeat(4, 50mm) !important; grid-template-rows:repeat(2, 60mm) !important; column-gap:7mm !important; row-gap:13mm !important; align-content:center !important; justify-content:center !important; }
+    .pp.black-friday-page .black-friday-label { width:50mm !important; height:60mm !important; aspect-ratio:auto !important; background-image:var(--black-friday-bg) !important; }
     @media print {
-      .black-friday-page .g-black-friday { width:297mm !important; height:210mm !important; grid-template-columns:repeat(4, 53mm) !important; grid-template-rows:repeat(2, 52mm) !important; column-gap:7mm !important; row-gap:13mm !important; align-content:center !important; justify-content:center !important; }
-      .black-friday-page .black-friday-label { box-sizing:border-box !important; width:53mm !important; min-width:53mm !important; max-width:53mm !important; height:52mm !important; min-height:52mm !important; max-height:52mm !important; aspect-ratio:auto !important; background-image:var(--black-friday-bg) !important; }
+      .black-friday-page .g-black-friday { width:297mm !important; height:210mm !important; grid-template-columns:repeat(4, 50mm) !important; grid-template-rows:repeat(2, 60mm) !important; column-gap:7mm !important; row-gap:13mm !important; align-content:center !important; justify-content:center !important; }
+      .black-friday-page .black-friday-label { box-sizing:border-box !important; width:50mm !important; min-width:50mm !important; max-width:50mm !important; height:60mm !important; min-height:60mm !important; max-height:60mm !important; aspect-ratio:auto !important; background-image:var(--black-friday-bg) !important; }
     }
     /* CARTÕES VENDEDORAS: nove cartões horizontais por folha A4 paisagem. */
     .vendedoras-sheets { width:100%; display:flex; flex-direction:column; align-items:center; gap:18px; }
@@ -2828,7 +2828,7 @@
             <div class="sheet black-friday-sheet" data-page="{{ bp.n }}" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
               <div class="g-black-friday" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:10px;">
                 <sc-for list="{{ bp.items }}" as="g" hint-placeholder-count="8">
-                  <div class="label-preview black-friday-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:53 / 52; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-color:#d000c4; background-repeat:no-repeat; background-position:center; background-size:100% 100%; background-image:{{ g.blackFridayBg }}; --black-friday-bg:{{ g.blackFridayBg }};">
+                  <div class="label-preview black-friday-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:50 / 60; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-color:#d000c4; background-repeat:no-repeat; background-position:center; background-size:100% 100%; background-image:{{ g.blackFridayBg }}; --black-friday-bg:{{ g.blackFridayBg }};">
                     <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar este preçário"></button>
                     <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir preçário" aria-label="Excluir preçário">×</button>
                     <sc-if value="{{ g.hasBrand }}"><div style="position:absolute; left:12%; top:8%; width:35%; height:12%; background-image:{{ g.brandBg }}; background-size:contain; background-position:left center; background-repeat:no-repeat;"></div></sc-if>
@@ -3889,8 +3889,8 @@ ${assets}
   body.black-friday-page .black-friday-sheets { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
   body.black-friday-page .black-friday-sheet { display:block !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
   body.black-friday-page .black-friday-sheet:last-child { break-after:auto !important; page-break-after:auto !important; }
-  body.black-friday-page .g-black-friday { display:grid !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; grid-template-columns:repeat(4, 53mm) !important; grid-template-rows:repeat(2, 52mm) !important; grid-auto-rows:52mm !important; column-gap:7mm !important; row-gap:13mm !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
-  body.black-friday-page .black-friday-label { box-sizing:border-box !important; width:53mm !important; min-width:53mm !important; max-width:53mm !important; height:52mm !important; min-height:52mm !important; max-height:52mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:.25mm dashed #9aa6b1 !important; outline-offset:-.25mm !important; aspect-ratio:auto !important; background-image:var(--black-friday-bg) !important; background-size:100% 100% !important; background-position:center !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
+  body.black-friday-page .g-black-friday { display:grid !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; grid-template-columns:repeat(4, 50mm) !important; grid-template-rows:repeat(2, 60mm) !important; grid-auto-rows:60mm !important; column-gap:7mm !important; row-gap:13mm !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
+  body.black-friday-page .black-friday-label { box-sizing:border-box !important; width:50mm !important; min-width:50mm !important; max-width:50mm !important; height:60mm !important; min-height:60mm !important; max-height:60mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:.25mm dashed #9aa6b1 !important; outline-offset:-.25mm !important; aspect-ratio:auto !important; background-image:var(--black-friday-bg) !important; background-size:100% 100% !important; background-position:center !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
   .no-print, button { display:none !important; }
 </style>
 </head>
@@ -4180,7 +4180,7 @@ ${assets}
       const item = this.buildItem("blackFridayLabels", g, i);
       const brand = this.blackFridayArt.indexOf(g.brand) !== -1 ? g.brand : "semmarca";
       const autoNameSize = (g.name || "").length > 30 ? 4.2 : (g.name || "").length > 18 ? 5.2 : 6.7;
-      const legacyPt = Math.round(autoNameSize * this.clampFontScale(g.fontScale) / 100 * 53 * 72 / 2540);
+      const legacyPt = Math.round(autoNameSize * this.clampFontScale(g.fontScale) / 100 * 50 * 72 / 2540);
       const fontSizePt = Math.min(32, Math.max(6, parseInt(g.fontSizePt, 10) || legacyPt));
       const textAlign = ["left", "center", "right", "justify"].includes(g.textAlign) ? g.textAlign : "left";
       const alignment = {};
@@ -4199,7 +4199,7 @@ ${assets}
         boldStyle: "flex:none; width:32px; height:34px; border-radius:6px; font-size:16px; font-weight:800; cursor:pointer; border:1px solid " + (g.bold === true ? "#006B67; background:#E7F6F5; color:#006B67;" : "#d8dee4; background:#fff; color:#475569;"),
         blackFridayBg: "linear-gradient(135deg, #ff6096, #f23d65)",
         blackFridayReaisSize: String(reais).length > 7 ? "9.5cqw" : String(reais).length > 5 ? "13cqw" : String(reais).length > 3 ? "16.5cqw" : "23cqw",
-        blackFridayNameSize: (fontSizePt * 2540 / (53 * 72)).toFixed(4) + "cqw",
+        blackFridayNameSize: (fontSizePt * 2540 / (50 * 72)).toFixed(4) + "cqw",
         textAlign,
         nameWrap: textAlign === "justify" ? "wrap" : "balance",
         fontSizePt,
