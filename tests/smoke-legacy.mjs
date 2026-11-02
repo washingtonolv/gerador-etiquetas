@@ -76,7 +76,7 @@ for (const disabledModel of ["blitzpreco", "aniversarioA6", "aniversarioA5"]) {
   component.selectModel(disabledModel);
   assert.equal(component.state.model, "blackfriday");
 }
-assert.equal(component.getModelMeta("blackfriday").perPage, 8);
+assert.equal(component.getModelMeta("blackfriday").perPage, 15);
 assert.equal(component.getModelMeta("blackfriday").create().cada, true);
 for (const brand of component.placaBrands.filter(b => b.key !== "semmarca")) {
   const item = component.buildItem("blackFridayLabels", { brand: brand.key, porPrice: "259,99" }, 0);
@@ -159,10 +159,10 @@ assert.equal(values.blitzPages.length, 2, "Três etiquetas BLITZ devem ocupar du
 assert.deepEqual(JSON.parse(JSON.stringify(values.blitzPages.map(page => page.items.length))), [2, 1], "Cada folha BLITZ deve receber no máximo dois A5");
 
 component.state.model = "blackfriday";
-component.state.blackFridayLabels = [{ brand: "avon", name: "Teste", dePrice: "15,00", porPrice: "10,00", qty: 9 }];
+component.state.blackFridayLabels = [{ brand: "avon", name: "Teste", dePrice: "15,00", porPrice: "10,00", qty: 16 }];
 values = component.renderVals();
-assert.equal(values.blackFridayPages.length, 2, "Nove preçários BLITZ devem ocupar duas folhas");
-assert.deepEqual(JSON.parse(JSON.stringify(values.blackFridayPages.map(page => page.items.length))), [8, 1], "Cada folha deve receber no máximo oito preçários BLITZ");
+assert.equal(values.blackFridayPages.length, 2, "Dezesseis preçários Black Friday devem ocupar duas folhas");
+assert.deepEqual(JSON.parse(JSON.stringify(values.blackFridayPages.map(page => page.items.length))), [15, 1], "Cada folha deve receber no máximo quinze preçários Black Friday");
 assert.equal(values.printOrientation, "Paisagem", "O Preçário Blitz Vitrine deve imprimir em A4 paisagem");
 assert.equal(values.printMargins, "Nenhuma", "O Preçário Blitz Vitrine deve imprimir sem margens do navegador");
 
@@ -212,8 +212,8 @@ assert.match(html, /<body class="blitz-page pp">/);
 assert.match(html, /if \(model === "blitz" \|\| model === "aniversarioA5"\) \{\s+await this\.printBlitzDocument\(\);/);
 assert.match(html, /if \(model === "blackfriday"\) \{\s+await this\.printBlackFridayDocument\(\);/);
 assert.match(html, /grid-template-columns:148mm 148mm !important/);
-assert.match(html, /grid-template-columns:repeat\(4, 50mm\) !important/);
-assert.match(html, /grid-template-rows:repeat\(2, 60mm\) !important/);
+assert.match(html, /grid-template-columns:repeat\(5, 50mm\) !important/);
+assert.match(html, /grid-template-rows:repeat\(3, 60mm\) !important/);
 assert.match(html, /width: 148mm/);
 assert.match(html, /aria-label="Mais opções"/);
 assert.doesNotMatch(html, /renderVals\(\)\.addCurrent/);
