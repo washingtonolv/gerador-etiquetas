@@ -1404,6 +1404,15 @@
   <meta name="theme-color" content="#006B67">
   <link rel="manifest" href="manifest.webmanifest">
 <style>.a5-native-page:not(.pp) .g-blitz{grid-template-columns:minmax(0,480px)!important;justify-content:center!important}.a5-native-page .aniversario-a5-price{color:white}.a5-native-page .blitz-label{aspect-ratio:148/210!important}</style>
+<style>
+.a5-native-page:not(.pp) .g-blitz{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.pp.a5-native-page .blitz-sheet,.pp.a5-native-page .g-blitz{width:297mm!important;height:210mm!important;padding:0!important}
+.pp.a5-native-page .g-blitz{grid-template-columns:repeat(2,148mm)!important;grid-template-rows:210mm!important;gap:0!important}
+.pp.a5-native-page .blitz-label{width:148mm!important;height:210mm!important}
+.pp.a6-native-page .blitz-sheet,.pp.a6-native-page .g-blitz{width:210mm!important;height:297mm!important}
+.pp.a6-native-page .g-blitz{grid-template-columns:repeat(2,105mm)!important;grid-template-rows:repeat(2,148mm)!important}
+.pp.a6-native-page .blitz-label{width:105mm!important;height:148mm!important}
+</style>
 </helmet>
 <div class="no-print splash" id="dd-splash" style="position:fixed; inset:0; z-index:999;">
   <svg class="splash-flower splash-flower--top" viewBox="-10 -10 220 220" aria-hidden="true"><g fill="#A72F50"><circle cx="145" cy="126" r="48"/><circle cx="100" cy="152" r="48"/><circle cx="55" cy="126" r="48"/><circle cx="55" cy="74" r="48"/><circle cx="100" cy="48" r="48"/><circle cx="145" cy="74" r="48"/><circle cx="100" cy="100" r="52"/></g><g fill="#F7FAFA"><circle cx="120.8" cy="112" r="21"/><circle cx="100" cy="124" r="21"/><circle cx="79.2" cy="112" r="21"/><circle cx="79.2" cy="88" r="21"/><circle cx="100" cy="76" r="21"/><circle cx="120.8" cy="88" r="21"/><circle cx="100" cy="100" r="24"/></g><circle cx="100" cy="100" r="13" fill="#A72F50"/></svg>
@@ -3300,8 +3309,8 @@ class Component extends DCLogic {
     { key: "vizzela", label: "Vizzela" }, { key: "semmarca", label: "Sem marca" },
   ];
   modelMeta = {
-    a6blackfriday: { key:"blackFridayA6s", activeKey:"activeBlackFridayA6",label:"A5 Black Friday (A6)",perPage:1,create:()=>({brand:"avon",name:"PRODUTO",desc:"Descrição",dePrice:"",porPrice:"0,00",cada:true,qty:1,fontSizePt:22,textAlign:"center",bold:false}) },
-    a5blackfriday: { key: "aniversarioA5s", activeKey: "activeAniversarioA5", label: "A5 Black Friday", perPage: 1, create: () => ({brand:"avon",name:"PRODUTO",desc:"Descrição",dePrice:"",porPrice:"0,00",cada:true,qty:1,fontSizePt:28,textAlign:"center",bold:false}) },
+    a6blackfriday: { key:"blackFridayA6s", activeKey:"activeBlackFridayA6",label:"A5 Black Friday (A6)",perPage:4,create:()=>({brand:"avon",name:"PRODUTO",desc:"Descrição",dePrice:"",porPrice:"0,00",cada:true,qty:1,fontSizePt:22,textAlign:"center",bold:false}) },
+    a5blackfriday: { key: "aniversarioA5s", activeKey: "activeAniversarioA5", label: "A5 Black Friday", perPage: 2, create: () => ({brand:"avon",name:"PRODUTO",desc:"Descrição",dePrice:"",porPrice:"0,00",cada:true,qty:1,fontSizePt:28,textAlign:"center",bold:false}) },
     placa: { key: "placas", activeKey: "activePlaca", label: "Etiqueta Vitrine", perPage: 12, create: () => ({ brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }) },
     pcr: { key: "pcrs", activeKey: "activePcr", label: "Expositor Madeira", perPage: 9, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }) },
     prec: { key: "prs", activeKey: "activePr", label: "Placa de Acrílico Promoção", perPage: 12, create: () => ({ brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" }) },
@@ -3892,14 +3901,14 @@ ${assets}
 <base href="${baseHref}">
 ${assets}
 <style id="dd-black-friday-isolated-print">
-  @page { size: 105mm 148mm; margin: 0; }
-  html, body { margin:0 !important; padding:0 !important; width:105mm !important; min-width:105mm !important; height:auto !important; background:#fff !important; }
+  @page { size: 210mm 297mm; margin: 0; }
+  html, body { margin:0 !important; padding:0 !important; width:210mm !important; min-width:210mm !important; height:auto !important; background:#fff !important; }
   body.a5-native-page { display:block !important; min-height:0 !important; }
-  body.a5-native-page .preview-wrap { display:block !important; width:105mm !important; margin:0 !important; padding:0 !important; }
-  body.a5-native-page .a5-native-sheets { display:block !important; width:105mm !important; margin:0 !important; padding:0 !important; }
-  body.a5-native-page .blitz-sheet { display:block !important; box-sizing:border-box !important; width:105mm !important; min-width:105mm !important; max-width:105mm !important; height:148mm !important; min-height:148mm !important; max-height:148mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
+  body.a5-native-page .preview-wrap { display:block !important; width:210mm !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page .a5-native-sheets { display:block !important; width:210mm !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page .blitz-sheet { display:block !important; box-sizing:border-box !important; width:210mm !important; min-width:210mm !important; max-width:210mm !important; height:297mm !important; min-height:297mm !important; max-height:297mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
   body.a5-native-page .blitz-sheet:last-child { break-after:auto !important; page-break-after:auto !important; }
-  body.a5-native-page .g-blitz { display:grid !important; box-sizing:border-box !important; width:105mm !important; min-width:105mm !important; max-width:105mm !important; height:148mm !important; min-height:148mm !important; max-height:148mm !important; grid-template-columns:105mm !important; grid-template-rows:148mm !important; grid-auto-rows:148mm !important; column-gap:0 !important; row-gap:0 !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page .g-blitz { display:grid !important; box-sizing:border-box !important; width:210mm !important; min-width:210mm !important; max-width:210mm !important; height:297mm !important; min-height:297mm !important; max-height:297mm !important; grid-template-columns:repeat(2, 105mm) !important; grid-template-rows:repeat(2, 148mm) !important; grid-auto-rows:148mm !important; column-gap:0 !important; row-gap:0 !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
   body.a5-native-page .blitz-label { box-sizing:border-box !important; width:105mm !important; min-width:105mm !important; max-width:105mm !important; height:148mm !important; min-height:148mm !important; max-height:148mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:.25mm dashed #9aa6b1 !important; outline-offset:-.25mm !important; aspect-ratio:auto !important; background-image:var(--blitz-bg) !important; background-size:100% 100% !important; background-position:center !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
   .no-print, button { display:none !important; }
 </style>
@@ -3940,6 +3949,7 @@ ${assets}
     printWindow.print();
     return true;
   }
+
   async printA5BlackFridayDocument() {
     const source = document.querySelector(".a5-native-sheets");
     if (!source) return false;
@@ -3973,14 +3983,14 @@ ${assets}
 <base href="${baseHref}">
 ${assets}
 <style id="dd-black-friday-isolated-print">
-  @page { size: 148mm 210mm; margin: 0; }
-  html, body { margin:0 !important; padding:0 !important; width:148mm !important; min-width:148mm !important; height:auto !important; background:#fff !important; }
+  @page { size: 297mm 210mm; margin: 0; }
+  html, body { margin:0 !important; padding:0 !important; width:297mm !important; min-width:297mm !important; height:auto !important; background:#fff !important; }
   body.a5-native-page { display:block !important; min-height:0 !important; }
-  body.a5-native-page .preview-wrap { display:block !important; width:148mm !important; margin:0 !important; padding:0 !important; }
-  body.a5-native-page .a5-native-sheets { display:block !important; width:148mm !important; margin:0 !important; padding:0 !important; }
-  body.a5-native-page .blitz-sheet { display:block !important; box-sizing:border-box !important; width:148mm !important; min-width:148mm !important; max-width:148mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
+  body.a5-native-page .preview-wrap { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page .a5-native-sheets { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page .blitz-sheet { display:block !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
   body.a5-native-page .blitz-sheet:last-child { break-after:auto !important; page-break-after:auto !important; }
-  body.a5-native-page .g-blitz { display:grid !important; box-sizing:border-box !important; width:148mm !important; min-width:148mm !important; max-width:148mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; grid-template-columns:148mm !important; grid-template-rows:210mm !important; grid-auto-rows:210mm !important; column-gap:0 !important; row-gap:0 !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page .g-blitz { display:grid !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; grid-template-columns:repeat(2, 148mm) !important; grid-template-rows:repeat(1, 210mm) !important; grid-auto-rows:210mm !important; column-gap:0 !important; row-gap:0 !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
   body.a5-native-page .blitz-label { box-sizing:border-box !important; width:148mm !important; min-width:148mm !important; max-width:148mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:.25mm dashed #9aa6b1 !important; outline-offset:-.25mm !important; aspect-ratio:auto !important; background-image:var(--blitz-bg) !important; background-size:100% 100% !important; background-position:center !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
   .no-print, button { display:none !important; }
 </style>
@@ -4021,6 +4031,7 @@ ${assets}
     printWindow.print();
     return true;
   }
+
   async printBlackFridayDocument() {
     const source = document.querySelector(".black-friday-sheets");
     if (!source) return false;
@@ -4421,7 +4432,7 @@ ${assets}
     for (let i = 0; i < aniversarioA6Grid.length; i += 4) aniversarioA6Pages.push({ n: aniversarioA6Pages.length + 1, items: aniversarioA6Grid.slice(i, i + 4) });
     const aniversarioA5Grid = expand(aniversarioA5s);
     const aniversarioA5Pages = [];
-    for (let i = 0; i < aniversarioA5Grid.length; i += (["a5blackfriday","a6blackfriday"].includes(model) ? 1 : 2)) aniversarioA5Pages.push({ n: aniversarioA5Pages.length + 1, items: aniversarioA5Grid.slice(i, i + (["a5blackfriday","a6blackfriday"].includes(model) ? 1 : 2)) });
+    for (let i = 0; i < aniversarioA5Grid.length; i += (model === "a6blackfriday" ? 4 : 2)) aniversarioA5Pages.push({ n: aniversarioA5Pages.length + 1, items: aniversarioA5Grid.slice(i, i + (model === "a6blackfriday" ? 4 : 2)) });
     const blackFridayGrid = expand(blackFridayLabels);
     const blackFridayPages = [];
     for (let i = 0; i < blackFridayGrid.length; i += 15) blackFridayPages.push({ n: blackFridayPages.length + 1, items: blackFridayGrid.slice(i, i + 15) });
@@ -4431,7 +4442,7 @@ ${assets}
     const modelMeta = this.getModelMeta(model);
     const activeCount = expand(renderedLists[modelMeta.key]).length;
     const pages = Math.max(1, Math.ceil(activeCount / modelMeta.perPage));
-    const pageInfo = activeCount + " etiqueta" + (activeCount === 1 ? "" : "s") + " · " + pages + " folha" + (pages === 1 ? "" : "s") + (model === "a6blackfriday" ? " A6" : model === "a5blackfriday" ? " A5" : " A4");
+    const pageInfo = activeCount + " etiqueta" + (activeCount === 1 ? "" : "s") + " · " + pages + " folha" + (pages === 1 ? "" : "s") + " A4";
 
     return {
       isPlaca: model === "placa",
@@ -4695,8 +4706,8 @@ ${assets}
       printCount: activeCount,
       printPages: pages,
       printModel: modelMeta.label,
-      printPaper: model === "a6blackfriday" ? "A6 (105 × 148 mm)" : model === "a5blackfriday" ? "A5 (148 × 210 mm)" : "A4",
-      printOrientation: model === "aniversarioA5" || model === "blitz" || model === "blackfriday" || model === "vendedoras" ? "Paisagem" : "Retrato",
+      printPaper: "A4",
+      printOrientation: model === "a5blackfriday" || model === "aniversarioA5" || model === "blitz" || model === "blackfriday" || model === "vendedoras" ? "Paisagem" : "Retrato",
       printMargins: model === "a6blackfriday" || model === "a5blackfriday" || model === "aniversarioA5" || model === "aniversarioA6" || model === "blitz" || model === "blitzA6" || model === "blackfriday" || model === "vendedoras" || model === "pais6" ? "Nenhuma" : "Padrão",
       isImportOpen: !!this.state.importOpen,
       closeImport: () => this.setState({ importOpen: false }),

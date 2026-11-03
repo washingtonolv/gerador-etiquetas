@@ -309,16 +309,16 @@ console.log("A5 anniversaryA5 editing, assets, pagination and persistence passed
 const nativeA5 = new Component();
 nativeA5.selectModel("a5blackfriday");
 assert.equal(nativeA5.state.model, "a5blackfriday");
-assert.equal(nativeA5.getModelMeta().perPage, 1);
+assert.equal(nativeA5.getModelMeta().perPage, 2);
 nativeA5.state.aniversarioA5s = [{brand:"avon",name:"A5",porPrice:"99,90",qty:2}];
-assert.equal(nativeA5.renderVals().aniversarioA5Pages.length, 2);
-assert.equal(nativeA5.renderVals().printPaper, "A5 (148 × 210 mm)");
-assert.equal(nativeA5.renderVals().printOrientation, "Retrato");
+assert.equal(nativeA5.renderVals().aniversarioA5Pages.length, 1);
+assert.equal(nativeA5.renderVals().printPaper, "A4");
+assert.equal(nativeA5.renderVals().printOrientation, "Paisagem");
 nativeA5.selectModel("a6blackfriday");
 assert.equal(nativeA5.listKey(), "blackFridayA6s");
 nativeA5.state.blackFridayA6s = [{brand:"avon",name:"A6",porPrice:"59,90",qty:3}];
-assert.equal(nativeA5.renderVals().aniversarioA5Pages.length, 3);
-assert.equal(nativeA5.renderVals().printPaper, "A6 (105 × 148 mm)");
+assert.equal(nativeA5.renderVals().aniversarioA5Pages.length, 1);
+assert.equal(nativeA5.renderVals().printPaper, "A4");
 assert.equal(nativeA5.state.aniversarioA5s[0].name, "A5");
 
 
