@@ -1471,6 +1471,7 @@
     <div class="model-rail-title">Modelo<br>de Etiquetas</div>
       <button onClick="{{ pickBlackFriday }}" data-on="{{ tabBlackFridayOn }}" aria-pressed="{{ tabBlackFridayPressed }}" aria-label="Preçario Black Friday" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background:linear-gradient(135deg,#ff6096,#f23d65);"><span style="display:block; margin:20% 8%; height:65%; border-radius:6px; background:#000;"></span></span><span class="model-n">#17</span><span>Preçario Black Friday</span></button>
       <button onClick="{{ pickA5BlackFriday }}" data-on="{{ a5BlackFridayOn }}" aria-label="A5 Black Friday" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background:url(assets/black-friday-a5/template.webp) center/cover"></span><span class="model-n">#18</span><span>A5 Black Friday</span></button>
+      <button onClick="{{ pickA6BlackFriday }}" data-on="{{ a6BlackFridayOn }}" aria-label="A5 Black Friday (A6)" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background:url(assets/black-friday-a5/template.webp) center/cover"></span><span class="model-n">#19</span><span>A5 Black Friday (A6)</span></button>
       <button onClick="{{ pickMake }}" data-on="{{ tabMakeOn }}" aria-pressed="{{ tabMakePressed }}" aria-label="Placa de Acrílico" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-verde.png');"></span><span class="model-n">#1</span><span>Placa de Acrílico</span></button>
       <button onClick="{{ pickPrec }}" data-on="{{ tabPrecOn }}" aria-pressed="{{ tabPrecPressed }}" aria-label="Placa de Acrílico Promoção" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-verde2.png');"></span><span class="model-n">#2</span><span>Placa de Acrílico Promoção</span></button>
       <button onClick="{{ pickMake2 }}" data-on="{{ tabMake2On }}" aria-pressed="{{ tabMake2Pressed }}" aria-label="Régua de Preços" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-verde.png');"></span><span class="model-n">#3</span><span>Régua de Preços</span></button>
@@ -3203,6 +3204,7 @@ class Component extends DCLogic {
     activeBlitzA6: 0,
     activeBlackFriday: 0,
     activeAniversarioA6: 0,
+    activeBlackFridayA6: 0,
     activeAniversarioA5: 0,
     activeVendedoras: 0,
     activePlaca: 0,
@@ -3234,6 +3236,7 @@ class Component extends DCLogic {
       { brand: "avon", name: "PRODUTO", desc: "Descrição", dePrice: "350,99", porPrice: "259,99", qty: 1 },
     ],
     aniversarioA6s: [{ brand: "avon", name: "PRODUTO", desc: "Descrição", dePrice: "350,99", porPrice: "259,99", cada: true, qty: 1, fontSizePt: 22, textAlign: "center", bold: false }],
+    blackFridayA6s: [{brand:"avon",name:"PRODUTO",desc:"Descrição",dePrice:"350,99",porPrice:"259,99",cada:true,qty:1,fontSizePt:22,textAlign:"center",bold:false}],
     aniversarioA5s: [{ brand: "avon", name: "PRODUTO", desc: "Descrição", dePrice: "350,99", porPrice: "259,99", cada: true, qty: 1, fontSizePt: 28, textAlign: "center", bold: false }],
     blackFridayLabels: [
       { brand: "avon", name: "Produto", dePrice: "350,99", porPrice: "259,99", qty: 1, fontSizePt: 10, textAlign: "left", bold: true, cada: true },
@@ -3297,6 +3300,7 @@ class Component extends DCLogic {
     { key: "vizzela", label: "Vizzela" }, { key: "semmarca", label: "Sem marca" },
   ];
   modelMeta = {
+    a6blackfriday: { key:"blackFridayA6s", activeKey:"activeBlackFridayA6",label:"A5 Black Friday (A6)",perPage:1,create:()=>({brand:"avon",name:"PRODUTO",desc:"Descrição",dePrice:"",porPrice:"0,00",cada:true,qty:1,fontSizePt:22,textAlign:"center",bold:false}) },
     a5blackfriday: { key: "aniversarioA5s", activeKey: "activeAniversarioA5", label: "A5 Black Friday", perPage: 1, create: () => ({brand:"avon",name:"PRODUTO",desc:"Descrição",dePrice:"",porPrice:"0,00",cada:true,qty:1,fontSizePt:28,textAlign:"center",bold:false}) },
     placa: { key: "placas", activeKey: "activePlaca", label: "Etiqueta Vitrine", perPage: 12, create: () => ({ brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }) },
     pcr: { key: "pcrs", activeKey: "activePcr", label: "Expositor Madeira", perPage: 9, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }) },
@@ -3472,15 +3476,15 @@ class Component extends DCLogic {
   }
   buildTextFormatting(key, item, i) {
     // Physical widths match each model's print grid in millimetres.
-    const specs = { pcrs: [48, 5.3, 700], prs: [65, 3.3, 800], mks: [64, 3.25, 800], mks2: [55, 3.25, 800], mks3: [55, 3.25, 800], placas: [50, 3.56, 700], aniversarioA6s: [105, 7.4, 700], aniversarioA5s: [148, 6.67, 700] };
+    const specs = { pcrs: [48, 5.3, 700], prs: [65, 3.3, 800], mks: [64, 3.25, 800], mks2: [55, 3.25, 800], mks3: [55, 3.25, 800], placas: [50, 3.56, 700], aniversarioA6s: [105, 7.4, 700], blackFridayA6s: [105, 6.67, 700], aniversarioA5s: [148, 6.67, 700] };
     const spec = specs[key];
     if (!spec) return {};
     const [widthMm, defaultCqw, defaultWeight] = spec;
     const savedSize = Number(item.fontSizePt);
     const hasSize = Number.isFinite(savedSize) && savedSize >= 6;
     const fontSizePt = hasSize ? Math.min(32, Math.round(savedSize)) : Math.max(6, Math.round(defaultCqw * widthMm * 72 / 2540));
-    const textAlign = ["left", "center", "right", "justify"].includes(item.textAlign) ? item.textAlign : ["aniversarioA6s", "aniversarioA5s"].includes(key) ? "center" : "left";
-    const bold = typeof item.bold === "boolean" ? item.bold : !["aniversarioA6s", "aniversarioA5s"].includes(key);
+    const textAlign = ["left", "center", "right", "justify"].includes(item.textAlign) ? item.textAlign : ["aniversarioA6s", "aniversarioA5s", "blackFridayA6s"].includes(key) ? "center" : "left";
+    const bold = typeof item.bold === "boolean" ? item.bold : !["aniversarioA6s", "aniversarioA5s", "blackFridayA6s"].includes(key);
     const update = patch => this.updateItem(key, i, patch);
     const buttonStyle = active => "flex:none; display:flex; align-items:center; justify-content:center; width:28px; height:34px; border-radius:6px; font-size:16px; font-weight:800; cursor:pointer; border:1px solid " + (active ? "#006B67; background:#E7F6F5; color:#006B67;" : "#d8dee4; background:#fff; color:#475569;");
     const formatting = {
@@ -3626,6 +3630,7 @@ class Component extends DCLogic {
         blitzs: this.state.blitzs,
         blackFridayLabels: this.state.blackFridayLabels,
         aniversarioA6s: this.state.aniversarioA6s,
+        blackFridayA6s: this.state.blackFridayA6s,
         aniversarioA5s: this.state.aniversarioA5s,
         placas: this.state.placas,
       },
@@ -3655,6 +3660,7 @@ class Component extends DCLogic {
         blitzs: this.sanitizeList(data.blitzs || this.state.blitzs),
         blackFridayLabels: this.sanitizeList(data.blackFridayLabels || this.state.blackFridayLabels),
         aniversarioA6s: this.sanitizeList(data.aniversarioA6s || this.state.aniversarioA6s),
+        blackFridayA6s: this.sanitizeList(data.blackFridayA6s || this.state.blackFridayA6s),
         aniversarioA5s: this.sanitizeList(data.aniversarioA5s || this.state.aniversarioA5s),
         placas: this.sanitizeList(data.placas),
         activePcr: 0,
@@ -3834,6 +3840,87 @@ ${assets}
       }))),
       new Promise((resolve) => setTimeout(resolve, 4000)),
     ]);
+    if (printDocument.fonts?.ready) await Promise.race([printDocument.fonts.ready, new Promise((resolve) => setTimeout(resolve, 1500))]);
+
+    const printWindow = frame.contentWindow;
+    if (!printWindow) {
+      frame.remove();
+      return false;
+    }
+    let removed = false;
+    const cleanup = () => {
+      if (removed) return;
+      removed = true;
+      frame.remove();
+    };
+    printWindow.addEventListener("afterprint", () => setTimeout(cleanup, 1000), { once: true });
+    setTimeout(cleanup, 120000);
+    printWindow.focus();
+    printWindow.print();
+    return true;
+  }
+  async printA6BlackFridayDocument() {
+    const source = document.querySelector(".a5-native-sheets");
+    if (!source) return false;
+
+    const printable = source.cloneNode(true);
+    printable.querySelectorAll(".no-print, button").forEach((el) => el.remove());
+
+    const frame = document.createElement("iframe");
+    frame.title = "Impressão Preçario Black Friday";
+    frame.setAttribute("aria-hidden", "true");
+    frame.setAttribute("data-dd-black-friday-print-frame", "");
+    frame.style.cssText = "position:fixed; left:-10000px; top:0; width:1px; height:1px; border:0; opacity:0; pointer-events:none;";
+    document.body.appendChild(frame);
+
+    const printDocument = frame.contentDocument;
+    if (!printDocument) {
+      frame.remove();
+      return false;
+    }
+
+    const assets = Array.from(document.querySelectorAll('link[rel="stylesheet"], style'))
+      .filter((el) => !el.id?.startsWith("dd-print-page-"))
+      .map((el) => el.outerHTML)
+      .join("\n");
+    const baseHref = String(document.baseURI || location.href).replace(/"/g, "&quot;");
+    printDocument.open();
+    printDocument.write(`<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<base href="${baseHref}">
+${assets}
+<style id="dd-black-friday-isolated-print">
+  @page { size: 105mm 148mm; margin: 0; }
+  html, body { margin:0 !important; padding:0 !important; width:105mm !important; min-width:105mm !important; height:auto !important; background:#fff !important; }
+  body.a5-native-page { display:block !important; min-height:0 !important; }
+  body.a5-native-page .preview-wrap { display:block !important; width:105mm !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page .a5-native-sheets { display:block !important; width:105mm !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page .blitz-sheet { display:block !important; box-sizing:border-box !important; width:105mm !important; min-width:105mm !important; max-width:105mm !important; height:148mm !important; min-height:148mm !important; max-height:148mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
+  body.a5-native-page .blitz-sheet:last-child { break-after:auto !important; page-break-after:auto !important; }
+  body.a5-native-page .g-blitz { display:grid !important; box-sizing:border-box !important; width:105mm !important; min-width:105mm !important; max-width:105mm !important; height:148mm !important; min-height:148mm !important; max-height:148mm !important; grid-template-columns:105mm !important; grid-template-rows:148mm !important; grid-auto-rows:148mm !important; column-gap:0 !important; row-gap:0 !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page .blitz-label { box-sizing:border-box !important; width:105mm !important; min-width:105mm !important; max-width:105mm !important; height:148mm !important; min-height:148mm !important; max-height:148mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:.25mm dashed #9aa6b1 !important; outline-offset:-.25mm !important; aspect-ratio:auto !important; background-image:var(--blitz-bg) !important; background-size:100% 100% !important; background-position:center !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
+  .no-print, button { display:none !important; }
+</style>
+</head>
+<body class="a5-native-page pp"><div class="preview-wrap">${printable.outerHTML}</div></body>
+</html>`);
+    printDocument.close();
+
+    const backgroundUrls = Array.from(printDocument.querySelectorAll(".blitz-label")).map((label) => {
+      const value = printDocument.defaultView?.getComputedStyle(label).backgroundImage || "";
+      const start = value.indexOf("(");
+      const end = value.lastIndexOf(")");
+      return start >= 0 && end > start ? value.slice(start + 1, end).replace(/^['"]|['"]$/g, "") : "";
+    }).filter(Boolean);
+    const backgroundReady = Promise.all(Array.from(new Set(backgroundUrls)).map((src) => new Promise((resolve) => {
+      const image = new Image();
+      image.onload = resolve;
+      image.onerror = resolve;
+      image.src = src;
+    })));
+    await Promise.race([backgroundReady, new Promise((resolve) => setTimeout(resolve, 4000))]);
     if (printDocument.fonts?.ready) await Promise.race([printDocument.fonts.ready, new Promise((resolve) => setTimeout(resolve, 1500))]);
 
     const printWindow = frame.contentWindow;
@@ -4053,11 +4140,11 @@ ${assets}
       const raw = localStorage.getItem("dd-etiquetas-v2") || localStorage.getItem("dd-etiquetas-v1");
       const saved = raw ? JSON.parse(raw) : null;
       const restored = {};
-      const listKeys = ["pcrs", "prs", "mks", "mks2", "mks3", "pss", "pss6", "blitzs", "blackFridayLabels", "aniversarioA6s", "aniversarioA5s", "placas"];
+      const listKeys = ["pcrs", "prs", "mks", "mks2", "mks3", "pss", "pss6", "blitzs", "blackFridayLabels", "aniversarioA6s", "aniversarioA5s", "blackFridayA6s", "placas"];
       for (const key of listKeys) {
         if (saved && Array.isArray(saved[key])) restored[key] = this.sanitizeList(saved[key]);
       }
-      const validModels = ["placa", "pcr", "prec", "make", "make2", "make3", "pais", "pais6", "blackfriday", "a5blackfriday"];
+      const validModels = ["placa", "pcr", "prec", "make", "make2", "make3", "pais", "pais6", "blackfriday", "a5blackfriday", "a6blackfriday"];
       if (saved && validModels.includes(saved.model)) restored.model = saved.model;
       if (!saved?.a5NativeMigrated) {
         try {
@@ -4095,11 +4182,11 @@ ${assets}
       requestAnimationFrame(() => this._focusBeforeDialog.focus());
     }
 
-    const listKeys = ["pcrs", "prs", "mks", "mks2", "mks3", "pss", "pss6", "blitzs", "blackFridayLabels", "aniversarioA6s", "aniversarioA5s", "placas"];
+    const listKeys = ["pcrs", "prs", "mks", "mks2", "mks3", "pss", "pss6", "blitzs", "blackFridayLabels", "aniversarioA6s", "aniversarioA5s", "blackFridayA6s", "placas"];
     const shouldPersist = !prevState || prevState.model !== this.state.model || listKeys.some(key => prevState[key] !== this.state[key]);
     if (shouldPersist) {
-      const { model, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, blackFridayLabels, aniversarioA6s, aniversarioA5s, placas } = this.state;
-      const data = JSON.stringify({ version: 2, a5NativeMigrated: true, model, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, blackFridayLabels, aniversarioA6s, aniversarioA5s, placas });
+      const { model, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, blackFridayLabels, aniversarioA6s, aniversarioA5s, blackFridayA6s, placas } = this.state;
+      const data = JSON.stringify({ version: 2, a5NativeMigrated: true, model, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, blackFridayLabels, aniversarioA6s, aniversarioA5s, blackFridayA6s, placas });
       this._last = data;
       const status = document.querySelector(".app-status");
       try {
@@ -4251,14 +4338,15 @@ ${assets}
       };
     });
 
-    const aniversarioA5s = this.state.aniversarioA5s.map((g, i) => {
-      const item = this.buildItem("aniversarioA5s", g, i);
+    const a5ListKey = model === "a6blackfriday" ? "blackFridayA6s" : "aniversarioA5s";
+    const aniversarioA5s = this.state[a5ListKey].map((g, i) => {
+      const item = this.buildItem(a5ListKey, g, i);
       const brand = this.pais6Art.includes(g.brand) ? g.brand : "semmarca";
       const de = this.splitPrice(g.dePrice);
       return {
         ...item,
-        blitzBg: model === "a5blackfriday" ? "url('assets/black-friday-a5/template.webp')" : "url('assets/aniversario-a5/" + brand + ".png')",
-        setDesc: e => this.updateItem("aniversarioA5s", i, { desc: e.target.value }),
+        blitzBg: ["a5blackfriday","a6blackfriday"].includes(model) ? "url('assets/black-friday-a5/template.webp')" : "url('assets/aniversario-a5/" + brand + ".png')",
+        setDesc: e => this.updateItem(a5ListKey, i, { desc: e.target.value }),
         descSize: (item.fontSizePt * 0.55 * 2540 / (148 * 72)).toFixed(4) + "cqw",
         deReais: de.reais, deCentavos: de.centavos,
         deSize: de.reais.length > 5 ? "6cqw" : "8.3cqw",
@@ -4321,7 +4409,7 @@ ${assets}
     });
 
     const expand = items => items.flatMap(item => Array(this.clampQty(item.qty)).fill(item));
-    const renderedLists = { placas, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, blitzA6s, blackFridayLabels, aniversarioA6s, aniversarioA5s, vendedorCards };
+    const renderedLists = { placas, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, blitzA6s, blackFridayLabels, aniversarioA6s, aniversarioA5s, blackFridayA6s: aniversarioA5s, vendedorCards };
     const blitzGrid = expand(blitzs);
     const blitzPages = [];
     for (let i = 0; i < blitzGrid.length; i += 2) blitzPages.push({ n: blitzPages.length + 1, items: blitzGrid.slice(i, i + 2) });
@@ -4333,7 +4421,7 @@ ${assets}
     for (let i = 0; i < aniversarioA6Grid.length; i += 4) aniversarioA6Pages.push({ n: aniversarioA6Pages.length + 1, items: aniversarioA6Grid.slice(i, i + 4) });
     const aniversarioA5Grid = expand(aniversarioA5s);
     const aniversarioA5Pages = [];
-    for (let i = 0; i < aniversarioA5Grid.length; i += (model === "a5blackfriday" ? 1 : 2)) aniversarioA5Pages.push({ n: aniversarioA5Pages.length + 1, items: aniversarioA5Grid.slice(i, i + (model === "a5blackfriday" ? 1 : 2)) });
+    for (let i = 0; i < aniversarioA5Grid.length; i += (["a5blackfriday","a6blackfriday"].includes(model) ? 1 : 2)) aniversarioA5Pages.push({ n: aniversarioA5Pages.length + 1, items: aniversarioA5Grid.slice(i, i + (["a5blackfriday","a6blackfriday"].includes(model) ? 1 : 2)) });
     const blackFridayGrid = expand(blackFridayLabels);
     const blackFridayPages = [];
     for (let i = 0; i < blackFridayGrid.length; i += 15) blackFridayPages.push({ n: blackFridayPages.length + 1, items: blackFridayGrid.slice(i, i + 15) });
@@ -4343,7 +4431,7 @@ ${assets}
     const modelMeta = this.getModelMeta(model);
     const activeCount = expand(renderedLists[modelMeta.key]).length;
     const pages = Math.max(1, Math.ceil(activeCount / modelMeta.perPage));
-    const pageInfo = activeCount + " etiqueta" + (activeCount === 1 ? "" : "s") + " · " + pages + " folha" + (pages === 1 ? "" : "s") + (model === "a5blackfriday" ? " A5" : " A4");
+    const pageInfo = activeCount + " etiqueta" + (activeCount === 1 ? "" : "s") + " · " + pages + " folha" + (pages === 1 ? "" : "s") + (model === "a6blackfriday" ? " A6" : model === "a5blackfriday" ? " A5" : " A4");
 
     return {
       isPlaca: model === "placa",
@@ -4360,22 +4448,24 @@ ${assets}
       tabAniversarioA6Pressed: model === "aniversarioA6" ? "true" : "false",
       addAniversarioA6: () => this.addItem("aniversarioA6s", this.modelMeta.aniversarioA6.create()),
       pickAniversarioA6: () => this.selectModel("aniversarioA6"),
-      isAniversarioA5: ["aniversarioA5","a5blackfriday"].includes(model),
+      isAniversarioA5: ["aniversarioA5","a5blackfriday","a6blackfriday"].includes(model),
       pickA5BlackFriday: () => this.selectModel("a5blackfriday"),
       a5BlackFridayOn: model === "a5blackfriday" ? "1" : "0",
-      a5Title: model === "a5blackfriday" ? "A5 Black Friday" : "A5 ANIVERSARIO",
+      pickA6BlackFriday: () => this.selectModel("a6blackfriday"),
+      a6BlackFridayOn: model === "a6blackfriday" ? "1" : "0",
+      a5Title: model === "a6blackfriday" ? "A5 Black Friday (A6)" : model === "a5blackfriday" ? "A5 Black Friday" : "A5 ANIVERSARIO",
       aniversarioA5s, aniversarioA5Pages, aniversarioA5Count: aniversarioA5s.length,
       aniversarioA5Empty: aniversarioA5s.length === 0, aniversarioA5HasItems: aniversarioA5s.length > 0,
       tabAniversarioA5On: model === "aniversarioA5" ? "1" : "0",
       tabAniversarioA5Pressed: model === "aniversarioA5" ? "true" : "false",
-      addAniversarioA5: () => this.addItem("aniversarioA5s", this.modelMeta.aniversarioA5.create()),
+      addAniversarioA5: () => this.addItem(a5ListKey, this.getModelMeta().create()),
       pickAniversarioA5: () => this.selectModel("aniversarioA5"),
       isBlitzA6: model === "blitzA6",
       isBlackFriday: model === "blackfriday",
       isVendedoras: model === "vendedoras",
       pais6PageClass: model === "pais6" ? "pais6-page" : "",
       pais6PageCss: "",
-      blitzPageClass: model === "a5blackfriday" ? "blitz-page a5-native-page" : ["blitz", "aniversarioA5"].includes(model) ? "blitz-page" : "",
+      blitzPageClass: model === "a6blackfriday" ? "blitz-page a5-native-page a6-native-page" : model === "a5blackfriday" ? "blitz-page a5-native-page" : ["blitz", "aniversarioA5"].includes(model) ? "blitz-page" : "",
       blitzPageCss: "",
       blitzA6PageClass: ["blitzA6", "aniversarioA6"].includes(model) ? "blitzA6-page" : "",
       blitzA6PageCss: "",
@@ -4575,6 +4665,7 @@ ${assets}
             await this.printBlitzA6Document();
             return;
           }
+          if (model === "a6blackfriday") { await this.printA6BlackFridayDocument(); return; }
           if (model === "a5blackfriday") { await this.printA5BlackFridayDocument(); return; }
           if (model === "blackfriday") {
             await this.printBlackFridayDocument();
@@ -4604,9 +4695,9 @@ ${assets}
       printCount: activeCount,
       printPages: pages,
       printModel: modelMeta.label,
-      printPaper: model === "a5blackfriday" ? "A5 (148 × 210 mm)" : "A4",
+      printPaper: model === "a6blackfriday" ? "A6 (105 × 148 mm)" : model === "a5blackfriday" ? "A5 (148 × 210 mm)" : "A4",
       printOrientation: model === "aniversarioA5" || model === "blitz" || model === "blackfriday" || model === "vendedoras" ? "Paisagem" : "Retrato",
-      printMargins: model === "a5blackfriday" || model === "aniversarioA5" || model === "aniversarioA6" || model === "blitz" || model === "blitzA6" || model === "blackfriday" || model === "vendedoras" || model === "pais6" ? "Nenhuma" : "Padrão",
+      printMargins: model === "a6blackfriday" || model === "a5blackfriday" || model === "aniversarioA5" || model === "aniversarioA6" || model === "blitz" || model === "blitzA6" || model === "blackfriday" || model === "vendedoras" || model === "pais6" ? "Nenhuma" : "Padrão",
       isImportOpen: !!this.state.importOpen,
       closeImport: () => this.setState({ importOpen: false }),
       downloadModel: () => {
