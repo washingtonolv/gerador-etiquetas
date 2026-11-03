@@ -320,5 +320,12 @@ nativeA5.state.blackFridayA6s = [{brand:"avon",name:"A6",porPrice:"59,90",qty:3}
 assert.equal(nativeA5.renderVals().aniversarioA5Pages.length, 1);
 assert.equal(nativeA5.renderVals().printPaper, "A4");
 assert.equal(nativeA5.state.aniversarioA5s[0].name, "A5");
+nativeA5.state.blackFridayA6s = [];
+assert.equal(nativeA5.renderVals().printPages, 0, "Lista vazia não deve contar folha de impressão");
+nativeA5.state.blackFridayA6s = [{brand:"avon",name:"A6",porPrice:"59,90",qty:5}];
+assert.deepEqual(Array.from(nativeA5.renderVals().aniversarioA5Pages, p => p.items.length), [4,1]);
+nativeA5.selectModel("a5blackfriday");
+nativeA5.state.aniversarioA5s = [{brand:"avon",name:"A5",porPrice:"99,90",qty:3}];
+assert.deepEqual(Array.from(nativeA5.renderVals().aniversarioA5Pages, p => p.items.length), [2,1]);
 
 

@@ -4441,7 +4441,7 @@ ${assets}
     for (let i = 0; i < vendedorasGrid.length; i += 9) vendedorasPages.push({ n: vendedorasPages.length + 1, items: vendedorasGrid.slice(i, i + 9) });
     const modelMeta = this.getModelMeta(model);
     const activeCount = expand(renderedLists[modelMeta.key]).length;
-    const pages = Math.max(1, Math.ceil(activeCount / modelMeta.perPage));
+    const pages = Math.ceil(activeCount / modelMeta.perPage);
     const pageInfo = activeCount + " etiqueta" + (activeCount === 1 ? "" : "s") + " · " + pages + " folha" + (pages === 1 ? "" : "s") + " A4";
 
     return {
