@@ -306,4 +306,13 @@ assert.equal(restoredAnniversaryA5.state.aniversarioA5s[0].fontSizePt, 32);
 assert.equal(restoredAnniversaryA5.state.aniversarioA5s[0].name, "Perfume aniversário");
 restoredAnniversaryA5.componentWillUnmount();
 console.log("A5 anniversaryA5 editing, assets, pagination and persistence passed.");
+const nativeA5 = new Component();
+nativeA5.selectModel("a5blackfriday");
+assert.equal(nativeA5.state.model, "a5blackfriday");
+assert.equal(nativeA5.getModelMeta().perPage, 1);
+nativeA5.state.aniversarioA5s = [{brand:"avon",name:"A5",porPrice:"99,90",qty:2}];
+assert.equal(nativeA5.renderVals().aniversarioA5Pages.length, 2);
+assert.equal(nativeA5.renderVals().printPaper, "A5 (148 × 210 mm)");
+assert.equal(nativeA5.renderVals().printOrientation, "Retrato");
+
 

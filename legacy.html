@@ -1403,6 +1403,7 @@
   </style>
   <meta name="theme-color" content="#006B67">
   <link rel="manifest" href="manifest.webmanifest">
+<style>.a5-native-page:not(.pp) .g-blitz{grid-template-columns:minmax(0,480px)!important;justify-content:center!important}.a5-native-page .aniversario-a5-price{color:white}.a5-native-page .blitz-label{aspect-ratio:148/210!important}</style>
 </helmet>
 <div class="no-print splash" id="dd-splash" style="position:fixed; inset:0; z-index:999;">
   <svg class="splash-flower splash-flower--top" viewBox="-10 -10 220 220" aria-hidden="true"><g fill="#A72F50"><circle cx="145" cy="126" r="48"/><circle cx="100" cy="152" r="48"/><circle cx="55" cy="126" r="48"/><circle cx="55" cy="74" r="48"/><circle cx="100" cy="48" r="48"/><circle cx="145" cy="74" r="48"/><circle cx="100" cy="100" r="52"/></g><g fill="#F7FAFA"><circle cx="120.8" cy="112" r="21"/><circle cx="100" cy="124" r="21"/><circle cx="79.2" cy="112" r="21"/><circle cx="79.2" cy="88" r="21"/><circle cx="100" cy="76" r="21"/><circle cx="120.8" cy="88" r="21"/><circle cx="100" cy="100" r="24"/></g><circle cx="100" cy="100" r="13" fill="#A72F50"/></svg>
@@ -1469,6 +1470,7 @@
     <button class="model-rail-toggle" onClick="{{ toggleModelsPanel }}" title="{{ modelsToggleTitle }}" aria-label="{{ modelsToggleTitle }}" aria-expanded="{{ modelsExpanded }}"><span class="model-rail-toggle-icon">›</span></button>
     <div class="model-rail-title">Modelo<br>de Etiquetas</div>
       <button onClick="{{ pickBlackFriday }}" data-on="{{ tabBlackFridayOn }}" aria-pressed="{{ tabBlackFridayPressed }}" aria-label="Preçario Black Friday" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background:linear-gradient(135deg,#ff6096,#f23d65);"><span style="display:block; margin:20% 8%; height:65%; border-radius:6px; background:#000;"></span></span><span class="model-n">#17</span><span>Preçario Black Friday</span></button>
+      <button onClick="{{ pickA5BlackFriday }}" data-on="{{ a5BlackFridayOn }}" aria-label="A5 Black Friday" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background:url(assets/black-friday-a5/template.webp) center/cover"></span><span class="model-n">#18</span><span>A5 Black Friday</span></button>
       <button onClick="{{ pickMake }}" data-on="{{ tabMakeOn }}" aria-pressed="{{ tabMakePressed }}" aria-label="Placa de Acrílico" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-verde.png');"></span><span class="model-n">#1</span><span>Placa de Acrílico</span></button>
       <button onClick="{{ pickPrec }}" data-on="{{ tabPrecOn }}" aria-pressed="{{ tabPrecPressed }}" aria-label="Placa de Acrílico Promoção" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-verde2.png');"></span><span class="model-n">#2</span><span>Placa de Acrílico Promoção</span></button>
       <button onClick="{{ pickMake2 }}" data-on="{{ tabMake2On }}" aria-pressed="{{ tabMake2Pressed }}" aria-label="Régua de Preços" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-verde.png');"></span><span class="model-n">#3</span><span>Régua de Preços</span></button>
@@ -1562,7 +1564,7 @@
       <div class="import-panel" role="dialog" aria-modal="true" aria-labelledby="print-dialog-title" tabindex="-1" style="background:#fff; border-radius:18px; padding:26px; width:100%; max-width:500px; max-height:90vh; overflow:auto; display:flex; flex-direction:column; gap:18px; box-shadow:0 18px 60px rgba(0,0,0,.3);">
         <div style="display:flex; align-items:center; gap:10px;"><div style="width:42px; height:42px; display:grid; place-items:center; border-radius:12px; background:#FCECEF; color:#A72F50; font-size:21px;">🖨</div><div><div id="print-dialog-title" style="font-size:19px; font-weight:600; color:#263737;">Tudo pronto para imprimir?</div><div style="font-size:12px; color:#657575; margin-top:3px;">{{ printModel }}</div></div><div style="flex:1;"></div><button onClick="{{ closePrint }}" aria-label="Fechar confirmação de impressão" style="background:none; border:none; color:#657575; font-size:20px; cursor:pointer;">✕</button></div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;"><div style="padding:14px; border-radius:12px; background:#F7FAFA; border:1px solid #DCE9E8;"><div style="font-size:24px; font-weight:800; color:#006B67;">{{ printCount }}</div><div style="font-size:12px; color:#657575;">etiquetas</div></div><div style="padding:14px; border-radius:12px; background:#F7FAFA; border:1px solid #DCE9E8;"><div style="font-size:24px; font-weight:800; color:#006B67;">{{ printPages }}</div><div style="font-size:12px; color:#657575;">folhas A4</div></div></div>
-        <div style="display:flex; flex-direction:column; gap:9px; padding:14px; border-radius:12px; background:#FFF8F9; border:1px solid #F0CAD3; font-size:13px; color:#4E5555;"><div>✓ Papel: <b>A4</b></div><div>✓ Orientação: <b>{{ printOrientation }}</b></div><div>✓ Margens: <b>{{ printMargins }}</b></div><div>✓ Escala: <b>100% ou tamanho real</b></div><div>✓ Desative <b>cabeçalhos e rodapés</b></div><div>✓ Não use “Ajustar à página”</div></div>
+        <div style="display:flex; flex-direction:column; gap:9px; padding:14px; border-radius:12px; background:#FFF8F9; border:1px solid #F0CAD3; font-size:13px; color:#4E5555;"><div>✓ Papel: <b>{{ printPaper }}</b></div><div>✓ Orientação: <b>{{ printOrientation }}</b></div><div>✓ Margens: <b>{{ printMargins }}</b></div><div>✓ Escala: <b>100% ou tamanho real</b></div><div>✓ Desative <b>cabeçalhos e rodapés</b></div><div>✓ Não use “Ajustar à página”</div></div>
         <div style="display:flex; gap:10px;"><button onClick="{{ closePrint }}" style="flex:1; background:#fff; color:#657575; border:1px solid #DCE9E8; border-radius:10px; padding:12px; font-size:13px; font-weight:700; cursor:pointer;">Voltar</button><button onClick="{{ confirmPrint }}" style="flex:1.4; background:#A72F50; color:#fff; border:none; border-radius:10px; padding:12px; font-size:13px; font-weight:800; cursor:pointer;">Imprimir agora</button></div>
       </div>
     </div>
@@ -2621,7 +2623,7 @@
       <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
       <div class="editor-panel-content">
         <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-          <h2 style="flex:1; font-size:11px; font-weight:600; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">A5 ANIVERSARIO ({{ aniversarioA5Count }})</h2>
+          <h2 style="flex:1; font-size:11px; font-weight:600; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">{{ a5Title }} ({{ aniversarioA5Count }})</h2>
         </div>
         <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
         <sc-for list="{{ aniversarioA5s }}" as="g" hint-placeholder-count="2">
@@ -2630,8 +2632,8 @@
             <div class="card-content"><div class="card-content-inner">
               <div style="display:flex; align-items:center; gap:8px;">
                 <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span>
-                <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" aria-label="Marca da etiqueta A5 ANIVERSARIO" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
-                  <sc-for list="{{ blitzBrandOptions }}" as="b" hint-placeholder-count="18"><option value="{{ b.key }}">{{ b.label }}</option></sc-for>
+                <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" aria-label="Marca da etiqueta A5 Black Friday" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
+                  <sc-for list="{{ placaBrandOptions }}" as="b" hint-placeholder-count="18"><option value="{{ b.key }}">{{ b.label }}</option></sc-for>
                 </select>
                 <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
                 <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
@@ -2690,13 +2692,13 @@
           <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">+</button>
         </div>
       </div>
-      <div class="blitz-sheets">
+      <div class="blitz-sheets a5-native-sheets">
         <sc-if value="{{ aniversarioA5Empty }}" hint-placeholder-val="false">
           <div class="sheet blitz-sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
             <div class="g-blitz" style="display:grid; grid-template-columns:repeat(2, 1fr); gap:10px;">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
               <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
-              <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta A5 ANIVERSARIO ainda</div>
+              <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta A5 Black Friday ainda</div>
               <button onClick="{{ addAniversarioA5 }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
             </div>
             </div>
@@ -2710,8 +2712,9 @@
                   <div class="label-preview blitz-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:148 / 210; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-color:#d000c4; background-repeat:no-repeat; background-position:center; background-size:100% 100%; background-image:{{ g.blitzBg }}; --blitz-bg:{{ g.blitzBg }};">
                     <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar esta etiqueta"></button>
                     <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+                    <sc-if value="{{ g.hasBrand }}"><div style="position:absolute;left:25%;top:18%;width:50%;height:9%;background-image:{{ g.brandBg }};background-size:contain;background-position:center;background-repeat:no-repeat;"></div></sc-if>
                     <!-- Masks cover only the baked sample text; original brand artwork stays untouched. -->
-                    <div aria-hidden="true" style="position:absolute; left:10%; top:27.2%; width:80%; height:30.8%; background:#fff0df;"></div>
+                    <div aria-hidden="true" style="position:absolute; left:10%; top:27.2%; width:80%; height:30.8%; background:transparent;"></div>
                     <div class="aniversario-a5-copy" style="position:absolute; left:10%; top:27.7%; width:80%; height:20%; overflow:hidden; text-align:{{ g.textAlign }};">
                       <div style="font-size:{{ g.formattedNameSize }}; font-weight:{{ g.nameWeight }}; line-height:1.12; color:#000; white-space:pre-wrap; overflow-wrap:anywhere; text-wrap:{{ g.nameWrap }};">{{ g.name }}</div>
                       <div style="margin-top:1cqw; font-size:{{ g.descSize }}; font-weight:{{ g.detailsWeight }}; line-height:1.15; color:#000; white-space:pre-wrap; overflow-wrap:anywhere;">{{ g.desc }}</div>
@@ -2721,7 +2724,7 @@
                         <span style="font-size:{{ g.deSize }}; font-weight:400; line-height:1; color:#000;">DE: {{ g.deReais }}</span><span style="font-size:5.7cqw; font-weight:400; line-height:1; color:#000;">,{{ g.deCentavos }}</span>
                       </div>
                     </sc-if>
-                    <div aria-hidden="true" style="position:absolute; left:8%; top:65%; width:84%; height:22%; background:#ff4e4d;"></div>
+                    <div aria-hidden="true" style="position:absolute; left:8%; top:65%; width:84%; height:22%; background:transparent;"></div>
                     <div class="aniversario-a5-price" style="position:absolute; left:10%; top:70.5%; width:80%; display:flex; justify-content:center; align-items:center; gap:1.4cqw; white-space:nowrap;">
                       <span style="font-size:4.8cqw; font-weight:400; line-height:1.05; color:#fff;">POR:<br>R$</span>
                       <span style="font-size:{{ g.priceSize }}; font-weight:900; line-height:1; letter-spacing:-.7cqw; color:#fff;">{{ g.reais }}</span>
@@ -3294,6 +3297,7 @@ class Component extends DCLogic {
     { key: "vizzela", label: "Vizzela" }, { key: "semmarca", label: "Sem marca" },
   ];
   modelMeta = {
+    a5blackfriday: { key: "aniversarioA5s", activeKey: "activeAniversarioA5", label: "A5 Black Friday", perPage: 1, create: () => ({brand:"avon",name:"PRODUTO",desc:"Descrição",dePrice:"",porPrice:"0,00",cada:true,qty:1,fontSizePt:28,textAlign:"center",bold:false}) },
     placa: { key: "placas", activeKey: "activePlaca", label: "Etiqueta Vitrine", perPage: 12, create: () => ({ brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }) },
     pcr: { key: "pcrs", activeKey: "activePcr", label: "Expositor Madeira", perPage: 9, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }) },
     prec: { key: "prs", activeKey: "activePr", label: "Placa de Acrílico Promoção", perPage: 12, create: () => ({ brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" }) },
@@ -3849,6 +3853,87 @@ ${assets}
     printWindow.print();
     return true;
   }
+  async printA5BlackFridayDocument() {
+    const source = document.querySelector(".a5-native-sheets");
+    if (!source) return false;
+
+    const printable = source.cloneNode(true);
+    printable.querySelectorAll(".no-print, button").forEach((el) => el.remove());
+
+    const frame = document.createElement("iframe");
+    frame.title = "Impressão Preçario Black Friday";
+    frame.setAttribute("aria-hidden", "true");
+    frame.setAttribute("data-dd-black-friday-print-frame", "");
+    frame.style.cssText = "position:fixed; left:-10000px; top:0; width:1px; height:1px; border:0; opacity:0; pointer-events:none;";
+    document.body.appendChild(frame);
+
+    const printDocument = frame.contentDocument;
+    if (!printDocument) {
+      frame.remove();
+      return false;
+    }
+
+    const assets = Array.from(document.querySelectorAll('link[rel="stylesheet"], style'))
+      .filter((el) => !el.id?.startsWith("dd-print-page-"))
+      .map((el) => el.outerHTML)
+      .join("\n");
+    const baseHref = String(document.baseURI || location.href).replace(/"/g, "&quot;");
+    printDocument.open();
+    printDocument.write(`<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<base href="${baseHref}">
+${assets}
+<style id="dd-black-friday-isolated-print">
+  @page { size: 148mm 210mm; margin: 0; }
+  html, body { margin:0 !important; padding:0 !important; width:148mm !important; min-width:148mm !important; height:auto !important; background:#fff !important; }
+  body.a5-native-page { display:block !important; min-height:0 !important; }
+  body.a5-native-page .preview-wrap { display:block !important; width:148mm !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page .a5-native-sheets { display:block !important; width:148mm !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page .blitz-sheet { display:block !important; box-sizing:border-box !important; width:148mm !important; min-width:148mm !important; max-width:148mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
+  body.a5-native-page .blitz-sheet:last-child { break-after:auto !important; page-break-after:auto !important; }
+  body.a5-native-page .g-blitz { display:grid !important; box-sizing:border-box !important; width:148mm !important; min-width:148mm !important; max-width:148mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; grid-template-columns:148mm !important; grid-template-rows:210mm !important; grid-auto-rows:210mm !important; column-gap:0 !important; row-gap:0 !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page .blitz-label { box-sizing:border-box !important; width:148mm !important; min-width:148mm !important; max-width:148mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:.25mm dashed #9aa6b1 !important; outline-offset:-.25mm !important; aspect-ratio:auto !important; background-image:var(--blitz-bg) !important; background-size:100% 100% !important; background-position:center !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
+  .no-print, button { display:none !important; }
+</style>
+</head>
+<body class="a5-native-page pp"><div class="preview-wrap">${printable.outerHTML}</div></body>
+</html>`);
+    printDocument.close();
+
+    const backgroundUrls = Array.from(printDocument.querySelectorAll(".blitz-label")).map((label) => {
+      const value = printDocument.defaultView?.getComputedStyle(label).backgroundImage || "";
+      const start = value.indexOf("(");
+      const end = value.lastIndexOf(")");
+      return start >= 0 && end > start ? value.slice(start + 1, end).replace(/^['"]|['"]$/g, "") : "";
+    }).filter(Boolean);
+    const backgroundReady = Promise.all(Array.from(new Set(backgroundUrls)).map((src) => new Promise((resolve) => {
+      const image = new Image();
+      image.onload = resolve;
+      image.onerror = resolve;
+      image.src = src;
+    })));
+    await Promise.race([backgroundReady, new Promise((resolve) => setTimeout(resolve, 4000))]);
+    if (printDocument.fonts?.ready) await Promise.race([printDocument.fonts.ready, new Promise((resolve) => setTimeout(resolve, 1500))]);
+
+    const printWindow = frame.contentWindow;
+    if (!printWindow) {
+      frame.remove();
+      return false;
+    }
+    let removed = false;
+    const cleanup = () => {
+      if (removed) return;
+      removed = true;
+      frame.remove();
+    };
+    printWindow.addEventListener("afterprint", () => setTimeout(cleanup, 1000), { once: true });
+    setTimeout(cleanup, 120000);
+    printWindow.focus();
+    printWindow.print();
+    return true;
+  }
   async printBlackFridayDocument() {
     const source = document.querySelector(".black-friday-sheets");
     if (!source) return false;
@@ -3972,8 +4057,14 @@ ${assets}
       for (const key of listKeys) {
         if (saved && Array.isArray(saved[key])) restored[key] = this.sanitizeList(saved[key]);
       }
-      const validModels = ["placa", "pcr", "prec", "make", "make2", "make3", "pais", "pais6", "blackfriday"];
+      const validModels = ["placa", "pcr", "prec", "make", "make2", "make3", "pais", "pais6", "blackfriday", "a5blackfriday"];
       if (saved && validModels.includes(saved.model)) restored.model = saved.model;
+      if (!saved?.a5NativeMigrated) {
+        try {
+          const previous = JSON.parse(localStorage.getItem("dd-a5-black-friday-v1"));
+          if (Array.isArray(previous)) restored.aniversarioA5s = this.sanitizeList(previous.map(it => ({...it, dePrice:it.de, porPrice:it.por, fontSizePt:it.size, textAlign:it.align})));
+        } catch (e) {}
+      }
       restored.dark = localStorage.getItem("dd-dark") === "1";
       restored.onboardingOpen = false;
       if (Object.keys(restored).length) this.setState(restored);
@@ -4008,7 +4099,7 @@ ${assets}
     const shouldPersist = !prevState || prevState.model !== this.state.model || listKeys.some(key => prevState[key] !== this.state[key]);
     if (shouldPersist) {
       const { model, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, blackFridayLabels, aniversarioA6s, aniversarioA5s, placas } = this.state;
-      const data = JSON.stringify({ version: 2, model, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, blackFridayLabels, aniversarioA6s, aniversarioA5s, placas });
+      const data = JSON.stringify({ version: 2, a5NativeMigrated: true, model, pcrs, prs, mks, mks2, mks3, pss, pss6, blitzs, blackFridayLabels, aniversarioA6s, aniversarioA5s, placas });
       this._last = data;
       const status = document.querySelector(".app-status");
       try {
@@ -4166,7 +4257,7 @@ ${assets}
       const de = this.splitPrice(g.dePrice);
       return {
         ...item,
-        blitzBg: "url('assets/aniversario-a5/" + brand + ".png')",
+        blitzBg: model === "a5blackfriday" ? "url('assets/black-friday-a5/template.webp')" : "url('assets/aniversario-a5/" + brand + ".png')",
         setDesc: e => this.updateItem("aniversarioA5s", i, { desc: e.target.value }),
         descSize: (item.fontSizePt * 0.55 * 2540 / (148 * 72)).toFixed(4) + "cqw",
         deReais: de.reais, deCentavos: de.centavos,
@@ -4242,7 +4333,7 @@ ${assets}
     for (let i = 0; i < aniversarioA6Grid.length; i += 4) aniversarioA6Pages.push({ n: aniversarioA6Pages.length + 1, items: aniversarioA6Grid.slice(i, i + 4) });
     const aniversarioA5Grid = expand(aniversarioA5s);
     const aniversarioA5Pages = [];
-    for (let i = 0; i < aniversarioA5Grid.length; i += 2) aniversarioA5Pages.push({ n: aniversarioA5Pages.length + 1, items: aniversarioA5Grid.slice(i, i + 2) });
+    for (let i = 0; i < aniversarioA5Grid.length; i += (model === "a5blackfriday" ? 1 : 2)) aniversarioA5Pages.push({ n: aniversarioA5Pages.length + 1, items: aniversarioA5Grid.slice(i, i + (model === "a5blackfriday" ? 1 : 2)) });
     const blackFridayGrid = expand(blackFridayLabels);
     const blackFridayPages = [];
     for (let i = 0; i < blackFridayGrid.length; i += 15) blackFridayPages.push({ n: blackFridayPages.length + 1, items: blackFridayGrid.slice(i, i + 15) });
@@ -4252,7 +4343,7 @@ ${assets}
     const modelMeta = this.getModelMeta(model);
     const activeCount = expand(renderedLists[modelMeta.key]).length;
     const pages = Math.max(1, Math.ceil(activeCount / modelMeta.perPage));
-    const pageInfo = activeCount + " etiqueta" + (activeCount === 1 ? "" : "s") + " · " + pages + " folha" + (pages === 1 ? "" : "s") + " A4";
+    const pageInfo = activeCount + " etiqueta" + (activeCount === 1 ? "" : "s") + " · " + pages + " folha" + (pages === 1 ? "" : "s") + (model === "a5blackfriday" ? " A5" : " A4");
 
     return {
       isPlaca: model === "placa",
@@ -4269,7 +4360,10 @@ ${assets}
       tabAniversarioA6Pressed: model === "aniversarioA6" ? "true" : "false",
       addAniversarioA6: () => this.addItem("aniversarioA6s", this.modelMeta.aniversarioA6.create()),
       pickAniversarioA6: () => this.selectModel("aniversarioA6"),
-      isAniversarioA5: model === "aniversarioA5",
+      isAniversarioA5: ["aniversarioA5","a5blackfriday"].includes(model),
+      pickA5BlackFriday: () => this.selectModel("a5blackfriday"),
+      a5BlackFridayOn: model === "a5blackfriday" ? "1" : "0",
+      a5Title: model === "a5blackfriday" ? "A5 Black Friday" : "A5 ANIVERSARIO",
       aniversarioA5s, aniversarioA5Pages, aniversarioA5Count: aniversarioA5s.length,
       aniversarioA5Empty: aniversarioA5s.length === 0, aniversarioA5HasItems: aniversarioA5s.length > 0,
       tabAniversarioA5On: model === "aniversarioA5" ? "1" : "0",
@@ -4281,7 +4375,7 @@ ${assets}
       isVendedoras: model === "vendedoras",
       pais6PageClass: model === "pais6" ? "pais6-page" : "",
       pais6PageCss: "",
-      blitzPageClass: ["blitz", "aniversarioA5"].includes(model) ? "blitz-page" : "",
+      blitzPageClass: model === "a5blackfriday" ? "blitz-page a5-native-page" : ["blitz", "aniversarioA5"].includes(model) ? "blitz-page" : "",
       blitzPageCss: "",
       blitzA6PageClass: ["blitzA6", "aniversarioA6"].includes(model) ? "blitzA6-page" : "",
       blitzA6PageCss: "",
@@ -4481,6 +4575,7 @@ ${assets}
             await this.printBlitzA6Document();
             return;
           }
+          if (model === "a5blackfriday") { await this.printA5BlackFridayDocument(); return; }
           if (model === "blackfriday") {
             await this.printBlackFridayDocument();
             return;
@@ -4509,8 +4604,9 @@ ${assets}
       printCount: activeCount,
       printPages: pages,
       printModel: modelMeta.label,
+      printPaper: model === "a5blackfriday" ? "A5 (148 × 210 mm)" : "A4",
       printOrientation: model === "aniversarioA5" || model === "blitz" || model === "blackfriday" || model === "vendedoras" ? "Paisagem" : "Retrato",
-      printMargins: model === "aniversarioA5" || model === "aniversarioA6" || model === "blitz" || model === "blitzA6" || model === "blackfriday" || model === "vendedoras" || model === "pais6" ? "Nenhuma" : "Padrão",
+      printMargins: model === "a5blackfriday" || model === "aniversarioA5" || model === "aniversarioA6" || model === "blitz" || model === "blitzA6" || model === "blackfriday" || model === "vendedoras" || model === "pais6" ? "Nenhuma" : "Padrão",
       isImportOpen: !!this.state.importOpen,
       closeImport: () => this.setState({ importOpen: false }),
       downloadModel: () => {
@@ -4564,4 +4660,5 @@ ${assets}
 </script>
 </body>
 </html>
+
 
