@@ -8,7 +8,7 @@ const whatsappModel = readFileSync(new URL("cartao-agradecimento.js", root), "ut
 assert.match(bootstrap, /<iframe[^>]+src="\.\/legacy\.html"/);
 assert.match(bootstrap, /cartao-agradecimento\.js/);
 assert.match(whatsappModel, /Cartão Agradecimento WhatsApp/);
-assert.match(whatsappModel, /#12/);
+assert.match(whatsappModel, /class="model-n">8/);
 assert.match(whatsappModel, /DEFAULT_COUNT = 4/);
 assert.match(whatsappModel, /A4 portrait/);
 assert.match(whatsappModel, /97\.8154mm/);

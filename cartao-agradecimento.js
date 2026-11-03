@@ -109,7 +109,7 @@
     workspace.innerHTML = `
       <header class="ddwa-toolbar">
         <button class="ddwa-btn" data-action="close">← Voltar ao gerador</button>
-        <h1>Cartão de Agradecimento WhatsApp<small>Modelo #12 · A4 vertical · 4 cartões por folha</small></h1>
+        <h1>Cartão de Agradecimento WhatsApp<small>Modelo 8 · A4 vertical · 4 cartões por folha</small></h1>
         <button class="ddwa-btn" data-action="add">+ Novo cartão</button>
         <button class="ddwa-btn ddwa-btn-primary" data-action="print">Imprimir</button>
       </header>
@@ -207,7 +207,7 @@
     button.id = "dd-whatsapp-model-button";
     button.className = "model-item";
     button.setAttribute("aria-label", "Cartão de Agradecimento WhatsApp");
-    button.innerHTML = '<span class="model-thumb ddwa-model-thumb"></span><span class="model-n">#12</span><span>Cartão Agradecimento WhatsApp</span>';
+    button.innerHTML = '<span class="model-thumb ddwa-model-thumb"></span><span class="model-n">8</span><span>Cartão Agradecimento WhatsApp</span>';
     button.addEventListener("click", openWorkspace);
     return button;
   }
@@ -216,7 +216,7 @@
     ensureStyles();
     const rail = document.querySelector(".model-rail");
     if (!rail || rail.querySelector("#dd-whatsapp-model-button")) return;
-    rail.appendChild(modelButton());
+    rail.insertBefore(modelButton(), rail.querySelector('[aria-label="Preçario Black Friday"]'));
   }
 
   function boot() {
