@@ -43,6 +43,7 @@
     @media(max-width:720px){#home{padding:0 16px 35px}.topbar{height:68px}.topnote{display:none}.intro{margin:30px auto 24px}.gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.model{padding:8px;border-radius:15px}.art{height:125px}.model-name{font-size:13px}.model-sub{font-size:11px}.meta{padding:12px 3px 5px}.arrow{width:27px;height:27px}}
     @media(max-width:420px){.art{height:105px}.art img{width:76%}.gallery{gap:9px}.model-sub{display:none}}
     @media print{.workspace-head{display:none}#app-frame{height:100%}}
+  .dd-icon{width:20px;height:20px;display:inline-block;vertical-align:middle;flex-shrink:0;pointer-events:none} button>.dd-icon:not(:only-child){margin-right:6px} .arrow .dd-icon{width:18px;height:18px} .back{display:inline-flex;align-items:center;gap:6px}
   </style>
 </head>
 <body>
@@ -54,7 +55,7 @@
     <p id="empty">Nenhum modelo encontrado para esta busca.</p>
   </main>
   <section id="workspace" aria-label="Editor de etiquetas">
-    <div class="workspace-head"><button class="back" id="back" type="button">← Todos os modelos</button><span id="current-title"></span></div>
+    <div class="workspace-head"><button class="back" id="back" type="button"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>Todos os modelos</button><span id="current-title"></span></div>
     <iframe id="app-frame" src="./legacy.html" title="Editor de Etiquetas D&D"></iframe>
   </section>
   <script>
@@ -126,7 +127,7 @@
           const meta=document.createElement('div');meta.className='meta';
           const labels=document.createElement('div');const name=document.createElement('div');name.className='model-name';name.textContent=model.name;
           const sub=document.createElement('div');sub.className='model-sub';sub.textContent='Abrir editor de etiqueta';labels.append(name,sub);
-          const arrow=document.createElement('span');arrow.className='arrow';arrow.textContent='→';meta.append(labels,arrow);
+          const arrow=document.createElement('span');arrow.className='arrow';arrow.innerHTML="<svg class=\"dd-icon\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\" xmlns=\"http://www.w3.org/2000/svg\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\"><path d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z\"/></svg>";meta.append(labels,arrow);
           button.append(art,meta);button.addEventListener('click',()=>activate(model));gallery.appendChild(button);
         });
       }
@@ -138,3 +139,4 @@
   </script>
 </body>
 </html>
+

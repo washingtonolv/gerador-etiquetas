@@ -19,7 +19,8 @@
 .g-make .fold-label { aspect-ratio:48 / 30; }
 @media print { .g-make > .fold-label { width:48mm !important; height:30mm !important; } }
 .pp .g-make > .fold-label { width:48mm !important; height:30mm !important; }
-</style></head>
+</style><style>.dd-icon{width:20px;height:20px;display:inline-block;vertical-align:middle;flex-shrink:0;pointer-events:none} button>.dd-icon:not(:only-child){margin-right:6px} .arrow .dd-icon{width:18px;height:18px} .back{display:inline-flex;align-items:center;gap:6px}</style>
+</head>
 <body>
 <dd-app-shell>
 <x-dc>
@@ -1446,18 +1447,18 @@
       </div>
       <div style="flex:1;"></div>
       <div class="hdr-actions" style="display:flex; align-items:center; gap:2px;">
-        <button onClick="{{ addCurrent }}" class="hdr-btn btn-secondary" style="background:none; border:none; color:#7A7183; font-size:14px; font-weight:700; cursor:pointer; padding:9px 12px; border-radius:999px;" style-hover="background:#E7F6F5; color:#006B67;">+ Adicionar</button>
-        <button onClick="{{ doImport }}" class="hdr-btn" title="Importar CSV" style="background:none; border:none; color:#7A7183; font-size:14px; font-weight:700; cursor:pointer; padding:9px 12px; border-radius:999px;" style-hover="background:#E7F6F5; color:#006B67;">Importar</button>
+        <button onClick="{{ addCurrent }}" class="hdr-btn btn-secondary" style="background:none; border:none; color:#7A7183; font-size:14px; font-weight:700; cursor:pointer; padding:9px 12px; border-radius:999px;" style-hover="background:#E7F6F5; color:#006B67;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar</button>
+        <button onClick="{{ doImport }}" class="hdr-btn" title="Importar CSV" style="background:none; border:none; color:#7A7183; font-size:14px; font-weight:700; cursor:pointer; padding:9px 12px; border-radius:999px;" style-hover="background:#E7F6F5; color:#006B67;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>Importar</button>
         <button onClick="{{ exportLabels }}" class="hdr-btn hdr-more" title="Baixar backup das etiquetas" style="background:none; border:none; color:#7A7183; font-size:14px; font-weight:700; cursor:pointer; padding:9px 12px; border-radius:999px;" style-hover="background:#E7F6F5; color:#006B67;">Exportar etiquetas</button>
         <button onClick="{{ clearCurrent }}" class="hdr-btn hdr-more" title="Limpar a aba atual" style="background:none; border:none; color:#7A7183; font-size:14px; font-weight:700; cursor:pointer; padding:9px 12px; border-radius:999px;" style-hover="background:#E7F6F5; color:#006B67;">Limpar aba</button>
         <button onClick="{{ toggleDark }}" class="hdr-btn hdr-more" title="Modo escuro" style="background:none; border:none; color:#7A7183; font-size:14px; font-weight:700; cursor:pointer; padding:9px 12px; border-radius:999px;" style-hover="background:#E7F6F5; color:#006B67;">{{ darkIcon }}</button>
         <button onClick="{{ openHelp }}" class="hdr-btn hdr-more" title="Guia rápido" style="background:none; border:none; color:#7A7183; font-size:14px; font-weight:700; cursor:pointer; padding:9px 12px; border-radius:999px;" style-hover="background:#E7F6F5; color:#006B67;">?</button>
         <div class="hdr-menu" style="position:relative;">
-          <button onClick="{{ toggleMenu }}" class="hdr-btn" title="Mais opções" aria-label="Mais opções" aria-expanded="{{ menuExpanded }}" style="background:none; border:none; color:#7A7183; font-size:14px; font-weight:700; cursor:pointer; padding:9px 12px; border-radius:999px; font-size:19px; padding:7px 12px; line-height:1;" style-hover="background:#E7F6F5; color:#006B67;">⋯</button>
+          <button onClick="{{ toggleMenu }}" class="hdr-btn" title="Mais opções" aria-label="Mais opções" aria-expanded="{{ menuExpanded }}" style="background:none; border:none; color:#7A7183; font-size:14px; font-weight:700; cursor:pointer; padding:9px 12px; border-radius:999px; font-size:19px; padding:7px 12px; line-height:1;" style-hover="background:#E7F6F5; color:#006B67;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></button>
           <sc-if value="{{ isMenuOpen }}" hint-placeholder-val="{{ false }}">
             <div class="menu-pop" style="position:absolute; right:0; top:calc(100% + 10px); z-index:95; background:#fff; border-radius:18px; box-shadow:0 16px 40px rgba(70,50,115,.18); padding:8px; display:flex; flex-direction:column; min-width:220px;">
-              <button onClick="{{ menuAdd }}" style="{{ menuItemStyle }}">+ Adicionar etiqueta</button>
-              <button onClick="{{ menuImport }}" style="{{ menuItemStyle }}">Importar CSV</button>
+              <button onClick="{{ menuAdd }}" style="{{ menuItemStyle }}"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
+              <button onClick="{{ menuImport }}" style="{{ menuItemStyle }}"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>Importar CSV</button>
               <button onClick="{{ menuPreview }}" style="{{ menuItemStyle }}">{{ previewLabel }}</button>
               <button onClick="{{ menuExport }}" style="{{ menuItemStyle }}">Exportar etiquetas</button>
               <button onClick="{{ menuClear }}" style="{{ menuItemStyle }}">Limpar aba atual</button>
@@ -1466,7 +1467,7 @@
             </div>
           </sc-if>
         </div>
-        <button onClick="{{ doPrint }}" class="hdr-btn print-btn" style="background:#A72F50; color:#fff; border:none; border-radius:999px; padding:12px 22px; font-size:14px; font-weight:800; cursor:pointer; white-space:nowrap;" style-hover="background:#922844;">Imprimir / PDF</button>
+        <button onClick="{{ doPrint }}" class="hdr-btn print-btn" style="background:#A72F50; color:#fff; border:none; border-radius:999px; padding:12px 22px; font-size:14px; font-weight:800; cursor:pointer; white-space:nowrap;" style-hover="background:#922844;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>Imprimir / PDF</button>
       </div>
     </div>
   </div>
@@ -1475,7 +1476,7 @@
     <div class="no-print dd-toast">
       <span>{{ undoMsg }}</span>
       <button onClick="{{ doUndo }}">Desfazer</button>
-      <button onClick="{{ dismissUndo }}" title="Fechar" aria-label="Fechar" style="color:#B9B2C4;">✕</button>
+      <button onClick="{{ dismissUndo }}" title="Fechar" aria-label="Fechar" style="color:#B9B2C4;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
     </div>
   </sc-if>
 
@@ -1497,7 +1498,7 @@
   <sc-if value="{{ isPreview }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed; top:14px; right:14px; z-index:50; display:flex; gap:8px;">
       <button onClick="{{ togglePreview }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:12px 18px; font-size:14px; font-weight:800; cursor:pointer; box-shadow:0 2px 10px rgba(0,0,0,.25);">✕ Sair da prévia</button>
-      <button onClick="{{ doPrint }}" style="background:#fff; color:#006B67; border:none; border-radius:8px; padding:12px 18px; font-size:14px; font-weight:800; cursor:pointer; box-shadow:0 2px 10px rgba(0,0,0,.25);">Imprimir / PDF</button>
+      <button onClick="{{ doPrint }}" style="background:#fff; color:#006B67; border:none; border-radius:8px; padding:12px 18px; font-size:14px; font-weight:800; cursor:pointer; box-shadow:0 2px 10px rgba(0,0,0,.25);"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>Imprimir / PDF</button>
     </div>
   </sc-if>
 
@@ -1509,7 +1510,7 @@
       <button onClick="{{ setMvSheet }}" style="{{ mvSheetBtn }}">Folha</button>
     </div>
     <div style="flex:1;"></div>
-    <button onClick="{{ addCurrent }}" style="background:#E7F6F5; color:#006B67; border:1px solid #A9DAD7; border-radius:8px; padding:12px 14px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar</button>
+    <button onClick="{{ addCurrent }}" style="background:#E7F6F5; color:#006B67; border:1px solid #A9DAD7; border-radius:8px; padding:12px 14px; font-size:13px; font-weight:800; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar</button>
     <button onClick="{{ doPrint }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:12px 16px; font-size:13px; font-weight:800; cursor:pointer;">Imprimir</button>
   </div>
 
@@ -1519,7 +1520,7 @@
         <div style="display:flex; align-items:center; gap:8px;">
           <div id="help-dialog-title" style="font-size:17px; font-weight:600; color:#1a1d21;">Guia rápido</div>
           <div style="flex:1;"></div>
-          <button onClick="{{ closeHelp }}" aria-label="Fechar guia rápido" style="background:none; border:none; color:#657575; font-size:18px; cursor:pointer; line-height:1;">✕</button>
+          <button onClick="{{ closeHelp }}" aria-label="Fechar guia rápido" style="background:none; border:none; color:#657575; font-size:18px; cursor:pointer; line-height:1;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
         </div>
         <div style="display:flex; flex-direction:column; gap:10px; font-size:13px; color:#5a6873; line-height:1.55;">
           <div><b style="color:#006B67;">1. Escolha o modelo</b> — as abas no topo trocam entre Placa, Preçário, Precificador e Etiqueta Make.</div>
@@ -1542,7 +1543,7 @@
         <div style="display:flex; align-items:flex-start; gap:12px;">
           <div><div id="onboarding-dialog-title" style="font-size:21px; font-weight:600; color:#263737;">Crie suas etiquetas em 3 passos</div><div style="margin-top:4px; font-size:13px; color:#657575;">O sistema salva tudo automaticamente neste navegador.</div></div>
           <div style="flex:1;"></div>
-          <button onClick="{{ closeOnboarding }}" title="Fechar" aria-label="Fechar introdução" style="background:none; border:none; color:#657575; font-size:20px; cursor:pointer; line-height:1;">✕</button>
+          <button onClick="{{ closeOnboarding }}" title="Fechar" aria-label="Fechar introdução" style="background:none; border:none; color:#657575; font-size:20px; cursor:pointer; line-height:1;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
         </div>
         <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px;">
           <div style="padding:16px; border:1px solid #DCE9E8; border-radius:14px; background:#F7FAFA;"><div style="width:32px; height:32px; display:grid; place-items:center; border-radius:50%; background:#006B67; color:#fff; font-weight:800;">1</div><div style="margin-top:12px; font-size:14px; font-weight:800; color:#263737;">Preencha</div><div style="margin-top:5px; font-size:12px; line-height:1.5; color:#657575;">Digite nome, marca e preços no painel lateral.</div></div>
@@ -1560,7 +1561,7 @@
         <div style="display:flex; align-items:center; gap:8px;">
           <div id="import-dialog-title" style="font-size:17px; font-weight:600; color:#1a1d21;">Importar ou restaurar etiquetas</div>
           <div style="flex:1;"></div>
-          <button onClick="{{ closeImport }}" aria-label="Fechar importação" style="background:none; border:none; color:#657575; font-size:18px; cursor:pointer; line-height:1;">✕</button>
+          <button onClick="{{ closeImport }}" aria-label="Fechar importação" style="background:none; border:none; color:#657575; font-size:18px; cursor:pointer; line-height:1;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
         </div>
         <div style="font-size:13px; color:#5a6873; line-height:1.5;">Para planilhas CSV: uma etiqueta por linha, separada por <b>;</b>.<br><b>Nome ; Preço POR ; Preço DE ; Marca</b><br><br>Para recuperar todas as etiquetas, selecione um backup <b>.json</b> criado em “Exportar etiquetas”.</div>
         <button onClick="{{ downloadModel }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;">⬇ Baixar modelo de importação (.csv)</button>
@@ -1576,7 +1577,7 @@
   <sc-if value="{{ isPrintOpen }}" hint-placeholder-val="{{ false }}">
     <div class="no-print dialog-backdrop" style="position:fixed; inset:0; z-index:110; background:rgba(21,38,37,.58); display:flex; align-items:center; justify-content:center; padding:16px;">
       <div class="import-panel" role="dialog" aria-modal="true" aria-labelledby="print-dialog-title" tabindex="-1" style="background:#fff; border-radius:18px; padding:26px; width:100%; max-width:500px; max-height:90vh; overflow:auto; display:flex; flex-direction:column; gap:18px; box-shadow:0 18px 60px rgba(0,0,0,.3);">
-        <div style="display:flex; align-items:center; gap:10px;"><div style="width:42px; height:42px; display:grid; place-items:center; border-radius:12px; background:#FCECEF; color:#A72F50; font-size:21px;">🖨</div><div><div id="print-dialog-title" style="font-size:19px; font-weight:600; color:#263737;">Tudo pronto para imprimir?</div><div style="font-size:12px; color:#657575; margin-top:3px;">{{ printModel }}</div></div><div style="flex:1;"></div><button onClick="{{ closePrint }}" aria-label="Fechar confirmação de impressão" style="background:none; border:none; color:#657575; font-size:20px; cursor:pointer;">✕</button></div>
+        <div style="display:flex; align-items:center; gap:10px;"><div style="width:42px; height:42px; display:grid; place-items:center; border-radius:12px; background:#FCECEF; color:#A72F50; font-size:21px;">🖨</div><div><div id="print-dialog-title" style="font-size:19px; font-weight:600; color:#263737;">Tudo pronto para imprimir?</div><div style="font-size:12px; color:#657575; margin-top:3px;">{{ printModel }}</div></div><div style="flex:1;"></div><button onClick="{{ closePrint }}" aria-label="Fechar confirmação de impressão" style="background:none; border:none; color:#657575; font-size:20px; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button></div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;"><div style="padding:14px; border-radius:12px; background:#F7FAFA; border:1px solid #DCE9E8;"><div style="font-size:24px; font-weight:800; color:#006B67;">{{ printCount }}</div><div style="font-size:12px; color:#657575;">etiquetas</div></div><div style="padding:14px; border-radius:12px; background:#F7FAFA; border:1px solid #DCE9E8;"><div style="font-size:24px; font-weight:800; color:#006B67;">{{ printPages }}</div><div style="font-size:12px; color:#657575;">folhas A4</div></div></div>
         <div style="display:flex; flex-direction:column; gap:9px; padding:14px; border-radius:12px; background:#FFF8F9; border:1px solid #F0CAD3; font-size:13px; color:#4E5555;"><div>✓ Papel: <b>{{ printPaper }}</b></div><div>✓ Orientação: <b>{{ printOrientation }}</b></div><div>✓ Margens: <b>{{ printMargins }}</b></div><div>✓ Escala: <b>100% ou tamanho real</b></div><div>✓ Desative <b>cabeçalhos e rodapés</b></div><div>✓ Não use “Ajustar à página”</div></div>
         <div style="display:flex; gap:10px;"><button onClick="{{ closePrint }}" style="flex:1; background:#fff; color:#657575; border:1px solid #DCE9E8; border-radius:10px; padding:12px; font-size:13px; font-weight:700; cursor:pointer;">Voltar</button><button onClick="{{ confirmPrint }}" style="flex:1.4; background:#A72F50; color:#fff; border:none; border-radius:10px; padding:12px; font-size:13px; font-weight:800; cursor:pointer;">Imprimir agora</button></div>
@@ -1606,10 +1607,10 @@
               </sc-for>
             </select>
             <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}"><div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ g.brandBg }};"></div></sc-if>
-            <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
-            <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
-            <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
-            <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+            <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para cima"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg></button>
+            <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para baixo"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></button>
+            <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;" aria-label="Duplicar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
+            <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;" aria-label="Remover"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
           </div>
           <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Descrição do produto" aria-label="Descrição do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:600;"></textarea>
               <div class="name-format-toolbar" style="display:flex; align-items:center; justify-content:space-between; gap:4px; flex-wrap:wrap;">
@@ -1642,9 +1643,9 @@
             <div style="flex:1;"></div>
             <div style="display:flex; align-items:center; gap:6px;">
               <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
-                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Menos"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
                 <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
-                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Mais"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
               </div>
               <span style="font-size:12px; font-weight:600; color:#475569;">cópias</span>
             </div>
@@ -1653,7 +1654,7 @@
 </div>
 </div>
       </sc-for>
-      <button onClick="{{ addPcr }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;">+ Adicionar produto</button>
+      <button onClick="{{ addPcr }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar produto</button>
           </div>
 </div>
 
@@ -1662,28 +1663,28 @@
         <span style="font-size:12px; font-weight:700; color:#475569;">{{ pageInfo }}</span>
         <div style="flex:1;"></div>
         <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">−</button>
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Diminuir"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
           <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">+</button>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Aumentar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
         </div>
       </div>
       <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-pcr" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:10px;">
           <sc-if value="{{ pcrEmpty }}" hint-placeholder-val="{{ false }}">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
-              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"/></svg></div>
               <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta ainda</div>
               <div style="font-size:13px; color:#475569; max-width:300px;">Adicione a primeira etiqueta ou importe várias de uma vez por planilha CSV.</div>
               <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
-                <button onClick="{{ addCurrent }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
-                <button onClick="{{ doImport }}" style="background:#fff; color:#006B67; border:1px solid #A9DAD7; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;">Importar CSV</button>
+                <button onClick="{{ addCurrent }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
+                <button onClick="{{ doImport }}" style="background:#fff; color:#006B67; border:1px solid #A9DAD7; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>Importar CSV</button>
               </div>
             </div>
           </sc-if>
           <sc-for list="{{ pcrsGrid }}" as="g" hint-placeholder-count="3">
             <div class="label-preview" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:4.8 / 6.8; background:#FFE1E4; overflow:hidden; border:1px solid #f0dade; border-radius:2px; container-type:inline-size;">
               <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar esta etiqueta"></button>
-              <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+              <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
               <div style="position:absolute; left:0; top:58.7%; width:100%; height:41.3%; background-image:url('assets/placa/nuvem-rosa.png'); background-size:cover; background-position:center bottom; background-repeat:no-repeat;"></div>
               <div style="position:absolute; left:40%; top:38.7%; width:56.7%; aspect-ratio:1 / 1; background-image:url('assets/placa/flor-verde.png'); background-size:contain; background-repeat:no-repeat;"></div>
               <img src="assets/placa/image4.png" alt="D&amp;D" style="position:absolute; left:61%; top:6.5%; width:34%;">
@@ -1735,10 +1736,10 @@
               </sc-for>
             </select>
             <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}"><div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ g.brandBg }};"></div></sc-if>
-            <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
-            <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
-            <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
-            <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+            <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para cima"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg></button>
+            <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para baixo"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></button>
+            <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;" aria-label="Duplicar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
+            <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;" aria-label="Remover"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
           </div>
           <div style="display:flex; gap:6px;">
             <button onClick="{{ g.setRosa }}" style="{{ g.rosaBtnStyle }}">Fundo rosa</button>
@@ -1775,9 +1776,9 @@
             <div style="flex:1;"></div>
             <div style="display:flex; align-items:center; gap:6px;">
               <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
-                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Menos"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
                 <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
-                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Mais"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
               </div>
               <span style="font-size:12px; font-weight:600; color:#475569;">cópias</span>
             </div>
@@ -1786,7 +1787,7 @@
 </div>
 </div>
       </sc-for>
-      <button onClick="{{ addPr }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;">+ Adicionar precificador</button>
+      <button onClick="{{ addPr }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar precificador</button>
           </div>
 </div>
 
@@ -1795,28 +1796,28 @@
         <span style="font-size:12px; font-weight:700; color:#475569;">{{ pageInfo }}</span>
         <div style="flex:1;"></div>
         <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">−</button>
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Diminuir"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
           <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">+</button>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Aumentar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
         </div>
       </div>
       <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-prec" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:10px;">
           <sc-if value="{{ prEmpty }}" hint-placeholder-val="{{ false }}">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
-              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"/></svg></div>
               <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta ainda</div>
               <div style="font-size:13px; color:#475569; max-width:300px;">Adicione a primeira etiqueta ou importe várias de uma vez por planilha CSV.</div>
               <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
-                <button onClick="{{ addCurrent }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
-                <button onClick="{{ doImport }}" style="background:#fff; color:#006B67; border:1px solid #A9DAD7; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;">Importar CSV</button>
+                <button onClick="{{ addCurrent }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
+                <button onClick="{{ doImport }}" style="background:#fff; color:#006B67; border:1px solid #A9DAD7; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>Importar CSV</button>
               </div>
             </div>
           </sc-if>
           <sc-for list="{{ prsGrid }}" as="g" hint-placeholder-count="3">
             <div class="label-preview fold-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
               <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar esta etiqueta"></button>
-              <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+              <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
               <div class="fold-label-face" style="background-image:{{ g.fundoBg }};">
               <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:2.9%; top:5.7%; width:30.7%;">
               <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}">
@@ -1862,10 +1863,10 @@
               </sc-for>
             </select>
             <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}"><div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ g.brandBg }};"></div></sc-if>
-            <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
-            <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
-            <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
-            <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+            <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para cima"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg></button>
+            <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para baixo"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></button>
+            <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;" aria-label="Duplicar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
+            <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;" aria-label="Remover"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
           </div>
           <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Descrição do produto" aria-label="Descrição do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:600;"></textarea>
               <div class="name-format-toolbar" style="display:flex; align-items:center; justify-content:space-between; gap:4px; flex-wrap:wrap;">
@@ -1898,9 +1899,9 @@
             <div style="flex:1;"></div>
             <div style="display:flex; align-items:center; gap:6px;">
               <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
-                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Menos"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
                 <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
-                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Mais"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
               </div>
               <span style="font-size:12px; font-weight:600; color:#475569;">cópias</span>
             </div>
@@ -1909,7 +1910,7 @@
 </div>
 </div>
       </sc-for>
-      <button onClick="{{ addMk }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;">+ Adicionar etiqueta</button>
+      <button onClick="{{ addMk }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
           </div>
 </div>
 
@@ -1918,28 +1919,28 @@
         <span style="font-size:12px; font-weight:700; color:#475569;">{{ pageInfo }}</span>
         <div style="flex:1;"></div>
         <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">−</button>
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Diminuir"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
           <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">+</button>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Aumentar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
         </div>
       </div>
       <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-make" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:10px;">
           <sc-if value="{{ mkEmpty }}" hint-placeholder-val="{{ false }}">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
-              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"/></svg></div>
               <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta ainda</div>
               <div style="font-size:13px; color:#475569; max-width:300px;">Adicione a primeira etiqueta ou importe várias de uma vez por planilha CSV.</div>
               <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
-                <button onClick="{{ addCurrent }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
-                <button onClick="{{ doImport }}" style="background:#fff; color:#006B67; border:1px solid #A9DAD7; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;">Importar CSV</button>
+                <button onClick="{{ addCurrent }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
+                <button onClick="{{ doImport }}" style="background:#fff; color:#006B67; border:1px solid #A9DAD7; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>Importar CSV</button>
               </div>
             </div>
           </sc-if>
           <sc-for list="{{ mksGrid }}" as="g" hint-placeholder-count="3">
             <div class="label-preview fold-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
               <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar esta etiqueta"></button>
-              <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+              <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
               <div class="fold-label-face" style="background-image:url('assets/precificador/fundo-verde.png');">
               <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:1%; top:5%; width:48%;">
               <div class="formatted-product-name" style="position:absolute; left:2%; top:57%; width:38%; font-size:{{ g.formattedNameSize }}; font-weight:{{ g.nameWeight }}; line-height:1.15; color:#171717; text-transform:uppercase;  text-align:{{ g.textAlign }}; text-wrap:{{ g.nameWrap }}; overflow-wrap:break-word;">{{ g.name }}</div>
@@ -1984,10 +1985,10 @@
               </sc-for>
             </select>
             <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}"><div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ g.brandBg }};"></div></sc-if>
-            <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
-            <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
-            <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
-            <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+            <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para cima"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg></button>
+            <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para baixo"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></button>
+            <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;" aria-label="Duplicar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
+            <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;" aria-label="Remover"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
           </div>
           <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Descrição do produto" aria-label="Descrição do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:600;"></textarea>
               <div class="name-format-toolbar" style="display:flex; align-items:center; justify-content:space-between; gap:4px; flex-wrap:wrap;">
@@ -2020,9 +2021,9 @@
             <div style="flex:1;"></div>
             <div style="display:flex; align-items:center; gap:6px;">
               <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
-                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Menos"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
                 <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
-                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Mais"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
               </div>
               <span style="font-size:12px; font-weight:600; color:#475569;">cópias</span>
             </div>
@@ -2031,7 +2032,7 @@
 </div>
 </div>
       </sc-for>
-      <button onClick="{{ addMk2 }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;">+ Adicionar etiqueta</button>
+      <button onClick="{{ addMk2 }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
           </div>
 </div>
 
@@ -2040,28 +2041,28 @@
         <span style="font-size:12px; font-weight:700; color:#475569;">{{ pageInfo }}</span>
         <div style="flex:1;"></div>
         <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">−</button>
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Diminuir"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
           <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">+</button>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Aumentar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
         </div>
       </div>
       <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-make2" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:10px;">
           <sc-if value="{{ mk2Empty }}" hint-placeholder-val="{{ false }}">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
-              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"/></svg></div>
               <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta ainda</div>
               <div style="font-size:13px; color:#475569; max-width:300px;">Adicione a primeira etiqueta ou importe várias de uma vez por planilha CSV.</div>
               <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
-                <button onClick="{{ addCurrent }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
-                <button onClick="{{ doImport }}" style="background:#fff; color:#006B67; border:1px solid #A9DAD7; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;">Importar CSV</button>
+                <button onClick="{{ addCurrent }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
+                <button onClick="{{ doImport }}" style="background:#fff; color:#006B67; border:1px solid #A9DAD7; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>Importar CSV</button>
               </div>
             </div>
           </sc-if>
           <sc-for list="{{ mks2Grid }}" as="g" hint-placeholder-count="3">
             <div class="label-preview fold-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
               <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar esta etiqueta"></button>
-              <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+              <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
               <div class="fold-label-face" style="background-image:url('assets/precificador/fundo-verde.png');">
               <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:1.5%; top:6%; width:30%;">
               <div class="formatted-product-name" style="position:absolute; left:2%; top:54%; width:40%; font-size:{{ g.formattedNameSize }}; font-weight:{{ g.nameWeight }}; line-height:1.15; color:#171717; text-transform:uppercase;  text-align:{{ g.textAlign }}; text-wrap:{{ g.nameWrap }}; overflow-wrap:break-word;">{{ g.name }}</div>
@@ -2106,10 +2107,10 @@
               </sc-for>
             </select>
             <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}"><div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ g.brandBg }};"></div></sc-if>
-            <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
-            <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
-            <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
-            <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+            <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para cima"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg></button>
+            <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para baixo"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></button>
+            <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;" aria-label="Duplicar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
+            <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;" aria-label="Remover"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
           </div>
           <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Descrição do produto" aria-label="Descrição do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:600;"></textarea>
           <div style="display:flex; gap:8px;">
@@ -2129,9 +2130,9 @@
             <div style="flex:1;"></div>
             <div style="display:flex; align-items:center; gap:6px;">
               <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
-                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Menos"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
                 <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
-                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Mais"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
               </div>
               <span style="font-size:12px; font-weight:600; color:#475569;">cópias</span>
             </div>
@@ -2140,7 +2141,7 @@
 </div>
 </div>
       </sc-for>
-      <button onClick="{{ addPs }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;">+ Adicionar etiqueta</button>
+      <button onClick="{{ addPs }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
           </div>
 </div>
 
@@ -2149,28 +2150,28 @@
         <span style="font-size:12px; font-weight:700; color:#475569;">{{ pageInfo }}</span>
         <div style="flex:1;"></div>
         <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">−</button>
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Diminuir"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
           <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">+</button>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Aumentar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
         </div>
       </div>
       <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-pais" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:10px;">
           <sc-if value="{{ psEmpty }}" hint-placeholder-val="{{ false }}">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
-              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"/></svg></div>
               <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta ainda</div>
               <div style="font-size:13px; color:#475569; max-width:300px;">Adicione a primeira etiqueta ou importe várias de uma vez por planilha CSV.</div>
               <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
-                <button onClick="{{ addCurrent }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
-                <button onClick="{{ doImport }}" style="background:#fff; color:#006B67; border:1px solid #A9DAD7; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;">Importar CSV</button>
+                <button onClick="{{ addCurrent }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
+                <button onClick="{{ doImport }}" style="background:#fff; color:#006B67; border:1px solid #A9DAD7; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>Importar CSV</button>
               </div>
             </div>
           </sc-if>
           <sc-for list="{{ pssGrid }}" as="g" hint-placeholder-count="3">
             <div class="label-preview pais-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:4 / 5; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-repeat:no-repeat; background-size:100% 100%; background-image:{{ g.paisBg }}; --pais-print-bg:{{ g.paisPrintBg }};">
               <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar esta etiqueta"></button>
-              <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+              <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
               <div style="position:absolute; left:6.9%; top:27%; width:41%; max-height:26%; overflow:hidden; font-size:{{ g.nameSize }}; font-weight:800; line-height:1.15; color:#171717; text-transform:uppercase; text-wrap:balance; overflow-wrap:break-word;">{{ g.name }}</div>
               <sc-if value="{{ g.hasDe }}" hint-placeholder-val="{{ true }}">
                 <div style="position:absolute; left:52%; top:39%; width:40%; display:flex; align-items:flex-start; justify-content:center; color:#FFE3C0; text-decoration:line-through;">
@@ -2210,10 +2211,10 @@
               </sc-for>
             </select>
             <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}"><div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ g.brandBg }};"></div></sc-if>
-            <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
-            <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
-            <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
-            <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+            <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para cima"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg></button>
+            <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para baixo"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></button>
+            <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;" aria-label="Duplicar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
+            <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;" aria-label="Remover"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
           </div>
           <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Descrição do produto" aria-label="Descrição do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:600;"></textarea>
           <div style="display:flex; gap:8px;">
@@ -2233,9 +2234,9 @@
             <div style="flex:1;"></div>
             <div style="display:flex; align-items:center; gap:6px;">
               <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
-                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Menos"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
                 <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
-                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Mais"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
               </div>
               <span style="font-size:12px; font-weight:600; color:#475569;">cópias</span>
             </div>
@@ -2244,7 +2245,7 @@
 </div>
 </div>
       </sc-for>
-      <button onClick="{{ addPs6 }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;">+ Adicionar etiqueta</button>
+      <button onClick="{{ addPs6 }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
           </div>
 </div>
 
@@ -2253,28 +2254,28 @@
         <span style="font-size:12px; font-weight:700; color:#475569;">{{ pageInfo }}</span>
         <div style="flex:1;"></div>
         <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">−</button>
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Diminuir"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
           <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">+</button>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Aumentar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
         </div>
       </div>
       <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-pais6" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:10px;">
           <sc-if value="{{ ps6Empty }}" hint-placeholder-val="{{ false }}">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
-              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"/></svg></div>
               <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta ainda</div>
               <div style="font-size:13px; color:#475569; max-width:300px;">Adicione a primeira etiqueta ou importe várias de uma vez por planilha CSV.</div>
               <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
-                <button onClick="{{ addCurrent }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
-                <button onClick="{{ doImport }}" style="background:#fff; color:#006B67; border:1px solid #A9DAD7; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;">Importar CSV</button>
+                <button onClick="{{ addCurrent }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
+                <button onClick="{{ doImport }}" style="background:#fff; color:#006B67; border:1px solid #A9DAD7; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>Importar CSV</button>
               </div>
             </div>
           </sc-if>
           <sc-for list="{{ pss6Grid }}" as="g" hint-placeholder-count="3">
             <div class="label-preview pais6-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:105 / 148; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-color:#00928d; background-repeat:no-repeat; background-position:top center; background-size:100% auto; background-image:{{ g.pais6Bg }}; --pais6-print-bg:{{ g.pais6PrintBg }};">
               <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar esta etiqueta"></button>
-              <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+              <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
               <div style="position:absolute; left:5%; top:33.6%; width:47%; max-height:13.5%; overflow:hidden; font-size:{{ g.nameSize }}; font-weight:800; line-height:1.15; color:#171717; text-transform:uppercase; text-wrap:balance; overflow-wrap:break-word;">{{ g.name }}</div>
               <sc-if value="{{ g.hasDe }}" hint-placeholder-val="{{ true }}">
                 <div style="position:absolute; left:25.5%; top:58.3%; width:61%; display:flex; align-items:baseline; justify-content:flex-start; gap:1.2cqw; color:#FFE3C0; white-space:nowrap;">
@@ -2314,10 +2315,10 @@
                 <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" aria-label="Marca da etiqueta BLITZ" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
                   <sc-for list="{{ blitzBrandOptions }}" as="b" hint-placeholder-count="18"><option value="{{ b.key }}">{{ b.label }}</option></sc-for>
                 </select>
-                <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
-                <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
-                <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
-                <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+                <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para cima"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg></button>
+                <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para baixo"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></button>
+                <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;" aria-label="Duplicar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
+                <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;" aria-label="Remover"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
               </div>
               <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Nome do produto" aria-label="Nome do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:700;"></textarea>
               <input value="{{ g.desc }}" onChange="{{ g.setDesc }}" placeholder="Detalhes do produto" aria-label="Detalhes do produto" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px;">
@@ -2337,16 +2338,16 @@
                 </label>
                 <div style="flex:1;"></div>
                 <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
-                  <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                  <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Menos"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
                   <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
-                  <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+                  <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Mais"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
                 </div>
                 <span style="font-size:12px; font-weight:600; color:#475569;">cópias</span>
               </div>
             </div></div>
           </div>
         </sc-for>
-        <button onClick="{{ addBlitz }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;">+ Adicionar etiqueta</button>
+        <button onClick="{{ addBlitz }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
       </div>
     </div>
 
@@ -2354,9 +2355,9 @@
       <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
         <span style="font-size:12px; font-weight:700; color:#475569;">{{ pageInfo }}</span><div style="flex:1;"></div>
         <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">−</button>
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Diminuir"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
           <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">+</button>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Aumentar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
         </div>
       </div>
       <div class="blitz-sheets">
@@ -2364,9 +2365,9 @@
           <div class="sheet blitz-sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
             <div class="g-blitz" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:10px;">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
-              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"/></svg></div>
               <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta BLITZ ainda</div>
-              <button onClick="{{ addBlitz }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
+              <button onClick="{{ addBlitz }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
             </div>
             </div>
           </div>
@@ -2378,7 +2379,7 @@
                 <sc-for list="{{ bp.items }}" as="g" hint-placeholder-count="2">
                   <div class="label-preview blitz-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:148 / 210; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-color:#d000c4; background-repeat:no-repeat; background-position:center; background-size:100% 100%; background-image:{{ g.blitzBg }}; --blitz-bg:{{ g.blitzBg }};">
                     <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar esta etiqueta"></button>
-                    <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+                    <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
                     <div style="position:absolute; left:27.7%; top:26.6%; width:45.5%; max-height:5.8%; overflow:hidden; text-align:center; font-size:{{ g.blitzNameSize }}; font-weight:800; line-height:1.05; color:#fff; text-transform:uppercase; text-wrap:balance; overflow-wrap:break-word;">{{ g.name }}</div>
                     <div style="position:absolute; left:39.1%; top:32.7%; width:21.8%; max-height:4.8%; overflow:hidden; text-align:center; font-size:{{ g.blitzDescSize }}; font-weight:500; line-height:1.1; color:#fff; white-space:nowrap; text-overflow:ellipsis;">{{ g.desc }}</div>
                     <sc-if value="{{ g.hasDe }}" hint-placeholder-val="true">
@@ -2420,10 +2421,10 @@
                 <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" aria-label="Marca da etiqueta BLITZ A6" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
                   <sc-for list="{{ blitzBrandOptions }}" as="b" hint-placeholder-count="18"><option value="{{ b.key }}">{{ b.label }}</option></sc-for>
                 </select>
-                <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
-                <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
-                <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
-                <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+                <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para cima"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg></button>
+                <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para baixo"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></button>
+                <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;" aria-label="Duplicar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
+                <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;" aria-label="Remover"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
               </div>
               <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Nome do produto" aria-label="Nome do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:700;"></textarea>
               <input value="{{ g.desc }}" onChange="{{ g.setDesc }}" placeholder="Detalhes do produto" aria-label="Detalhes do produto" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px;">
@@ -2443,16 +2444,16 @@
                 </label>
                 <div style="flex:1;"></div>
                 <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
-                  <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                  <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Menos"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
                   <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
-                  <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+                  <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Mais"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
                 </div>
                 <span style="font-size:12px; font-weight:600; color:#475569;">cópias</span>
               </div>
             </div></div>
           </div>
         </sc-for>
-        <button onClick="{{ addBlitzA6 }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;">+ Adicionar etiqueta</button>
+        <button onClick="{{ addBlitzA6 }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
       </div>
     </div>
 
@@ -2460,9 +2461,9 @@
       <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
         <span style="font-size:12px; font-weight:700; color:#475569;">{{ pageInfo }}</span><div style="flex:1;"></div>
         <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">−</button>
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Diminuir"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
           <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">+</button>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Aumentar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
         </div>
       </div>
       <div class="blitzA6-sheets">
@@ -2470,9 +2471,9 @@
           <div class="sheet blitzA6-sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
             <div class="g-blitzA6" style="display:grid; grid-template-columns:repeat(2, 1fr); gap:10px;">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
-              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"/></svg></div>
               <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta BLITZ A6 ainda</div>
-              <button onClick="{{ addBlitzA6 }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
+              <button onClick="{{ addBlitzA6 }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
             </div>
             </div>
           </div>
@@ -2484,7 +2485,7 @@
                 <sc-for list="{{ bp.items }}" as="g" hint-placeholder-count="4">
                   <div class="label-preview blitzA6-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:105 / 148; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-color:#d000c4; background-repeat:no-repeat; background-position:center; background-size:100% 100%; background-image:{{ g.blitzBg }}; --blitz-bg:{{ g.blitzBg }};">
                     <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar esta etiqueta"></button>
-                    <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+                    <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
                     <div style="position:absolute; left:27.7%; top:26.6%; width:45.5%; max-height:5.8%; overflow:hidden; text-align:center; font-size:{{ g.blitzNameSize }}; font-weight:800; line-height:1.05; color:#fff; text-transform:uppercase; text-wrap:balance; overflow-wrap:break-word;">{{ g.name }}</div>
                     <div style="position:absolute; left:39.1%; top:32.7%; width:21.8%; max-height:4.8%; overflow:hidden; text-align:center; font-size:{{ g.blitzDescSize }}; font-weight:500; line-height:1.1; color:#fff; white-space:nowrap; text-overflow:ellipsis;">{{ g.desc }}</div>
                     <sc-if value="{{ g.hasDe }}" hint-placeholder-val="true">
@@ -2526,10 +2527,10 @@
                 <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" aria-label="Marca da etiqueta A6 ANIVERSARIO" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
                   <sc-for list="{{ blitzBrandOptions }}" as="b" hint-placeholder-count="18"><option value="{{ b.key }}">{{ b.label }}</option></sc-for>
                 </select>
-                <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
-                <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
-                <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
-                <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+                <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para cima"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg></button>
+                <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para baixo"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></button>
+                <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;" aria-label="Duplicar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
+                <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;" aria-label="Remover"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
               </div>
               <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Nome do produto" aria-label="Nome do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:700;"></textarea>
               <input value="{{ g.desc }}" onChange="{{ g.setDesc }}" placeholder="Detalhes do produto" aria-label="Detalhes do produto" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px;">
@@ -2561,16 +2562,16 @@
                 </label>
                 <div style="flex:1;"></div>
                 <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
-                  <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                  <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Menos"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
                   <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
-                  <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+                  <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Mais"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
                 </div>
                 <span style="font-size:12px; font-weight:600; color:#475569;">cópias</span>
               </div>
             </div></div>
           </div>
         </sc-for>
-        <button onClick="{{ addAniversarioA6 }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;">+ Adicionar etiqueta</button>
+        <button onClick="{{ addAniversarioA6 }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
       </div>
     </div>
 
@@ -2578,9 +2579,9 @@
       <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
         <span style="font-size:12px; font-weight:700; color:#475569;">{{ pageInfo }}</span><div style="flex:1;"></div>
         <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">−</button>
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Diminuir"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
           <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">+</button>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Aumentar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
         </div>
       </div>
       <div class="blitzA6-sheets">
@@ -2588,9 +2589,9 @@
           <div class="sheet blitzA6-sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
             <div class="g-blitzA6" style="display:grid; grid-template-columns:repeat(2, 1fr); gap:10px;">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
-              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"/></svg></div>
               <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta A6 ANIVERSARIO ainda</div>
-              <button onClick="{{ addAniversarioA6 }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
+              <button onClick="{{ addAniversarioA6 }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
             </div>
             </div>
           </div>
@@ -2602,7 +2603,7 @@
                 <sc-for list="{{ bp.items }}" as="g" hint-placeholder-count="4">
                   <div class="label-preview blitzA6-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:105 / 148; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-color:#d000c4; background-repeat:no-repeat; background-position:center; background-size:100% 100%; background-image:{{ g.blitzBg }}; --blitz-bg:{{ g.blitzBg }};">
                     <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar esta etiqueta"></button>
-                    <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+                    <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
                     <!-- Masks cover only the baked sample text; original brand artwork stays untouched. -->
                     <div aria-hidden="true" style="position:absolute; left:10%; top:28.5%; width:80%; height:29.5%; background:#fff0df;"></div>
                     <div class="aniversario-a6-copy" style="position:absolute; left:10%; top:30%; width:80%; height:17%; overflow:hidden; text-align:{{ g.textAlign }};">
@@ -2649,10 +2650,10 @@
                 <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" aria-label="Marca da etiqueta A5 Black Friday" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
                   <sc-for list="{{ placaBrandOptions }}" as="b" hint-placeholder-count="18"><option value="{{ b.key }}">{{ b.label }}</option></sc-for>
                 </select>
-                <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
-                <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
-                <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
-                <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+                <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para cima"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg></button>
+                <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para baixo"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></button>
+                <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;" aria-label="Duplicar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
+                <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;" aria-label="Remover"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
               </div>
               <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Nome do produto" aria-label="Nome do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:700;"></textarea>
               <input value="{{ g.desc }}" onChange="{{ g.setDesc }}" placeholder="Detalhes do produto" aria-label="Detalhes do produto" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px;">
@@ -2684,16 +2685,16 @@
                 </label>
                 <div style="flex:1;"></div>
                 <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
-                  <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                  <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Menos"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
                   <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
-                  <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+                  <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Mais"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
                 </div>
                 <span style="font-size:12px; font-weight:600; color:#475569;">cópias</span>
               </div>
             </div></div>
           </div>
         </sc-for>
-        <button onClick="{{ addAniversarioA5 }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;">+ Adicionar etiqueta</button>
+        <button onClick="{{ addAniversarioA5 }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
       </div>
     </div>
 
@@ -2701,9 +2702,9 @@
       <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
         <span style="font-size:12px; font-weight:700; color:#475569;">{{ pageInfo }}</span><div style="flex:1;"></div>
         <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">−</button>
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Diminuir"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
           <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">+</button>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Aumentar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
         </div>
       </div>
       <div class="blitz-sheets a5-native-sheets">
@@ -2711,9 +2712,9 @@
           <div class="sheet blitz-sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
             <div class="g-blitz" style="display:grid; grid-template-columns:repeat(2, 1fr); gap:10px;">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
-              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"/></svg></div>
               <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta A5 Black Friday ainda</div>
-              <button onClick="{{ addAniversarioA5 }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
+              <button onClick="{{ addAniversarioA5 }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
             </div>
             </div>
           </div>
@@ -2725,7 +2726,7 @@
                 <sc-for list="{{ bp.items }}" as="g" hint-placeholder-count="4">
                   <div class="label-preview blitz-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:148 / 210; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-color:#d000c4; background-repeat:no-repeat; background-position:center; background-size:100% 100%; background-image:{{ g.blitzBg }}; --blitz-bg:{{ g.blitzBg }};">
                     <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar esta etiqueta"></button>
-                    <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+                    <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
                     <sc-if value="{{ g.hasBrand }}"><div style="position:absolute;left:25%;top:18%;width:50%;height:9%;background-image:{{ g.brandBg }};background-size:contain;background-position:center;background-repeat:no-repeat;"></div></sc-if>
                     <!-- Masks cover only the baked sample text; original brand artwork stays untouched. -->
                     <div aria-hidden="true" style="position:absolute; left:10%; top:27.2%; width:80%; height:30.8%; background:transparent;"></div>
@@ -2773,10 +2774,10 @@
                 <select value="{{ g.brand }}" onChange="{{ g.setBrand }}" aria-label="Marca do Preçario Black Friday" style="flex:1; border:1px solid #d8dee4; border-radius:6px; padding:6px; font-size:12px; font-weight:600;">
                   <sc-for list="{{ blackFridayBrandOptions }}" as="b" hint-placeholder-count="15"><option value="{{ b.key }}">{{ b.label }}</option></sc-for>
                 </select>
-                <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
-                <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
-                <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
-                <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+                <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para cima"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg></button>
+                <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para baixo"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></button>
+                <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;" aria-label="Duplicar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
+                <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;" aria-label="Remover"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
               </div>
               <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Nome do produto" aria-label="Nome do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:700;"></textarea>
               <div class="blitz-name-toolbar" style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
@@ -2806,16 +2807,16 @@
                   <input type="checkbox" checked="{{ g.cada }}" onChange="{{ g.setCada }}"> Mostrar "cada"
                 </label>
                 <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
-                  <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                  <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Menos"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
                   <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
-                  <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+                  <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Mais"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
                 </div>
                 <span style="font-size:12px; font-weight:600; color:#475569;">cópias</span>
               </div>
             </div></div>
           </div>
         </sc-for>
-        <button onClick="{{ addBlackFriday }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;">+ Adicionar preçário</button>
+        <button onClick="{{ addBlackFriday }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar preçário</button>
       </div>
     </div>
 
@@ -2823,9 +2824,9 @@
       <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;">
         <span style="font-size:12px; font-weight:700; color:#475569;">{{ pageInfo }}</span><div style="flex:1;"></div>
         <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">−</button>
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Diminuir"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
           <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">+</button>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Aumentar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
         </div>
       </div>
       <div class="black-friday-sheets">
@@ -2833,9 +2834,9 @@
           <div class="sheet black-friday-sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
             <div class="g-black-friday" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:10px;">
               <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
-                <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+                <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"/></svg></div>
                 <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhum Preçario Black Friday ainda</div>
-                <button onClick="{{ addBlackFriday }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar preçário</button>
+                <button onClick="{{ addBlackFriday }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar preçário</button>
               </div>
             </div>
           </div>
@@ -2847,7 +2848,7 @@
                 <sc-for list="{{ bp.items }}" as="g" hint-placeholder-count="8">
                   <div class="label-preview black-friday-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; aspect-ratio:40 / 50; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size; background-color:#d000c4; background-repeat:no-repeat; background-position:center; background-size:100% 100%; background-image:{{ g.blackFridayBg }}; --black-friday-bg:{{ g.blackFridayBg }};">
                     <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar este preçário"></button>
-                    <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir preçário" aria-label="Excluir preçário">×</button>
+                    <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir preçário" aria-label="Excluir preçário"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
                     <sc-if value="{{ g.hasBrand }}"><div style="position:absolute; left:12%; top:8%; width:35%; height:12%; background-image:{{ g.brandBg }}; background-size:contain; background-position:left center; background-repeat:no-repeat;"></div></sc-if>
                     <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; right:8%; top:7%; width:19%; height:13%; object-fit:contain; filter:brightness(0);">
                     <div class="black-friday-name" style="position:absolute; left:8%; top:23.8%; bottom:55%; width:84%; overflow:hidden; font-size:{{ g.blackFridayNameSize }}; font-weight:{{ g.nameWeight }}; line-height:1.05; color:#000; text-align:{{ g.textAlign }}; text-wrap:{{ g.nameWrap }}; overflow-wrap:break-word;">{{ g.name }}</div>
@@ -2894,10 +2895,10 @@
               </sc-for>
             </select>
             <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}"><div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ g.brandBg }};"></div></sc-if>
-            <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
-            <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
-            <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
-            <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+            <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para cima"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg></button>
+            <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para baixo"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></button>
+            <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;" aria-label="Duplicar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
+            <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;" aria-label="Remover"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
           </div>
           <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Descrição do produto" aria-label="Descrição do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:600;"></textarea>
               <div class="name-format-toolbar" style="display:flex; align-items:center; justify-content:space-between; gap:4px; flex-wrap:wrap;">
@@ -2930,9 +2931,9 @@
             <div style="flex:1;"></div>
             <div style="display:flex; align-items:center; gap:6px;">
               <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
-                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Menos"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
                 <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
-                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+                <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Mais"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
               </div>
               <span style="font-size:12px; font-weight:600; color:#475569;">cópias</span>
             </div>
@@ -2941,7 +2942,7 @@
 </div>
 </div>
       </sc-for>
-      <button onClick="{{ addMk3 }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;">+ Adicionar etiqueta</button>
+      <button onClick="{{ addMk3 }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
           </div>
 </div>
 
@@ -2950,28 +2951,28 @@
         <span style="font-size:12px; font-weight:700; color:#475569;">{{ pageInfo }}</span>
         <div style="flex:1;"></div>
         <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">−</button>
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Diminuir"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
           <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">+</button>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Aumentar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
         </div>
       </div>
       <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-make3" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:10px;">
           <sc-if value="{{ mk3Empty }}" hint-placeholder-val="{{ false }}">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
-              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"/></svg></div>
               <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta ainda</div>
               <div style="font-size:13px; color:#475569; max-width:300px;">Adicione a primeira etiqueta ou importe várias de uma vez por planilha CSV.</div>
               <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
-                <button onClick="{{ addCurrent }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
-                <button onClick="{{ doImport }}" style="background:#fff; color:#006B67; border:1px solid #A9DAD7; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;">Importar CSV</button>
+                <button onClick="{{ addCurrent }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
+                <button onClick="{{ doImport }}" style="background:#fff; color:#006B67; border:1px solid #A9DAD7; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>Importar CSV</button>
               </div>
             </div>
           </sc-if>
           <sc-for list="{{ mks3Grid }}" as="g" hint-placeholder-count="3">
             <div class="label-preview fold-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
               <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar esta etiqueta"></button>
-              <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+              <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
               <div class="fold-label-face" style="background-image:url('assets/precificador/fundo-rosa.png');">
               <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:1.5%; top:6%; width:30%;">
               <div class="formatted-product-name" style="position:absolute; left:2%; top:54%; width:40%; font-size:{{ g.formattedNameSize }}; font-weight:{{ g.nameWeight }}; line-height:1.15; color:#171717; text-transform:uppercase;  text-align:{{ g.textAlign }}; text-wrap:{{ g.nameWrap }}; overflow-wrap:break-word;">{{ g.name }}</div>
@@ -3017,10 +3018,10 @@
               </sc-for>
             </select>
             <sc-if value="{{ pl.hasBrand }}" hint-placeholder-val="{{ true }}"><div style="width:36px; height:28px; flex:none; border:1px solid #d8dee4; border-radius:6px; background:#fff no-repeat center / 80% auto; background-image:{{ pl.brandBg }};"></div></sc-if>
-            <button onClick="{{ pl.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▲</button>
-            <button onClick="{{ pl.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;">▼</button>
-            <button onClick="{{ pl.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;">⧉</button>
-            <button onClick="{{ pl.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;">✕</button>
+            <button onClick="{{ pl.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para cima"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg></button>
+            <button onClick="{{ pl.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer; line-height:1; padding:2px;" aria-label="Mover para baixo"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></button>
+            <button onClick="{{ pl.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;" aria-label="Duplicar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
+            <button onClick="{{ pl.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;" aria-label="Remover"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
           </div>
           <div style="display:flex; flex-direction:column; gap:4px;">
             <span style="font-size:10px; font-weight:700; color:#475569; letter-spacing:.4px;">NOME (NEGRITO)</span>
@@ -3060,9 +3061,9 @@
             <div style="flex:1;"></div>
             <div style="display:flex; align-items:center; gap:6px;">
               <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
-                <button onClick="{{ pl.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">−</button>
+                <button onClick="{{ pl.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Menos"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
                 <input type="number" min="1" max="999" value="{{ pl.qty }}" onChange="{{ pl.setQty }}" aria-label="Quantidade de cópias" style="width:34px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
-                <button onClick="{{ pl.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;">+</button>
+                <button onClick="{{ pl.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px; line-height:1;" aria-label="Mais"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
               </div>
               <span style="font-size:12px; font-weight:600; color:#475569;">cópias</span>
             </div>
@@ -3071,7 +3072,7 @@
 </div>
 </div>
       </sc-for>
-      <button onClick="{{ addPlaca }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;">+ Adicionar placa</button>
+      <button onClick="{{ addPlaca }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;" style-hover="background:#E7F6F5; border-color:#006B67;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar placa</button>
           </div>
 </div>
 
@@ -3080,28 +3081,28 @@
         <span style="font-size:12px; font-weight:700; color:#475569;">{{ pageInfo }}</span>
         <div style="flex:1;"></div>
         <div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;">
-          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">−</button>
+          <button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Diminuir"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
           <span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span>
-          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">+</button>
+          <button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Aumentar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
         </div>
       </div>
       <div class="sheet" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:clamp(12px,2.5vw,22px); width:100%; max-width:980px; zoom:{{ zoomVal }};">
         <div class="g-placa" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:10px;">
           <sc-if value="{{ placaEmpty }}" hint-placeholder-val="{{ false }}">
             <div class="no-print" style="grid-column:1 / -1; padding:40px 20px; display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;">
-              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;">🏷️</div>
+              <div style="width:56px; height:56px; border-radius:50%; background:#E7F6F5; display:flex; align-items:center; justify-content:center; font-size:26px;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"/></svg></div>
               <div style="font-size:15px; font-weight:800; color:#1a1d21;">Nenhuma etiqueta ainda</div>
               <div style="font-size:13px; color:#475569; max-width:300px;">Adicione a primeira etiqueta ou importe várias de uma vez por planilha CSV.</div>
               <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
-                <button onClick="{{ addCurrent }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar etiqueta</button>
-                <button onClick="{{ doImport }}" style="background:#fff; color:#006B67; border:1px solid #A9DAD7; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;">Importar CSV</button>
+                <button onClick="{{ addCurrent }}" style="background:#006B67; color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:800; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar etiqueta</button>
+                <button onClick="{{ doImport }}" style="background:#fff; color:#006B67; border:1px solid #A9DAD7; border-radius:8px; padding:11px 18px; font-size:13px; font-weight:700; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>Importar CSV</button>
               </div>
             </div>
           </sc-if>
           <sc-for list="{{ placasGrid }}" as="pl" hint-placeholder-count="3">
             <div class="label-preview" data-active="{{ pl.activeOn }}" style="position:relative; width:100%; aspect-ratio:5 / 6; background:#fff; overflow:hidden; border:1px solid #eadfe2; border-radius:2px; container-type:inline-size; font-family:Axiforma, Archivo, sans-serif;">
               <button type="button" class="no-print preview-activate" onClick="{{ pl.activatePreview }}" aria-label="Editar esta etiqueta"></button>
-              <button type="button" class="no-print preview-delete" onClick="{{ pl.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta">×</button>
+              <button type="button" class="no-print preview-delete" onClick="{{ pl.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
               <div style="position:absolute; left:0; top:45.7%; width:100%; height:54.3%; background-image:url('assets/placa/nuvem-rosa.png'); background-size:cover; background-position:center bottom; background-repeat:no-repeat;"></div>
               <div style="position:absolute; left:9.87%; top:23.08%; width:33.57%; aspect-ratio:725 / 714; background-image:url('assets/placa/flor-branca.png'); background-size:contain; background-repeat:no-repeat;"></div>
               <div style="position:absolute; left:34.1%; top:20.03%; width:56.88%; aspect-ratio:1 / 1; background-image:url('assets/placa/flor-verde.png'); background-size:contain; background-repeat:no-repeat;"></div>
@@ -3144,35 +3145,35 @@
             <div class="card-content"><div class="card-content-inner">
               <div style="display:flex; align-items:center; gap:8px;">
                 <span style="font-size:11px; font-weight:800; color:#9aa6b1;">#{{ g.n }}</span><div style="flex:1;"></div>
-                <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer;">▲</button>
-                <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer;">▼</button>
-                <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer;">⧉</button>
-                <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer;">✕</button>
+                <button onClick="{{ g.moveUp }}" title="Mover para cima" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer;" aria-label="Mover para cima"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg></button>
+                <button onClick="{{ g.moveDown }}" title="Mover para baixo" style="background:none; border:none; color:#5a6873; font-size:14px; cursor:pointer;" aria-label="Mover para baixo"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></button>
+                <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer;" aria-label="Duplicar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
+                <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer;" aria-label="Remover"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
               </div>
               <input value="{{ g.name }}" onChange="{{ g.setName }}" onKeyDown="{{ addOnEnter }}" placeholder="Nome da vendedora" aria-label="Nome da vendedora" style="width:100%; border:1px solid #d8dee4; border-radius:6px; padding:9px; font-size:14px; font-weight:700;">
               <div style="display:flex; gap:6px;"><button onClick="{{ g.setVerde }}" style="{{ g.verdeBtnStyle }}">Verde</button><button onClick="{{ g.setRosa }}" style="{{ g.rosaBtnStyle }}">Rosa</button></div>
               <div style="display:flex; align-items:center; gap:8px; justify-content:flex-end;">
                 <div style="display:flex; align-items:center; border:1px solid #d8dee4; border-radius:6px; overflow:hidden;">
-                  <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px;">−</button>
+                  <button onClick="{{ g.qtyMinus }}" title="Menos" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px;" aria-label="Menos"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button>
                   <input type="number" min="1" max="999" value="{{ g.qty }}" onChange="{{ g.setQty }}" aria-label="Quantidade de cópias" style="width:40px; border:none; border-left:1px solid #eef1f3; border-right:1px solid #eef1f3; padding:6px 2px; font-size:13px; text-align:center;">
-                  <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px;">+</button>
+                  <button onClick="{{ g.qtyPlus }}" title="Mais" style="background:#fff; border:none; color:#006B67; font-size:16px; font-weight:800; cursor:pointer; padding:6px 9px;" aria-label="Mais"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
                 </div><span style="font-size:12px; font-weight:600; color:#475569;">cópias</span>
               </div>
             </div></div>
           </div>
         </sc-for>
-        <button onClick="{{ addVendedora }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;">+ Adicionar vendedora</button>
+        <button onClick="{{ addVendedora }}" style="background:#fff; color:#006B67; border:1.5px dashed #A9DAD7; border-radius:14px; padding:14px; font-size:13px; font-weight:800; cursor:pointer;"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Adicionar vendedora</button>
       </div>
     </div>
     <div class="preview-wrap" style="flex:9999 1 520px; padding:clamp(12px,3vw,26px); display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0;">
-      <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;"><span style="font-size:12px; font-weight:700; color:#475569;">{{ pageInfo }}</span><div style="flex:1;"></div><div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;"><button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">−</button><span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span><button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;">+</button></div></div>
+      <div class="no-print" style="display:flex; align-items:center; gap:10px; width:100%; max-width:980px;"><span style="font-size:12px; font-weight:700; color:#475569;">{{ pageInfo }}</span><div style="flex:1;"></div><div class="zoombar" style="display:flex; align-items:center; gap:2px; background:#fff; border:1px solid #e4d4d9; border-radius:8px; padding:2px;"><button onClick="{{ zoomOut }}" title="Diminuir" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Diminuir"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13H5v-2h14v2z"/></svg></button><span style="font-size:12px; font-weight:700; color:#5a6873; min-width:38px; text-align:center;">{{ zoomPct }}</span><button onClick="{{ zoomIn }}" title="Aumentar" style="background:none; border:none; font-size:16px; font-weight:800; color:#006B67; cursor:pointer; padding:4px 10px;" aria-label="Aumentar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button></div></div>
       <div class="vendedoras-sheets">
         <sc-for list="{{ vendedorasPages }}" as="vp" hint-placeholder-count="1">
           <div class="sheet vendedoras-sheet" data-page="{{ vp.n }}" style="background:#fff; box-shadow:0 8px 34px rgba(30,50,70,.10); border-radius:18px; padding:16px; width:100%; max-width:980px; zoom:{{ zoomVal }};">
             <div class="g-vendedoras">
               <sc-for list="{{ vp.items }}" as="g" hint-placeholder-count="9">
                 <div class="label-preview vendedora-card" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; overflow:hidden; border:1px solid rgba(0,0,0,.12); border-radius:2px; container-type:inline-size; background-image:{{ g.cardBg }}; background-size:100% 100%; background-position:center; background-repeat:no-repeat; color:#fff;">
-                  <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar cartão de {{ g.name }}"></button><button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir cartão" aria-label="Excluir cartão">×</button>
+                  <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar cartão de {{ g.name }}"></button><button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir cartão" aria-label="Excluir cartão"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
                   <div style="position:absolute; left:8%; right:8%; top:50%; transform:translateY(-50%); text-align:center; font-size:13.2cqw; font-weight:400; line-height:1; letter-spacing:0; overflow-wrap:anywhere;">{{ g.name }}</div>
                 </div>
               </sc-for>
@@ -4786,5 +4787,6 @@ ${assets}
 </script>
 </body>
 </html>
+
 
 
