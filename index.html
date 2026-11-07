@@ -56,6 +56,7 @@
     (() => {
       const models = [
         {name:'Placa de Acrílico',image:'assets/precificador/fundo-verde.png',tint:'#e9f6ee'},
+        {name:'Placa acrilico 4,8 x 3 cm',image:'assets/precificador/fundo-verde.png',tint:'#e9f6ee',src:'./placa-acrilico-48x30.html'},
         {name:'Placa de Acrílico Promoção',image:'assets/precificador/fundo-verde2.png',tint:'#e4f6f1'},
         {name:'Régua de Preços',image:'assets/precificador/fundo-verde.png',tint:'#eaf4f5'},
         {name:'Régua de Preço Promoção',image:'assets/precificador/fundo-rosa.png',tint:'#fff0f5'},
@@ -87,6 +88,8 @@
       }
       function activate(model) {
         active=model;
+        const source=model.src||'./legacy.html';
+        if(frame.getAttribute('src')!==source) frame.setAttribute('src',source);
         document.getElementById('current-title').textContent=model.name;
         document.body.classList.add('editing');
         const attempt = (n=0) => {
