@@ -23,6 +23,11 @@
     .gallery{max-width:1420px;margin:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
     .model{background:#fff;border:1px solid #e3ebe9;border-radius:20px;text-align:left;padding:12px;transition:transform .2s,border-color .2s,box-shadow .2s;box-shadow:0 4px 15px rgba(23,60,55,.025);min-width:0}
     .model:hover,.model:focus-visible{transform:translateY(-4px);border-color:#63ada4;box-shadow:0 15px 35px rgba(0,78,70,.12);outline:none}
+    .model-new{position:relative;border-color:#d8b45b;animation:new-card-glow 3.2s ease-in-out infinite}
+    .new-badge{position:absolute;top:22px;right:22px;z-index:1;padding:7px 13px;border:1px solid #e8cc80;border-radius:999px;background:linear-gradient(135deg,#f9e7ab,#d4a63a 55%,#f2d684);color:#513a08;font-size:11px;font-weight:900;letter-spacing:1.2px;box-shadow:0 3px 10px #80601e30;pointer-events:none}
+    @keyframes new-card-glow{0%,100%{box-shadow:0 4px 15px #b88a2512}50%{box-shadow:0 6px 25px #c99b3b45;border-color:#c69a35}}
+    .model-new:hover,.model-new:focus-visible{animation:none}
+    @media(prefers-reduced-motion:reduce){.model-new{animation:none}}
     .art{height:164px;background:var(--tint,#eff7f6);border-radius:13px;display:grid;place-items:center;overflow:hidden;position:relative}
     .art img{width:62%;height:76%;object-fit:contain;filter:drop-shadow(0 9px 9px #0002)}
     .art .fallback{font-size:40px;font-weight:900;color:var(--accent,#006b67);border:4px solid currentColor;border-radius:10px;padding:13px 22px;transform:rotate(-5deg)}
@@ -56,7 +61,7 @@
     (() => {
       const models = [
         {name:'Placa de Acrílico',image:'assets/precificador/fundo-verde.png',tint:'#e9f6ee'},
-        {name:'Placa acrilico 4,8 x 3 cm',image:'assets/precificador/fundo-verde.png',tint:'#e9f6ee',src:'./placa-acrilico-48x30.html'},
+        {name:'Placa acrilico 4,8 x 3 cm',image:'assets/precificador/fundo-verde.png',tint:'#e9f6ee',src:'./placa-acrilico-48x30.html',isNew:true},
         {name:'Placa de Acrílico Promoção',image:'assets/precificador/fundo-verde2.png',tint:'#e4f6f1'},
         {name:'Régua de Preços',image:'assets/precificador/fundo-verde.png',tint:'#eaf4f5'},
         {name:'Régua de Preço Promoção',image:'assets/precificador/fundo-rosa.png',tint:'#fff0f5'},
@@ -111,6 +116,7 @@
         gallery.replaceChildren();
         visible.forEach(model=>{
           const button=document.createElement('button');button.className='model';button.type='button';
+          if(model.isNew){button.classList.add('model-new');const badge=document.createElement('span');badge.className='new-badge';badge.textContent='NOVO';button.appendChild(badge);}
           const art=document.createElement('div');art.className='art';art.style.setProperty('--tint',model.tint);
           if(model.image){
             const img=document.createElement('img');img.src=model.image;img.alt='';img.loading='lazy';
