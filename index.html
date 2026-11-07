@@ -44,19 +44,29 @@
     @media(max-width:420px){.art{height:105px}.art img{width:76%}.gallery{gap:9px}.model-sub{display:none}}
     @media print{.workspace-head{display:none}#app-frame{height:100%}}
   .dd-icon{width:20px;height:20px;display:inline-block;vertical-align:middle;flex-shrink:0;pointer-events:none} button>.dd-icon:not(:only-child){margin-right:6px} .arrow .dd-icon{width:18px;height:18px} .back{display:inline-flex;align-items:center;gap:6px}
+  
+    button,input{min-height:48px}
+    button:focus-visible{outline:3px solid #006b67;outline-offset:4px}
+    .model-new{animation:none;border-color:#e3ebe9}
+    .model-sub{color:#586c67}
+    .flow-hint{max-width:1420px;margin:0 auto 24px;color:#48645e;line-height:1.6}
+    #editor-status{padding:12px 18px;background:#eef7f5;color:#234e46}
+    #editor-status[hidden]{display:none}
+    @media(max-width:720px){.toolbar{align-items:stretch}.toolbar input{width:100%}.workspace-head{height:auto;min-height:64px;gap:10px;padding:8px}.back{flex-shrink:0}#app-frame{height:calc(100% - 80px)}.model-sub{display:block}.flow-hint{font-size:14px}}
+    @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
   </style>
 </head>
 <body>
   <main id="home">
     <header class="topbar"><div class="brand"><span class="brand-icon">D&amp;D</span>Gerador de Etiquetas</div><span class="topnote">Central de modelos de impressão</span></header>
     <section class="intro"><div class="eyebrow">Biblioteca de modelos</div><h1>Qual etiqueta vamos criar?</h1><p class="subtitle">Escolha um modelo para abrir seu espaço de edição, configurar os produtos e preparar a impressão.</p></section>
-    <div class="toolbar"><strong id="count">Modelos disponíveis</strong><input id="search" type="search" placeholder="Buscar modelo de etiqueta..." aria-label="Buscar modelo"></div>
+    <p class="flow-hint">1. Escolha um modelo → 2. Preencha os dados → 3. Revise e imprima</p><div class="toolbar"><strong id="count" role="status" aria-live="polite">Modelos disponíveis</strong><input id="search" type="search" placeholder="Buscar modelo de etiqueta..." aria-label="Buscar modelo"></div>
     <section class="gallery" id="gallery" aria-label="Modelos de etiquetas"></section>
-    <p id="empty">Nenhum modelo encontrado para esta busca.</p>
+    <p id="empty">Nenhum modelo encontrado. Tente um nome mais curto ou limpe a busca para ver todos.</p>
   </main>
   <section id="workspace" aria-label="Editor de etiquetas">
     <div class="workspace-head"><button class="back" id="back" type="button"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>Todos os modelos</button><span id="current-title"></span></div>
-    <iframe id="app-frame" src="./legacy.html" title="Editor de Etiquetas D&D"></iframe>
+    <div id="editor-status" role="status" aria-live="polite" hidden></div><iframe id="app-frame" src="./legacy.html" title="Editor de Etiquetas D&D"></iframe>
   </section>
   <script>
     (() => {
@@ -77,6 +87,8 @@
       const gallery = document.getElementById('gallery');
       const input = document.getElementById('search');
       let active = null;
+      let lastModelButton = null;
+      const status = document.getElementById('editor-status');
       let loaded = false;
       function prepareFrame() {
         const doc = frame.contentDocument;
@@ -94,6 +106,7 @@
       }
       function activate(model) {
         active=model;
+        status.hidden=false;status.textContent="Abrindo "+model.name+"…";
         const source=model.src||'./legacy.html';
         if(frame.getAttribute('src')!==source) frame.setAttribute('src',source);
         document.getElementById('current-title').textContent=model.name;
@@ -103,9 +116,10 @@
             const doc=frame.contentDocument;
             const buttons=Array.from(doc?.querySelectorAll('.model-rail .model-item')||[]);
             const selected=buttons.find(b=>b.getAttribute('aria-label')===model.name);
-            if(selected){selected.click();return;}
+            if(selected){selected.click();status.hidden=true;frame.focus();return;}
           } catch(e){console.warn('Erro ao selecionar modelo',e)}
           if(n<35) setTimeout(()=>attempt(n+1),120);
+          else {status.textContent="Se o editor não aparecer, volte aos modelos e tente novamente.";}
         };
         attempt();
       }
@@ -128,10 +142,10 @@
           const labels=document.createElement('div');const name=document.createElement('div');name.className='model-name';name.textContent=model.name;
           const sub=document.createElement('div');sub.className='model-sub';sub.textContent='Abrir editor de etiqueta';labels.append(name,sub);
           const arrow=document.createElement('span');arrow.className='arrow';arrow.innerHTML="<svg class=\"dd-icon\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\" xmlns=\"http://www.w3.org/2000/svg\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\"><path d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z\"/></svg>";meta.append(labels,arrow);
-          button.append(art,meta);button.addEventListener('click',()=>activate(model));gallery.appendChild(button);
+          button.append(art,meta);button.addEventListener('click',()=>{lastModelButton=button;activate(model)});gallery.appendChild(button);
         });
       }
-      document.getElementById('back').addEventListener('click',()=>{document.body.classList.remove('editing');active=null;});
+      document.getElementById('back').addEventListener('click',()=>{document.body.classList.remove('editing');active=null;status.hidden=true;lastModelButton?.focus();});
       input.addEventListener('input',draw);
       frame.addEventListener('load',()=>{loaded=true;prepareFrame();if(active)activate(active)});
       draw();
