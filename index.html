@@ -23,8 +23,8 @@
     .gallery{max-width:1420px;margin:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
     .model{background:#fff;border:1px solid #e3ebe9;border-radius:20px;text-align:left;padding:12px;transition:transform .2s,border-color .2s,box-shadow .2s;box-shadow:0 4px 15px rgba(23,60,55,.025);min-width:0}
     .model:hover,.model:focus-visible{transform:translateY(-4px);border-color:#63ada4;box-shadow:0 15px 35px rgba(0,78,70,.12);outline:none}
-    .model-new{position:relative;border-color:#d8b45b;animation:new-card-glow 3.2s ease-in-out infinite}
-    .new-badge{position:absolute;top:22px;right:22px;z-index:1;padding:7px 13px;border:1px solid #e8cc80;border-radius:999px;background:linear-gradient(135deg,#f9e7ab,#d4a63a 55%,#f2d684);color:#513a08;font-size:11px;font-weight:900;letter-spacing:1.2px;box-shadow:0 3px 10px #80601e30;pointer-events:none}
+    .model-new{position:relative;overflow:hidden;border-color:#d8b45b;animation:new-card-glow 3.2s ease-in-out infinite}
+    .new-badge{position:absolute;top:23px;right:-35px;width:140px;z-index:1;padding:8px 0;text-align:center;transform:rotate(45deg);border-block:1px solid #e8cc80;background:linear-gradient(135deg,#f9e7ab,#d4a63a 55%,#f2d684);color:#513a08;font-size:11px;font-weight:900;letter-spacing:1.2px;box-shadow:0 3px 10px #80601e30;pointer-events:none}
     @keyframes new-card-glow{0%,100%{box-shadow:0 4px 15px #b88a2512}50%{box-shadow:0 6px 25px #c99b3b45;border-color:#c69a35}}
     .model-new:hover,.model-new:focus-visible{animation:none}
     @media(prefers-reduced-motion:reduce){.model-new{animation:none}}
