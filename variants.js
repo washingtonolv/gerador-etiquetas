@@ -6,6 +6,7 @@
     makeLabel: "Placa de Acrílico",
     storageKeys: { labels: "dd-etiquetas-v2", labelsLegacy: "dd-etiquetas-v1" },
     makeColumnMm: null,
+    colorChoice: false,
     css: "",
   };
 
@@ -15,6 +16,7 @@
       makeLabel: "Placa acrilico 4,8 x 3 cm",
       storageKeys: { labels: "dd-etiquetas-acrilico-48x30-v2", labelsLegacy: "dd-etiquetas-acrilico-48x30-v1" },
       makeColumnMm: 48,
+      colorChoice: true,
       css: [
         ".g-make .fold-label { aspect-ratio:48 / 30; }",
         "@media print { .g-make > .fold-label { width:48mm !important; height:30mm !important; } }",
