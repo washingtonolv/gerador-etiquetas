@@ -3289,6 +3289,62 @@ class Component extends DCLogic {
     }
   }
 
+  // Modelos impressos em iframe isolado: seletor das folhas, seletor das artes de fundo,
+  // classe do <body> e o CSS de página de cada um.
+  isolatedPrintModels = {
+    a6blackfriday: {
+      sheets: ".a5-native-sheets",
+      labels: ".blitz-label",
+      bodyClass: "a5-native-page a6-native-page",
+      css: `<style id="dd-black-friday-isolated-print">
+  @page { size: 210mm 297mm; margin: 0; }
+  html, body { margin:0 !important; padding:0 !important; width:210mm !important; min-width:210mm !important; height:auto !important; background:#fff !important; }
+  body.a5-native-page.pp { display:block !important; min-height:0 !important; }
+  body.a5-native-page.pp .preview-wrap { display:block !important; width:210mm !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page.pp .a5-native-sheets { display:block !important; width:210mm !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page.pp .blitz-sheet { display:block !important; box-sizing:border-box !important; width:210mm !important; min-width:210mm !important; max-width:210mm !important; height:297mm !important; min-height:297mm !important; max-height:297mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
+  body.a5-native-page.pp .blitz-sheet:last-child { break-after:auto !important; page-break-after:auto !important; }
+  body.a5-native-page.pp .g-blitz { display:grid !important; box-sizing:border-box !important; width:210mm !important; min-width:210mm !important; max-width:210mm !important; height:297mm !important; min-height:297mm !important; max-height:297mm !important; grid-template-columns:repeat(2, 105mm) !important; grid-template-rows:repeat(2, 148mm) !important; grid-auto-rows:148mm !important; column-gap:0 !important; row-gap:0 !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page.pp .blitz-label { box-sizing:border-box !important; width:105mm !important; min-width:105mm !important; max-width:105mm !important; height:148mm !important; min-height:148mm !important; max-height:148mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:.25mm dashed #9aa6b1 !important; outline-offset:-.25mm !important; aspect-ratio:auto !important; background-image:var(--blitz-bg) !important; background-size:100% 100% !important; background-position:center !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
+  .no-print, button { display:none !important; }
+</style>`,
+    },
+    a5blackfriday: {
+      sheets: ".a5-native-sheets",
+      labels: ".blitz-label",
+      bodyClass: "a5-native-page",
+      css: `<style id="dd-black-friday-isolated-print">
+  @page { size: 297mm 210mm; margin: 0; }
+  html, body { margin:0 !important; padding:0 !important; width:297mm !important; min-width:297mm !important; height:auto !important; background:#fff !important; }
+  body.a5-native-page.pp { display:block !important; min-height:0 !important; }
+  body.a5-native-page.pp .preview-wrap { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page.pp .a5-native-sheets { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page.pp .blitz-sheet { display:block !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
+  body.a5-native-page.pp .blitz-sheet:last-child { break-after:auto !important; page-break-after:auto !important; }
+  body.a5-native-page.pp .g-blitz { display:grid !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; grid-template-columns:repeat(2, 148mm) !important; grid-template-rows:repeat(1, 210mm) !important; grid-auto-rows:210mm !important; column-gap:0 !important; row-gap:0 !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page.pp .blitz-label { box-sizing:border-box !important; width:148mm !important; min-width:148mm !important; max-width:148mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:.25mm dashed #9aa6b1 !important; outline-offset:-.25mm !important; aspect-ratio:auto !important; background-image:var(--blitz-bg) !important; background-size:100% 100% !important; background-position:center !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
+  .no-print, button { display:none !important; }
+</style>`,
+    },
+    blackfriday: {
+      sheets: ".black-friday-sheets",
+      labels: ".black-friday-label",
+      bodyClass: "black-friday-page",
+      css: `<style id="dd-black-friday-isolated-print">
+  @page { size: A4 landscape; margin: 0; }
+  html, body { margin:0 !important; padding:0 !important; width:297mm !important; min-width:297mm !important; height:auto !important; background:#fff !important; }
+  body.black-friday-page { display:block !important; min-height:0 !important; }
+  body.black-friday-page .preview-wrap { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
+  body.black-friday-page .black-friday-sheets { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
+  body.black-friday-page .black-friday-sheet { display:block !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
+  body.black-friday-page .black-friday-sheet:last-child { break-after:auto !important; page-break-after:auto !important; }
+  body.black-friday-page .g-black-friday { display:grid !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; grid-template-columns:repeat(5, 40mm) !important; grid-template-rows:repeat(3, 50mm) !important; grid-auto-rows:50mm !important; column-gap:2mm !important; row-gap:2mm !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
+  body.black-friday-page .black-friday-label { box-sizing:border-box !important; width:40mm !important; min-width:40mm !important; max-width:40mm !important; height:50mm !important; min-height:50mm !important; max-height:50mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:.25mm dashed #9aa6b1 !important; outline-offset:-.25mm !important; aspect-ratio:auto !important; background-image:var(--black-friday-bg) !important; background-size:100% 100% !important; background-position:center !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
+  .no-print, button { display:none !important; }
+</style>`,
+    },
+  };
+
   // Catálogo único de marcas (chave -> rótulo exibido nos seletores).
   brandLabels = {
     ammobeauty: "Ammô Beauty", cimed: "Cimed", loudepre: "Lou de Pré",
@@ -3882,8 +3938,12 @@ ${assets}
     printWindow.print();
     return true;
   }
-  async printA6BlackFridayDocument() {
-    const source = document.querySelector(".a5-native-sheets");
+  // Impressão das folhas dos modelos Black Friday em um iframe isolado da página.
+  async printIsolatedSheets(modelKey) {
+    const config = this.isolatedPrintModels[modelKey];
+    if (!config) return false;
+
+    const source = document.querySelector(config.sheets);
     if (!source) return false;
 
     const printable = source.cloneNode(true);
@@ -3914,24 +3974,13 @@ ${assets}
 <meta charset="utf-8">
 <base href="${baseHref}">
 ${assets}
-<style id="dd-black-friday-isolated-print">
-  @page { size: 210mm 297mm; margin: 0; }
-  html, body { margin:0 !important; padding:0 !important; width:210mm !important; min-width:210mm !important; height:auto !important; background:#fff !important; }
-  body.a5-native-page.pp { display:block !important; min-height:0 !important; }
-  body.a5-native-page.pp .preview-wrap { display:block !important; width:210mm !important; margin:0 !important; padding:0 !important; }
-  body.a5-native-page.pp .a5-native-sheets { display:block !important; width:210mm !important; margin:0 !important; padding:0 !important; }
-  body.a5-native-page.pp .blitz-sheet { display:block !important; box-sizing:border-box !important; width:210mm !important; min-width:210mm !important; max-width:210mm !important; height:297mm !important; min-height:297mm !important; max-height:297mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
-  body.a5-native-page.pp .blitz-sheet:last-child { break-after:auto !important; page-break-after:auto !important; }
-  body.a5-native-page.pp .g-blitz { display:grid !important; box-sizing:border-box !important; width:210mm !important; min-width:210mm !important; max-width:210mm !important; height:297mm !important; min-height:297mm !important; max-height:297mm !important; grid-template-columns:repeat(2, 105mm) !important; grid-template-rows:repeat(2, 148mm) !important; grid-auto-rows:148mm !important; column-gap:0 !important; row-gap:0 !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
-  body.a5-native-page.pp .blitz-label { box-sizing:border-box !important; width:105mm !important; min-width:105mm !important; max-width:105mm !important; height:148mm !important; min-height:148mm !important; max-height:148mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:.25mm dashed #9aa6b1 !important; outline-offset:-.25mm !important; aspect-ratio:auto !important; background-image:var(--blitz-bg) !important; background-size:100% 100% !important; background-position:center !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
-  .no-print, button { display:none !important; }
-</style>
+${config.css}
 </head>
-<body class="a5-native-page a6-native-page pp"><div class="preview-wrap">${printable.outerHTML}</div></body>
+<body class="${config.bodyClass} pp"><div class="preview-wrap">${printable.outerHTML}</div></body>
 </html>`);
     printDocument.close();
 
-    const backgroundUrls = Array.from(printDocument.querySelectorAll(".blitz-label")).map((label) => {
+    const backgroundUrls = Array.from(printDocument.querySelectorAll(config.labels)).map((label) => {
       const value = printDocument.defaultView?.getComputedStyle(label).backgroundImage || "";
       const start = value.indexOf("(");
       const end = value.lastIndexOf(")");
@@ -3964,169 +4013,7 @@ ${assets}
     return true;
   }
 
-  async printA5BlackFridayDocument() {
-    const source = document.querySelector(".a5-native-sheets");
-    if (!source) return false;
 
-    const printable = source.cloneNode(true);
-    printable.querySelectorAll(".no-print, button").forEach((el) => el.remove());
-
-    const frame = document.createElement("iframe");
-    frame.title = "Impressão Preçario Black Friday";
-    frame.setAttribute("aria-hidden", "true");
-    frame.setAttribute("data-dd-black-friday-print-frame", "");
-    frame.style.cssText = "position:fixed; left:-10000px; top:0; width:1px; height:1px; border:0; opacity:0; pointer-events:none;";
-    document.body.appendChild(frame);
-
-    const printDocument = frame.contentDocument;
-    if (!printDocument) {
-      frame.remove();
-      return false;
-    }
-
-    const assets = Array.from(document.querySelectorAll('link[rel="stylesheet"], style'))
-      .filter((el) => !el.id?.startsWith("dd-print-page-"))
-      .map((el) => el.outerHTML)
-      .join("\n");
-    const baseHref = String(document.baseURI || location.href).replace(/"/g, "&quot;");
-    printDocument.open();
-    printDocument.write(`<!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<base href="${baseHref}">
-${assets}
-<style id="dd-black-friday-isolated-print">
-  @page { size: 297mm 210mm; margin: 0; }
-  html, body { margin:0 !important; padding:0 !important; width:297mm !important; min-width:297mm !important; height:auto !important; background:#fff !important; }
-  body.a5-native-page.pp { display:block !important; min-height:0 !important; }
-  body.a5-native-page.pp .preview-wrap { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
-  body.a5-native-page.pp .a5-native-sheets { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
-  body.a5-native-page.pp .blitz-sheet { display:block !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
-  body.a5-native-page.pp .blitz-sheet:last-child { break-after:auto !important; page-break-after:auto !important; }
-  body.a5-native-page.pp .g-blitz { display:grid !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; grid-template-columns:repeat(2, 148mm) !important; grid-template-rows:repeat(1, 210mm) !important; grid-auto-rows:210mm !important; column-gap:0 !important; row-gap:0 !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
-  body.a5-native-page.pp .blitz-label { box-sizing:border-box !important; width:148mm !important; min-width:148mm !important; max-width:148mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:.25mm dashed #9aa6b1 !important; outline-offset:-.25mm !important; aspect-ratio:auto !important; background-image:var(--blitz-bg) !important; background-size:100% 100% !important; background-position:center !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
-  .no-print, button { display:none !important; }
-</style>
-</head>
-<body class="a5-native-page pp"><div class="preview-wrap">${printable.outerHTML}</div></body>
-</html>`);
-    printDocument.close();
-
-    const backgroundUrls = Array.from(printDocument.querySelectorAll(".blitz-label")).map((label) => {
-      const value = printDocument.defaultView?.getComputedStyle(label).backgroundImage || "";
-      const start = value.indexOf("(");
-      const end = value.lastIndexOf(")");
-      return start >= 0 && end > start ? value.slice(start + 1, end).replace(/^['"]|['"]$/g, "") : "";
-    }).filter(Boolean);
-    const backgroundReady = Promise.all(Array.from(new Set(backgroundUrls)).map((src) => new Promise((resolve) => {
-      const image = new Image();
-      image.onload = resolve;
-      image.onerror = resolve;
-      image.src = src;
-    })));
-    await Promise.race([backgroundReady, new Promise((resolve) => setTimeout(resolve, 4000))]);
-    if (printDocument.fonts?.ready) await Promise.race([printDocument.fonts.ready, new Promise((resolve) => setTimeout(resolve, 1500))]);
-
-    const printWindow = frame.contentWindow;
-    if (!printWindow) {
-      frame.remove();
-      return false;
-    }
-    let removed = false;
-    const cleanup = () => {
-      if (removed) return;
-      removed = true;
-      frame.remove();
-    };
-    printWindow.addEventListener("afterprint", () => setTimeout(cleanup, 1000), { once: true });
-    setTimeout(cleanup, 120000);
-    printWindow.focus();
-    printWindow.print();
-    return true;
-  }
-
-  async printBlackFridayDocument() {
-    const source = document.querySelector(".black-friday-sheets");
-    if (!source) return false;
-
-    const printable = source.cloneNode(true);
-    printable.querySelectorAll(".no-print, button").forEach((el) => el.remove());
-
-    const frame = document.createElement("iframe");
-    frame.title = "Impressão Preçario Black Friday";
-    frame.setAttribute("aria-hidden", "true");
-    frame.setAttribute("data-dd-black-friday-print-frame", "");
-    frame.style.cssText = "position:fixed; left:-10000px; top:0; width:1px; height:1px; border:0; opacity:0; pointer-events:none;";
-    document.body.appendChild(frame);
-
-    const printDocument = frame.contentDocument;
-    if (!printDocument) {
-      frame.remove();
-      return false;
-    }
-
-    const assets = Array.from(document.querySelectorAll('link[rel="stylesheet"], style'))
-      .filter((el) => !el.id?.startsWith("dd-print-page-"))
-      .map((el) => el.outerHTML)
-      .join("\n");
-    const baseHref = String(document.baseURI || location.href).replace(/"/g, "&quot;");
-    printDocument.open();
-    printDocument.write(`<!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<base href="${baseHref}">
-${assets}
-<style id="dd-black-friday-isolated-print">
-  @page { size: A4 landscape; margin: 0; }
-  html, body { margin:0 !important; padding:0 !important; width:297mm !important; min-width:297mm !important; height:auto !important; background:#fff !important; }
-  body.black-friday-page { display:block !important; min-height:0 !important; }
-  body.black-friday-page .preview-wrap { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
-  body.black-friday-page .black-friday-sheets { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
-  body.black-friday-page .black-friday-sheet { display:block !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
-  body.black-friday-page .black-friday-sheet:last-child { break-after:auto !important; page-break-after:auto !important; }
-  body.black-friday-page .g-black-friday { display:grid !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; grid-template-columns:repeat(5, 40mm) !important; grid-template-rows:repeat(3, 50mm) !important; grid-auto-rows:50mm !important; column-gap:2mm !important; row-gap:2mm !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
-  body.black-friday-page .black-friday-label { box-sizing:border-box !important; width:40mm !important; min-width:40mm !important; max-width:40mm !important; height:50mm !important; min-height:50mm !important; max-height:50mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:.25mm dashed #9aa6b1 !important; outline-offset:-.25mm !important; aspect-ratio:auto !important; background-image:var(--black-friday-bg) !important; background-size:100% 100% !important; background-position:center !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
-  .no-print, button { display:none !important; }
-</style>
-</head>
-<body class="black-friday-page pp"><div class="preview-wrap">${printable.outerHTML}</div></body>
-</html>`);
-    printDocument.close();
-
-    const backgroundUrls = Array.from(printDocument.querySelectorAll(".black-friday-label")).map((label) => {
-      const value = printDocument.defaultView?.getComputedStyle(label).backgroundImage || "";
-      const start = value.indexOf("(");
-      const end = value.lastIndexOf(")");
-      return start >= 0 && end > start ? value.slice(start + 1, end).replace(/^['"]|['"]$/g, "") : "";
-    }).filter(Boolean);
-    const backgroundReady = Promise.all(Array.from(new Set(backgroundUrls)).map((src) => new Promise((resolve) => {
-      const image = new Image();
-      image.onload = resolve;
-      image.onerror = resolve;
-      image.src = src;
-    })));
-    await Promise.race([backgroundReady, new Promise((resolve) => setTimeout(resolve, 4000))]);
-    if (printDocument.fonts?.ready) await Promise.race([printDocument.fonts.ready, new Promise((resolve) => setTimeout(resolve, 1500))]);
-
-    const printWindow = frame.contentWindow;
-    if (!printWindow) {
-      frame.remove();
-      return false;
-    }
-    let removed = false;
-    const cleanup = () => {
-      if (removed) return;
-      removed = true;
-      frame.remove();
-    };
-    printWindow.addEventListener("afterprint", () => setTimeout(cleanup, 1000), { once: true });
-    setTimeout(cleanup, 120000);
-    printWindow.focus();
-    printWindow.print();
-    return true;
-  }
   componentDidMount() {
     setTimeout(() => this.centerActiveTab(), 60);
     this._onKeyDown = e => {
@@ -4692,10 +4579,8 @@ ${assets}
             await this.printBlitzA6Document();
             return;
           }
-          if (model === "a6blackfriday") { await this.printA6BlackFridayDocument(); return; }
-          if (model === "a5blackfriday") { await this.printA5BlackFridayDocument(); return; }
-          if (model === "blackfriday") {
-            await this.printBlackFridayDocument();
+          if (this.isolatedPrintModels[model]) {
+            await this.printIsolatedSheets(model);
             return;
           }
           const values = Array.from(document.querySelectorAll(".pais-label, .pais6-label, .blitz-label, .blitzA6-label")).flatMap((el) => {
