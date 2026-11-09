@@ -15,6 +15,7 @@
 <style id="dd-print-page-vendedoras" media="not all">@page { size: A4 landscape; margin: 0; }</style>
 <style>x-dc { display: none !important; }</style>
 <script type="module" src="./modern-app.js"></script>
+<script src="./variants.js"></script>
 <style>.dd-icon{width:20px;height:20px;display:inline-block;vertical-align:middle;flex-shrink:0;pointer-events:none} button>.dd-icon:not(:only-child){margin-right:6px} .arrow .dd-icon{width:18px;height:18px} .back{display:inline-flex;align-items:center;gap:6px}</style>
 <style id="ux-editor-rules">
  @media screen {
@@ -87,7 +88,7 @@
       .preview-wrap { padding: 0 !important; display: block !important; }
       .sheet { box-shadow: none !important; border: none !important; margin: 0 !important; padding: 0 !important; max-width: none !important; border-radius: 0 !important; }
       .g-prec { grid-template-columns: repeat(2, 65mm) !important; gap: 6mm !important; justify-content:center !important; }
-      .g-make { grid-template-columns: repeat(2, 64mm) !important; gap: 6mm !important; justify-content:center !important; }
+      .g-make { grid-template-columns: repeat(2, var(--make-col-mm, 64mm)) !important; gap: 6mm !important; justify-content:center !important; }
       .g-make2, .g-make3 { grid-template-columns: repeat(3, 55mm) !important; gap: 4mm 3mm !important; justify-content:center !important; }
       .g-pais { display:grid !important; grid-template-columns:repeat(4, 40mm) !important; grid-auto-rows:50mm !important; column-gap:4mm !important; row-gap:4mm !important; justify-content:center !important; align-content:start !important; width:172mm !important; max-width:172mm !important; }
       .g-pais6 { grid-template-columns: repeat(2, 105mm) !important; grid-auto-rows: 148mm !important; gap: 0 !important; justify-content:center !important; }
@@ -117,7 +118,7 @@
     .pp .no-print { display: none !important; }
     .pp .preview-wrap { padding: 16px !important; }
     .pp .g-prec { grid-template-columns: repeat(2, 65mm) !important; gap: 6mm !important; justify-content:center !important; }
-    .pp .g-make { grid-template-columns: repeat(2, 64mm) !important; gap: 6mm !important; justify-content:center !important; }
+    .pp .g-make { grid-template-columns: repeat(2, var(--make-col-mm, 64mm)) !important; gap: 6mm !important; justify-content:center !important; }
     .pp .g-make2, .pp .g-make3 { grid-template-columns: repeat(3, 55mm) !important; gap: 4mm 3mm !important; justify-content:center !important; }
     .pp .g-pais { display:grid !important; grid-template-columns:repeat(4, 40mm) !important; grid-auto-rows:50mm !important; column-gap:4mm !important; row-gap:4mm !important; justify-content:center !important; align-content:start !important; width:172mm !important; max-width:172mm !important; }
     .pp .g-pais6 { grid-template-columns: repeat(2, 105mm) !important; grid-auto-rows: 148mm !important; gap: 0 !important; justify-content:center !important; }
@@ -454,6 +455,8 @@
       .splash-flower--small { right: 18vw; bottom: 28vh; width: 70px; }
     }
     @keyframes ddFade { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+    #dd-splash { pointer-events: none; }
+    @media (prefers-reduced-motion: reduce) { #dd-splash { display: none !important; } }
     /* inputs modernos */
     .card-box input, .card-box select, .card-box textarea { background:#f7f8f9; border:1px solid #e7ebee !important; border-radius:10px !important; transition: box-shadow .15s, border-color .15s, background .15s; }
     .card-box input:focus, .card-box select:focus, .card-box textarea:focus { outline:none; background:#fff; border-color:#006B67 !important; box-shadow:0 0 0 3px rgba(5,145,140,.18); }
@@ -1486,7 +1489,7 @@
   <nav class="no-print model-rail {{ modelsRailClass }}" aria-label="Modelos de etiqueta">
     <button class="model-rail-toggle" onClick="{{ toggleModelsPanel }}" title="{{ modelsToggleTitle }}" aria-label="{{ modelsToggleTitle }}" aria-expanded="{{ modelsExpanded }}"><span class="model-rail-toggle-icon">›</span></button>
     <div class="model-rail-title">Modelo<br>de Etiquetas</div>
-      <button onClick="{{ pickMake }}" data-on="{{ tabMakeOn }}" aria-pressed="{{ tabMakePressed }}" aria-label="Placa de Acrílico" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-verde.png');"></span><span class="model-n">1</span><span>Placa de Acrílico</span></button>
+      <button onClick="{{ pickMake }}" data-on="{{ tabMakeOn }}" aria-pressed="{{ tabMakePressed }}" aria-label="{{ makeLabel }}" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-verde.png');"></span><span class="model-n">1</span><span>{{ makeLabel }}</span></button>
       <button onClick="{{ pickPrec }}" data-on="{{ tabPrecOn }}" aria-pressed="{{ tabPrecPressed }}" aria-label="Placa de Acrílico Promoção" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-verde2.png');"></span><span class="model-n">2</span><span>Placa de Acrílico Promoção</span></button>
       <button onClick="{{ pickMake2 }}" data-on="{{ tabMake2On }}" aria-pressed="{{ tabMake2Pressed }}" aria-label="Régua de Preços" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-verde.png');"></span><span class="model-n">3</span><span>Régua de Preços</span></button>
       <button onClick="{{ pickMake3 }}" data-on="{{ tabMake3On }}" aria-pressed="{{ tabMake3Pressed }}" aria-label="Régua de Preço Promoção" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-rosa.png');"></span><span class="model-n">4</span><span>Régua de Preço Promoção</span></button>
@@ -1851,7 +1854,7 @@
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
       <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
       <div class="editor-panel-content">
-      <h2 style="font-size:11px; font-weight:600; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Placa de Acrílico ({{ mkCount }})</h2>
+      <h2 style="font-size:11px; font-weight:600; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">{{ makeLabel }} ({{ mkCount }})</h2>
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ mks }}" as="g" hint-placeholder-count="3">
         <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
@@ -3269,10 +3272,13 @@ class Component extends DCLogic {
   };
 
 
+  // Variante do editor (definida em variants.js a partir de ?variant=).
+  variant = window.DD_VARIANT;
+
   // Chaves do localStorage e valores fixos usados em mais de um ponto.
   storageKeys = {
-    labels: "dd-etiquetas-v2",
-    labelsLegacy: "dd-etiquetas-v1",
+    labels: this.variant.storageKeys.labels,
+    labelsLegacy: this.variant.storageKeys.labelsLegacy,
     a5BlackFridayLegacy: "dd-a5-black-friday-v1",
     dark: "dd-dark",
     onboardingSeen: "dd-onboarding-seen",
@@ -3288,6 +3294,62 @@ class Component extends DCLogic {
       console.warn("[gerador-etiquetas] Não foi possível salvar a preferência " + key, e);
     }
   }
+
+  // Modelos impressos em iframe isolado: seletor das folhas, seletor das artes de fundo,
+  // classe do <body> e o CSS de página de cada um.
+  isolatedPrintModels = {
+    a6blackfriday: {
+      sheets: ".a5-native-sheets",
+      labels: ".blitz-label",
+      bodyClass: "a5-native-page a6-native-page",
+      css: `<style id="dd-black-friday-isolated-print">
+  @page { size: 210mm 297mm; margin: 0; }
+  html, body { margin:0 !important; padding:0 !important; width:210mm !important; min-width:210mm !important; height:auto !important; background:#fff !important; }
+  body.a5-native-page.pp { display:block !important; min-height:0 !important; }
+  body.a5-native-page.pp .preview-wrap { display:block !important; width:210mm !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page.pp .a5-native-sheets { display:block !important; width:210mm !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page.pp .blitz-sheet { display:block !important; box-sizing:border-box !important; width:210mm !important; min-width:210mm !important; max-width:210mm !important; height:297mm !important; min-height:297mm !important; max-height:297mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
+  body.a5-native-page.pp .blitz-sheet:last-child { break-after:auto !important; page-break-after:auto !important; }
+  body.a5-native-page.pp .g-blitz { display:grid !important; box-sizing:border-box !important; width:210mm !important; min-width:210mm !important; max-width:210mm !important; height:297mm !important; min-height:297mm !important; max-height:297mm !important; grid-template-columns:repeat(2, 105mm) !important; grid-template-rows:repeat(2, 148mm) !important; grid-auto-rows:148mm !important; column-gap:0 !important; row-gap:0 !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page.pp .blitz-label { box-sizing:border-box !important; width:105mm !important; min-width:105mm !important; max-width:105mm !important; height:148mm !important; min-height:148mm !important; max-height:148mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:.25mm dashed #9aa6b1 !important; outline-offset:-.25mm !important; aspect-ratio:auto !important; background-image:var(--blitz-bg) !important; background-size:100% 100% !important; background-position:center !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
+  .no-print, button { display:none !important; }
+</style>`,
+    },
+    a5blackfriday: {
+      sheets: ".a5-native-sheets",
+      labels: ".blitz-label",
+      bodyClass: "a5-native-page",
+      css: `<style id="dd-black-friday-isolated-print">
+  @page { size: 297mm 210mm; margin: 0; }
+  html, body { margin:0 !important; padding:0 !important; width:297mm !important; min-width:297mm !important; height:auto !important; background:#fff !important; }
+  body.a5-native-page.pp { display:block !important; min-height:0 !important; }
+  body.a5-native-page.pp .preview-wrap { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page.pp .a5-native-sheets { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page.pp .blitz-sheet { display:block !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
+  body.a5-native-page.pp .blitz-sheet:last-child { break-after:auto !important; page-break-after:auto !important; }
+  body.a5-native-page.pp .g-blitz { display:grid !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; grid-template-columns:repeat(2, 148mm) !important; grid-template-rows:repeat(1, 210mm) !important; grid-auto-rows:210mm !important; column-gap:0 !important; row-gap:0 !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
+  body.a5-native-page.pp .blitz-label { box-sizing:border-box !important; width:148mm !important; min-width:148mm !important; max-width:148mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:.25mm dashed #9aa6b1 !important; outline-offset:-.25mm !important; aspect-ratio:auto !important; background-image:var(--blitz-bg) !important; background-size:100% 100% !important; background-position:center !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
+  .no-print, button { display:none !important; }
+</style>`,
+    },
+    blackfriday: {
+      sheets: ".black-friday-sheets",
+      labels: ".black-friday-label",
+      bodyClass: "black-friday-page",
+      css: `<style id="dd-black-friday-isolated-print">
+  @page { size: A4 landscape; margin: 0; }
+  html, body { margin:0 !important; padding:0 !important; width:297mm !important; min-width:297mm !important; height:auto !important; background:#fff !important; }
+  body.black-friday-page { display:block !important; min-height:0 !important; }
+  body.black-friday-page .preview-wrap { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
+  body.black-friday-page .black-friday-sheets { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
+  body.black-friday-page .black-friday-sheet { display:block !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
+  body.black-friday-page .black-friday-sheet:last-child { break-after:auto !important; page-break-after:auto !important; }
+  body.black-friday-page .g-black-friday { display:grid !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; grid-template-columns:repeat(5, 40mm) !important; grid-template-rows:repeat(3, 50mm) !important; grid-auto-rows:50mm !important; column-gap:2mm !important; row-gap:2mm !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
+  body.black-friday-page .black-friday-label { box-sizing:border-box !important; width:40mm !important; min-width:40mm !important; max-width:40mm !important; height:50mm !important; min-height:50mm !important; max-height:50mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:.25mm dashed #9aa6b1 !important; outline-offset:-.25mm !important; aspect-ratio:auto !important; background-image:var(--black-friday-bg) !important; background-size:100% 100% !important; background-position:center !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
+  .no-print, button { display:none !important; }
+</style>`,
+    },
+  };
 
   // Catálogo único de marcas (chave -> rótulo exibido nos seletores).
   brandLabels = {
@@ -3328,7 +3390,7 @@ class Component extends DCLogic {
     placa: { key: "placas", activeKey: "activePlaca", label: "Etiqueta Vitrine", perPage: 12, create: () => ({ brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }) },
     pcr: { key: "pcrs", activeKey: "activePcr", label: "Expositor Madeira", perPage: 9, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }) },
     prec: { key: "prs", activeKey: "activePr", label: "Placa de Acrílico Promoção", perPage: 12, create: () => ({ brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" }) },
-    make: { key: "mks", activeKey: "activeMk", label: "Placa de Acrílico", perPage: 12, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
+    make: { key: "mks", activeKey: "activeMk", label: this.variant.makeLabel, perPage: 12, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
     make2: { key: "mks2", activeKey: "activeMk2", label: "Régua de Preços", perPage: 30, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
     make3: { key: "mks3", activeKey: "activeMk3", label: "Régua de Preço Promoção", perPage: 30, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
     pais: { key: "pss", activeKey: "activePs", label: "Etiqueta Especial Dia dos Pais", perPage: 20, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
@@ -3882,8 +3944,12 @@ ${assets}
     printWindow.print();
     return true;
   }
-  async printA6BlackFridayDocument() {
-    const source = document.querySelector(".a5-native-sheets");
+  // Impressão das folhas dos modelos Black Friday em um iframe isolado da página.
+  async printIsolatedSheets(modelKey) {
+    const config = this.isolatedPrintModels[modelKey];
+    if (!config) return false;
+
+    const source = document.querySelector(config.sheets);
     if (!source) return false;
 
     const printable = source.cloneNode(true);
@@ -3914,24 +3980,13 @@ ${assets}
 <meta charset="utf-8">
 <base href="${baseHref}">
 ${assets}
-<style id="dd-black-friday-isolated-print">
-  @page { size: 210mm 297mm; margin: 0; }
-  html, body { margin:0 !important; padding:0 !important; width:210mm !important; min-width:210mm !important; height:auto !important; background:#fff !important; }
-  body.a5-native-page.pp { display:block !important; min-height:0 !important; }
-  body.a5-native-page.pp .preview-wrap { display:block !important; width:210mm !important; margin:0 !important; padding:0 !important; }
-  body.a5-native-page.pp .a5-native-sheets { display:block !important; width:210mm !important; margin:0 !important; padding:0 !important; }
-  body.a5-native-page.pp .blitz-sheet { display:block !important; box-sizing:border-box !important; width:210mm !important; min-width:210mm !important; max-width:210mm !important; height:297mm !important; min-height:297mm !important; max-height:297mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
-  body.a5-native-page.pp .blitz-sheet:last-child { break-after:auto !important; page-break-after:auto !important; }
-  body.a5-native-page.pp .g-blitz { display:grid !important; box-sizing:border-box !important; width:210mm !important; min-width:210mm !important; max-width:210mm !important; height:297mm !important; min-height:297mm !important; max-height:297mm !important; grid-template-columns:repeat(2, 105mm) !important; grid-template-rows:repeat(2, 148mm) !important; grid-auto-rows:148mm !important; column-gap:0 !important; row-gap:0 !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
-  body.a5-native-page.pp .blitz-label { box-sizing:border-box !important; width:105mm !important; min-width:105mm !important; max-width:105mm !important; height:148mm !important; min-height:148mm !important; max-height:148mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:.25mm dashed #9aa6b1 !important; outline-offset:-.25mm !important; aspect-ratio:auto !important; background-image:var(--blitz-bg) !important; background-size:100% 100% !important; background-position:center !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
-  .no-print, button { display:none !important; }
-</style>
-</head>
-<body class="a5-native-page a6-native-page pp"><div class="preview-wrap">${printable.outerHTML}</div></body>
+${config.css}
+${this.variant.printStyleTag}</head>
+<body class="${config.bodyClass} pp"><div class="preview-wrap">${printable.outerHTML}</div></body>
 </html>`);
     printDocument.close();
 
-    const backgroundUrls = Array.from(printDocument.querySelectorAll(".blitz-label")).map((label) => {
+    const backgroundUrls = Array.from(printDocument.querySelectorAll(config.labels)).map((label) => {
       const value = printDocument.defaultView?.getComputedStyle(label).backgroundImage || "";
       const start = value.indexOf("(");
       const end = value.lastIndexOf(")");
@@ -3964,169 +4019,7 @@ ${assets}
     return true;
   }
 
-  async printA5BlackFridayDocument() {
-    const source = document.querySelector(".a5-native-sheets");
-    if (!source) return false;
 
-    const printable = source.cloneNode(true);
-    printable.querySelectorAll(".no-print, button").forEach((el) => el.remove());
-
-    const frame = document.createElement("iframe");
-    frame.title = "Impressão Preçario Black Friday";
-    frame.setAttribute("aria-hidden", "true");
-    frame.setAttribute("data-dd-black-friday-print-frame", "");
-    frame.style.cssText = "position:fixed; left:-10000px; top:0; width:1px; height:1px; border:0; opacity:0; pointer-events:none;";
-    document.body.appendChild(frame);
-
-    const printDocument = frame.contentDocument;
-    if (!printDocument) {
-      frame.remove();
-      return false;
-    }
-
-    const assets = Array.from(document.querySelectorAll('link[rel="stylesheet"], style'))
-      .filter((el) => !el.id?.startsWith("dd-print-page-"))
-      .map((el) => el.outerHTML)
-      .join("\n");
-    const baseHref = String(document.baseURI || location.href).replace(/"/g, "&quot;");
-    printDocument.open();
-    printDocument.write(`<!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<base href="${baseHref}">
-${assets}
-<style id="dd-black-friday-isolated-print">
-  @page { size: 297mm 210mm; margin: 0; }
-  html, body { margin:0 !important; padding:0 !important; width:297mm !important; min-width:297mm !important; height:auto !important; background:#fff !important; }
-  body.a5-native-page.pp { display:block !important; min-height:0 !important; }
-  body.a5-native-page.pp .preview-wrap { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
-  body.a5-native-page.pp .a5-native-sheets { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
-  body.a5-native-page.pp .blitz-sheet { display:block !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
-  body.a5-native-page.pp .blitz-sheet:last-child { break-after:auto !important; page-break-after:auto !important; }
-  body.a5-native-page.pp .g-blitz { display:grid !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; grid-template-columns:repeat(2, 148mm) !important; grid-template-rows:repeat(1, 210mm) !important; grid-auto-rows:210mm !important; column-gap:0 !important; row-gap:0 !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
-  body.a5-native-page.pp .blitz-label { box-sizing:border-box !important; width:148mm !important; min-width:148mm !important; max-width:148mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:.25mm dashed #9aa6b1 !important; outline-offset:-.25mm !important; aspect-ratio:auto !important; background-image:var(--blitz-bg) !important; background-size:100% 100% !important; background-position:center !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
-  .no-print, button { display:none !important; }
-</style>
-</head>
-<body class="a5-native-page pp"><div class="preview-wrap">${printable.outerHTML}</div></body>
-</html>`);
-    printDocument.close();
-
-    const backgroundUrls = Array.from(printDocument.querySelectorAll(".blitz-label")).map((label) => {
-      const value = printDocument.defaultView?.getComputedStyle(label).backgroundImage || "";
-      const start = value.indexOf("(");
-      const end = value.lastIndexOf(")");
-      return start >= 0 && end > start ? value.slice(start + 1, end).replace(/^['"]|['"]$/g, "") : "";
-    }).filter(Boolean);
-    const backgroundReady = Promise.all(Array.from(new Set(backgroundUrls)).map((src) => new Promise((resolve) => {
-      const image = new Image();
-      image.onload = resolve;
-      image.onerror = resolve;
-      image.src = src;
-    })));
-    await Promise.race([backgroundReady, new Promise((resolve) => setTimeout(resolve, 4000))]);
-    if (printDocument.fonts?.ready) await Promise.race([printDocument.fonts.ready, new Promise((resolve) => setTimeout(resolve, 1500))]);
-
-    const printWindow = frame.contentWindow;
-    if (!printWindow) {
-      frame.remove();
-      return false;
-    }
-    let removed = false;
-    const cleanup = () => {
-      if (removed) return;
-      removed = true;
-      frame.remove();
-    };
-    printWindow.addEventListener("afterprint", () => setTimeout(cleanup, 1000), { once: true });
-    setTimeout(cleanup, 120000);
-    printWindow.focus();
-    printWindow.print();
-    return true;
-  }
-
-  async printBlackFridayDocument() {
-    const source = document.querySelector(".black-friday-sheets");
-    if (!source) return false;
-
-    const printable = source.cloneNode(true);
-    printable.querySelectorAll(".no-print, button").forEach((el) => el.remove());
-
-    const frame = document.createElement("iframe");
-    frame.title = "Impressão Preçario Black Friday";
-    frame.setAttribute("aria-hidden", "true");
-    frame.setAttribute("data-dd-black-friday-print-frame", "");
-    frame.style.cssText = "position:fixed; left:-10000px; top:0; width:1px; height:1px; border:0; opacity:0; pointer-events:none;";
-    document.body.appendChild(frame);
-
-    const printDocument = frame.contentDocument;
-    if (!printDocument) {
-      frame.remove();
-      return false;
-    }
-
-    const assets = Array.from(document.querySelectorAll('link[rel="stylesheet"], style'))
-      .filter((el) => !el.id?.startsWith("dd-print-page-"))
-      .map((el) => el.outerHTML)
-      .join("\n");
-    const baseHref = String(document.baseURI || location.href).replace(/"/g, "&quot;");
-    printDocument.open();
-    printDocument.write(`<!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<base href="${baseHref}">
-${assets}
-<style id="dd-black-friday-isolated-print">
-  @page { size: A4 landscape; margin: 0; }
-  html, body { margin:0 !important; padding:0 !important; width:297mm !important; min-width:297mm !important; height:auto !important; background:#fff !important; }
-  body.black-friday-page { display:block !important; min-height:0 !important; }
-  body.black-friday-page .preview-wrap { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
-  body.black-friday-page .black-friday-sheets { display:block !important; width:297mm !important; margin:0 !important; padding:0 !important; }
-  body.black-friday-page .black-friday-sheet { display:block !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; box-shadow:none !important; overflow:hidden !important; zoom:1 !important; break-inside:avoid-page !important; page-break-inside:avoid !important; break-after:page !important; page-break-after:always !important; }
-  body.black-friday-page .black-friday-sheet:last-child { break-after:auto !important; page-break-after:auto !important; }
-  body.black-friday-page .g-black-friday { display:grid !important; box-sizing:border-box !important; width:297mm !important; min-width:297mm !important; max-width:297mm !important; height:210mm !important; min-height:210mm !important; max-height:210mm !important; grid-template-columns:repeat(5, 40mm) !important; grid-template-rows:repeat(3, 50mm) !important; grid-auto-rows:50mm !important; column-gap:2mm !important; row-gap:2mm !important; align-content:center !important; justify-content:center !important; margin:0 !important; padding:0 !important; }
-  body.black-friday-page .black-friday-label { box-sizing:border-box !important; width:40mm !important; min-width:40mm !important; max-width:40mm !important; height:50mm !important; min-height:50mm !important; max-height:50mm !important; margin:0 !important; padding:0 !important; border:0 !important; border-radius:0 !important; outline:.25mm dashed #9aa6b1 !important; outline-offset:-.25mm !important; aspect-ratio:auto !important; background-image:var(--black-friday-bg) !important; background-size:100% 100% !important; background-position:center !important; background-repeat:no-repeat !important; break-inside:avoid !important; }
-  .no-print, button { display:none !important; }
-</style>
-</head>
-<body class="black-friday-page pp"><div class="preview-wrap">${printable.outerHTML}</div></body>
-</html>`);
-    printDocument.close();
-
-    const backgroundUrls = Array.from(printDocument.querySelectorAll(".black-friday-label")).map((label) => {
-      const value = printDocument.defaultView?.getComputedStyle(label).backgroundImage || "";
-      const start = value.indexOf("(");
-      const end = value.lastIndexOf(")");
-      return start >= 0 && end > start ? value.slice(start + 1, end).replace(/^['"]|['"]$/g, "") : "";
-    }).filter(Boolean);
-    const backgroundReady = Promise.all(Array.from(new Set(backgroundUrls)).map((src) => new Promise((resolve) => {
-      const image = new Image();
-      image.onload = resolve;
-      image.onerror = resolve;
-      image.src = src;
-    })));
-    await Promise.race([backgroundReady, new Promise((resolve) => setTimeout(resolve, 4000))]);
-    if (printDocument.fonts?.ready) await Promise.race([printDocument.fonts.ready, new Promise((resolve) => setTimeout(resolve, 1500))]);
-
-    const printWindow = frame.contentWindow;
-    if (!printWindow) {
-      frame.remove();
-      return false;
-    }
-    let removed = false;
-    const cleanup = () => {
-      if (removed) return;
-      removed = true;
-      frame.remove();
-    };
-    printWindow.addEventListener("afterprint", () => setTimeout(cleanup, 1000), { once: true });
-    setTimeout(cleanup, 120000);
-    printWindow.focus();
-    printWindow.print();
-    return true;
-  }
   componentDidMount() {
     setTimeout(() => this.centerActiveTab(), 60);
     this._onKeyDown = e => {
@@ -4692,10 +4585,8 @@ ${assets}
             await this.printBlitzA6Document();
             return;
           }
-          if (model === "a6blackfriday") { await this.printA6BlackFridayDocument(); return; }
-          if (model === "a5blackfriday") { await this.printA5BlackFridayDocument(); return; }
-          if (model === "blackfriday") {
-            await this.printBlackFridayDocument();
+          if (this.isolatedPrintModels[model]) {
+            await this.printIsolatedSheets(model);
             return;
           }
           const values = Array.from(document.querySelectorAll(".pais-label, .pais6-label, .blitz-label, .blitzA6-label")).flatMap((el) => {
@@ -4722,6 +4613,7 @@ ${assets}
       printCount: activeCount,
       printPages: pages,
       printModel: modelMeta.label,
+      makeLabel: this.variant.makeLabel,
       printPaper: "A4",
       printOrientation: model === "a5blackfriday" || model === "aniversarioA5" || model === "blitz" || model === "blackfriday" || model === "vendedoras" ? "Paisagem" : "Retrato",
       printMargins: model === "a6blackfriday" || model === "a5blackfriday" || model === "aniversarioA5" || model === "aniversarioA6" || model === "blitz" || model === "blitzA6" || model === "blackfriday" || model === "vendedoras" || model === "pais6" ? "Nenhuma" : "Padrão",

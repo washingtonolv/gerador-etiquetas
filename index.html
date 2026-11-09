@@ -72,7 +72,7 @@
     (() => {
       const models = [
         {name:'Placa de Acrílico',image:'assets/precificador/fundo-verde.png',tint:'#e9f6ee'},
-        {name:'Placa acrilico 4,8 x 3 cm',image:'assets/precificador/fundo-verde.png',tint:'#e9f6ee',src:'./placa-acrilico-48x30.html',isNew:true},
+        {name:'Placa acrilico 4,8 x 3 cm',image:'assets/precificador/fundo-verde.png',tint:'#e9f6ee',src:'./legacy.html?variant=placa-48x30',isNew:true},
         {name:'Placa de Acrílico Promoção',image:'assets/precificador/fundo-verde2.png',tint:'#e4f6f1'},
         {name:'Régua de Preços',image:'assets/precificador/fundo-verde.png',tint:'#eaf4f5'},
         {name:'Régua de Preço Promoção',image:'assets/precificador/fundo-rosa.png',tint:'#fff0f5'},
@@ -110,7 +110,7 @@
           doc.body.appendChild(script);
         }
       }
-      function selectLegacyModel(model, id, tries = 0) {
+      function selectEditorModel(model, id, tries = 0) {
         if (id !== requestId || !active || active !== model) return;
         try {
           const doc = frame.contentDocument;
@@ -126,7 +126,7 @@
           console.warn('Erro ao selecionar modelo', e);
         }
         if (tries < 100) {
-          setTimeout(() => selectLegacyModel(model, id, tries + 1), 150);
+          setTimeout(() => selectEditorModel(model, id, tries + 1), 150);
         } else {
           status.textContent = 'O editor não respondeu. Volte aos modelos e tente novamente.';
         }
@@ -146,12 +146,7 @@
           return;
         }
         if (frameReady) {
-          if (source !== './legacy.html') {
-            status.hidden = true;
-            frame.focus();
-          } else {
-            selectLegacyModel(model, id);
-          }
+          selectEditorModel(model, id);
         }
       }
       function draw(){
@@ -185,12 +180,7 @@
         const id = requestId;
         const source = active.src || './legacy.html';
         if (source !== currentSource) return;
-        if (source !== './legacy.html') {
-          status.hidden = true;
-          frame.focus();
-        } else {
-          selectLegacyModel(active, id);
-        }
+        selectEditorModel(active, id);
       });
       draw();
     })();
