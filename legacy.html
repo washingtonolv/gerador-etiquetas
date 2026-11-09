@@ -1874,6 +1874,12 @@
             <button onClick="{{ g.dup }}" title="Duplicar" style="background:none; border:none; color:#5a6873; font-size:15px; cursor:pointer; line-height:1;" aria-label="Duplicar"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
             <button onClick="{{ g.remove }}" title="Remover" style="background:none; border:none; color:#b0392b; font-size:16px; cursor:pointer; line-height:1;" aria-label="Remover"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
           </div>
+          <sc-if value="{{ makeColorChoice }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; gap:6px;">
+            <button onClick="{{ g.setRosa }}" style="{{ g.rosaBtnStyle }}">Fundo rosa</button>
+            <button onClick="{{ g.setVerde }}" style="{{ g.verdeBtnStyle }}">Fundo verde</button>
+          </div>
+          </sc-if>
           <textarea value="{{ g.name }}" onChange="{{ g.setName }}" rows="2" placeholder="Descrição do produto" aria-label="Descrição do produto" style="width:100%; resize:vertical; border:1px solid #d8dee4; border-radius:6px; padding:8px; font-size:13px; font-weight:600;"></textarea>
               <details class="ux-advanced no-print" open="true"><summary>Formatação do nome</summary><div class="name-format-toolbar" style="display:flex; align-items:center; justify-content:space-between; gap:4px; flex-wrap:wrap;">
                 <div role="group" aria-label="Alinhamento da descrição" style="display:flex; gap:2px;">
@@ -1947,7 +1953,7 @@
             <div class="label-preview fold-label" data-active="{{ g.activeOn }}" style="font-family:Axiforma, Archivo, sans-serif; position:relative; width:100%; overflow:hidden; border:1px solid #e4e9ed; border-radius:2px; container-type:inline-size;">
               <button type="button" class="no-print preview-activate" onClick="{{ g.activatePreview }}" aria-label="Editar esta etiqueta"></button>
               <button type="button" class="no-print preview-delete" onClick="{{ g.removePreview }}" title="Excluir etiqueta" aria-label="Excluir etiqueta"><svg class="dd-icon" fill="currentColor" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
-              <div class="fold-label-face" style="background-image:url('assets/precificador/fundo-verde.png');">
+              <div class="fold-label-face" style="background-image:{{ g.fundoBg }};">
               <img src="assets/precificador/logo.png" alt="D&amp;D Cosméticos" style="position:absolute; left:1%; top:5%; width:48%;">
               <div class="formatted-product-name" style="position:absolute; left:2%; top:57%; width:38%; font-size:{{ g.formattedNameSize }}; font-weight:{{ g.nameWeight }}; line-height:1.15; color:#171717; text-transform:uppercase;  text-align:{{ g.textAlign }}; text-wrap:{{ g.nameWrap }}; overflow-wrap:break-word;">{{ g.name }}</div>
               <sc-if value="{{ g.hasBrand }}" hint-placeholder-val="{{ true }}">
@@ -4178,7 +4184,15 @@ ${this.variant.printStyleTag}</head>
       };
     });
 
-    const mks = this.state.mks.map((g, i) => this.buildItem("mks", g, i));
+    const fBtnMk = "flex:1; border-radius:6px; padding:7px; font-size:12px; font-weight:700; cursor:pointer;";
+    const mks = this.state.mks.map((g, i) => ({
+      ...this.buildItem("mks", g, i),
+      fundoBg: this.variant.colorChoice && g.fundo === "rosa" ? 'url("assets/precificador/fundo-rosa.png")' : 'url("assets/precificador/fundo-verde.png")',
+      rosaBtnStyle: fBtnMk + (g.fundo === "rosa" ? "background:#A72F50; color:#fff; border:1px solid #A72F50;" : "background:#fff; color:#657575; border:1px solid #d8dee4;"),
+      verdeBtnStyle: fBtnMk + (g.fundo !== "rosa" ? "background:#006B67; color:#fff; border:1px solid #006B67;" : "background:#fff; color:#657575; border:1px solid #d8dee4;"),
+      setRosa: () => this.updateItem("mks", i, { fundo: "rosa" }),
+      setVerde: () => this.updateItem("mks", i, { fundo: "verde" }),
+    }));
     const mks2 = this.state.mks2.map((g, i) => this.buildItem("mks2", g, i));
     const mks3 = this.state.mks3.map((g, i) => this.buildItem("mks3", g, i));
 
@@ -4428,7 +4442,7 @@ ${this.variant.printStyleTag}</head>
       placaEmpty: placas.length === 0, pcrEmpty: pcrs.length === 0, prEmpty: prs.length === 0, mkEmpty: mks.length === 0, mk2Empty: mks2.length === 0, mk3Empty: mks3.length === 0, ps6Empty: pss6.length === 0, psEmpty: pss.length === 0, blitzEmpty: blitzs.length === 0, blitzHasItems: blitzs.length > 0, blitzA6Empty: blitzA6s.length === 0, blitzA6HasItems: blitzA6s.length > 0, blackFridayEmpty: blackFridayLabels.length === 0, blackFridayHasItems: blackFridayLabels.length > 0,
       placasGrid: expand(placas), mksGrid: expand(mks), mks2Grid: expand(mks2), mks3Grid: expand(mks3), pssGrid: expand(pss), pss6Grid: expand(pss6), blitzGrid, blitzPages, blitzA6Grid, blitzA6Pages, blackFridayGrid, blackFridayPages, prsGrid: expand(prs), pcrsGrid: expand(pcrs),
       pageInfo,
-      mks, mkCount: mks.length,
+      mks, mkCount: mks.length, makeColorChoice: !!this.variant.colorChoice,
       mks2, mk2Count: mks2.length,
       mks3, mk3Count: mks3.length,
       pss, psCount: pss.length,
