@@ -3279,6 +3279,16 @@ class Component extends DCLogic {
   };
   blitzPptxPartCount = 21;
 
+  // Preferências simples (tema, onboarding): se o navegador bloquear o armazenamento,
+  // o app continua funcionando e o motivo fica registrado no console.
+  saveSetting(key, value) {
+    try {
+      localStorage.setItem(key, value);
+    } catch (e) {
+      console.warn("[gerador-etiquetas] Não foi possível salvar a preferência " + key, e);
+    }
+  }
+
   // Catálogo único de marcas (chave -> rótulo exibido nos seletores).
   brandLabels = {
     ammobeauty: "Ammô Beauty", cimed: "Cimed", loudepre: "Lou de Pré",
@@ -4165,7 +4175,9 @@ ${assets}
         try {
           const previous = JSON.parse(localStorage.getItem(this.storageKeys.a5BlackFridayLegacy));
           if (Array.isArray(previous)) restored.aniversarioA5s = this.sanitizeList(previous.map(it => ({...it, dePrice:it.de, porPrice:it.por, fontSizePt:it.size, textAlign:it.align})));
-        } catch (e) {}
+        } catch (e) {
+          console.warn("[gerador-etiquetas] Backup antigo do Black Friday A5 ignorado (dados inválidos).", e);
+        }
       }
       restored.dark = localStorage.getItem(this.storageKeys.dark) === "1";
       restored.onboardingOpen = false;
@@ -4595,7 +4607,7 @@ ${assets}
         this.setState({ [key]: [], [this.activeKeyFor(key)]: 0 });
       },
       menuDark: () => this.setState(s => {
-        try { localStorage.setItem(this.storageKeys.dark, s.dark ? "0" : "1"); } catch (e) {}
+        this.saveSetting(this.storageKeys.dark, s.dark ? "0" : "1");
         return { menuOpen: false, dark: !s.dark };
       }),
       mvClass: this.state.mobileView === "sheet" ? "mv-sheet" : "mv-edit",
@@ -4620,7 +4632,7 @@ ${assets}
       darkClass: this.state.dark ? "dark" : "",
       darkIcon: this.state.dark ? "☀" : "🌙",
       toggleDark: () => this.setState(s => {
-        try { localStorage.setItem(this.storageKeys.dark, s.dark ? "0" : "1"); } catch (e) {}
+        this.saveSetting(this.storageKeys.dark, s.dark ? "0" : "1");
         return { dark: !s.dark };
       }),
       addOnEnter: e => {
@@ -4662,7 +4674,7 @@ ${assets}
       isHelpOpen: !!this.state.helpOpen,
       isOnboardingOpen: !!this.state.onboardingOpen,
       closeOnboarding: () => {
-        try { localStorage.setItem(this.storageKeys.onboardingSeen, "1"); } catch (e) {}
+        this.saveSetting(this.storageKeys.onboardingSeen, "1");
         this.setState({ onboardingOpen: false });
       },
       exportLabels: () => this.exportLabels(),
