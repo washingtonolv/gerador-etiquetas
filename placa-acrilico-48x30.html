@@ -3275,6 +3275,16 @@ class Component extends DCLogic {
   };
 
 
+  // Chaves do localStorage e valores fixos usados em mais de um ponto.
+  storageKeys = {
+    labels: "dd-etiquetas-acrilico-48x30-v2",
+    labelsLegacy: "dd-etiquetas-acrilico-48x30-v1",
+    a5BlackFridayLegacy: "dd-a5-black-friday-v1",
+    dark: "dd-dark",
+    onboardingSeen: "dd-onboarding-seen",
+  };
+  blitzPptxPartCount = 21;
+
   pais6Art = ["semmarca","avon","boticario","ciclo","eudora","fhader","hinode","jequiti","kiss","larive","lattafa","loudepre","mahogany","marykay","pariselysees","rubykisses","styleandscents","vizzela"];
   pais6Brands = [
     { key: "avon", label: "Avon" }, { key: "boticario", label: "O Boticário" },
@@ -4183,7 +4193,7 @@ ${assets}
     this._onBeforePrint = () => this.applyPrintPage();
     window.addEventListener?.("beforeprint", this._onBeforePrint);
     try {
-      const raw = localStorage.getItem("dd-etiquetas-acrilico-48x30-v2") || localStorage.getItem("dd-etiquetas-acrilico-48x30-v1");
+      const raw = localStorage.getItem(this.storageKeys.labels) || localStorage.getItem(this.storageKeys.labelsLegacy);
       const saved = raw ? JSON.parse(raw) : null;
       const restored = {};
       const listKeys = ["pcrs", "prs", "mks", "mks2", "mks3", "pss", "pss6", "blitzs", "blackFridayLabels", "aniversarioA6s", "aniversarioA5s", "blackFridayA6s", "placas"];
@@ -4194,11 +4204,11 @@ ${assets}
       if (saved && validModels.includes(saved.model)) restored.model = saved.model;
       if (!saved?.a5NativeMigrated) {
         try {
-          const previous = JSON.parse(localStorage.getItem("dd-a5-black-friday-v1"));
+          const previous = JSON.parse(localStorage.getItem(this.storageKeys.a5BlackFridayLegacy));
           if (Array.isArray(previous)) restored.aniversarioA5s = this.sanitizeList(previous.map(it => ({...it, dePrice:it.de, porPrice:it.por, fontSizePt:it.size, textAlign:it.align})));
         } catch (e) {}
       }
-      restored.dark = localStorage.getItem("dd-dark") === "1";
+      restored.dark = localStorage.getItem(this.storageKeys.dark) === "1";
       restored.onboardingOpen = false;
       if (Object.keys(restored).length) this.setState(restored);
     } catch (e) {
@@ -4236,7 +4246,7 @@ ${assets}
       this._last = data;
       const status = document.querySelector(".app-status");
       try {
-        localStorage.setItem("dd-etiquetas-acrilico-48x30-v2", data);
+        localStorage.setItem(this.storageKeys.labels, data);
         if (status) status.textContent = "✓ Alterações salvas automaticamente";
       } catch (e) {
         if (status) status.textContent = "Não foi possível salvar neste navegador";
@@ -4626,7 +4636,7 @@ ${assets}
         this.setState({ [key]: [], [this.activeKeyFor(key)]: 0 });
       },
       menuDark: () => this.setState(s => {
-        try { localStorage.setItem("dd-dark", s.dark ? "0" : "1"); } catch (e) {}
+        try { localStorage.setItem(this.storageKeys.dark, s.dark ? "0" : "1"); } catch (e) {}
         return { menuOpen: false, dark: !s.dark };
       }),
       mvClass: this.state.mobileView === "sheet" ? "mv-sheet" : "mv-edit",
@@ -4651,7 +4661,7 @@ ${assets}
       darkClass: this.state.dark ? "dark" : "",
       darkIcon: this.state.dark ? "☀" : "🌙",
       toggleDark: () => this.setState(s => {
-        try { localStorage.setItem("dd-dark", s.dark ? "0" : "1"); } catch (e) {}
+        try { localStorage.setItem(this.storageKeys.dark, s.dark ? "0" : "1"); } catch (e) {}
         return { dark: !s.dark };
       }),
       addOnEnter: e => {
@@ -4693,7 +4703,7 @@ ${assets}
       isHelpOpen: !!this.state.helpOpen,
       isOnboardingOpen: !!this.state.onboardingOpen,
       closeOnboarding: () => {
-        try { localStorage.setItem("dd-onboarding-seen", "1"); } catch (e) {}
+        try { localStorage.setItem(this.storageKeys.onboardingSeen, "1"); } catch (e) {}
         this.setState({ onboardingOpen: false });
       },
       exportLabels: () => this.exportLabels(),
@@ -4765,7 +4775,7 @@ ${assets}
             await window.DDEtiquetas.downloadBlitzPowerPoint();
             return;
           }
-          const partNames = Array.from({ length: 21 }, (_, i) => "uploads/blitz-a5-parts/part-" + String(i + 1).padStart(2, "0") + ".bin");
+          const partNames = Array.from({ length: this.blitzPptxPartCount }, (_, i) => "uploads/blitz-a5-parts/part-" + String(i + 1).padStart(2, "0") + ".bin");
           const responses = await Promise.all(partNames.map(path => fetch(path)));
           if (responses.some(response => !response.ok)) throw new Error("Parte ausente");
           const parts = await Promise.all(responses.map(response => response.arrayBuffer()));
