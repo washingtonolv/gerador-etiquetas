@@ -15,6 +15,7 @@
 <style id="dd-print-page-vendedoras" media="not all">@page { size: A4 landscape; margin: 0; }</style>
 <style>x-dc { display: none !important; }</style>
 <script type="module" src="./modern-app.js"></script>
+<script src="./variants.js"></script>
 <style>.dd-icon{width:20px;height:20px;display:inline-block;vertical-align:middle;flex-shrink:0;pointer-events:none} button>.dd-icon:not(:only-child){margin-right:6px} .arrow .dd-icon{width:18px;height:18px} .back{display:inline-flex;align-items:center;gap:6px}</style>
 <style id="ux-editor-rules">
  @media screen {
@@ -87,7 +88,7 @@
       .preview-wrap { padding: 0 !important; display: block !important; }
       .sheet { box-shadow: none !important; border: none !important; margin: 0 !important; padding: 0 !important; max-width: none !important; border-radius: 0 !important; }
       .g-prec { grid-template-columns: repeat(2, 65mm) !important; gap: 6mm !important; justify-content:center !important; }
-      .g-make { grid-template-columns: repeat(2, 64mm) !important; gap: 6mm !important; justify-content:center !important; }
+      .g-make { grid-template-columns: repeat(2, var(--make-col-mm, 64mm)) !important; gap: 6mm !important; justify-content:center !important; }
       .g-make2, .g-make3 { grid-template-columns: repeat(3, 55mm) !important; gap: 4mm 3mm !important; justify-content:center !important; }
       .g-pais { display:grid !important; grid-template-columns:repeat(4, 40mm) !important; grid-auto-rows:50mm !important; column-gap:4mm !important; row-gap:4mm !important; justify-content:center !important; align-content:start !important; width:172mm !important; max-width:172mm !important; }
       .g-pais6 { grid-template-columns: repeat(2, 105mm) !important; grid-auto-rows: 148mm !important; gap: 0 !important; justify-content:center !important; }
@@ -117,7 +118,7 @@
     .pp .no-print { display: none !important; }
     .pp .preview-wrap { padding: 16px !important; }
     .pp .g-prec { grid-template-columns: repeat(2, 65mm) !important; gap: 6mm !important; justify-content:center !important; }
-    .pp .g-make { grid-template-columns: repeat(2, 64mm) !important; gap: 6mm !important; justify-content:center !important; }
+    .pp .g-make { grid-template-columns: repeat(2, var(--make-col-mm, 64mm)) !important; gap: 6mm !important; justify-content:center !important; }
     .pp .g-make2, .pp .g-make3 { grid-template-columns: repeat(3, 55mm) !important; gap: 4mm 3mm !important; justify-content:center !important; }
     .pp .g-pais { display:grid !important; grid-template-columns:repeat(4, 40mm) !important; grid-auto-rows:50mm !important; column-gap:4mm !important; row-gap:4mm !important; justify-content:center !important; align-content:start !important; width:172mm !important; max-width:172mm !important; }
     .pp .g-pais6 { grid-template-columns: repeat(2, 105mm) !important; grid-auto-rows: 148mm !important; gap: 0 !important; justify-content:center !important; }
@@ -454,6 +455,8 @@
       .splash-flower--small { right: 18vw; bottom: 28vh; width: 70px; }
     }
     @keyframes ddFade { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+    #dd-splash { pointer-events: none; }
+    @media (prefers-reduced-motion: reduce) { #dd-splash { display: none !important; } }
     /* inputs modernos */
     .card-box input, .card-box select, .card-box textarea { background:#f7f8f9; border:1px solid #e7ebee !important; border-radius:10px !important; transition: box-shadow .15s, border-color .15s, background .15s; }
     .card-box input:focus, .card-box select:focus, .card-box textarea:focus { outline:none; background:#fff; border-color:#006B67 !important; box-shadow:0 0 0 3px rgba(5,145,140,.18); }
@@ -1486,7 +1489,7 @@
   <nav class="no-print model-rail {{ modelsRailClass }}" aria-label="Modelos de etiqueta">
     <button class="model-rail-toggle" onClick="{{ toggleModelsPanel }}" title="{{ modelsToggleTitle }}" aria-label="{{ modelsToggleTitle }}" aria-expanded="{{ modelsExpanded }}"><span class="model-rail-toggle-icon">›</span></button>
     <div class="model-rail-title">Modelo<br>de Etiquetas</div>
-      <button onClick="{{ pickMake }}" data-on="{{ tabMakeOn }}" aria-pressed="{{ tabMakePressed }}" aria-label="Placa de Acrílico" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-verde.png');"></span><span class="model-n">1</span><span>Placa de Acrílico</span></button>
+      <button onClick="{{ pickMake }}" data-on="{{ tabMakeOn }}" aria-pressed="{{ tabMakePressed }}" aria-label="{{ makeLabel }}" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-verde.png');"></span><span class="model-n">1</span><span>{{ makeLabel }}</span></button>
       <button onClick="{{ pickPrec }}" data-on="{{ tabPrecOn }}" aria-pressed="{{ tabPrecPressed }}" aria-label="Placa de Acrílico Promoção" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-verde2.png');"></span><span class="model-n">2</span><span>Placa de Acrílico Promoção</span></button>
       <button onClick="{{ pickMake2 }}" data-on="{{ tabMake2On }}" aria-pressed="{{ tabMake2Pressed }}" aria-label="Régua de Preços" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-verde.png');"></span><span class="model-n">3</span><span>Régua de Preços</span></button>
       <button onClick="{{ pickMake3 }}" data-on="{{ tabMake3On }}" aria-pressed="{{ tabMake3Pressed }}" aria-label="Régua de Preço Promoção" class="model-item" style="{{ modelRailStyle }}"><span class="model-thumb" style="background-image:url('assets/precificador/fundo-rosa.png');"></span><span class="model-n">4</span><span>Régua de Preço Promoção</span></button>
@@ -1851,7 +1854,7 @@
     <div class="no-print editor-col" style="flex:1 1 340px; min-width:280px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; border-right:1px solid #e7e2e4;">
       <button class="panel-toggle" onClick="{{ togglePanel }}" title="{{ panelToggleTitle }}" aria-label="{{ panelToggleTitle }}" aria-expanded="{{ panelExpanded }}"><span class="panel-toggle-icon">{{ panelToggleIcon }}</span></button>
       <div class="editor-panel-content">
-      <h2 style="font-size:11px; font-weight:600; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">Placa de Acrílico ({{ mkCount }})</h2>
+      <h2 style="font-size:11px; font-weight:600; letter-spacing:1px; color:#657575; text-transform:uppercase; padding:0 2px; margin:0;">{{ makeLabel }} ({{ mkCount }})</h2>
       <div class="continuous-hint"><span class="enter-key">Enter</span><span>Após preencher o preço, pressione <strong>Enter</strong> para abrir a próxima etiqueta.</span></div>
       <sc-for list="{{ mks }}" as="g" hint-placeholder-count="3">
         <div class="card-box" data-active="{{ g.activeOn }}" data-card-index="{{ g.cardIndex }}" style="background:#fff; border:1px solid #edf0f2; border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px; box-shadow:0 1px 3px rgba(30,40,50,.05);">
@@ -3269,10 +3272,13 @@ class Component extends DCLogic {
   };
 
 
+  // Variante do editor (definida em variants.js a partir de ?variant=).
+  variant = window.DD_VARIANT;
+
   // Chaves do localStorage e valores fixos usados em mais de um ponto.
   storageKeys = {
-    labels: "dd-etiquetas-v2",
-    labelsLegacy: "dd-etiquetas-v1",
+    labels: this.variant.storageKeys.labels,
+    labelsLegacy: this.variant.storageKeys.labelsLegacy,
     a5BlackFridayLegacy: "dd-a5-black-friday-v1",
     dark: "dd-dark",
     onboardingSeen: "dd-onboarding-seen",
@@ -3384,7 +3390,7 @@ class Component extends DCLogic {
     placa: { key: "placas", activeKey: "activePlaca", label: "Etiqueta Vitrine", perPage: 12, create: () => ({ brand: "semmarca", name: "Novo produto", desc: "", dePrice: "", porPrice: "0,00" }) },
     pcr: { key: "pcrs", activeKey: "activePcr", label: "Expositor Madeira", perPage: 9, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00" }) },
     prec: { key: "prs", activeKey: "activePr", label: "Placa de Acrílico Promoção", perPage: 12, create: () => ({ brand: "semmarca", fundo: "rosa", name: "Novo produto", dePrice: "", porPrice: "0,00" }) },
-    make: { key: "mks", activeKey: "activeMk", label: "Placa de Acrílico", perPage: 12, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
+    make: { key: "mks", activeKey: "activeMk", label: this.variant.makeLabel, perPage: 12, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
     make2: { key: "mks2", activeKey: "activeMk2", label: "Régua de Preços", perPage: 30, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
     make3: { key: "mks3", activeKey: "activeMk3", label: "Régua de Preço Promoção", perPage: 30, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
     pais: { key: "pss", activeKey: "activePs", label: "Etiqueta Especial Dia dos Pais", perPage: 20, create: () => ({ brand: "semmarca", name: "Novo produto", dePrice: "", porPrice: "0,00", cada: false }) },
@@ -3975,7 +3981,7 @@ ${assets}
 <base href="${baseHref}">
 ${assets}
 ${config.css}
-</head>
+${this.variant.printStyleTag}</head>
 <body class="${config.bodyClass} pp"><div class="preview-wrap">${printable.outerHTML}</div></body>
 </html>`);
     printDocument.close();
@@ -4607,6 +4613,7 @@ ${config.css}
       printCount: activeCount,
       printPages: pages,
       printModel: modelMeta.label,
+      makeLabel: this.variant.makeLabel,
       printPaper: "A4",
       printOrientation: model === "a5blackfriday" || model === "aniversarioA5" || model === "blitz" || model === "blackfriday" || model === "vendedoras" ? "Paisagem" : "Retrato",
       printMargins: model === "a6blackfriday" || model === "a5blackfriday" || model === "aniversarioA5" || model === "aniversarioA6" || model === "blitz" || model === "blitzA6" || model === "blackfriday" || model === "vendedoras" || model === "pais6" ? "Nenhuma" : "Padrão",
