@@ -1,3 +1,4 @@
+const BLITZ_PPTX_PART_COUNT = 21;
 const CSV_TEMPLATE =
   "Nome do produto;Preço POR;Preço DE (opcional);Marca (opcional)\r\n" +
   "Pó Bronzer;56,90;75,00;Avon\r\n" +
@@ -30,7 +31,7 @@ export function downloadCsvTemplate(): void {
 }
 
 export async function downloadBlitzPowerPoint(): Promise<void> {
-  const urls = Array.from({ length: 21 }, (_, index) => {
+  const urls = Array.from({ length: BLITZ_PPTX_PART_COUNT }, (_, index) => {
     const part = String(index + 1).padStart(2, "0");
     return new URL(`uploads/blitz-a5-parts/part-${part}.bin`, document.baseURI).href;
   });
