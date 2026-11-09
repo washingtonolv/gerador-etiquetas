@@ -1,4 +1,8 @@
 (() => {
+  // A galeria principal já funciona como entrada do sistema; o editor deve
+  // abrir diretamente, sem exibir a antiga tela de apresentação.
+  document.getElementById('dd-splash')?.remove();
+
   const feedback = document.createElement('div');
   feedback.className = 'ux-progress no-print';
   feedback.setAttribute('role', 'status');
