@@ -3773,13 +3773,7 @@ ${assets}
 @media print { .g-make > .fold-label { width:48mm !important; height:30mm !important; } }
 .pp .g-make > .fold-label { width:48mm !important; height:30mm !important; }
 </style></head>
-<body class="blitz-page pp"><div class="preview-wrap">${printable.outerHTML}</div><script>
-  // Remove the splash independently of CSS animation preferences.
-  window.addEventListener('DOMContentLoaded', () => {
-    const splash = document.getElementById('dd-splash');
-    if (splash) window.setTimeout(() => splash.remove(), 1000);
-  });
-</script>
+<body class="blitz-page pp"><div class="preview-wrap">${printable.outerHTML}</div>
 </body>
 </html>`);
     printDocument.close();
