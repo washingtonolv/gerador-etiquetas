@@ -3285,53 +3285,39 @@ class Component extends DCLogic {
   };
   blitzPptxPartCount = 21;
 
+  // Catálogo único de marcas (chave -> rótulo exibido nos seletores).
+  brandLabels = {
+    ammobeauty: "Ammô Beauty", cimed: "Cimed", loudepre: "Lou de Pré",
+    carmed: "Carmed", payot: "Payot", barbours: "Barbour's Beauty",
+    fran: "Fran by Franciny Ehlke", lattafa: "Lattafa", nuance: "Nuance",
+    phallebeauty: "Phállebeauty", zimaya: "Zimaya", avon: "Avon",
+    boticario: "O Boticário", ciclo: "Ciclo", eudora: "Eudora",
+    fhader: "Fhader", hinode: "Hinode", jequiti: "Jequiti",
+    kiss: "Kiss NY", larive: "La Rive", mahogany: "Mahogany",
+    marimaria: "Mari Maria", marykay: "Mary Kay", mascavo: "Mascavo",
+    pariselysees: "Paris Elysees", rubykisses: "Ruby Kisses", styleandscents: "Style & Scents",
+    truss: "Truss", vizzela: "Vizzela", semmarca: "Sem marca",
+  };
+  // Monta as opções de marca a partir das chaves; "semmarca" sempre fica por último.
+  brandOptionsFor(keys, labelOverrides = {}) {
+    return [...keys.filter(key => key !== "semmarca"), "semmarca"].map(key => ({
+      key,
+      label: labelOverrides[key] || this.brandLabels[key],
+    }));
+  }
   pais6Art = ["semmarca","avon","boticario","ciclo","eudora","fhader","hinode","jequiti","kiss","larive","lattafa","loudepre","mahogany","marykay","pariselysees","rubykisses","styleandscents","vizzela"];
-  pais6Brands = [
-    { key: "avon", label: "Avon" }, { key: "boticario", label: "O Boticário" },
-    { key: "ciclo", label: "Ciclo" }, { key: "eudora", label: "Eudora" },
-    { key: "fhader", label: "Fhader" }, { key: "hinode", label: "Hinode" },
-    { key: "jequiti", label: "Jequiti" }, { key: "kiss", label: "Kiss NY" },
-    { key: "larive", label: "La Rive" }, { key: "lattafa", label: "Lattafa" },
-    { key: "loudepre", label: "Lou de Pre" }, { key: "mahogany", label: "Mahogany" },
-    { key: "marykay", label: "Mary Kay" }, { key: "pariselysees", label: "Paris Elysees" },
-    { key: "rubykisses", label: "Ruby Kisses" }, { key: "styleandscents", label: "Style & Scents" },
-    { key: "vizzela", label: "Vizzela" }, { key: "semmarca", label: "Sem marca" },
-  ];
+  pais6Brands = this.brandOptionsFor(this.pais6Art, { loudepre: "Lou de Pre" });
   paisArt = ["semmarca", "avon", "boticario", "ciclo", "eudora", "fhader", "hinode", "jequiti", "kiss", "larive", "mahogany", "marykay", "pariselysees", "rubykisses", "vizzela"];
-  blackFridayArt = ["semmarca", "avon", "boticario", "ciclo", "eudora", "fhader", "hinode", "jequiti", "kiss", "larive", "mahogany", "marykay", "pariselysees", "rubykisses", "vizzela"];
-  blackFridayBrands = [
-    { key: "avon", label: "Avon" }, { key: "boticario", label: "O Boticário" },
-    { key: "ciclo", label: "Ciclo" }, { key: "eudora", label: "Eudora" },
-    { key: "fhader", label: "Fhader" }, { key: "hinode", label: "Hinode" },
-    { key: "jequiti", label: "Jequiti" }, { key: "kiss", label: "Kiss New York" },
-    { key: "larive", label: "La Rive" }, { key: "mahogany", label: "Mahogany" },
-    { key: "marykay", label: "Mary Kay" }, { key: "pariselysees", label: "Paris Elysees" },
-    { key: "rubykisses", label: "Ruby Kisses" }, { key: "vizzela", label: "Vizzela" },
-    { key: "semmarca", label: "Sem marca" },
-  ];
+  blackFridayArt = [...this.paisArt];
+  blackFridayBrands = this.brandOptionsFor(this.blackFridayArt, { kiss: "Kiss New York" });
   newBrandLogos = {"ammobeauty":"assets/placa/marcas/ammobeauty-transparente.png","cimed":"assets/placa/marcas/cimed-transparente.png","loudepre":"assets/placa/marcas/loudepre-transparente.png","carmed":"assets/placa/marcas/carmed-transparente.png","payot":"assets/placa/marcas/payot-transparente.png","barbours":"assets/placa/marcas/barbours-transparente.png","fran":"assets/placa/marcas/fran-transparente.png","lattafa":"assets/placa/marcas/lattafa-transparente.png","nuance":"assets/placa/marcas/nuance-transparente.png","phallebeauty":"assets/placa/marcas/phallebeauty-transparente.png","zimaya":"assets/placa/marcas/zimaya-transparente.png"};
-  placaBrands = [
-    { key: "ammobeauty", label: "Ammô Beauty" },
-    { key: "cimed", label: "Cimed" },
-    { key: "loudepre", label: "Lou de Pré" },
-    { key: "carmed", label: "Carmed" },
-    { key: "payot", label: "Payot" },
-    { key: "barbours", label: "Barbour's Beauty" },
-    { key: "fran", label: "Fran by Franciny Ehlke" },
-    { key: "lattafa", label: "Lattafa" },
-    { key: "nuance", label: "Nuance" },
-    { key: "phallebeauty", label: "Phállebeauty" },
-    { key: "zimaya", label: "Zimaya" },
-    { key: "avon", label: "Avon" }, { key: "boticario", label: "O Boticário" },
-    { key: "ciclo", label: "Ciclo" }, { key: "eudora", label: "Eudora" },
-    { key: "fhader", label: "Fhader" }, { key: "hinode", label: "Hinode" },
-    { key: "jequiti", label: "Jequiti" }, { key: "kiss", label: "Kiss NY" },
-    { key: "larive", label: "La Rive" }, { key: "mahogany", label: "Mahogany" },
-    { key: "marimaria", label: "Mari Maria" }, { key: "marykay", label: "Mary Kay" },
-    { key: "mascavo", label: "Mascavo" }, { key: "pariselysees", label: "Paris Elysees" },
-    { key: "rubykisses", label: "Ruby Kisses" }, { key: "truss", label: "Truss" },
-    { key: "vizzela", label: "Vizzela" }, { key: "semmarca", label: "Sem marca" },
-  ];
+  placaBrands = this.brandOptionsFor([
+    "ammobeauty", "cimed", "loudepre", "carmed", "payot", "barbours",
+    "fran", "lattafa", "nuance", "phallebeauty", "zimaya", "avon",
+    "boticario", "ciclo", "eudora", "fhader", "hinode", "jequiti",
+    "kiss", "larive", "mahogany", "marimaria", "marykay", "mascavo",
+    "pariselysees", "rubykisses", "truss", "vizzela",
+  ]);
   modelMeta = {
     a6blackfriday: { key:"blackFridayA6s", activeKey:"activeBlackFridayA6",label:"A5 Black Friday (A6)",perPage:4,create:()=>({brand:"avon",name:"PRODUTO",desc:"Descrição",dePrice:"",porPrice:"0,00",cada:true,qty:1,fontSizePt:22,textAlign:"center",bold:false}) },
     a5blackfriday: { key: "aniversarioA5s", activeKey: "activeAniversarioA5", label: "A5 Black Friday", perPage: 2, create: () => ({brand:"avon",name:"PRODUTO",desc:"Descrição",dePrice:"",porPrice:"0,00",cada:true,qty:1,fontSizePt:28,textAlign:"center",bold:false}) },
