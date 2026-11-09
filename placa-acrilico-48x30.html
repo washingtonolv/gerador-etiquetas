@@ -458,6 +458,8 @@
       .splash-flower--small { right: 18vw; bottom: 28vh; width: 70px; }
     }
     @keyframes ddFade { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+    #dd-splash { pointer-events: none; }
+    @media (prefers-reduced-motion: reduce) { #dd-splash { display: none !important; } }
     /* inputs modernos */
     .card-box input, .card-box select, .card-box textarea { background:#f7f8f9; border:1px solid #e7ebee !important; border-radius:10px !important; transition: box-shadow .15s, border-color .15s, background .15s; }
     .card-box input:focus, .card-box select:focus, .card-box textarea:focus { outline:none; background:#fff; border-color:#006B67 !important; box-shadow:0 0 0 3px rgba(5,145,140,.18); }
@@ -3771,7 +3773,14 @@ ${assets}
 @media print { .g-make > .fold-label { width:48mm !important; height:30mm !important; } }
 .pp .g-make > .fold-label { width:48mm !important; height:30mm !important; }
 </style></head>
-<body class="blitz-page pp"><div class="preview-wrap">${printable.outerHTML}</div></body>
+<body class="blitz-page pp"><div class="preview-wrap">${printable.outerHTML}</div><script>
+  // Remove the splash independently of CSS animation preferences.
+  window.addEventListener('DOMContentLoaded', () => {
+    const splash = document.getElementById('dd-splash');
+    if (splash) window.setTimeout(() => splash.remove(), 1000);
+  });
+</script>
+</body>
 </html>`);
     printDocument.close();
 
