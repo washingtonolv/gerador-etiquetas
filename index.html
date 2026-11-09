@@ -110,7 +110,7 @@
           doc.body.appendChild(script);
         }
       }
-      function selectLegacyModel(model, id, tries = 0) {
+      function selectEditorModel(model, id, tries = 0) {
         if (id !== requestId || !active || active !== model) return;
         try {
           const doc = frame.contentDocument;
@@ -126,7 +126,7 @@
           console.warn('Erro ao selecionar modelo', e);
         }
         if (tries < 100) {
-          setTimeout(() => selectLegacyModel(model, id, tries + 1), 150);
+          setTimeout(() => selectEditorModel(model, id, tries + 1), 150);
         } else {
           status.textContent = 'O editor não respondeu. Volte aos modelos e tente novamente.';
         }
@@ -146,12 +146,7 @@
           return;
         }
         if (frameReady) {
-          if (source !== './legacy.html') {
-            status.hidden = true;
-            frame.focus();
-          } else {
-            selectLegacyModel(model, id);
-          }
+          selectEditorModel(model, id);
         }
       }
       function draw(){
@@ -185,12 +180,7 @@
         const id = requestId;
         const source = active.src || './legacy.html';
         if (source !== currentSource) return;
-        if (source !== './legacy.html') {
-          status.hidden = true;
-          frame.focus();
-        } else {
-          selectLegacyModel(active, id);
-        }
+        selectEditorModel(active, id);
       });
       draw();
     })();
