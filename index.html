@@ -95,17 +95,17 @@
   <script>
     (() => {
       const models = [
-        {name:'Placa de Acrílico',image:'assets/figma/be283.png',tint:'#e9f6ee'},
-        {name:'Placa acrilico 4,8 x 3 cm',image:'assets/figma/be283.png',tint:'#e9f6ee',src:'./legacy.html?variant=placa-48x30',isNew:true},
-        {name:'Placa de Acrílico Promoção',image:'assets/figma/be283.png',tint:'#e4f6f1'},
-        {name:'Régua de Preços',image:'assets/figma/be283.png',tint:'#eaf4f5'},
-        {name:'Régua de Preço Promoção',image:'assets/figma/64614.png',tint:'#fff0f5'},
-        {name:'Etiqueta Vitrine',image:'assets/figma/682ef.png',tint:'#fff0f4'},
-        {name:'Expositor Madeira',image:'assets/figma/8533c.png',tint:'#f7f1e8'},
-        {name:'Cartões vendedoras',image:'assets/figma/3a2d9.png',tint:'#e7f6f1'},
+        {name:'Placa de Acrílico',image:'assets/precificador/fundo-verde.png',tint:'#e9f6ee'},
+        {name:'Placa acrilico 4,8 x 3 cm',image:'assets/precificador/fundo-verde.png',tint:'#e9f6ee',src:'./legacy.html?variant=placa-48x30',isNew:true},
+        {name:'Placa de Acrílico Promoção',image:'assets/precificador/fundo-verde.png',tint:'#e4f6f1'},
+        {name:'Régua de Preços',image:'assets/precificador/fundo-verde.png',tint:'#eaf4f5'},
+        {name:'Régua de Preço Promoção',image:'assets/precificador/fundo-rosa.png',tint:'#fff0f5'},
+        {name:'Etiqueta Vitrine',image:'assets/placa/nuvem-rosa.png',tint:'#fff0f4'},
+        {name:'Expositor Madeira',image:'assets/precario/template.png',tint:'#f7f1e8'},
+        {name:'Cartões vendedoras',image:'assets/vendedoras/verde.svg',tint:'#e7f6f1'},
         {name:'Preçario Black Friday',tint:'#ffe9ee',accent:'#bc2d56'},
-        {name:'A5 Black Friday',image:'assets/figma/bd153.png',tint:'#f8e9ed'},
-        {name:'A5 Black Friday (A6)',image:'assets/figma/bd153.png',tint:'#faeaf0'}
+        {name:'A5 Black Friday',image:'assets/black-friday-a5/template.webp',tint:'#f8e9ed'},
+        {name:'A5 Black Friday (A6)',image:'assets/black-friday-a5/template.webp',tint:'#faeaf0'}
       ];
       const frame = document.getElementById('app-frame');
       const gallery = document.getElementById('gallery');
@@ -191,7 +191,7 @@
           const meta=document.createElement('div');meta.className='meta';
           const labels=document.createElement('div');const name=document.createElement('div');name.className='model-name';name.textContent=model.name;
           const sub=document.createElement('div');sub.className='model-sub';sub.textContent='Abrir editor de etiqueta';labels.append(name,sub);
-          const arrow=document.createElement('span');arrow.className='arrow';arrow.innerHTML='<img src="assets/figma/cb3e9.svg" alt="" width="18" height="18">';meta.append(labels,arrow);
+          const arrow=document.createElement('span');arrow.className='arrow';arrow.innerHTML='<span aria-hidden="true">→</span>';meta.append(labels,arrow);
           button.append(art,meta);button.addEventListener('click',()=>{lastModelButton=button;activate(model)});gallery.appendChild(button);
         });
       }
