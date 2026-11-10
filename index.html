@@ -54,13 +54,37 @@
     #editor-status[hidden]{display:none}
     @media(max-width:720px){.toolbar{align-items:stretch}.toolbar input{width:100%}.workspace-head{height:auto;min-height:64px;gap:10px;padding:8px}.back{flex-shrink:0}#app-frame{height:calc(100% - 80px)}.model-sub{display:block}.flow-hint{font-size:14px}}
     @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+    /* Figma library: desktop, tablet and mobile. */
+    #home{padding:0 48px 48px}
+    .topbar,.intro,.toolbar,.gallery,#empty{max-width:1328px}
+    .topbar{height:88px}.brand{font-weight:700}.brand-icon{font-size:16px}
+    .intro{margin:40px auto 0}.eyebrow{font-size:12px;letter-spacing:1.2px;font-weight:700}
+    h1{font-size:40px;line-height:48px;margin:12px 0;font-weight:700}
+    .subtitle{font-size:16px;line-height:24px;color:#536d68}
+    .toolbar{padding-top:32px;margin-bottom:24px;gap:16px}
+    .toolbar input{width:360px;height:48px;border-radius:12px;font-size:15px}
+    .gallery{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+    .model{padding:12px;border-radius:18px;border-color:#dce7e3;box-shadow:0 3px 6px #163d340d}
+    .model-new{border-color:#c4a34f}
+    .art{height:168px;border-radius:12px;padding:12px}
+    .art img{width:162.438px;height:124.625px}
+     .model[data-model="Expositor Madeira"] .art img{width:142.168px;height:144px}
+    .meta{padding:16px 4px 0;display:grid;grid-template-columns:1fr 44px;gap:0}
+    .meta>div{display:contents}.model-name{grid-column:1/-1;min-height:44px;font-size:16px;line-height:22px;font-weight:700;color:#203d36}
+    .model-sub{margin-top:10px;display:flex;align-items:center;min-height:44px;font-size:13px;line-height:18px;color:#536d68}
+    .arrow{margin-top:10px;width:44px;height:44px}.arrow img{display:block}
+    .new-badge{top:21px;right:21px;width:56px;height:26px;padding:6px 8px;transform:none;border-radius:7px;background:#f6e8be;font-weight:700;box-shadow:0 3px 5px #80601e30}
+    @media(min-width:1101px){.intro{margin:0 auto; padding-top:0; order:4}#home{display:flex;flex-direction:column}.topbar,.toolbar,.gallery,.intro{width:100%;flex-shrink:0}.intro h1{margin-top:11px}.intro .subtitle{margin-top:12px}}
+    @media(max-width:1100px){#home{padding:0 32px 48px}.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:36px;line-height:42px}}
+    @media(max-width:599px){#home{padding:0 20px 32px}.topbar{height:109px;flex-direction:column;align-items:flex-start;justify-content:center;gap:10px}.topnote{display:block}.intro{margin:28px auto 0}h1{font-size:30px;line-height:36px}.toolbar{padding-top:24px;align-items:flex-start;flex-direction:column}.toolbar input{width:100%}.gallery{grid-template-columns:minmax(0,1fr);gap:16px}.model-sub{display:flex}.brand{font-size:18px}}
   </style>
 </head>
 <body>
   <main id="home">
     <header class="topbar"><div class="brand"><span class="brand-icon">D&amp;D</span>Gerador de Etiquetas</div><span class="topnote">Central de modelos de impressão</span></header>
     <section class="intro"><div class="eyebrow">Biblioteca de modelos</div><h1>Qual etiqueta vamos criar?</h1><p class="subtitle">Escolha um modelo para abrir seu espaço de edição, configurar os produtos e preparar a impressão.</p></section>
-    <p class="flow-hint">1. Escolha um modelo → 2. Preencha os dados → 3. Revise e imprima</p><div class="toolbar"><strong id="count" role="status" aria-live="polite">Modelos disponíveis</strong><input id="search" type="search" placeholder="Buscar modelo de etiqueta..." aria-label="Buscar modelo"></div>
+    <div class="toolbar"><strong id="count" role="status" aria-live="polite">Modelos disponíveis</strong><input id="search" type="search" placeholder="Buscar modelo de etiqueta..." aria-label="Buscar modelo"></div>
     <section class="gallery" id="gallery" aria-label="Modelos de etiquetas"></section>
     <p id="empty">Nenhum modelo encontrado. Tente um nome mais curto ou limpe a busca para ver todos.</p>
   </main>
@@ -71,17 +95,17 @@
   <script>
     (() => {
       const models = [
-        {name:'Placa de Acrílico',image:'assets/precificador/fundo-verde.png',tint:'#e9f6ee'},
-        {name:'Placa acrilico 4,8 x 3 cm',image:'assets/precificador/fundo-verde.png',tint:'#e9f6ee',src:'./legacy.html?variant=placa-48x30',isNew:true},
-        {name:'Placa de Acrílico Promoção',image:'assets/precificador/fundo-verde2.png',tint:'#e4f6f1'},
-        {name:'Régua de Preços',image:'assets/precificador/fundo-verde.png',tint:'#eaf4f5'},
-        {name:'Régua de Preço Promoção',image:'assets/precificador/fundo-rosa.png',tint:'#fff0f5'},
-        {name:'Etiqueta Vitrine',image:'assets/placa/nuvem-rosa.png',tint:'#fff0f4'},
-        {name:'Expositor Madeira',image:'assets/precario/template.png',tint:'#f7f1e8'},
-        {name:'Cartões vendedoras',image:'assets/vendedoras/verde.svg',tint:'#e7f6f1'},
+        {name:'Placa de Acrílico',image:'assets/figma/be283.png',tint:'#e9f6ee'},
+        {name:'Placa acrilico 4,8 x 3 cm',image:'assets/figma/be283.png',tint:'#e9f6ee',src:'./legacy.html?variant=placa-48x30',isNew:true},
+        {name:'Placa de Acrílico Promoção',image:'assets/figma/be283.png',tint:'#e4f6f1'},
+        {name:'Régua de Preços',image:'assets/figma/be283.png',tint:'#eaf4f5'},
+        {name:'Régua de Preço Promoção',image:'assets/figma/64614.png',tint:'#fff0f5'},
+        {name:'Etiqueta Vitrine',image:'assets/figma/682ef.png',tint:'#fff0f4'},
+        {name:'Expositor Madeira',image:'assets/figma/8533c.png',tint:'#f7f1e8'},
+        {name:'Cartões vendedoras',image:'assets/figma/3a2d9.png',tint:'#e7f6f1'},
         {name:'Preçario Black Friday',tint:'#ffe9ee',accent:'#bc2d56'},
-        {name:'A5 Black Friday',image:'assets/black-friday-a5/template.webp',tint:'#f8e9ed'},
-        {name:'A5 Black Friday (A6)',image:'assets/black-friday-a5/template.webp',tint:'#faeaf0'}
+        {name:'A5 Black Friday',image:'assets/figma/bd153.png',tint:'#f8e9ed'},
+        {name:'A5 Black Friday (A6)',image:'assets/figma/bd153.png',tint:'#faeaf0'}
       ];
       const frame = document.getElementById('app-frame');
       const gallery = document.getElementById('gallery');
@@ -156,7 +180,7 @@
         document.getElementById('empty').style.display=visible.length?'none':'block';
         gallery.replaceChildren();
         visible.forEach(model=>{
-          const button=document.createElement('button');button.className='model';button.type='button';
+          const button=document.createElement('button');button.className='model';button.dataset.model=model.name;button.type='button';
           if(model.isNew){button.classList.add('model-new');const badge=document.createElement('span');badge.className='new-badge';badge.textContent='NOVO';button.appendChild(badge);}
           const art=document.createElement('div');art.className='art';art.style.setProperty('--tint',model.tint);
           if(model.image){
@@ -167,7 +191,7 @@
           const meta=document.createElement('div');meta.className='meta';
           const labels=document.createElement('div');const name=document.createElement('div');name.className='model-name';name.textContent=model.name;
           const sub=document.createElement('div');sub.className='model-sub';sub.textContent='Abrir editor de etiqueta';labels.append(name,sub);
-          const arrow=document.createElement('span');arrow.className='arrow';arrow.innerHTML="<svg class=\"dd-icon\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\" xmlns=\"http://www.w3.org/2000/svg\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\"><path d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z\"/></svg>";meta.append(labels,arrow);
+          const arrow=document.createElement('span');arrow.className='arrow';arrow.innerHTML='<img src="assets/figma/cb3e9.svg" alt="" width="18" height="18">';meta.append(labels,arrow);
           button.append(art,meta);button.addEventListener('click',()=>{lastModelButton=button;activate(model)});gallery.appendChild(button);
         });
       }
